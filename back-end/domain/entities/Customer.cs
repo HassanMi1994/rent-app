@@ -9,6 +9,7 @@
         public string FatherName { get; set; }
         public string Mobile { get; set; }
         public string RefereeName { get; set; }
+        public string Address { get; set; }
         #endregion
 
         #region create
