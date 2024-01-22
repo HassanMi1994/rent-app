@@ -1,13 +1,23 @@
 ﻿using domain.abstraction;
+using persistance;
 using Rent.Entities;
 
 namespace application.Services
 {
     public class CustomerService : ICustomerService
     {
-        public Task Create(Customer customer)
+        RentDbContext _rentDb;
+
+        public CustomerService(RentDbContext rentDb)
         {
-            return Task.CompletedTask;
+            _rentDb = rentDb;
+        }
+
+        public async Task Create(Customer customer)
+        {
+
+            _rentDb.Customers.Add(customer);
+            await _rentDb.SaveChangesAsync();
         }
     }
 }

@@ -1,6 +1,7 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
+using persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddRentAppServices();
 
+builder.Services.AddDbContext<RentDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]);
+});
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
