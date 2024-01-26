@@ -1,15 +1,47 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>RentFront</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <style>
+    /* Custom transition */
+    @keyframes rotate-out {
+      to {
+        transform: scale3d(1);
+        opacity: 1;
+      }
+    }
+
+    @keyframes rotate-in {
+      from {
+        opacity: 0;
+        transform: scale3d(0.1);
+      }
+    }
+
+    .container::view-transition-old(*),
+    .container::view-transition-new(*) {
+      animation-duration: 1000ms;
+      /* animation-name: -ua-view-transition-fade-in, rotate-in; */
+      animation-name: -ua-view-transition-fade-in, roate-in;
+    }
+
+    ::view-transition-old(*) {
+      /* animation-name: -ua-view-transition-fade-out; */
+      animation-name: -ua-view-transition-fade-out, rotate-out;
+      
+    }
+  </style>
 </head>
+
 <body>
-  <div class="container container-fluid">
+  <div class="container">
     <app-root></app-root>
   </div>
 </body>
+
 </html>

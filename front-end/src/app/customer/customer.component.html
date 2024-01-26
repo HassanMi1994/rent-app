@@ -1,41 +1,54 @@
-<p>customer works!</p>
+<div
+  class="alert alert-primary alert-dismissible fade show"
+  role="alert"
+>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+  <strong>{{"manage-customers" | transloco}}</strong> Alert Content
+</div>
 
-<h3 class="h3 text text-danger">
-    welcome to the page to create new customer for your app!
-</h3>
+<script>
+  var alertList = document.querySelectorAll(".alert");
+  alertList.forEach(function (alert) {
+    new bootstrap.Alert(alert);
+  });
+</script>
 
 
 <h3>
-  <a class="btn btn-dark" routerLink="/customer/new">New Customer</a>
+  <a class="btn btn-dark" routerLink="/customers/new">{{'new-customer'|transloco}}</a>
 </h3>
 
-
 <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">{{'firstName' | transloco}}</th>
-        <th scope="col">{{'lastName' | transloco}}</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td></td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td></td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">{{'firstName' | transloco}}</th>
+      <th scope="col">{{'lastName' | transloco}}</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td></td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td colspan="2">Larry the Bird</td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>

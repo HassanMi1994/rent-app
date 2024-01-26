@@ -1,33 +1,34 @@
 <form class="">
     <div class="row">
         <div class="col-12 col-md-4 m-1">
-            <input name="name" class="form-control text-body-emphasis" type="text" placeholder='Name'>
+            <input name="name" class="form-control text-body-emphasis" type="text" [placeholder]="'firstName'|transloco">
         </div>
 
         <div class="col-12 col-md-4 m-1">
-            <input name="lastName" class="form-control" type="text" placeholder="Last Name">
+            <input name="lastName" class="form-control" type="text" [placeholder]="'lastName'|transloco">
         </div>
 
         <div class="col-12 col-md-4 m-1">
-            <input name="fatherName" class="form-control" type="text" placeholder="Father Name">
+            <input name="fatherName" class="form-control" type="text" [placeholder]="'fatherName'|transloco">
         </div>
 
         <div class="col-12 col-md-4 m-1">
-            <input name="mobile" class="form-control" type="text" placeholder="Mobile">
+            <input name="mobile" class="form-control" type="text" [placeholder]="'mobile'|transloco">
         </div>
 
         <div class="col-12 col-md-4 m-1">
-            <input name="refereeName" class="form-control" type="text" placeholder="Referee Name">
+            <input name="refereeName" class="form-control" type="text" [placeholder]="'refereeName'|transloco">
         </div>
     </div>
 
     <div class="row">
         <div class="col-12 col-md-4 m-1">
-            <input  class="form-control btn btn-info" type="button" value="Cancel" placeholder="Referee Name">
+            <input class="form-control btn btn-info" type="button" [value]="'cancel'|transloco"
+                placeholder="Referee Name">
         </div>
 
         <div class="col-12 col-md-4 m-1">
-            <input  class="form-control btn btn-success" type="submit" value="Save" placeholder="Referee Name">
+            <input class="form-control btn btn-success" type="submit" value="Save" [value]="'save'|transloco">
         </div>
     </div>
 </form>

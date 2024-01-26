@@ -6,9 +6,9 @@ import { CreateCustomerComponent } from './customer/create-customer/create-custo
 
 export const routes: Routes = [
 
-    {component:CustomerComponent, path: 'customer/create'},
-    {component:CreateCustomerComponent, path: 'customer/new'},
-    {component: WelcomePageComponent, path: 'welcome-page'},
-    { path: '',   redirectTo: 'welcome-page', pathMatch: 'full' },
-    { path: '**', component: PageNotFoundComponent },  // Wildcard route for a 404 page
+    { component: CustomerComponent, path: 'customers', data: { animation: 'insertRemovePage' } },
+    { component: CreateCustomerComponent, path: 'customers/new', data: { animation: 'insertRemovePage' } },
+    { component: WelcomePageComponent, path: 'welcome-page', data: { animation: 'insertRemovePage' } },
+    { path: '', redirectTo: 'welcome-page', pathMatch: 'full', data: { animation: 'insertRemovePage' } },
+    { path: '**', component: PageNotFoundComponent, data: { animation: 'insertRemovePage' } },  // Wildcard route for a 404 page
 ];
