@@ -1,0 +1,21 @@
+<h3>
+    <a class="btn btn-outline-primary" routerLink="/stuff/new">{{'new-stuff'|transloco}}</a>
+</h3>
+
+
+<div class="row">
+    @for (s of stuff; track $index) {
+    <div
+        class="col-12 rounded col-md-3 m-5 text-center rounded-5 border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient customer-template">
+        <div class="row">
+            <div class="col-12 bg-info"></div>
+            <div class="col-12 text-primary">
+                <b> {{s.name}} {{s.description}}</b>
+            </div>
+            <div class="col-12 border-3">
+                <span class="bi bi-arrow-down"></span>
+            </div>
+        </div>
+    </div>
+    }
+</div>

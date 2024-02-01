@@ -20,6 +20,15 @@ builder.Services.AddDbContext<RentDbContext>(options =>
     options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]);
 });
 
+var corsPolicyName = "_corsPolicyName";
+builder.Services.AddCors(option => option.AddPolicy(name: corsPolicyName, policy =>
+{
+    policy.AllowAnyHeader();
+    policy.AllowAnyOrigin();
+    policy.AllowAnyMethod();
+    policy.SetIsOriginAllowed(origin => true);
+}));
+
 var app = builder.Build();
 
 
@@ -31,9 +40,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors(corsPolicyName);
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

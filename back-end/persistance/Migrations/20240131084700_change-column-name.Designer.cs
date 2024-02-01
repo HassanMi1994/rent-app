@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using persistance;
 
@@ -10,9 +11,11 @@ using persistance;
 namespace persistance.Migrations
 {
     [DbContext(typeof(RentDbContext))]
-    partial class RentDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240131084700_change-column-name")]
+    partial class changecolumnname
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -56,27 +59,6 @@ namespace persistance.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Customers");
-                });
-
-            modelBuilder.Entity("domain.entities.Stuff", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Stuffs");
                 });
 #pragma warning restore 612, 618
         }

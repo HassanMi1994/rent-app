@@ -1,32 +1,25 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" id="navId" role="tablist">
   <li class="nav-item">
-    <a routerLink="/" class="nav-link active" data-bs-toggle="tab" aria-current="page" routerLinkActive="active">Rent App</a>
-  </li>
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-      aria-expanded="false">{{'app-name'|transloco}}</a>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="#tab2Id">Action</a>
-      <a class="dropdown-item" href="#tab3Id">Another action</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#tab4Id">Action</a>
-    </div>
+    <a routerLink="/" class="nav-link active" data-bs-toggle="tab" aria-current="page" routerLinkActive="active">Rent
+      App</a>
   </li>
   <li class="nav-item" role="presentation">
-    <a routerLink="customers" class="nav-link" data-bs-toggle="tab" routerLinkActive="active">{{'customers'|transloco}}</a>
+    <a routerLink="stuff" class="nav-link" data-bs-toggle="tab"
+      routerLinkActive="active">{{'stuff'|transloco}}</a>
   </li>
   <li class="nav-item" role="presentation">
-    <a href="#" class="nav-link disabled" data-bs-toggle="tab">Disabled</a>
+    <a routerLink="customers" class="nav-link" data-bs-toggle="tab"
+      routerLinkActive="active">{{'customers'|transloco}}</a>
   </li>
 
   <li class="nav-item">
     <a class="" role="presentation" (click)="changeLang('fa')" routerLinkActive="active">
-      FA <i class="bi bi-star-fill row-cols-xl-3"></i>
+      فارسی <i class="bi bi-star-fill row-cols-xl-3"></i>
     </a>
 
     <a class="" role="presentation" (click)="changeLang('en')" routerLinkActive="active">
-      EN <i class="row-cols-xl-3"></i>
+      English <i class="row-cols-xl-3"></i>
     </a>
 
   </li>
@@ -36,6 +29,6 @@
 </ul>
 <br />
 
-<div [@routeAnimations]="prepareRoute(outlet)">
+<div class="route-animation-container" [@routeAnimations]="prepareRoute(outlet)">
   <router-outlet #outlet="outlet"></router-outlet>
 </div>

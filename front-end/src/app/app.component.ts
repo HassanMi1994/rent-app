@@ -8,7 +8,11 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, TranslocoPipe, CommonModule],
+  imports: [RouterOutlet,
+    RouterLink,
+    RouterLinkActive,
+    TranslocoPipe,
+    CommonModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   animations: [slideInAnimation]

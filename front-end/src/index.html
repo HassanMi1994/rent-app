@@ -11,7 +11,7 @@
     /* Custom transition */
     @keyframes rotate-out {
       to {
-        transform: scale3d(1);
+        transform: scale(1);
         opacity: 1;
       }
     }
@@ -19,21 +19,21 @@
     @keyframes rotate-in {
       from {
         opacity: 0;
-        transform: scale3d(0.1);
+        transform: scale(0.1);
       }
     }
 
-    .container::view-transition-old(*),
-    .container::view-transition-new(*) {
-      animation-duration: 1000ms;
+    html::view-transition-old(*),
+    html::view-transition-new(*) {
+      animation-duration: 250ms;
       /* animation-name: -ua-view-transition-fade-in, rotate-in; */
       animation-name: -ua-view-transition-fade-in, roate-in;
     }
 
-    ::view-transition-old(*) {
+    html::view-transition-old(*) {
       /* animation-name: -ua-view-transition-fade-out; */
       animation-name: -ua-view-transition-fade-out, rotate-out;
-      
+
     }
   </style>
 </head>

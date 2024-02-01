@@ -13,9 +13,13 @@ namespace application.Services
             _rentDb = rentDb;
         }
 
+        public IAsyncEnumerable<Customer> GetAll()
+        {
+            return _rentDb.Customers.AsAsyncEnumerable();
+        }
+
         public async Task Create(Customer customer)
         {
-
             _rentDb.Customers.Add(customer);
             await _rentDb.SaveChangesAsync();
         }

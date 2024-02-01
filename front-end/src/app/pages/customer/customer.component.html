@@ -1,0 +1,27 @@
+<h3>
+  <a class="btn btn-outline-primary" routerLink="/customers/new">{{'new-customer'|transloco}}</a>
+</h3>
+
+<app-toast></app-toast>
+
+
+<div class="row">
+  @for (cus of customers; track $index) {
+  <div
+    class="col-12 rounded col-md-3 m-5 text-center rounded-5 border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient customer-template">
+    <div class="row">
+      <div class="col-12 bg-info"></div>
+      <div class="col-12 text-primary">
+        <b> {{cus.firstName}} {{cus.lastName}}</b>
+      </div>
+      <div class="col-12 border-3">
+        {{cus.address}}
+      </div>
+
+      <div class="col-12 border-3">
+        <span class="bi bi-arrow-down"></span>
+      </div>
+    </div>
+  </div>
+  }
+</div>

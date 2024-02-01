@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    //NotifierModule.withConfig({})
+  ],
 })
 export class BaseModule { }

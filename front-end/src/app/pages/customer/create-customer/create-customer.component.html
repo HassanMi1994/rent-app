@@ -1,0 +1,41 @@
+<form name="create-customer-form">
+    <div class="row">
+        <div class="col-12 col-md-5 m-1">
+            <app-form-input [labelName]="'firstName'" (value)="customer.firstName=$event">
+            </app-form-input>
+        </div>
+
+        <div class="col-12 col-md-5 m-1">
+            <app-form-input [labelName]="'lastName'" (value)="customer.lastName=$event"></app-form-input>
+        </div>
+
+        <div class="col-12 col-md-5 m-1">
+            <app-form-input [labelName]="'fatherName'" (value)="customer.fatherName=$event"></app-form-input>
+        </div>
+
+        <div class="col-12 col-md-5 m-1">
+            <app-form-input [labelName]="'mobile'" (value)="customer.mobile=$event"></app-form-input>
+        </div>
+
+        <div class="col-12 col-md-5 m-1">
+            <app-form-input [labelName]="'address'" (value)="customer.address=$event"> </app-form-input>
+        </div>
+
+        <div class="col-12 col-md-5 m-1">
+            <app-form-input [labelName]="'refereeName'" (value)="customer.refereeName=$event">
+            </app-form-input>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-5 m-1">
+            <a class="form-control btn btn-outline-dark" routerLink="/customers"> {{'cancel'|transloco}}</a>
+        </div>
+        <br />
+        <div class="col-12 col-md-5 m-1">
+            <input class="form-control btn btn-outline-success" (click)="create()" type="button"
+                [value]="'save'|transloco">
+        </div>
+    </div>
+</form>

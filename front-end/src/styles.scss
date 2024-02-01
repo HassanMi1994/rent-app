@@ -1,1 +1,20 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: IRANSans;
+    src: url(assets/fonts/IRANSans-web.woff) format("opentype");
+}
+
+* {
+    font-family: IRANSans !important;
+}
+
+// body{
+//     background: rgb(72,222,120);
+//     background: linear-gradient(90deg,
+//      rgba(72,222,120,0.20211834733893552) 0%,
+//      rgba(81,72,222,0.4066001400560224) 100%,
+//      rgba(138,132,236,0.2049194677871149) 100%, rgb(14, 14, 223) 100%, rgba(38,79,87,0) 100%);
+// }
+// .container{
+//     background: none !important;
+// }

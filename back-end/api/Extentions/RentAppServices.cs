@@ -8,6 +8,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddRentAppServices(this IServiceCollection services)
         {
             services.AddTransient(typeof(ICustomerService), typeof(CustomerService));
+            services.AddTransient(typeof(IStuffService), typeof(StuffService));
             return services;
         }
     }
