@@ -1,0 +1,22 @@
+{
+    "welcome-text": "Добро пожаловать в приложение для аренды, держите все под контролем!",
+    "pageNotFound": "Страница не найдена",
+    "firstName": "Имя",
+    "lastName": "Фамилия",
+    "fatherName": "Отчество",
+    "mobile": "Мобильный телефон",
+    "address": "Адрес",
+    "refereeName": "Имя рекомендателя",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "app-name": "Аренда вещей",
+    "customers": "Клиенты",
+    "new-customer": "Новый клиент",
+    "stuff": "Вещи",
+    "manager-customers": "Управление клиентами",
+    "new-stuff": "Новые вещи",
+    "name": "Название",
+    "description": "Описание",
+    "pricePerDay": "Цена за день",
+    "quantity": "Количество"
+}

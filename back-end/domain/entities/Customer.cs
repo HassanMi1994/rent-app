@@ -1,6 +1,8 @@
-﻿namespace Rent.Entities
+﻿using domain.entities;
+
+namespace Rent.Entities
 {
-    public class Customer
+    public class Customer : IBaseEntity
     {
         #region props
         public int ID { get; set; }
@@ -10,6 +12,8 @@
         public string Mobile { get; set; }
         public string RefereeName { get; set; }
         public string Address { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
         #endregion
 
         #region create

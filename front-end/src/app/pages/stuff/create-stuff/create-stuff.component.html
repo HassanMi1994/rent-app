@@ -9,6 +9,15 @@
             <app-form-input [labelName]="'description'" (value)="stuff.description=$event"></app-form-input>
         </div>
 
+        <div class="col-12 col-md-5 m-1">
+            <app-form-input-number [labelName]="'quantity'" (value)="stuff.quantity=($event)"></app-form-input-number>
+        </div>
+
+        <div class="col-12 col-md-5 m-1">
+            <app-form-input-number [labelName]="'pricePerDay'"
+                (value)="stuff.pricePerDay=($event)"></app-form-input-number>
+        </div>
+
     </div>
 
     <div class="row">

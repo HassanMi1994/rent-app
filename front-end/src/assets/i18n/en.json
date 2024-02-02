@@ -16,5 +16,9 @@
     "manager-customers": "Manage Customers",
     "new-stuff":"New stuff",
     "name":"Name",
-    "description":"Description"
+    "description":"Description",
+    "pricePerDay":"Price Per Day",
+    "quantity": "Quantity",
+    "details":"Details",
+    "close":"close"
 }

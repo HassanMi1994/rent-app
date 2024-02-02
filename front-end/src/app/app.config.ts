@@ -11,12 +11,13 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withViewTransitions()), provideClientHydration(), provideHttpClient(), provideTransloco({
     config: {
-      availableLangs: ['en', 'fa'],
+      availableLangs: ['en', 'fa','ch','ru'],
       defaultLang: 'en',
       // Remove this option if your application doesn't support changing language in runtime.
       reRenderOnLangChange: true,
       prodMode: !isDevMode(),
     },
     loader: TranslocoHttpLoader
-  }), provideAnimations()]
+  }),
+   provideAnimations()]
 };

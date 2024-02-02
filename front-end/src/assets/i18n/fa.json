@@ -14,7 +14,11 @@
     "new-customer": "مشتری جدید",
     "stuff": "ابزار",
     "manager-customers": "مدیریت مشتریان",
-    "new-stuff":"افزودن وسیله",
-    "name":"نام",
-    "description":"توضیحات"
+    "new-stuff": "افزودن وسیله",
+    "name": "نام",
+    "description": "توضیحات",
+    "pricePerDay": "قیمت روزانه",
+    "quantity": "تعداد",
+    "details": "جزئیات",
+    "close": "بستن"
 }
