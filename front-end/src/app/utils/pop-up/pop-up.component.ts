@@ -1,5 +1,6 @@
-import { KeyValue } from '@angular/common';
 import { AfterViewInit, Component, Input, OnInit, input } from '@angular/core';
+import { TranslocoService } from '@ngneat/transloco';
+import moment from 'moment';
 
 @Component({
   selector: 'app-pop-up',
@@ -8,10 +9,61 @@ import { AfterViewInit, Component, Input, OnInit, input } from '@angular/core';
   templateUrl: './pop-up.component.html',
   styleUrl: './pop-up.component.scss'
 })
-export class PopUpComponent implements OnInit, AfterViewInit {
-  ngOnInit(): void {
-    for (const key in this.objectToBeingShown)
-      this.bindableProps.push([key, this.objectToBeingShown[key]]);
+export class PopUpComponent implements AfterViewInit {
+
+  loadElement: string;
+  elementToBeShown: any;
+  content: string;
+
+  constructor(private translator: TranslocoService) { }
+
+  public show() {
+    var content = document.getElementById("mydiv") as HTMLDivElement;
+    content.classList.remove('visually-hidden');
+  }
+
+  public hide() {
+    var content = document.getElementById("mydiv") as HTMLDivElement;
+    content.classList.add('visually-hidden');
+  }
+
+  public setTitle(title: string) {
+    let elem = document.getElementById('mydivheader-content');
+
+    elem?.replaceChildren(title);
+  }
+
+  public showObject(data: any) {
+    this.content = '';
+    let props = Object.entries(data);
+    for (let index = 0; index < props.length; index++) {
+      let newDiv = this.addAnotherRowIn(props[index][0], props[index][1] as string)
+      if (newDiv !== undefined)
+        this.content += '\n' + newDiv;
+    }
+  }
+
+  addAnotherRowIn(lable: string, value: string) {
+
+    let j = moment(value, true)
+    if (j.unix() > 1000000 && j.isValid()) {
+      let html = `<div class="row">
+    <div class="col-4 text-black">${this.translator.translate(lable)}</div>
+    <div class="col-6 text-info">${j.toString()}</div>
+    <hr class="hr"/>
+    </div>`;
+      this.content += html;
+    }
+    else {
+      let html = `<div class="row">
+    <div class="col-4 text-black">${this.translator.translate(lable)}</div>
+    <div class="col-6 text-info">${value}</div>
+    <hr class="hr"/>
+    </div>`;
+      this.content += html;
+    }
+
+
   }
 
   @Input() objectToBeingShown: any;
@@ -25,7 +77,6 @@ export class PopUpComponent implements OnInit, AfterViewInit {
 
   private registerDragElement() {
     const elmnt = document.getElementById('mydiv') as HTMLDivElement;
-
     let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
 
     const dragMouseDown = (e: MouseEvent) => {

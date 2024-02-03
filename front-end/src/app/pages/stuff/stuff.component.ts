@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Stuff } from '../../models/stuff';
 import { StuffService } from '../../services/stuff.service';
 import { CreateStuffComponent } from './create-stuff/create-stuff.component';
@@ -17,17 +17,20 @@ export default class StuffComponent implements OnInit {
 
   stuff: Stuff[]
 
+  @ViewChild('popUp') child: PopUpComponent;
+
   constructor(private stuffService: StuffService) { }
   ngOnInit(): void {
     this.stuffService.getAll().subscribe(r => this.stuff = r);
   }
 
   showMoreInfo(e: MouseEvent, stuffId: number) {
-    console.log(e);
-    console.log(this.stuff.find(x => x.id == stuffId))
-    let popUp = document.getElementById('morePopUp' + stuffId) as HTMLDivElement
-    popUp.classList.remove('visually-hidden');
-    popUp.style.top = e.clientY + 'px'
-    popUp.style.left = e.clientX + 'px'
+    var selectedStuff = this.stuff.find(x => x.id == stuffId) as Stuff;
+    this.child.setTitle(selectedStuff?.name)
+    this.child.showObject(selectedStuff);
+    this.child.show();
+    let popUp = document.getElementById('morePopUp') as HTMLDivElement
+    popUp.style.top = e.y + 'px'
+    popUp.style.left = e.x + 'px'
   }
 }

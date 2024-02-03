@@ -25,7 +25,7 @@ namespace persistance
                     entityEntry.Property(nameof(IBaseEntity.UpdatedAt)).CurrentValue = DateTime.UtcNow;
 
                 if (entityEntry.State == EntityState.Added)
-                    entityEntry.Property(nameof(IBaseEntity.UpdatedAt)).CurrentValue = DateTime.UtcNow;
+                    entityEntry.Property(nameof(IBaseEntity.CreatedAt)).CurrentValue = DateTime.UtcNow;
 
             }
             return base.SaveChangesAsync(cancellationToken);

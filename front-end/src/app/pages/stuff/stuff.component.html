@@ -13,12 +13,12 @@
                 <b> {{s.name}} {{s.description}}</b>
             </div>
             <div class="col-12 border-3 link-body-emphasis">
-                <span class="bi bi-arrow-down" (click)="showMoreInfo($event,s.id)">More</span>
+               <button class="btn"><span class="bi bi-zoom-in" (click)="showMoreInfo($event,s.id)"></span></button> 
             </div>
         </div>
     </div>
-    <app-pop-up id="morePopUp{{s.id}}" class="visually-hidden" [objectToBeingShown]="s"></app-pop-up>
     }
+    <app-pop-up id="morePopUp" #popUp></app-pop-up>
 </div>
 
 

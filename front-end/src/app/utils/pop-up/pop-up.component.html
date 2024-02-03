@@ -1,10 +1,18 @@
-<div id="mydiv">
-    <div id="mydivheader">Click here to move Draggable element</div>
-    <span class="bi bi-pen"></span>
-    @for (item of bindableProps; track $index) {
+<div id="mydiv" class="visually-hidden">
+    <div id="mydivheader">
+        <div class="row float-end"> <button class="btn" (click)="hide()"> <span class="bi bi-x-octagon"></span> </button></div>
+        <div id="mydivheader-content" class="row center text-center">
+
+        </div>
+    </div>
+
+    <!-- @for (item of bindableProps; track $index) {
     <div class="row m-3">
         <div class="col-4 text-black">{{item[0]}}</div>
         <div class="col-6 text-info">{{item[1]}}</div>
     </div>
-    }
+    } -->
+
+    <div id="jonjon" [innerHTML]="content">
+    </div>
 </div>

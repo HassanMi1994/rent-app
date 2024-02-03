@@ -1,5 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslocoPipe } from '@ngneat/transloco';
 import { CreateCustomerComponent } from './create-customer/create-customer.component';
@@ -7,12 +7,13 @@ import { FormInputComponent } from '../../utils/form-input/form-input.component'
 import { ToastComponent } from '../../utils/toast/toast.component';
 import { Customer } from '../../models/customer';
 import { CustomerService } from '../../services/customer.service';
+import { PopUpComponent } from '../../utils/pop-up/pop-up.component';
 
 
 @Component({
   selector: 'app-customer',
   standalone: true,
-  imports: [TranslocoPipe, RouterLink, CreateCustomerComponent, FormInputComponent, ToastComponent],
+  imports: [TranslocoPipe, RouterLink, CreateCustomerComponent, FormInputComponent, ToastComponent, PopUpComponent],
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.scss',
   animations: [
@@ -30,6 +31,8 @@ import { CustomerService } from '../../services/customer.service';
 })
 export class CustomerComponent implements OnInit {
 
+  @ViewChild('popup') popup: PopUpComponent;
+
   customers: Customer[];
 
   constructor(private customerService: CustomerService) {
@@ -38,6 +41,16 @@ export class CustomerComponent implements OnInit {
     this.customerService
       .getAll()
       .subscribe(x => this.customers = x);
+  }
+
+  showMoreInfo(e: MouseEvent, stuffId: number) {
+    var selectedStuff = this.customers.find(x => x.id == stuffId) as Customer;
+    this.popup.setTitle(selectedStuff?.firstName + selectedStuff?.lastName)
+    this.popup.showObject(selectedStuff);
+    this.popup.show();
+    let popUp = document.getElementById('morePopUp') as HTMLDivElement
+    popUp.style.top = e.y + 'px'
+    popUp.style.left = e.x + 'px'
   }
 
 

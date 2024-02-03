@@ -5,7 +5,7 @@
     text-align: center;
     border: 1px solid #d3d3d3;
     border-radius: 20px;
-    opacity: 0.8;
+    opacity: 0.9;
     // background-color: rgba(red, green, rgba(23, 23, 212, 0.473), 0.5);
 }
 
@@ -15,6 +15,11 @@
     z-index: 10;
     background-color: #2196F3;
     color: #fff;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    
 }
 
 // #div1 {
