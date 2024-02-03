@@ -20,5 +20,8 @@
     "pricePerDay":"Price Per Day",
     "quantity": "Quantity",
     "details":"Details",
-    "close":"close"
+    "close":"close",
+    "slide-first":"Welcome to the simple but pro rent app!",
+    "slide-second":"You can easily track your renting business!",
+    "slide-third":"This app is free to use!"
 }

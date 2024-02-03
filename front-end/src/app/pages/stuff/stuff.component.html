@@ -12,17 +12,23 @@
             <div class="col-12 text-primary">
                 <b> {{s.name}} {{s.description}}</b>
             </div>
-            <div class="col-12 border-3">
-                <span class="bi bi-arrow-down"></span>
+            <div class="col-12 border-3 link-body-emphasis">
+                <span class="bi bi-arrow-down" (click)="showMoreInfo($event,s.id)">More</span>
             </div>
-            <!-- Modal trigger button -->
+        </div>
+    </div>
+    <app-pop-up id="morePopUp{{s.id}}" class="visually-hidden" [objectToBeingShown]="s"></app-pop-up>
+    }
+</div>
+
+
+<!-- Modal trigger button
             <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#modalId">
                 {{'details'|transloco}}
-            </button>
-
-            <!-- Modal Body -->
-            <!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
-            <div class="modal fade" id="modalId" tabindex="-1" data-bs-keyboard="false" role="dialog"
+            </button> -->
+<!-- Modal Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+<!-- <div class="modal fade" id="modalId" tabindex="-1" data-bs-keyboard="false" role="dialog"
                 aria-labelledby="modalTitleId" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
                     <div class="modal-content">
@@ -48,17 +54,4 @@
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Optional: Place to the bottom of scripts -->
-            <script>
-                const myModal = new bootstrap.Modal(
-                    document.getElementById("modalId"),
-                    options,
-                );
-            </script>
-
-        </div>
-    </div>
-    }
-</div>
+            </div> -->
