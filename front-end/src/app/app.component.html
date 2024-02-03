@@ -5,6 +5,11 @@
       App</a>
   </li>
   <li class="nav-item" role="presentation">
+    <a routerLink="contracts" class="nav-link" data-bs-toggle="tab"
+      routerLinkActive="active">{{'contracts'|transloco}}</a>
+  </li>
+
+  <li class="nav-item" role="presentation">
     <a routerLink="stuff" class="nav-link" data-bs-toggle="tab" routerLinkActive="active">{{'stuff'|transloco}}</a>
   </li>
   <li class="nav-item" role="presentation">
@@ -18,7 +23,7 @@
       🌐
     </a>
     <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
-      <li><a class="dropdown-item " (click)="changeLang('fa')">فارسی</a></li>
+      <li><a class="dropdown-item " (click)="changeLang('fa')">Persian (فارسی)</a></li>
       <li>
         <hr class="dropdown-divider">
       </li>
@@ -26,11 +31,15 @@
       <li>
         <hr class="dropdown-divider">
       </li>
-      <li><a class="dropdown-item "  (click)="changeLang('ch')">Chinese</a></li>
+      <li><a class="dropdown-item " (click)="changeLang('ch')">Chinese (Китайский)</a></li>
       <li>
         <hr class="dropdown-divider">
       </li>
-      <li><a class="dropdown-item "  (click)="changeLang('ru')">Russion</a></li>
+      <li><a class="dropdown-item " (click)="changeLang('ru')">Russion (Русский)</a></li>
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+      <li><a class="dropdown-item " (click)="changeLang('it')">Italian (Italiana)</a></li>
     </ul>
   </li>
   <li>
