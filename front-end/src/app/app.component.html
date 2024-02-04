@@ -1,8 +1,8 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" id="navId" role="tablist">
   <li class="nav-item">
-    <a routerLink="/" class="nav-link active" data-bs-toggle="tab" aria-current="page" routerLinkActive="active">Rent
-      App</a>
+    <a routerLink="/" class="nav-link active" data-bs-toggle="tab" aria-current="page"
+      routerLinkActive="active">{{'app-name'|transloco}}</a>
   </li>
   <li class="nav-item" role="presentation">
     <a routerLink="contracts" class="nav-link" data-bs-toggle="tab"
@@ -21,8 +21,9 @@
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
       aria-expanded="false">
       🌐
+      {{selectedLang}}
     </a>
-    <ul class="dropdown-menu text-center" aria-labelledby="navbarDropdown">
+    <ul class="dropdown-menu text-center lang-list" aria-labelledby="navbarDropdown">
       <li><a class="dropdown-item " (click)="changeLang('fa')">Persian (فارسی)</a></li>
       <li>
         <hr class="dropdown-divider">
@@ -31,11 +32,15 @@
       <li>
         <hr class="dropdown-divider">
       </li>
-      <li><a class="dropdown-item " (click)="changeLang('ch')">Chinese (Китайский)</a></li>
+      <li><a class="dropdown-item " (click)="changeLang('ge')">Georgian (ქართული)</a></li>
       <li>
         <hr class="dropdown-divider">
       </li>
       <li><a class="dropdown-item " (click)="changeLang('ru')">Russion (Русский)</a></li>
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+      <li><a class="dropdown-item " (click)="changeLang('ch')">Chinese (中国人)</a></li>
       <li>
         <hr class="dropdown-divider">
       </li>

@@ -1,0 +1,32 @@
+.lang-list:hover {
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 10px;
+    background-color: lightblue;
+}
+
+.lang-list {
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+    padding-right: 10px;
+    padding-left: 10px;
+    border-radius: 20px;
+    background-color: lightblue;
+    transition-duration: 300ms;
+}
+
+.lang-list li {
+    //background-color: rgb(7, 193, 255);
+    // background-color: bisque;
+    border-radius: 10px;
+    transition-duration: 300ms;
+}
+
+.lang-list>li:hover {
+    background-color: rgb(33, 200, 255) !important;
+    border-radius: 20px;
+}
+
+.dropdown-item:hover{
+    background-color: rgb(33, 200, 255) !important;
+    border-radius: 10px;
+}

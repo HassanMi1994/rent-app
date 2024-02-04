@@ -1,9 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { AfterViewInit, Component, OnInit, importProvidersFrom, inject } from '@angular/core';
 
 import { ChildrenOutletContexts, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 import { slideInAnimation } from './animations';
 import { CommonModule } from '@angular/common';
+import { NgxPiwikProModule } from '@piwikpro/ngx-piwik-pro';
 
 @Component({
   selector: 'app-root',
@@ -12,20 +13,33 @@ import { CommonModule } from '@angular/common';
     RouterLink,
     RouterLinkActive,
     TranslocoPipe,
-    CommonModule],
+    CommonModule,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   animations: [slideInAnimation]
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   title = 'rent-front';
   transLoco: TranslocoService;
+  selectedLang: string;
 
   constructor(transLang: TranslocoService, private contexts: ChildrenOutletContexts) {
     this.transLoco = transLang;
+    this.selectedLang = this.transLoco.getDefaultLang().toUpperCase();
+
+  }
+  ngAfterViewInit(): void {
+    let langHistory = localStorage.getItem('selectedLang');
+    if (langHistory !== undefined) {
+      this.selectedLang = langHistory!.toUpperCase();
+      this.transLoco.setActiveLang(langHistory!);
+    }
   }
 
   changeLang(lang: string) {
+
+    localStorage.setItem('selectedLang', lang);
+    this.selectedLang = lang.toUpperCase();
     this.transLoco.setActiveLang(lang);
   }
 

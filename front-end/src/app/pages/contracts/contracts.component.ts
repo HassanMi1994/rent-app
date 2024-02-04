@@ -16,5 +16,11 @@ export class ContractsComponent {
   selectedCustomerId: number;
   customers: Customer[]
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: CustomerService) {
+
+    this.customerService.getAll().subscribe(result => {
+      this.customers = result;
+    });
+
+  }
 }
