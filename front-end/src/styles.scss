@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('../node_modules/bootstrap/scss/bootstrap.scss');
+
 @font-face {
     font-family: IRANSans;
     src: url(assets/fonts/IRANSans-web.woff) format("opentype");
@@ -8,9 +11,33 @@
     font-family: IRANSans !important;
 }
 
-body{
-    background-image: url('assets/images/background.png');
+// body {
+//     background-image: url('assets/images/background.png');
+//     //background-size: 150%;
+// }
+
+
+
+body {
+    @media (max-width: 500px) {
+        //background-image: url('assets/images/background-vertical.png');
+        background-image: url('assets/images/background.png');
+        transition-duration: .500ms;
+    }
+
+    @media (min-width: 500px) {
+        background-image: url('assets/images/background.png');
+    }
 }
+
+.nav-link.active {
+    background-image: none;
+    //color: var(--bs-nav-tabs-link-active-color);
+    // box-shadow: 50px aquamarine;
+    // border-color: var(--bs-nav-tabs-link-active-border-color);
+}
+
+
 
 // body{
 //     background: rgb(72,222,120);
