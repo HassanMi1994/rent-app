@@ -1,6 +1,5 @@
 ﻿using domain.entities;
 using Microsoft.EntityFrameworkCore;
-using persistance.configurations;
 using Rent.Entities;
 
 namespace persistance
@@ -13,6 +12,8 @@ namespace persistance
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Stuff> Stuffs { get; set; }
+        public DbSet<Contract> Contracts { get; set; }
+        public DbSet<RentedStuff> RentedStuffs { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

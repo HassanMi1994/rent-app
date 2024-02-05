@@ -4,7 +4,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { FormInputComponent } from '../../../utils/form-input/form-input.component';
 import { Router, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Customer } from '../../../models/customer';
+import { Customer } from '../../../models/customer.model';
 import { FormsModule } from '@angular/forms';
 import { CustomerService } from '../../../services/customer.service';
 

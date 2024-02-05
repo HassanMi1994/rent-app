@@ -4,7 +4,7 @@ using Rent.Entities;
 
 namespace api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/customers")]
     [ApiController]
     public class CustomersController : ControllerBase
     {

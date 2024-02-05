@@ -11,7 +11,13 @@
 input {
   border-radius: 30%;
   text-align: center;
+  background-color: unset;
+  border-color: #3498db;
+  //transform: scaleX(0);
+  transform-origin: center;
+  //transition: transform 0.3s ease;
 }
+
 
 .form-input-container {
   // max-width: 800px;

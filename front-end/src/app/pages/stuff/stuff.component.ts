@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Stuff } from '../../models/stuff';
+import { Stuff } from '../../models/stuff.model';
 import { StuffService } from '../../services/stuff.service';
 import { CreateStuffComponent } from './create-stuff/create-stuff.component';
 import { RouterLink } from '@angular/router';

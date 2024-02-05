@@ -5,7 +5,7 @@ import { TranslocoPipe } from '@ngneat/transloco';
 import { CreateCustomerComponent } from './create-customer/create-customer.component';
 import { FormInputComponent } from '../../utils/form-input/form-input.component';
 import { ToastComponent } from '../../utils/toast/toast.component';
-import { Customer } from '../../models/customer';
+import { Customer } from '../../models/customer.model';
 import { CustomerService } from '../../services/customer.service';
 import { PopUpComponent } from '../../utils/pop-up/pop-up.component';
 

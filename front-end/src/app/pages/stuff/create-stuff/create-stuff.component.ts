@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TranslocoPipe } from '@ngneat/transloco';
 import { FormInputComponent } from '../../../utils/form-input/form-input.component';
-import { Stuff } from '../../../models/stuff';
+import { Stuff } from '../../../models/stuff.model';
 import { Router, RouterLink } from '@angular/router';
 import { StuffService } from '../../../services/stuff.service';
 import { FormInputNumberComponent } from '../../../utils/form-input-number/form-input-number.component';

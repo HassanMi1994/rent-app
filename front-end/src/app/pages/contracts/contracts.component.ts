@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CustomerService } from '../../services/customer.service';
-import { Customer } from '../../models/customer';
+import { Customer } from '../../models/customer.model';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
