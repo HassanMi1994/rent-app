@@ -6,9 +6,8 @@ namespace Rent.Entities
     {
         #region props
         public int ID { get; set; }
-        public string FirstName { get; set; }
+        public string FullName { get; set; }
         public string NationalityCode { get; set; }
-        public string LastName { get; set; }
         public string FatherName { get; set; }
         public string Mobile { get; set; }
         public string RefereeName { get; set; }
@@ -18,10 +17,9 @@ namespace Rent.Entities
         #endregion
 
         #region create
-        public Customer Create(string name, string lastName, string mobile, string refereeName)
+        public Customer Create(string fullName, string mobile, string refereeName)
         {
-            FirstName = name;
-            LastName = lastName;
+            FullName = fullName;
             Mobile = mobile;
             RefereeName = refereeName;
             return this;

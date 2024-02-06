@@ -1,19 +1,19 @@
 <form name="create-customer-form">
     <div class="row">
-        <div class="col-12 col-md-5 m-1">
+        <div class="col-12 col-md-6 col-lg-4">
             <app-form-input [labelName]="'name'" (value)="stuff.name=$event">
             </app-form-input>
         </div>
 
-        <div class="col-12 col-md-5 m-1">
+        <div class="col-12 col-md-6 col-lg-4">
             <app-form-input [labelName]="'description'" (value)="stuff.description=$event"></app-form-input>
         </div>
 
-        <div class="col-12 col-md-5 m-1">
+        <div class="col-12 col-md-6 col-lg-4">
             <app-form-input-number [labelName]="'quantity'" (value)="stuff.quantity=($event)"></app-form-input-number>
         </div>
 
-        <div class="col-12 col-md-5 m-1">
+        <div class="col-12 col-md-6 col-lg-4">
             <app-form-input-number [labelName]="'pricePerDay'"
                 (value)="stuff.pricePerDay=($event)"></app-form-input-number>
         </div>
@@ -21,11 +21,11 @@
     </div>
 
     <div class="row">
-        <div class="col-12 col-md-5 m-1">
+        <div class="col-12 col-md-6 col-lg-4">
             <a class="form-control btn btn-outline-dark" routerLink="/stuff"> {{'cancel'|transloco}}</a>
         </div>
         <br />
-        <div class="col-12 col-md-5 m-1">
+        <div class="col-12 col-md-6 col-lg-4">
             <input class="form-control btn btn-outline-success" (click)="create()" type="button"
                 [value]="'save'|transloco">
         </div>

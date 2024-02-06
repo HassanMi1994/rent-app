@@ -45,14 +45,11 @@ export class CustomerComponent implements OnInit {
 
   showMoreInfo(e: MouseEvent, stuffId: number) {
     var selectedStuff = this.customers.find(x => x.id == stuffId) as Customer;
-    this.popup.setTitle(selectedStuff?.firstName + ' ' + selectedStuff?.lastName)
+    this.popup.setTitle(selectedStuff?.fullName)
     this.popup.showObject(selectedStuff);
     this.popup.show();
     let popUp = document.getElementById('morePopUp') as HTMLDivElement
     popUp.style.top = e.y + 'px'
     popUp.style.left = e.x + 'px'
   }
-
-
-
 }

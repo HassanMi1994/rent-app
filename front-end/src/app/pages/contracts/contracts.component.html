@@ -1,4 +1,28 @@
-<p>contracts works!</p>
+<a class="col-12 btn btn-outline-primary  m-2 " [routerLink]="'/contracts/new'">{{'newContract'|transloco}}</a>
+
+
+<div class="row">
+    @for (con of contracts; track $index) {
+    <div
+        class="col-12 rounded col-md-3 m-5 text-center rounded-5 border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient customer-template">
+        <div class="row">
+            <div class="col-12 bg-info"></div>
+            <div class="col-12 text-primary">
+                <b> {{con.createdAt}} {{con.prePaidMoney}}</b>
+            </div>
+            <div class="col-12 border-3">
+                {{con.totalPricePerDay}}
+            </div>
+
+            <div class="col-12 border-3 link-body-emphasis">
+                <button class="btn"><span class="bi bi-zoom-in" (click)="showMoreInfo($event,con.id)"></span></button>
+            </div>
+        </div>
+    </div>
+    }
+    <app-pop-up #popup id="morePopUp"></app-pop-up>
+</div>
+
 <!-- <h3>how are you doing?</h3>
 <ng-select style="z-index: 99999999;" class="form-control" [items]="customers" bindLabel="name" bindValue="id"
     [(ngModel)]="selectedCustomerId">

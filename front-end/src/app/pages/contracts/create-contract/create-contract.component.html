@@ -1,0 +1,65 @@
+<form name="create-contract-form">
+
+
+
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-4">
+            <ng-select [items]="customers$ |async" class="text-center center" [placeholder]="'customer'|transloco"
+                autofocus default bindValue="id" [(ngModel)]="selectedCustomerId">
+                <ng-template ng-option-tmp let-item="item" let-index="index">
+                    <p class="row text-center center">{{ item.firstName + ' ' + item.lastName + ' '}}</p>
+
+                    <!--let's have some small good baby here!  -->
+                    <div class="row" style="font-size: smaller;margin: 0; padding: 0 !important;">
+                        <div class="col-6">
+                            {{'mobile'|transloco}}: <span class="text text-info">{{ item.mobile}} </span>
+                        </div>
+
+                        <div class="col-6">
+                            {{'address'|transloco}}: <span class="text text-info">{{ item.fatherName}} </span>
+                        </div>
+                    </div>
+                </ng-template>
+            </ng-select>
+        </div>
+
+
+    </div>
+
+    <hr />
+    <h5 class="col-12 text-center text-info">{{'selectStuff'|transloco}}</h5>
+
+    <div class="row">
+        <div class="col-12 col-md-6 col-lg-4">
+            <ng-select [items]="stuff$ |async" bindLabel="Stuff" cslas="text-center center"
+                [placeholder]="'stuff'|transloco" autofocus default bindValue="id" [(ngModel)]="selectedCustomerId">
+                <ng-template ng-option-tmp let-item="item" let-search="searchTerm" let-index="index">
+                    <span class="text-center center">{{item.name}}</span>
+                </ng-template>
+
+            </ng-select>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <app-form-input [labelName]="'quantity'"></app-form-input>
+        </div>
+
+        <div class="col-12 col-md-6 col-lg-4">
+            <input type="date" class="form-control" />
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+        <div class="col-12 col-md-5 m-1">
+            <a class="form-control btn btn-outline-dark" routerLink="/contracts"> {{'cancel'|transloco}}</a>
+        </div>
+        <br />
+        <div class="col-12 col-md-5 m-1">
+            <input class="form-control btn btn-outline-success" (click)="create()" type="button"
+                [value]="'save'|transloco">
+        </div>
+    </div>
+</form>

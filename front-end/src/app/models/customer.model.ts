@@ -1,7 +1,6 @@
 export class Customer {
     id: number;
-    firstName: string = '';
-    lastName: string = '';
+    fullName: string = ''
     fatherName: string = '';
     mobile: string = '';
     address: string = '';

@@ -1,5 +1,5 @@
 <h3>
-  <a class="btn btn-outline-primary" routerLink="/customers/new">{{'new-customer'|transloco}}</a>
+  <a class="btn btn-outline-primary  m-2  col-12" routerLink="/customers/new">{{'new-customer'|transloco}}</a>
 </h3>
 
 <app-toast></app-toast>
@@ -12,7 +12,7 @@
     <div class="row">
       <div class="col-12 bg-info"></div>
       <div class="col-12 text-primary">
-        <b> {{cus.firstName}} {{cus.lastName}}</b>
+        <b> {{cus.fullName}}</b>
       </div>
       <div class="col-12 border-3">
         {{cus.address}}

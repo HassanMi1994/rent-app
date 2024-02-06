@@ -10,7 +10,8 @@
   </li>
 
   <li class="nav-item" role="presentation">
-    <a routerLink="stuff" class="nav-link" data-bs-toggle="tab" routerLinkActive="active">{{'stuff'|transloco}}</a>
+    <a routerLink="stuff" class="nav-link" data-bs-toggle="tab" routerLinkActive="active" data-toggle="tooltip"
+      data-placement="bottom" [title]="'stuffTooltip'|transloco">{{'stuff'|transloco}}</a>
   </li>
   <li class="nav-item" role="presentation">
     <a routerLink="customers" class="nav-link" data-bs-toggle="tab"
@@ -55,4 +56,17 @@
 
 <div class="route-animation-container" [@routeAnimations]="prepareRoute(outlet)">
   <router-outlet #outlet="outlet"></router-outlet>
+</div>
+
+
+
+<div class="text-center mt-auto footer-hm">
+  <hr />
+  <hr />
+  <p>
+    <a class="link-info" href="https://www.linkedin.com/in/hassan-monjezi/"> developer hm</a>
+  </p>
+  <p>
+    Version 0.5
+  </p>
 </div>
