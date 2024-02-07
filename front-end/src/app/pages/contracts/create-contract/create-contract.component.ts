@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { ContractService } from '../../../services/contract.service';
 
 @Component({
   selector: 'app-create-contract',
@@ -21,12 +22,12 @@ import { RouterLink } from '@angular/router';
 })
 export class CreateContractComponent {
 
-  contract: Contract;
+  contract: Contract = new Contract();
   stuff$: Observable<Stuff[]>
   customers$: Observable<Customer[]>;
   selectedCustomerId: number;
 
-  constructor(private stuffService: StuffService, private customerService: CustomerService) {
+  constructor(private stuffService: StuffService, private customerService: CustomerService, private contractService: ContractService) {
     this.stuff$ = this.stuffService.getAll();
     this.customers$ = this.customerService.getAll()
   }

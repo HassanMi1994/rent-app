@@ -12,7 +12,7 @@ import { NgxPiwikProModule } from '@piwikpro/ngx-piwik-pro';
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes, withViewTransitions()), provideClientHydration(), provideHttpClient(), provideTransloco({
     config: {
-      availableLangs: ['en', 'fa', 'ch', 'ru', 'it','ge'],
+      availableLangs: ['en', 'fa', 'ch', 'ru', 'it','ge','fr','ar'],
       defaultLang: 'en',
       // Remove this option if your application doesn't support changing language in runtime.
       reRenderOnLangChange: true,
