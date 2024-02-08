@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { TranslocoPipe } from '@ngneat/transloco';
 
 @Component({
-  selector: 'app-welcome-page',
+  selector: 'app-welcome',
   standalone: true,
   imports: [TranslocoPipe, TranslocoPipe],
-  templateUrl: './welcome-page.component.html',
-  styleUrl: './welcome-page.component.scss'
+  templateUrl: './welcome.component.html',
+  styleUrl: './welcome.component.scss'
 })
-export class WelcomePageComponent {
+export class WelcomeComponent {
 
 }

@@ -1,5 +1,5 @@
 import { Component, EnvironmentInjector, EventEmitter } from '@angular/core';
-import { TranslocoPipe } from '@ngneat/transloco';
+import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { FormInputComponent } from '../../../utils/form-input/form-input.component';
 import { Router, RouterLink } from '@angular/router';
@@ -29,13 +29,14 @@ import { CustomerService } from '../../../services/customer.service';
 })
 export class CreateCustomerComponent {
   customer: Customer = new Customer();
+  transLoco: TranslocoService;
 
-  constructor(private customerService: CustomerService, private router: Router) {
-
+  constructor(private customerService: CustomerService, private router: Router, transLoco: TranslocoService) {
+    this.transLoco = transLoco;
   }
 
   create() {
     this.customerService.create(this.customer);
-    this.router.navigateByUrl('/customers');
+    this.router.navigateByUrl('/' + this.transLoco.getActiveLang() + '/customers');
   }
 }

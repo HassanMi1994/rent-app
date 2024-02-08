@@ -1,5 +1,5 @@
 <h3>
-  <a class="btn btn-outline-primary  m-2  col-12" routerLink="/customers/new">{{'new-customer'|transloco}}</a>
+  <a class="btn btn-outline-primary  m-2  col-12" [routerLink]="['new']">{{'new-customer'|transloco}}</a>
 </h3>
 
 <app-toast></app-toast>
@@ -19,8 +19,8 @@
       </div>
 
       <div class="col-12 border-3 link-body-emphasis">
-        <button class="btn"><span class="bi bi-zoom-in" (click)="showMoreInfo($event,cus.id)"></span></button> 
-     </div>
+        <button class="btn"><span class="bi bi-zoom-in" (click)="showMoreInfo($event,cus.id)"></span></button>
+      </div>
     </div>
   </div>
   }

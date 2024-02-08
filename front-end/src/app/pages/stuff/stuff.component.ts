@@ -3,7 +3,7 @@ import { Stuff } from '../../models/stuff.model';
 import { StuffService } from '../../services/stuff.service';
 import { CreateStuffComponent } from './create-stuff/create-stuff.component';
 import { RouterLink } from '@angular/router';
-import { TranslocoPipe } from '@ngneat/transloco';
+import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 import { PopUpComponent } from '../../utils/pop-up/pop-up.component';
 
 @Component({
@@ -16,10 +16,13 @@ import { PopUpComponent } from '../../utils/pop-up/pop-up.component';
 export default class StuffComponent implements OnInit {
 
   stuff: Stuff[]
+  transLoco: TranslocoService;
 
   @ViewChild('popUp') child: PopUpComponent;
 
-  constructor(private stuffService: StuffService) { }
+  constructor(private stuffService: StuffService, transLoco: TranslocoService) {
+    this.transLoco = transLoco;
+  }
   ngOnInit(): void {
     this.stuffService.getAll().subscribe(r => this.stuff = r);
   }

@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { TranslocoPipe } from '@ngneat/transloco';
+import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 import { CreateCustomerComponent } from './create-customer/create-customer.component';
 import { FormInputComponent } from '../../utils/form-input/form-input.component';
 import { ToastComponent } from '../../utils/toast/toast.component';
@@ -32,10 +32,12 @@ import { PopUpComponent } from '../../utils/pop-up/pop-up.component';
 export class CustomerComponent implements OnInit {
 
   @ViewChild('popup') popup: PopUpComponent;
+  transLoco: TranslocoService
 
   customers: Customer[];
 
-  constructor(private customerService: CustomerService) {
+  constructor(private customerService: CustomerService, transLoco: TranslocoService) {
+    this.transLoco = transLoco;
   }
   ngOnInit(): void {
     this.customerService

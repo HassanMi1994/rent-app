@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TranslocoPipe } from '@ngneat/transloco';
+import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 import { FormInputComponent } from '../../../utils/form-input/form-input.component';
 import { Stuff } from '../../../models/stuff.model';
 import { Router, RouterLink } from '@angular/router';
@@ -15,11 +15,15 @@ import { FormInputNumberComponent } from '../../../utils/form-input-number/form-
 })
 export class CreateStuffComponent {
   stuff: Stuff = new Stuff();
+  transLoco: TranslocoService;
 
-  constructor(private stuffService: StuffService, private router: Router) { }
+  constructor(private stuffService: StuffService, private router: Router, transLoco: TranslocoService) {
+    this.transLoco = transLoco;
+  }
 
   create() {
     this.stuffService.create(this.stuff);
-    this.router.navigateByUrl('stuff');
+
+    this.router.navigateByUrl('/' + this.transLoco.getActiveLang() + '/stuff');
   }
 }

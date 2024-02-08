@@ -1,1 +1,1 @@
-jsontt en.json --module google --from en --to ar ru fr ka it zh-CN
+jsontt en.json --module google --from en --to ka it ru

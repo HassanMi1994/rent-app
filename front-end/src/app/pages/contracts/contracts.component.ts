@@ -4,7 +4,7 @@ import { Customer } from '../../models/customer.model';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { TranslocoPipe } from '@ngneat/transloco';
+import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 import { PopUpComponent } from '../../utils/pop-up/pop-up.component';
 import { ContractService } from '../../services/contract.service';
 import { Contract } from '../../models/contract.model';
@@ -23,8 +23,10 @@ export class ContractsComponent {
   selectedCustomerId: number;
   customers: Customer[];
   contracts: Contract[];
+  transLoco: TranslocoService;
 
-  constructor(private customerService: CustomerService, private contractService: ContractService) {
+  constructor(private customerService: CustomerService, private contractService: ContractService, transLoco: TranslocoService) {
+    this.transLoco = transLoco;
 
     this.customerService
       .getAll()
