@@ -1,4 +1,6 @@
-export class Customer {
+import { baseModel } from "./base.model";
+
+export class Customer extends baseModel {
     id: number;
     fullName: string = ''
     fatherName: string = '';

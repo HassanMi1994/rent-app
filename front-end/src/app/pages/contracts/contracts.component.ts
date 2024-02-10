@@ -8,11 +8,12 @@ import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 import { PopUpComponent } from '../../utils/pop-up/pop-up.component';
 import { ContractService } from '../../services/contract.service';
 import { Contract } from '../../models/contract.model';
+import { FormInputComponent } from '../../utils/form-input/form-input.component';
 
 @Component({
   selector: 'app-contracts',
   standalone: true,
-  imports: [NgSelectModule, FormsModule, ReactiveFormsModule, RouterLink, TranslocoPipe, PopUpComponent],
+  imports: [NgSelectModule, FormsModule, ReactiveFormsModule, RouterLink, TranslocoPipe, PopUpComponent, FormInputComponent],
   templateUrl: './contracts.component.html',
   styleUrl: './contracts.component.scss'
 })

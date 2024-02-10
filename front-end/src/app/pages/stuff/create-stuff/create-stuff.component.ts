@@ -23,7 +23,6 @@ export class CreateStuffComponent {
 
   create() {
     this.stuffService.create(this.stuff);
-
     this.router.navigateByUrl('/' + this.transLoco.getActiveLang() + '/stuff');
   }
 }

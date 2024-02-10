@@ -1,32 +1,16 @@
 <form name="create-contract-form">
-
-
-
     <div class="row">
-        <div class="col-12 col-md-6 col-lg-4">
-            <ng-select [items]="customers$ |async" class="text-center center" [placeholder]="'customer'|transloco"
-                autofocus default bindValue="id" [(ngModel)]="selectedCustomerId">
+        <div class="col-12 text-center">
+            <ng-select [items]="customers$ |async" [typeahead]="inputSearchCustomer$"
+                [notFoundText]="'notFound'|transloco" class="text-center center" bindValue="this" bindLabel="fullName"
+                [placeholder]="'customer'|transloco" autofocus default [(ngModel)]="contract.customer">
                 <ng-template ng-option-tmp let-item="item" let-index="index">
-                    <p class="row text-center center">{{ item.firstName + ' ' + item.lastName + ' '}}</p>
-
-                    <!--let's have some small good baby here!  -->
-                    <div class="row" style="font-size: smaller;margin: 0; padding: 0 !important;">
-                        <div class="col-6">
-                            {{'mobile'|transloco}}: <span class="text text-info">{{ item.mobile}} </span>
-                        </div>
-
-                        <div class="col-6">
-                            {{'address'|transloco}}: <span class="text text-info">{{ item.fatherName}} </span>
-                        </div>
-                    </div>
+                    <span class="col-6 p-3 text-start border-1 text-success">{{ item.fullName}}</span>
                 </ng-template>
             </ng-select>
         </div>
-
-
     </div>
 
-    <hr />
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-outline-primary btn-lg col-12" data-bs-toggle="modal"
@@ -34,6 +18,61 @@
         {{'selectStuff'|transloco}}
     </button>
 
+    <div class="row">
+        <div class="contract-item-header row">
+            <div class="col-3 h6 text-info text-center">
+                {{'name'|transloco}}
+            </div>
+
+            <div class="col-3 h6 text-info text-center">
+                {{'quantity'|transloco}}
+            </div>
+
+
+            <div class="col-3 h6 text-info text-center">
+                {{'pricePerDay'|transloco}}
+            </div>
+
+        </div>
+
+        @for (item of contract.contractStuffs; track $index) {
+
+        <div class="contract-item row">
+            <div class=" col-3 h6 text-center">
+                {{item.stuffID}}
+            </div>
+
+            <div class="col-3 h6 text-center">
+                {{item.quantity}}
+            </div>
+
+            <div class="col-3 h6 text-center">
+                {{item.pricePerDay}}
+            </div>
+
+            <div class="col-3 p-2 h6 text-info text-center">
+                <a [routerLink]="" class="col-4 text-center" (click)="deleteItem($event)">
+                    <span class="bi bi-eraser-fill"></span>
+                </a>
+
+                <a [routerLink]="" class="col-4 p-2 text-center" (click)="editItem($event)">
+                    <span class="bi bi-pencil-fill"></span>
+                </a>
+
+                <a [routerLink]="" class="col-4 p-2 text-center" (click)="moreInfo($event)">
+                    <span class="bi bi-info-circle-fill"></span>
+                </a>
+            </div>
+        </div>
+        }
+
+        @if(this.contract.contractStuffs.length>0){
+        <div class="row fix-save-button">
+            <button class="btn btn-outline-success col-12 ">{{'save'|transloco}}</button>
+        </div>
+        }
+
+    </div>
 
     <!-- Modal -->
     <div class="modal fade add-new-item-modal" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
@@ -42,21 +81,38 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" style="text-align: center;width: 100%;" id="modalTitleId">
-                        {{"addingNewContractItem"|transloco}}
+                        {{"newContractItem"|transloco}}
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
 
                 <div class="modal-body">
-                    <ng-select [items]="stuff$ |async" bindLabel="Stuff" cslas="text-center center"
-                        [placeholder]="'stuff'|transloco" autofocus default bindValue="id"
-                        [(ngModel)]="selectedCustomerId">
-                        <ng-template ng-option-tmp let-item="item" let-search="searchTerm" let-index="index">
-                            <span class="text-center center">{{item.name}}</span>
-                        </ng-template>
 
+                    <ng-select [items]="stuff$ |async" [typeahead]="inputSearchStuff$" class="text-center center"
+                        bindValue="id" bindLabel="name" [notFoundText]="'notFound'|transloco"
+                        [placeholder]="'stuff'|transloco" autofocus default [(ngModel)]="contractItem.stuff">
+
+                        <ng-template ng-option-tmp let-item="item" let-index="index">
+                            <span class="col-6 p-3 text-start border-1 text-success">{{ item.name}}</span>
+                        </ng-template>
                     </ng-select>
+
+                    <div class="col-12">
+                        <app-form-input-number [labelName]="'quantity'"
+                            (value)="contractItem.quantity=($event)"></app-form-input-number>
+                    </div>
+
+                    <div class="col-12">
+                        <app-form-input-number [labelName]="'pricePerDay'"
+                            (value)="contractItem.pricePerDay=($event)"></app-form-input-number>
+                    </div>
+
+
+                    <div class="col-12">
+                        <app-form-input [labelName]="'description'"
+                            (value)="contractItem.description=($event)"></app-form-input>
+                    </div>
                 </div>
 
                 <!-- modal footer -->
@@ -65,7 +121,7 @@
                         <div class="row">
                             <div class="col-12 col-md-6 p-3">
                                 <div>
-                                    <button type="button" class="btn btn-outline-primary col-12">
+                                    <button type="button" class="btn btn-outline-primary col-12" (click)="addItem()">
                                         <span class="bi bi-plus-lg"></span>
                                         {{"add" |transloco}}</button>
                                 </div>

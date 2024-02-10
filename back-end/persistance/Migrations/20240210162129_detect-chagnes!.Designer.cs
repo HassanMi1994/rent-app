@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using persistance;
 
@@ -11,9 +12,11 @@ using persistance;
 namespace persistance.Migrations
 {
     [DbContext(typeof(RentDbContext))]
-    partial class RentDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240210162129_detect-chagnes!")]
+    partial class detectchagnes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,9 +76,6 @@ namespace persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<int>("ContractStatus")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -99,7 +99,7 @@ namespace persistance.Migrations
                     b.ToTable("Contracts");
                 });
 
-            modelBuilder.Entity("domain.entities.ContractItem", b =>
+            modelBuilder.Entity("domain.entities.RentedStuff", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -111,6 +111,7 @@ namespace persistance.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsReturned")
@@ -173,10 +174,10 @@ namespace persistance.Migrations
                     b.ToTable("Stuffs");
                 });
 
-            modelBuilder.Entity("domain.entities.ContractItem", b =>
+            modelBuilder.Entity("domain.entities.RentedStuff", b =>
                 {
                     b.HasOne("domain.entities.Contract", "Contract")
-                        .WithMany("Items")
+                        .WithMany("ContractStuffs")
                         .HasForeignKey("ContractID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -194,7 +195,7 @@ namespace persistance.Migrations
 
             modelBuilder.Entity("domain.entities.Contract", b =>
                 {
-                    b.Navigation("Items");
+                    b.Navigation("ContractStuffs");
                 });
 #pragma warning restore 612, 618
         }

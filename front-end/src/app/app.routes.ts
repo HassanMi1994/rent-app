@@ -20,7 +20,7 @@ export const routes: Routes = [
     { component: WelcomeComponent, path: ':{lang}/welcome' },
     { component: StuffComponent, path: ':{lang}/stuff' },
     { component: CreateStuffComponent, path: ':{lang}/stuff/new' },
-    { path: ':{lang}', redirectTo: ':{lang}', pathMatch: 'full', data: { lang: "en" } },
-    { path: '', redirectTo: ':{lang}/welcome', pathMatch: 'full', data: { lang: "en" } },
+    { path: 'en/welcome', redirectTo: 'en/welcome', pathMatch: 'full', },
+    { path: '', redirectTo: 'en/welcome', pathMatch: 'full', },
     { path: '**', component: PageNotFoundComponent }
 ];

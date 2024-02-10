@@ -1,8 +1,8 @@
 <!-- Nav tabs -->
 <ul class="nav nav-tabs" id="navId" role="tablist">
   <li class="nav-item">
-    <a [routerLink]="[this.transLoco.getActiveLang(),]" class="nav-link active" data-bs-toggle="tab" aria-current="page"
-      routerLinkActive="active">{{'app-name'|transloco}}</a>
+    <a [routerLink]="[this.transLoco.getActiveLang(),'welcome']" class="nav-link active" data-bs-toggle="tab"
+      aria-current="page" routerLinkActive="active">{{'app-name'|transloco}}</a>
   </li>
   <li class="nav-item" role="presentation">
     <a [routerLink]="[this.transLoco.getActiveLang(),'contracts']" class="nav-link" data-bs-toggle="tab"
@@ -10,8 +10,9 @@
   </li>
 
   <li class="nav-item" role="presentation">
-    <a [routerLink]="[this.transLoco.getActiveLang(),'stuff']" class="nav-link" data-bs-toggle="tab" routerLinkActive="active" data-toggle="tooltip"
-      data-placement="bottom" [title]="'stuffTooltip'|transloco">{{'stuff'|transloco}}</a>
+    <a [routerLink]="[this.transLoco.getActiveLang(),'stuff']" class="nav-link" data-bs-toggle="tab"
+      routerLinkActive="active" data-toggle="tooltip" data-placement="bottom"
+      [title]="'stuffTooltip'|transloco">{{'stuff'|transloco}}</a>
   </li>
   <li class="nav-item" role="presentation">
     <a [routerLink]="[this.transLoco.getActiveLang(),'customers']" class="nav-link" data-bs-toggle="tab"
@@ -25,6 +26,11 @@
       {{selectedLang}}
     </a>
     <ul class="dropdown-menu text-center lang-list" aria-labelledby="navbarDropdown">
+      <li><input type="search" class="form-control" [placeholder]="'search'|transloco" /></li>
+      <li>
+        <hr class="dropdown-divider">
+      </li>
+
       <li><a class="dropdown-item " routerLinkActive="active" (click)="changeLang('fa')">Persian (فارسی)</a></li>
       <li>
         <hr class="dropdown-divider">
