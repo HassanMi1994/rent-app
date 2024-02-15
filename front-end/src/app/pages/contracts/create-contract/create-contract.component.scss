@@ -32,3 +32,18 @@
     margin: 20px;
     width: 100%;
 }
+
+.contract-item-icon:hover {
+    background-color: rgba(0, 0, 255, 0.1);
+    border-radius: 10px;
+    color: black;
+    transition-duration: 0.300ms;
+}
+
+.ng-select.ng-select-single .ng-select-container .ng-value-container,
+.ng-select.ng-select-single .ng-select-container .ng-value-container .ng-value {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}

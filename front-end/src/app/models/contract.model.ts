@@ -4,11 +4,11 @@ import { Customer } from "./customer.model"
 
 export class Contract extends baseModel {
 
-    id: number
-    customerID: number
-    howManyDaysClaim: number
-    prePaidMoney: number
-    totalPricePerDay: number
+    id: number;
+    customerID: number;
+    howManyDaysClaim: number;
+    prePaidMoney: number;
+    totalPricePerDay: number;
     contractStuffs: ContractItem[] = [];
     customer: Customer = new Customer();
 }

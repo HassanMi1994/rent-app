@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, QueryList, ViewChildren, input } from '@angular/core';
 import { FormInputComponent } from '../../../utils/form-input/form-input.component';
 import { Contract } from '../../../models/contract.model';
 import { TranslocoPipe } from '@ngneat/transloco';
@@ -6,7 +6,7 @@ import { StuffService } from '../../../services/stuff.service';
 import { CustomerService } from '../../../services/customer.service';
 import { Stuff } from '../../../models/stuff.model';
 import { Customer } from '../../../models/customer.model';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { NgSelectConfig, NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { Observable, Subject, catchError, concat, distinctUntilChanged, map, of, switchMap, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -14,6 +14,7 @@ import { RouterLink } from '@angular/router';
 import { ContractService } from '../../../services/contract.service';
 import { FormInputNumberComponent } from '../../../utils/form-input-number/form-input-number.component';
 import { ContractItem } from '../../../models/contractItem.model';
+import { log } from 'console';
 
 @Component({
   selector: 'app-create-contract',
@@ -24,58 +25,80 @@ import { ContractItem } from '../../../models/contractItem.model';
 })
 export class CreateContractComponent {
 
+  @ViewChildren('inputRef') private itemInputs: FormInputComponent[];
+  @ViewChildren('inputNumRef') private itemNumInputs: FormInputComponent[];
+
+  stuff: Stuff[];
+  stuff$: Observable<Stuff[]>
+  selectedStuff: Stuff;
+  selectedStuffId: number;
+  filteredStuff: Stuff[];
+
   contract: Contract = new Contract();
   contractItem: ContractItem = new ContractItem();
-  stuff$: Observable<Stuff[]>
-  stuff: Stuff[];
   customers$: Observable<Customer[]>;
   customers: Customer[];
-  ngSelectTypeStuff$: Subject<string>
+  filteredCustomers: Customer[];
+  selectedCustomer: Customer;
+  selectedCustomerId: number;
   public inputSearchCustomer$ = new Subject<string>();
-
   public inputSearchStuff$ = new Subject<string>();
 
   constructor(private stuffService: StuffService,
     private customerService: CustomerService,
     private contractService: ContractService) {
-    this.stuff$ = this.stuffService.getAll();
-    this.stuff$.subscribe(x => this.stuff = x);
-    this.stuff$ = this.inputSearchStuff$.pipe(
-      map((term) => this.searchInStuff(term))
-    )
-    this.customers$ = this.customerService.getAll();
-    this.customers$.subscribe(x => this.customers = x);
 
-    this.inputSearchCustomer$.subscribe((newTerm) => {
-      // const logLine = `Typeahead emit: ${newTerm}\n`;
-      // this.codeRef.nativeElement.innerText += logLine;
+    //#region stuff
+    this.stuff$ = this.stuffService.getAll();
+    this.stuff$.subscribe(x => {
+      this.stuff = x;
+      this.filteredStuff = x;
+    });
+    this.inputSearchStuff$.pipe(map((term) => { this.searchInStuff(term) }));
+    //#endregion
+
+    //#region  customers
+    this.customers$ = this.customerService.getAll();
+    this.customers$.subscribe(x => {
+      this.customers = x;
+      this.filteredCustomers = x;
     });
 
-    this.customers$ = this.inputSearchCustomer$.pipe(
+    this.inputSearchCustomer$.pipe(
       map((term) => this.searchInCustomers(term))
     )
+
+    //#endregion
+
   }
 
   searchInCustomers(term: string): Customer[] {
-    if (term != undefined && term != '')
-      return this.customers.filter(x => x.fullName.includes(term));
-
+    console.warn(`${this.selectedCustomer}`);
+    console.warn(`${this.selectedStuff}`);
+    if (term != undefined && term != '') {
+      let jjj = this.customers.filter(x => x.fullName.includes(term));
+      this.filteredCustomers = jjj;
+    }
     return this.customers;
   }
 
   searchInStuff(term: string): Stuff[] {
-    if (term != undefined && term != '')
-      return this.stuff.filter(x => x.name.includes(term));
-
+    if (term != undefined && term != '') {
+      let jjj = this.stuff.filter(x => { x.name.includes(term) });
+      this.filteredStuff = jjj;
+    }
     return this.stuff;
   }
 
   addItem() {
     this.contractItem.rentDate = new Date();
+    this.contractItem.stuff = this.selectedStuff;
     this.contract.contractStuffs.push(this.contractItem);
     this.contractItem = new ContractItem();
-  }
 
+    this.itemNumInputs.forEach(input => input.clear());
+    this.itemInputs.forEach(input => input.clear());
+  }
 
   create() {
     console.log('create was called!');
@@ -95,5 +118,22 @@ export class CreateContractComponent {
 
   moreInfo(event: Event) {
     event.preventDefault();
+  }
+
+  save() {
+    // console.log(this.selectedCustomer);
+    // console.log(this.selectedStuff);
+    console.log(this.selectedCustomerId);
+    console.log(this.selectedStuffId);
+  }
+
+  selectedCustomerChanged(event$: Customer) {
+    this.contract.customer = event$;
+    console.log(event$);
+  }
+
+  selectedStuffChanged(event$: Stuff) {
+    this.selectedStuff = event$;
+    console.log(event$);
   }
 }

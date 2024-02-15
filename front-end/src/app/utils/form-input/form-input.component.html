@@ -1,11 +1,12 @@
 <div class="form-input-container">
     <div class="form-row">
         <div class="input-data">
-            <input type="text" #inp (change)="valueChanged(inp.value)" required>
+            <input type="text" #input (change)="valueChanged(input.value)" [(ngModel)]="val" required>
             <!-- <ng-content>
                 
             </ng-content> -->
-            <div class="underline"></div>
+            <div class=" underline">
+            </div>
             <label for="">{{labelName|transloco}}</label>
         </div>
     </div>

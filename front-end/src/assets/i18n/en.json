@@ -37,5 +37,9 @@
     "addAndClose":"Add and Close",
     "add":"Add Item",
     "contractItems":"Contract Items",
-    "search":"Search"
+    "search":"Search",
+    "id":"ID",
+    "nationalityCode":"National Code",
+    "createdAt":"Created At",
+    "updatedAt":"Updated At"
 }

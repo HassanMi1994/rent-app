@@ -1,16 +1,15 @@
 <form name="create-contract-form">
     <div class="row">
         <div class="col-12 text-center">
-            <ng-select [items]="customers$ |async" [typeahead]="inputSearchCustomer$"
-                [notFoundText]="'notFound'|transloco" class="text-center center" bindValue="this" bindLabel="fullName"
-                [placeholder]="'customer'|transloco" autofocus default [(ngModel)]="contract.customer">
+            <ng-select [items]="filteredCustomers" [typeahead]="inputSearchCustomer$"
+                [notFoundText]="'notFound'|transloco" class="text-center center" bindValue="id" bindLabel="fullName"
+                [placeholder]="'customer'|transloco" (change)="selectedCustomerChanged($event)" autofocus default>
                 <ng-template ng-option-tmp let-item="item" let-index="index">
                     <span class="col-6 p-3 text-start border-1 text-success">{{ item.fullName}}</span>
                 </ng-template>
             </ng-select>
         </div>
     </div>
-
 
     <!-- Button trigger modal -->
     <button type="button" class="btn btn-outline-primary btn-lg col-12" data-bs-toggle="modal"
@@ -39,7 +38,7 @@
 
         <div class="contract-item row">
             <div class=" col-3 h6 text-center">
-                {{item.stuffID}}
+                {{item.stuff.name}}
             </div>
 
             <div class="col-3 h6 text-center">
@@ -51,15 +50,15 @@
             </div>
 
             <div class="col-3 p-2 h6 text-info text-center">
-                <a [routerLink]="" class="col-4 text-center" (click)="deleteItem($event)">
+                <a class="col-4 text-center contract-item-icon" (click)="deleteItem($event)">
                     <span class="bi bi-eraser-fill"></span>
                 </a>
 
-                <a [routerLink]="" class="col-4 p-2 text-center" (click)="editItem($event)">
+                <a class="col-4 p-2 text-center contract-item-icon" (click)="editItem($event)">
                     <span class="bi bi-pencil-fill"></span>
                 </a>
 
-                <a [routerLink]="" class="col-4 p-2 text-center" (click)="moreInfo($event)">
+                <a class="col-4 p-2 text-center contract-item-icon" (click)="moreInfo($event)">
                     <span class="bi bi-info-circle-fill"></span>
                 </a>
             </div>
@@ -68,7 +67,7 @@
 
         @if(this.contract.contractStuffs.length>0){
         <div class="row fix-save-button">
-            <button class="btn btn-outline-success col-12 ">{{'save'|transloco}}</button>
+            <button class="btn btn-outline-success col-8 " (click)="save()">{{'save'|transloco}}</button>
         </div>
         }
 
@@ -88,10 +87,9 @@
 
 
                 <div class="modal-body">
-
-                    <ng-select [items]="stuff$ |async" [typeahead]="inputSearchStuff$" class="text-center center"
-                        bindValue="id" bindLabel="name" [notFoundText]="'notFound'|transloco"
-                        [placeholder]="'stuff'|transloco" autofocus default [(ngModel)]="contractItem.stuff">
+                    <ng-select [items]="filteredStuff" [typeahead]="inputSearchStuff$" class="text-center center"
+                        bindValue="" bindLabel="name" [notFoundText]="'notFound'|transloco"
+                        [placeholder]="'stuff'|transloco" autofocus (change)="selectedStuffChanged($event)">
 
                         <ng-template ng-option-tmp let-item="item" let-index="index">
                             <span class="col-6 p-3 text-start border-1 text-success">{{ item.name}}</span>
@@ -99,18 +97,18 @@
                     </ng-select>
 
                     <div class="col-12">
-                        <app-form-input-number [labelName]="'quantity'"
+                        <app-form-input-number #inputRef [labelName]="'quantity'"
                             (value)="contractItem.quantity=($event)"></app-form-input-number>
                     </div>
 
                     <div class="col-12">
-                        <app-form-input-number [labelName]="'pricePerDay'"
+                        <app-form-input-number #inputRef [labelName]="'pricePerDay'"
                             (value)="contractItem.pricePerDay=($event)"></app-form-input-number>
                     </div>
 
 
                     <div class="col-12">
-                        <app-form-input [labelName]="'description'"
+                        <app-form-input #inputRef [labelName]="'description'"
                             (value)="contractItem.description=($event)"></app-form-input>
                     </div>
                 </div>
