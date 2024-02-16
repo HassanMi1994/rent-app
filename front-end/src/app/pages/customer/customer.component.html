@@ -6,13 +6,19 @@
 
 
 <div class="row">
-  @for (cus of customers; track $index) {
+  @for (cus of customerService.customers; track $index) {
   <div
     class="col-12 rounded col-md-3 m-5 text-center rounded-5 border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient customer-template">
     <div class="row">
       <div class="col-12 bg-info"></div>
       <div class="col-12 text-primary">
         <b> {{cus.fullName}}</b>
+      </div>
+      <div class="col-12 border-3">
+        {{cus.nationalityCode}}
+      </div>
+      <div class="col-12 border-3">
+        {{cus.mobile}}
       </div>
       <div class="col-12 border-3">
         {{cus.address}}

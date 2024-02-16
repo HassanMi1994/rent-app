@@ -22,11 +22,14 @@ namespace persistance
 
             foreach (var entityEntry in entries)
             {
+
                 if (entityEntry.State == EntityState.Modified)
-                    entityEntry.Property(nameof(IBaseEntity.UpdatedAt)).CurrentValue = DateTime.UtcNow;
+                    if (entityEntry.Property(nameof(IBaseEntity.UpdatedAt)) is not null)
+                        entityEntry.Property(nameof(IBaseEntity.UpdatedAt)).CurrentValue = DateTime.UtcNow;
 
                 if (entityEntry.State == EntityState.Added)
-                    entityEntry.Property(nameof(IBaseEntity.CreatedAt)).CurrentValue = DateTime.UtcNow;
+                    if (entityEntry.Property(nameof(IBaseEntity.CreatedAt)) is not null)
+                        entityEntry.Property(nameof(IBaseEntity.CreatedAt)).CurrentValue = DateTime.UtcNow;
 
             }
             return base.SaveChangesAsync(cancellationToken);

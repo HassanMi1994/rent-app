@@ -4,7 +4,7 @@ namespace domain.abstraction
 {
     public interface IContractService
     {
-        Task Create(Contract customer);
+        Task Create(Contract contract);
         IAsyncEnumerable<Contract> GetAll();
     }
 }

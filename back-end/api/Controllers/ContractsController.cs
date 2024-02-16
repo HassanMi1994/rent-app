@@ -1,4 +1,5 @@
-﻿using domain.abstraction;
+﻿using application.Models.Contract;
+using domain.abstraction;
 using domain.entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,9 +23,29 @@ namespace api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Contract customer)
+        public async Task<IActionResult> Create([FromBody] CreateContractDto contract)
         {
-            await _contractService.Create(customer);
+            //todo: this should be moved to mapper!
+            var cont = new Contract
+            {
+                Date = contract.Date,
+                Items = contract.Items.Select(item => new ContractItem
+                {
+                    Description = item.Description,
+                    PricePerDay = item.PricePerDay,
+                    Quantity = item.Quantity,
+                    RentDate = item.RentDate,
+                    StuffID = item.StuffID
+                }).ToList(),
+                ContractStatus = domain.enums.ContractStatus.Opened,
+                PrePaidMoney = contract.PrePaidMoney,
+                HowManyDaysClaim = contract.HowManyDaysClaim,
+                RentLocation = contract.RentLocation,
+                TotalPricePerDay = contract.Items.Sum(x => (x.PricePerDay - x.Quantity)),
+                CustomerID = contract.CustomerID,
+            };
+
+            await _contractService.Create(cont);
             return Ok();
         }
     }

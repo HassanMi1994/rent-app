@@ -22,7 +22,15 @@ export class FormInputNumberComponent {
 
   empty() {
     this.val = 0;
-    this.input.value = '';
     this.valueChanged('');
+  }
+
+  setValue(val: number) {
+    this.val = val;
+    this.input.value = val.toString();
+  }
+
+  getValue() {
+    return this.val;
   }
 }

@@ -7,8 +7,10 @@ export class Contract extends baseModel {
     id: number;
     customerID: number;
     howManyDaysClaim: number;
+    date: Date;
     prePaidMoney: number;
     totalPricePerDay: number;
-    contractStuffs: ContractItem[] = [];
+    rentLocation: string;
+    items: ContractItem[] = [];
     customer: Customer = new Customer();
 }

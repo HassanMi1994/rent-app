@@ -6,8 +6,37 @@
                 [placeholder]="'customer'|transloco" (change)="selectedCustomerChanged($event)" autofocus default>
                 <ng-template ng-option-tmp let-item="item" let-index="index">
                     <span class="col-6 p-3 text-start border-1 text-success">{{ item.fullName}}</span>
+                    <span class="col-6 p-3 text-start border-1 text-info">{{ item.mobile}}</span>
                 </ng-template>
             </ng-select>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                <app-form-input-date [labelName]="'date'" (value)="contract.date=($event)"></app-form-input-date>
+            </div>
+
+            <div class="col-6">
+                @if (contract.date!=undefined)
+                {
+                <p class="text-info h3 p-5">{{contract.date.toLocaleDateString('fa-Ir')}}
+                    {{contract.date.getHours()|number:'2.0'}}:{{contract.date.getMinutes()|number:'2.0'}}</p>
+                }
+            </div>
+        </div>
+
+        <div class="col-12">
+            <app-form-input [labelName]="'rentLoaction'" (value)="contract.rentLocation=($event)"></app-form-input>
+        </div>
+
+        <div class="col-12">
+            <app-form-input-number [labelName]="'prepayment'"
+                (value)="contract.prePaidMoney=($event)"></app-form-input-number>
+        </div>
+
+        <div class="col-12">
+            <app-form-input-number [labelName]="'howManyDaysClaim'"
+                (value)="contract.howManyDaysClaim=($event)"></app-form-input-number>
         </div>
     </div>
 
@@ -34,7 +63,7 @@
 
         </div>
 
-        @for (item of contract.contractStuffs; track $index) {
+        @for (item of contract.items; track $index) {
 
         <div class="contract-item row">
             <div class=" col-3 h6 text-center">
@@ -65,7 +94,7 @@
         </div>
         }
 
-        @if(this.contract.contractStuffs.length>0){
+        @if(this.contract.items.length>0){
         <div class="row fix-save-button">
             <button class="btn btn-outline-success col-8 " (click)="save()">{{'save'|transloco}}</button>
         </div>
@@ -87,12 +116,16 @@
 
 
                 <div class="modal-body">
-                    <ng-select [items]="filteredStuff" [typeahead]="inputSearchStuff$" class="text-center center"
-                        bindValue="" bindLabel="name" [notFoundText]="'notFound'|transloco"
+                    <ng-select [items]="filteredStuff" #selectStuff [typeahead]="inputSearchStuff$"
+                        class="text-center center" bindValue="" bindLabel="name" [notFoundText]="'notFound'|transloco"
                         [placeholder]="'stuff'|transloco" autofocus (change)="selectedStuffChanged($event)">
 
-                        <ng-template ng-option-tmp let-item="item" let-index="index">
+                        <ng-template ng-option-tmp let-item="item" let-index="index"
+                            style="width: 100%; text-align: center;">
                             <span class="col-6 p-3 text-start border-1 text-success">{{ item.name}}</span>
+                            <span class="col-6 p-3 text-start border-1">
+                                {{'remainingInStock'|transloco}} {{item.quantity}}
+                            </span>
                         </ng-template>
                     </ng-select>
 
@@ -102,7 +135,7 @@
                     </div>
 
                     <div class="col-12">
-                        <app-form-input-number #inputRef [labelName]="'pricePerDay'"
+                        <app-form-input-number #pricePerDayRef [labelName]="'pricePerDay'"
                             (value)="contractItem.pricePerDay=($event)"></app-form-input-number>
                     </div>
 
@@ -116,6 +149,17 @@
                 <!-- modal footer -->
                 <div class="modal-footer p-4">
                     <div class="col-12">
+
+                        @if (selectedStuff!=null || selectedStuff !=undefined) {
+                        <div class="row">
+                            <p class="col-12 text-center">
+                                {{"quantity"|transloco}} {{"pricePerDay"|transloco}} =
+                                <b class="text-info">{{contractItem.quantity *
+                                    pricePerDayRef.getValue()|number}}
+                                </b>
+                            </p>
+                        </div>
+                        }
                         <div class="row">
                             <div class="col-12 col-md-6 p-3">
                                 <div>
@@ -128,13 +172,12 @@
 
                             <div class="col-12 col-md-6 p-3">
                                 <div>
-                                    <button type="button" class="btn btn-outline-primary col-12 ">
-                                        <span class="bi bi-plus-lg"></span>
-                                        <span class="bi bi-backspace"></span>
-                                        {{"addAndClose" |transloco}}
+                                    <button type="button" class="btn btn-outline-dark col-12 " data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <span class="bi bi-door-open"></span>
+                                        {{"close" |transloco}}
                                     </button>
                                 </div>
-
                             </div>
                         </div>
 

@@ -8,12 +8,14 @@
         <div class="row">
             <div class="col-12 bg-info"></div>
             <div class="col-12 text-primary">
+                <b class="text-info"> {{con.customer.fullName}} </b>
+            </div>
+            <div class="col-12 text-primary">
                 <b> {{con.createdAt}} {{con.prePaidMoney}}</b>
             </div>
             <div class="col-12 border-3">
                 {{con.totalPricePerDay}}
             </div>
-
             <div class="col-12 border-3 link-body-emphasis">
                 <button class="btn"><span class="bi bi-zoom-in" (click)="showMoreInfo($event,con.id)"></span></button>
             </div>

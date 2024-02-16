@@ -1,0 +1,12 @@
+<div class="form-input-container">
+    <div class="form-row">
+        <div class="input-data">
+            <input type="datetime-local" [placeholder]="" #input (change)="valueChanged(input.value)" [(ngModel)]="val" required>
+            <!-- <ng-content>
+                
+            </ng-content> -->
+            <div class="underline"></div>
+            <label for="">{{labelName|transloco}}</label>
+        </div>
+    </div>
+</div>

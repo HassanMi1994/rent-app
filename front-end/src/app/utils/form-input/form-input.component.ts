@@ -23,8 +23,17 @@ export class FormInputComponent {
   }
 
   clear() {
-    this.input.value = '';
-    this.val = '';
-    this.valueChanged('');
+    this.input.value = '10';
+    this.val = '10';
+    this.valueChanged('10');
+  }
+
+  setValue(val: string) {
+    this.val = val;
+    this.input.value = val;
+  }
+
+  getValue() {
+    return this.val;
   }
 }

@@ -1,22 +1,36 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Stuff } from '../../models/stuff.model';
-import { StuffService } from '../../services/stuff.service';
 import { CreateStuffComponent } from './create-stuff/create-stuff.component';
 import { RouterLink } from '@angular/router';
 import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 import { PopUpComponent } from '../../utils/pop-up/pop-up.component';
+import { FormInputComponent } from '../../utils/form-input/form-input.component';
+import { FormsModule } from '@angular/forms';
+import { StuffService } from '../../services/stuff.service';
 
 @Component({
   selector: 'app-stuff',
   standalone: true,
-  imports: [CreateStuffComponent, RouterLink, TranslocoPipe, PopUpComponent],
+  imports: [CreateStuffComponent, RouterLink, TranslocoPipe, PopUpComponent, FormInputComponent, FormsModule],
   templateUrl: './stuff.component.html',
   styleUrl: './stuff.component.scss'
 })
 export default class StuffComponent implements OnInit {
-
-  stuff: Stuff[]
+ private _searchTerm: string = '';
+  stuff: Stuff[];
+  stuffAll: Stuff[]
   transLoco: TranslocoService;
+
+  get searchTerm(): string {
+    return this._searchTerm;
+  }
+  
+  set searchTerm(value: string) {
+    if (value !== this._searchTerm) {
+      this._searchTerm = value;
+      this.serachTermChanged();
+    }
+  }
 
   @ViewChild('popUp') child: PopUpComponent;
 
@@ -24,7 +38,15 @@ export default class StuffComponent implements OnInit {
     this.transLoco = transLoco;
   }
   ngOnInit(): void {
-    this.stuffService.getAll().subscribe(r => this.stuff = r);
+    this.stuffService.getAll().subscribe(r => {
+      this.stuff = r;
+      this.stuffAll = this.stuff;
+    }
+    );
+  }
+
+  serachTermChanged() {
+    this.stuff = this.stuffAll.filter(x => x.name.includes(this.searchTerm));
   }
 
   showMoreInfo(e: MouseEvent, stuffId: number) {

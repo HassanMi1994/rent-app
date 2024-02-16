@@ -17,6 +17,13 @@
     background-color: #d0d0d0;
     border-radius: 20px;
     margin-top: 10px;
+    transition-duration: 77ms;
+    align-items: baseline;
+    padding-top: 5px;
+
+    &:hover{
+    background-color: #b37aeb75;
+    }
 }
 
 .ng-select .ng-select-container .ng-value-container .ng-placeholder {
@@ -46,4 +53,16 @@
     overflow: hidden;
     text-overflow: ellipsis;
     width: 100%;
+    text-align: center;
+}
+
+.ng-dropdown-panel .ng-dropdown-panel-items .ng-option
+{
+    box-sizing: border-box;
+    cursor: pointer;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
 }

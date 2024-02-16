@@ -34,19 +34,15 @@ export class CustomerComponent implements OnInit {
   @ViewChild('popup') popup: PopUpComponent;
   transLoco: TranslocoService
 
-  customers: Customer[];
-
-  constructor(private customerService: CustomerService, transLoco: TranslocoService) {
+  constructor(public customerService: CustomerService, transLoco: TranslocoService) {
     this.transLoco = transLoco;
   }
   ngOnInit(): void {
-    this.customerService
-      .getAll()
-      .subscribe(x => this.customers = x);
+    this.customerService.getAll()
   }
 
   showMoreInfo(e: MouseEvent, stuffId: number) {
-    var selectedStuff = this.customers.find(x => x.id == stuffId) as Customer;
+    var selectedStuff = this.customerService.customers.find(x => x.id == stuffId) as Customer;
     this.popup.setTitle(selectedStuff?.fullName)
     this.popup.showObject(selectedStuff);
     this.popup.show();

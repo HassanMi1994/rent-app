@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 import { FormInputComponent } from '../../../utils/form-input/form-input.component';
 import { Stuff } from '../../../models/stuff.model';
