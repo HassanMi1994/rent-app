@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class FormInputComponent {
   @Input() labelName: string;
+  @Input() readOnly: boolean=false;
   @Output() value = new EventEmitter<string>();
   val: string
   @ViewChild('input') input: HTMLInputElement;

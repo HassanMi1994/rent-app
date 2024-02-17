@@ -1,4 +1,5 @@
 ﻿using domain.abstraction;
+using Microsoft.EntityFrameworkCore;
 using persistance;
 using Rent.Entities;
 
@@ -15,7 +16,7 @@ namespace application.Services
 
         public IAsyncEnumerable<Customer> GetAll()
         {
-            return _rentDb.Customers.AsAsyncEnumerable();
+            return _rentDb.Customers.OrderByDescending(x => x.CreatedAt).AsAsyncEnumerable();
         }
 
         public async Task Create(Customer customer)

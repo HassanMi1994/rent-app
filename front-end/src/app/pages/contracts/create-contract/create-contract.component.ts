@@ -1,20 +1,19 @@
 import { Component, OnChanges, QueryList, SimpleChanges, ViewChild, ViewChildren, input } from '@angular/core';
 import { FormInputComponent } from '../../../utils/form-input/form-input.component';
 import { Contract } from '../../../models/contract.model';
-import { TranslocoPipe } from '@ngneat/transloco';
+import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 import { StuffService } from '../../../services/stuff.service';
 import { CustomerService } from '../../../services/customer.service';
 import { Stuff } from '../../../models/stuff.model';
 import { Customer } from '../../../models/customer.model';
-import { NgSelectComponent, NgSelectConfig, NgSelectModule } from '@ng-select/ng-select';
-import { FormsModule, NgSelectOption } from '@angular/forms';
-import { Observable, Subject, catchError, concat, distinctUntilChanged, map, of, switchMap, tap } from 'rxjs';
+import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
+import { Observable, Subject, map } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ContractService } from '../../../services/contract.service';
 import { FormInputNumberComponent } from '../../../utils/form-input-number/form-input-number.component';
 import { ContractItem } from '../../../models/contractItem.model';
-import { log } from 'console';
 import { FormInputDateComponent } from '../../../utils/form-input-date/form-input-date.component';
 
 @Component({
@@ -51,11 +50,13 @@ export class CreateContractComponent implements OnChanges {
 
   constructor(private stuffService: StuffService,
     private customerService: CustomerService,
-    private contractService: ContractService) {
+    private contractService: ContractService,
+    private router: Router,
+    private transLoco: TranslocoService) {
 
     //#region stuff
-    this.stuff$ = this.stuffService.getAll();
-    this.stuff$.subscribe(x => {
+
+    this.stuffService.getStuff().subscribe(x => {
       this.stuff = x;
       this.filteredStuff = x;
     });
@@ -69,10 +70,8 @@ export class CreateContractComponent implements OnChanges {
       this.filteredCustomers = x;
     });
 
-    this.inputSearchCustomer$.pipe(
-      map((term) => this.searchInCustomers(term))
-    )
-
+    this.inputSearchCustomer$
+      .pipe(map((term) => this.searchInCustomers(term)))
     //#endregion
 
   }
@@ -133,10 +132,9 @@ export class CreateContractComponent implements OnChanges {
   }
 
   save() {
-    // console.log(this.selectedCustomer);
-    // console.log(this.selectedStuff);
     console.log(this.contract);
     this.contractService.create(this.contract);
+    this.router.navigateByUrl('/' + this.transLoco.getActiveLang() + '/contracts');
   }
 
   selectedCustomerChanged(event$: Customer) {

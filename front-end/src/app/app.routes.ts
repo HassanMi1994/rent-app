@@ -7,6 +7,7 @@ import StuffComponent from './pages/stuff/stuff.component';
 import { CreateStuffComponent } from './pages/stuff/create-stuff/create-stuff.component';
 import { ContractsComponent } from './pages/contracts/contracts.component';
 import { CreateContractComponent } from './pages/contracts/create-contract/create-contract.component';
+import { ContractDetailsComponent } from './pages/contracts/contract-details/contract-details.component';
 
 
 //todo: titles should be set dynamically
@@ -15,6 +16,7 @@ export const routes: Routes = [
 
     { component: ContractsComponent, path: ':{lang}/contracts', },
     { component: CreateContractComponent, path: ':{lang}/contracts/new', },
+    { component: ContractDetailsComponent, path: ':{lang}/contracts/details/:{id}}', },
     { component: CustomerComponent, path: ':{lang}/customers', },
     { component: CreateCustomerComponent, path: ':{lang}/customers/new' },
     { component: WelcomeComponent, path: ':{lang}/welcome' },

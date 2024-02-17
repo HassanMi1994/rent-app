@@ -8,20 +8,22 @@ import { HttpClient } from '@angular/common/http';
 })
 export class StuffService {
 
-  public stuff: Observable<Stuff[]>;
+  public stuff$: Observable<Stuff[]>;
+  public stuff: Stuff[];
 
   constructor(private client: HttpClient) { }
 
   create(stuff: Stuff) {
     this.client.post('https://localhost:7053/api/stuff', stuff)
       .subscribe(x => {
-        this.stuff.pipe(tap(x => x.push(stuff)))
+        this.stuff = [stuff, ...this.stuff];
         // this.notifier.notify('success', 'a new customer was added');
       });
   }
 
-  getAll(): Observable<Stuff[]> {
-    this.stuff = this.client.get<Stuff[]>('https://localhost:7053/api/stuff');
-    return this.stuff;
+  getStuff(): Observable<Stuff[]> {
+    this.stuff$ = this.client.get<Stuff[]>('https://localhost:7053/api/stuff');
+    this.stuff$.subscribe(x => this.stuff = x);
+    return this.stuff$;
   }
 }

@@ -6,5 +6,6 @@ namespace domain.abstraction
     {
         Task Create(Contract contract);
         IAsyncEnumerable<Contract> GetAll();
+        Task<Contract> GetByIdAsync(int id);
     }
 }

@@ -17,6 +17,7 @@ export class CustomerService {
     this.client.post('https://localhost:7053/api/customers', customer)
       .subscribe(x => {
         this.customers$.pipe(tap(x => x = [customer, ...this.customers]));
+        this.customers = [customer, ...this.customers]
       });
   }
 

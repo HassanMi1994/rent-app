@@ -7,5 +7,7 @@ export class ContractItem {
     rentDate: Date;
     pricePerDay: number;
     description: string;
+    isReturned: boolean;
+    isReturnedSafe: boolean;
     stuff: Stuff = new Stuff();
 }

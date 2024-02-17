@@ -9,6 +9,10 @@ import { Contract } from '../models/contract.model';
 export class ContractService {
   constructor(private client: HttpClient) { }
 
+  contracts$: Observable<Contract[]>
+  contracts: Contract[];
+  selectedContractId: number = 0;
+
   create(contract: Contract) {
     this.client.post('https://localhost:7053/api/contracts', contract)
       .subscribe(x => {
@@ -17,6 +21,12 @@ export class ContractService {
   }
 
   getAll(): Observable<Contract[]> {
-    return this.client.get<Contract[]>('https://localhost:7053/api/contracts');
+    this.contracts$ = this.client.get<Contract[]>('https://localhost:7053/api/contracts');
+    this.contracts$.subscribe(x => this.contracts = x);
+    return this.contracts$;
+  }
+
+  getById(): Observable<Contract> {
+    return this.client.get<Contract>(`https://localhost:7053/api/contracts/${this.selectedContractId}`);
   }
 }

@@ -9,11 +9,12 @@ import { PopUpComponent } from '../../utils/pop-up/pop-up.component';
 import { ContractService } from '../../services/contract.service';
 import { Contract } from '../../models/contract.model';
 import { FormInputComponent } from '../../utils/form-input/form-input.component';
+import { DatePipe, DecimalPipe } from '@angular/common';
 
 @Component({
   selector: 'app-contracts',
   standalone: true,
-  imports: [NgSelectModule, FormsModule, ReactiveFormsModule, RouterLink, TranslocoPipe, PopUpComponent, FormInputComponent],
+  imports: [NgSelectModule, FormsModule, ReactiveFormsModule, RouterLink, TranslocoPipe, PopUpComponent, FormInputComponent, DatePipe, DecimalPipe],
   templateUrl: './contracts.component.html',
   styleUrl: './contracts.component.scss'
 })
@@ -24,7 +25,24 @@ export class ContractsComponent {
   selectedCustomerId: number;
   customers: Customer[];
   contracts: Contract[];
+  contractsAll: Contract[];
   transLoco: TranslocoService;
+  _searchTerm: string = '';
+
+  get searchTerm(): string {
+    return this._searchTerm;
+  }
+
+  set searchTerm(value: string) {
+    if (value !== this._searchTerm) {
+      this._searchTerm = value;
+      this.serachTermChanged();
+    }
+  }
+
+  serachTermChanged() {
+    this.contracts = this.contractsAll.filter(x => x.customer.fullName.toLowerCase().includes(this.searchTerm.toLowerCase()));
+  }
 
   constructor(private customerService: CustomerService, private contractService: ContractService, transLoco: TranslocoService) {
     this.transLoco = transLoco;
@@ -37,8 +55,14 @@ export class ContractsComponent {
 
     this.contractService
       .getAll()
-      .subscribe(result =>
-        this.contracts = result);
+      .subscribe(result => {
+        this.contractsAll = result;
+        this.serachTermChanged();
+      });
+  }
+
+  selectedContractChanged(id: number) {
+    this.contractService.selectedContractId = id;
   }
 
   showMoreInfo(e: MouseEvent, contractId: number) {

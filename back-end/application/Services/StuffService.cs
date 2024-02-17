@@ -1,5 +1,6 @@
 ﻿using domain.abstraction;
 using domain.entities;
+using Microsoft.EntityFrameworkCore;
 using persistance;
 
 namespace application.Services
@@ -21,7 +22,7 @@ namespace application.Services
 
         public IAsyncEnumerable<Stuff> GetAll()
         {
-            return rentDbContext.Stuffs.AsAsyncEnumerable();
+            return rentDbContext.Stuffs.OrderByDescending(x => x.CreatedAt).AsAsyncEnumerable();
         }
     }
 }

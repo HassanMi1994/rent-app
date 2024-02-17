@@ -22,7 +22,18 @@ namespace application.Services
 
         public IAsyncEnumerable<Contract> GetAll()
         {
-            return _rentDb.Contracts.Include(x => x.Customer).AsAsyncEnumerable();
+            return _rentDb.Contracts.Include(x => x.Customer).OrderByDescending(x => x.CreatedAt).AsAsyncEnumerable();
         }
+
+        public async Task<Contract> GetByIdAsync(int id)
+        {
+            return await _rentDb
+                .Contracts
+                .Include(x => x.Customer)
+                .Include(x=>x.Items)
+                    .ThenInclude(x=>x.Stuff)
+                .FirstOrDefaultAsync(x => x.ID == id);
+        }
+
     }
 }

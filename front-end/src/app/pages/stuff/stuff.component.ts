@@ -18,7 +18,6 @@ import { StuffService } from '../../services/stuff.service';
 export default class StuffComponent implements OnInit {
  private _searchTerm: string = '';
   stuff: Stuff[];
-  stuffAll: Stuff[]
   transLoco: TranslocoService;
 
   get searchTerm(): string {
@@ -38,15 +37,13 @@ export default class StuffComponent implements OnInit {
     this.transLoco = transLoco;
   }
   ngOnInit(): void {
-    this.stuffService.getAll().subscribe(r => {
+    this.stuffService.getStuff().subscribe(r => {
       this.stuff = r;
-      this.stuffAll = this.stuff;
-    }
-    );
+    });
   }
 
   serachTermChanged() {
-    this.stuff = this.stuffAll.filter(x => x.name.includes(this.searchTerm));
+    this.stuff = this.stuffService.stuff.filter(x => x.name.includes(this.searchTerm));
   }
 
   showMoreInfo(e: MouseEvent, stuffId: number) {

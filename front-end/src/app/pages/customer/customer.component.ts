@@ -34,11 +34,30 @@ export class CustomerComponent implements OnInit {
   @ViewChild('popup') popup: PopUpComponent;
   transLoco: TranslocoService
 
+  customers: Customer[];
+  _searchTerm: string = '';
+
+  get searchTerm(): string {
+    return this._searchTerm;
+  }
+
+  set searchTerm(value: string) {
+    if (value !== this._searchTerm) {
+      this._searchTerm = value;
+      this.serachTermChanged();
+    }
+  }
+
+  serachTermChanged() {
+    this.customers = this.customerService.customers.filter(x => x.fullName.includes(this.searchTerm));
+  }
+
   constructor(public customerService: CustomerService, transLoco: TranslocoService) {
     this.transLoco = transLoco;
   }
   ngOnInit(): void {
     this.customerService.getAll()
+      .subscribe(x => this.customers = x);
   }
 
   showMoreInfo(e: MouseEvent, stuffId: number) {

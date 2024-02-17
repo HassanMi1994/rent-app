@@ -37,7 +37,7 @@ namespace api.Controllers
                     RentDate = item.RentDate,
                     StuffID = item.StuffID
                 }).ToList(),
-                ContractStatus = domain.enums.ContractStatus.Opened,
+                Status = domain.enums.ContractStatus.Opened,
                 PrePaidMoney = contract.PrePaidMoney,
                 HowManyDaysClaim = contract.HowManyDaysClaim,
                 RentLocation = contract.RentLocation,
@@ -46,7 +46,15 @@ namespace api.Controllers
             };
 
             await _contractService.Create(cont);
+
             return Ok();
+        }
+
+
+        [HttpGet("{id}")]
+        public async Task<Contract> GetByIdAsycn(int id)
+        {
+            return await _contractService.GetByIdAsync(id);
         }
     }
 }

@@ -1,0 +1,13 @@
+.contract-item:hover {
+    transition-duration: 300ms;
+    background-color: rgba(0, 0, 0, 0.486);
+}
+
+a {
+    text-decoration: none;
+    color: unset;
+}
+
+a:hover{
+    background-color: alpha($color: #a674f775);
+}

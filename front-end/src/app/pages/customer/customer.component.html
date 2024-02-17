@@ -4,11 +4,14 @@
 
 <app-toast></app-toast>
 
+<div class="row">
+  <app-form-input [labelName]="'search'" (value)="searchTerm=$event"></app-form-input>
+</div>
 
 <div class="row">
-  @for (cus of customerService.customers; track $index) {
+  @for (cus of customers; track $index) {
   <div
-    class="col-12 rounded col-md-3 m-5 text-center rounded-5 border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient customer-template">
+    class="col-12 rounded col-md-3 m-3 text-center rounded-5 border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient customer-template">
     <div class="row">
       <div class="col-12 bg-info"></div>
       <div class="col-12 text-primary">
@@ -25,7 +28,7 @@
       </div>
 
       <div class="col-12 border-3 link-body-emphasis">
-        <button class="btn"><span class="bi bi-zoom-in" (click)="showMoreInfo($event,cus.id)"></span></button>
+        <button class="btn"><span class="bi bi-eye" (click)="showMoreInfo($event,cus.id)"></span></button>
       </div>
     </div>
   </div>
