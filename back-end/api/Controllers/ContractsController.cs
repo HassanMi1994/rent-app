@@ -41,7 +41,7 @@ namespace api.Controllers
                 PrePaidMoney = contract.PrePaidMoney,
                 HowManyDaysClaim = contract.HowManyDaysClaim,
                 RentLocation = contract.RentLocation,
-                TotalPricePerDay = contract.Items.Sum(x => (x.PricePerDay - x.Quantity)),
+                TotalPricePerDay = contract.Items.Sum(x => x.PricePerDay * x.Quantity),
                 CustomerID = contract.CustomerID,
             };
 

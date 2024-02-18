@@ -1,11 +1,11 @@
 <a class="col-12 btn btn-outline-primary  m-2 " [routerLink]="['new']">{{'newContract'|transloco}}</a>
 
 <div class="row">
-    <app-form-input [labelName]="'search'" (value)="searchTerm=$event"></app-form-input>
+    <app-form-input [labelName]="'search'" (value)="contractService.searchTerm=$event"></app-form-input>
 </div>
 
 <div class="row">
-    @for (con of contracts; track $index) {
+    @for (con of contractService.filterdContracts; track $index) {
 
     <div class="col-12 contract-item
          rounded col-md-3 m-3
@@ -13,7 +13,7 @@
            border-info border-4 shadow-lg
             bg-body-secondary bg-opacity-50
              bg-gradient customer-template">
-        <div class="row" >
+        <div class="row">
             <a (click)="selectedContractChanged(con.id)" [routerLink]="['details',con.id]">
                 <div class="col-12 bg-info"></div>
                 <div class="col-12 text-primary">

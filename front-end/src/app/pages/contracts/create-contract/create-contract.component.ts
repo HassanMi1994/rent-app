@@ -29,17 +29,11 @@ export class CreateContractComponent implements OnChanges {
   @ViewChild('pricePerDayRef') private pricePerDayInput: FormInputNumberComponent;
   @ViewChildren('inputNumRef') private itemNumInputs: FormInputComponent[];
 
-  stuff: Stuff[];
-  stuff$: Observable<Stuff[]>
   selectedStuff: Stuff;
   selectedStuffId: number;
-  filteredStuff: Stuff[];
 
   contract: Contract = new Contract();
   contractItem: ContractItem = new ContractItem();
-  customers$: Observable<Customer[]>;
-  customers: Customer[];
-  filteredCustomers: Customer[];
   selectedCustomer: Customer;
   selectedCustomerId: number;
   totalPriceForItem: number;
@@ -48,27 +42,17 @@ export class CreateContractComponent implements OnChanges {
 
   @ViewChild('selectStuff') selectStuff: NgSelectComponent
 
-  constructor(private stuffService: StuffService,
-    private customerService: CustomerService,
-    private contractService: ContractService,
+  constructor(public stuffService: StuffService,
+    public customerService: CustomerService,
+    public contractService: ContractService,
     private router: Router,
     private transLoco: TranslocoService) {
 
     //#region stuff
 
-    this.stuffService.getStuff().subscribe(x => {
-      this.stuff = x;
-      this.filteredStuff = x;
-    });
+    this.stuffService.getStuff();
     this.inputSearchStuff$.pipe(map((term) => { this.searchInStuff(term) }));
     //#endregion
-
-    //#region  customers
-    this.customers$ = this.customerService.getAll();
-    this.customers$.subscribe(x => {
-      this.customers = x;
-      this.filteredCustomers = x;
-    });
 
     this.inputSearchCustomer$
       .pipe(map((term) => this.searchInCustomers(term)))
@@ -83,18 +67,18 @@ export class CreateContractComponent implements OnChanges {
     console.warn(`${this.selectedCustomer}`);
     console.warn(`${this.selectedStuff}`);
     if (term != undefined && term != '') {
-      let jjj = this.customers.filter(x => x.fullName.includes(term));
-      this.filteredCustomers = jjj;
+      let jjj = this.customerService.customers.filter(x => x.fullName.includes(term));
+      this.customerService.filterdCustomers = jjj;
     }
-    return this.customers;
+    return this.customerService.customers;
   }
 
   searchInStuff(term: string): Stuff[] {
     if (term != undefined && term != '') {
-      let jjj = this.stuff.filter(x => { x.name.includes(term) });
-      this.filteredStuff = jjj;
+      let jjj = this.stuffService.stuff.filter(x => { x.name.includes(term) });
+      this.stuffService.filterdStuff = jjj;
     }
-    return this.stuff;
+    return this.stuffService.stuff;
   }
 
   addItem() {
@@ -145,6 +129,6 @@ export class CreateContractComponent implements OnChanges {
 
   selectedStuffChanged(event$: Stuff) {
     this.selectedStuff = event$;
-    this.pricePerDayInput.setValue(event$.pricePerDay)
+    this.pricePerDayInput.setValue(event$.pricePerDay);
   }
 }

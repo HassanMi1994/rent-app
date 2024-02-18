@@ -16,38 +16,22 @@ import { StuffService } from '../../services/stuff.service';
   styleUrl: './stuff.component.scss'
 })
 export default class StuffComponent implements OnInit {
- private _searchTerm: string = '';
-  stuff: Stuff[];
-  transLoco: TranslocoService;
-
-  get searchTerm(): string {
-    return this._searchTerm;
-  }
   
-  set searchTerm(value: string) {
-    if (value !== this._searchTerm) {
-      this._searchTerm = value;
-      this.serachTermChanged();
-    }
-  }
+  transLoco: TranslocoService;
+  
+
 
   @ViewChild('popUp') child: PopUpComponent;
 
-  constructor(private stuffService: StuffService, transLoco: TranslocoService) {
+  constructor(public stuffService: StuffService, transLoco: TranslocoService) {
     this.transLoco = transLoco;
   }
   ngOnInit(): void {
-    this.stuffService.getStuff().subscribe(r => {
-      this.stuff = r;
-    });
-  }
-
-  serachTermChanged() {
-    this.stuff = this.stuffService.stuff.filter(x => x.name.includes(this.searchTerm));
+    this.stuffService.getStuff();
   }
 
   showMoreInfo(e: MouseEvent, stuffId: number) {
-    var selectedStuff = this.stuff.find(x => x.id == stuffId) as Stuff;
+    var selectedStuff = this.stuffService.stuff.find(x => x.id == stuffId) as Stuff;
     this.child.setTitle(selectedStuff?.name)
     this.child.showObject(selectedStuff);
     this.child.show();

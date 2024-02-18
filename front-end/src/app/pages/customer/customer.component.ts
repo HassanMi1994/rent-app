@@ -33,8 +33,6 @@ export class CustomerComponent implements OnInit {
 
   @ViewChild('popup') popup: PopUpComponent;
   transLoco: TranslocoService
-
-  customers: Customer[];
   _searchTerm: string = '';
 
   get searchTerm(): string {
@@ -49,15 +47,14 @@ export class CustomerComponent implements OnInit {
   }
 
   serachTermChanged() {
-    this.customers = this.customerService.customers.filter(x => x.fullName.includes(this.searchTerm));
+    this.customerService.filterdCustomers = this.customerService.customers.filter(x => x.fullName.includes(this.searchTerm));
   }
 
   constructor(public customerService: CustomerService, transLoco: TranslocoService) {
     this.transLoco = transLoco;
   }
   ngOnInit(): void {
-    this.customerService.getAll()
-      .subscribe(x => this.customers = x);
+    this.customerService.getAll();
   }
 
   showMoreInfo(e: MouseEvent, stuffId: number) {

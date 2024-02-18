@@ -9,6 +9,7 @@ import { Observable, tap } from 'rxjs';
 export class CustomerService {
 
   customers$: Observable<Customer[]>;
+  filterdCustomers: Customer[];
   customers: Customer[];
 
   constructor(private client: HttpClient) { }
@@ -18,12 +19,13 @@ export class CustomerService {
       .subscribe(x => {
         this.customers$.pipe(tap(x => x = [customer, ...this.customers]));
         this.customers = [customer, ...this.customers]
+        this.filterdCustomers = this.customers;
       });
   }
 
   getAll(): Observable<Customer[]> {
     this.customers$ = this.client.get<Customer[]>('https://localhost:7053/api/customers');
-    this.customers$.subscribe(x => this.customers = x);
+    this.customers$.subscribe(x => this.customers = this.filterdCustomers = x);
     return this.customers$;
   }
 }

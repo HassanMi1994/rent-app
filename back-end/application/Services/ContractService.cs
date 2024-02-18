@@ -30,8 +30,8 @@ namespace application.Services
             return await _rentDb
                 .Contracts
                 .Include(x => x.Customer)
-                .Include(x=>x.Items)
-                    .ThenInclude(x=>x.Stuff)
+                .Include(x => x.Items)
+                    .ThenInclude(x => x.Stuff)
                 .FirstOrDefaultAsync(x => x.ID == id);
         }
 

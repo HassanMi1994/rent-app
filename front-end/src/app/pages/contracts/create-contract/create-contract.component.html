@@ -1,7 +1,7 @@
 <form name="create-contract-form">
     <div class="row">
         <div class="col-12 text-center">
-            <ng-select [items]="filteredCustomers" [typeahead]="inputSearchCustomer$"
+            <ng-select [items]="customerService.filterdCustomers" [typeahead]="inputSearchCustomer$"
                 [notFoundText]="'notFound'|transloco" class="text-center center" bindValue="id" bindLabel="fullName"
                 [placeholder]="'customer'|transloco" (change)="selectedCustomerChanged($event)" autofocus default>
                 <ng-template ng-option-tmp let-item="item" let-index="index">
@@ -19,7 +19,7 @@
             <div class="col-6">
                 @if (contract.date!=undefined)
                 {
-                <p class="text-info h3 p-5">{{contract.date.toLocaleDateString('fa-Ir')}}
+                <p class="text-success h4 p-5">{{contract.date.toLocaleDateString('fa-Ir')}}
                     {{contract.date.getHours()|number:'2.0'}}:{{contract.date.getMinutes()|number:'2.0'}}</p>
                 }
             </div>
@@ -56,9 +56,12 @@
                 {{'quantity'|transloco}}
             </div>
 
-
             <div class="col-3 h6 text-info text-center">
                 {{'pricePerDay'|transloco}}
+            </div>
+
+            <div class="col-3 h6 text-info text-center">
+                {{'totalPrice'|transloco}}
             </div>
 
         </div>
@@ -74,19 +77,18 @@
                 {{item.quantity}}
             </div>
 
-            <div class="col-3 h6 text-center">
+            <div class="col-2 h6 text-center">
                 {{item.pricePerDay}}
             </div>
 
-            <div class="col-3 p-2 h6 text-info text-center">
+            <div class="col-2 h6 text-center">
+                {{item.pricePerDay * item.quantity}}
+            </div>
+
+            <div class="col-2 p-2 h6 text-info text-center">
                 <a class="col-4 text-center contract-item-icon" (click)="deleteItem($event)">
                     <span class="bi bi-eraser-fill"></span>
                 </a>
-
-                <a class="col-4 p-2 text-center contract-item-icon" (click)="editItem($event)">
-                    <span class="bi bi-pencil-fill"></span>
-                </a>
-
                 <a class="col-4 p-2 text-center contract-item-icon" (click)="moreInfo($event)">
                     <span class="bi bi-info-circle-fill"></span>
                 </a>
@@ -114,9 +116,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-
                 <div class="modal-body">
-                    <ng-select [items]="filteredStuff" #selectStuff [typeahead]="inputSearchStuff$"
+                    <ng-select [items]="stuffService.stuff" #selectStuff [typeahead]="inputSearchStuff$"
                         class="text-center center" bindValue="" bindLabel="name" [notFoundText]="'notFound'|transloco"
                         [placeholder]="'stuff'|transloco" autofocus (change)="selectedStuffChanged($event)">
 
@@ -130,15 +131,14 @@
                     </ng-select>
 
                     <div class="col-12">
-                        <app-form-input-number #inputRef [labelName]="'quantity'"
-                            (value)="contractItem.quantity=($event)"></app-form-input-number>
-                    </div>
-
-                    <div class="col-12">
                         <app-form-input-number #pricePerDayRef [labelName]="'pricePerDay'"
                             (value)="contractItem.pricePerDay=($event)"></app-form-input-number>
                     </div>
 
+                    <div class="col-12">
+                        <app-form-input-number #inputRef [labelName]="'quantity'"
+                            (value)="contractItem.quantity=($event)"></app-form-input-number>
+                    </div>
 
                     <div class="col-12">
                         <app-form-input #inputRef [labelName]="'description'"

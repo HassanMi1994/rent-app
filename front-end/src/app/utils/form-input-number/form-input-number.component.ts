@@ -28,6 +28,7 @@ export class FormInputNumberComponent {
   setValue(val: number) {
     this.val = val;
     this.input.value = val.toString();
+    this.valueChanged(val.toString());
   }
 
   getValue() {
