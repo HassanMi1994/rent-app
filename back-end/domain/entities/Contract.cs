@@ -6,6 +6,7 @@ namespace domain.entities
     public class Contract : IBaseEntity
     {
         public int ID { get; set; }
+        public int ContractNumber { get; set; }
         public int CustomerID { get; set; }
         public DateTime Date { get; set; }
         public string RentLocation { get; set; }

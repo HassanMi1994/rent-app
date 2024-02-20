@@ -1,39 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ViewChildren } from '@angular/core';
 import { ContractService } from '../../../services/contract.service';
 import { ActivatedRoute } from '@angular/router';
-import { serialize } from 'v8';
-import { json } from 'stream/consumers';
 import { Contract } from '../../../models/contract.model';
 import { TranslocoPipe } from '@ngneat/transloco';
 import { FormsModule } from '@angular/forms';
 import { DecimalPipe } from '@angular/common';
+import { ContractItemsComponent } from '../contract-items/contract-items.component';
 
 @Component({
   selector: 'app-contract-details',
   standalone: true,
-  imports: [TranslocoPipe, FormsModule, DecimalPipe],
+  imports: [TranslocoPipe, FormsModule, DecimalPipe, ContractItemsComponent],
   templateUrl: './contract-details.component.html',
   styleUrl: './contract-details.component.scss'
 })
 export class ContractDetailsComponent {
 
   id: number;
-  contract: Contract;
-  selectStuffToReturn: boolean = false;
 
-  constructor(private contractService: ContractService, private route: ActivatedRoute) {
-
-    contractService.getById()
-      .subscribe(x => {
-        this.contract = x;
-        console.log(x)
-      });
-
+  constructor(public contractService: ContractService, private route: ActivatedRoute) {
+    contractService.getById();
   }
-
-  toggleCheckBoxes() {
-     this.selectStuffToReturn = !this.selectStuffToReturn;
-  }
-
-
 }

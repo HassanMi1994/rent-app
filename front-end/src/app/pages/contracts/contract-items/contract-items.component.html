@@ -1,0 +1,73 @@
+<div class="contract-item-header row">
+    <div class="col-3 h6 text-info text-center">
+        {{'name'|transloco}}
+    </div>
+
+    <div class="col-3 h6 text-infotext-center">
+        {{'quantity'|transloco}}
+    </div>
+
+    <div class="col-3 h6 text-info text-center">
+        {{'pricePerDay'|transloco}}
+    </div>
+
+    <div class="col-2 h6 text-info text-center">
+        {{'totalPrice'|transloco}}
+    </div>
+
+    <div class="col-1 h6 text-info text-center">
+        @if (enableCheckBox) {
+        <label class="container">
+            <input type="checkbox" [(ngModel)]="selectAll" checked="checked">
+            <span class="checkmark"></span>
+        </label>
+        }
+
+    </div>
+</div>
+
+@for (item of contractService.contract.items; track $index) {
+
+<div class="contract-item row">
+    <div class=" col-3 h6 text-center">
+        {{item.stuff.name}}
+    </div>
+
+    <div class="col-3 h6 text-center">
+        {{item.quantity}}
+    </div>
+
+    <div class="col-3 h6 text-center">
+        {{item.pricePerDay}}
+    </div>
+
+    <div class="col-2 h6 text-center">
+        {{item.pricePerDay * item.quantity|number}}
+    </div>
+
+    @if(enableCheckBox)
+    {
+    <div class="col-1 h6 text-info text-center h-100">
+        <label class="container">
+            <input type="checkbox" #itemsRef>
+            <span class="checkmark"></span>
+        </label>
+    </div>
+    }
+
+
+    <!-- <div class="col-3 p-2 h6 text-info text-center">
+            <a class="col-4 text-center contract-item-icon" (click)="deleteItem($event)">
+                <span class="bi bi-eraser-fill"></span>
+            </a>
+
+            <a class="col-4 p-2 text-center contract-item-icon" (click)="editItem($event)">
+                <span class="bi bi-pencil-fill"></span>
+            </a>
+
+            <a class="col-4 p-2 text-center contract-item-icon" (click)="moreInfo($event)">
+                <span class="bi bi-info-circle-fill"></span>
+            </a>
+        </div> -->
+</div>
+}

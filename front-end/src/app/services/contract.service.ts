@@ -13,6 +13,7 @@ export class ContractService {
   contracts: Contract[];
   filterdContracts: Contract[];
   selectedContractId: number = 0;
+  contract: Contract;
 
   public _searchTerm: string = '';
 
@@ -39,7 +40,9 @@ export class ContractService {
   }
 
   getById(): Observable<Contract> {
-    return this.client.get<Contract>(`https://localhost:7053/api/contracts/${this.selectedContractId}`);
+    let observable = this.client.get<Contract>(`https://localhost:7053/api/contracts/${this.selectedContractId}`);
+    observable.subscribe(x => this.contract = x);
+    return observable;
   }
 
   serach(term: string) {

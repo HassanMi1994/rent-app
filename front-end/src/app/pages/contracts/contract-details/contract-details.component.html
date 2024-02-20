@@ -1,4 +1,4 @@
-@if (contract !==undefined) {
+@if (contractService.contract !==undefined) {
 <div class="row">
     <!-- <div
         class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient">
@@ -8,10 +8,10 @@
         <span class="contract-label">
             {{'fullName'|transloco}}
         </span>
-        <b class="contract-label-value">{{contract.customer.fullName}}</b>
+        <b class="contract-label-value">{{contractService.contract.customer.fullName}}</b>
     </div>
     <div class=" col-12 col-md-3 m-3  contract-label-container">
-        {{contract.persianDateTime}}
+        {{contractService.contract.persianDateTime}}
     </div>
 
     <div class=" col-12 col-md-3 m-3  contract-label-container">
@@ -19,7 +19,7 @@
 
             {{'status'|transloco}}
         </span>
-        <b class="text-success">{{contract.status}}</b>
+        <b class="text-success">{{contractService.contract.status}}</b>
     </div>
     <div class=" col-12 col-md-3 m-3  contract-label-container">
 
@@ -27,20 +27,20 @@
 
             {{'mobile'|transloco}}
         </span>
-        <b class="text-success">{{contract.customer.mobile}}</b>
+        <b class="text-success">{{contractService.contract.customer.mobile}}</b>
     </div>
     <div class=" col-12 col-md-3 m-3  contract-label-container">
         <span class="contract-label">
             {{'rentLocation'|transloco}}
         </span>
-        <b class="text-success">{{contract.rentLocation}}</b>
+        <b class="text-success">{{contractService.contract.rentLocation}}</b>
     </div>
 
     <div class=" col-12 col-md-3 m-3  contract-label-container">
         <span class="contract-label">
             {{'howManyDaysClaim'|transloco}}
         </span>
-        <b class="text-success">{{contract.howManyDaysClaim|number}}</b>
+        <b class="text-success">{{contractService.contract.howManyDaysClaim|number}}</b>
 
     </div>
     <!-- <div
@@ -48,98 +48,64 @@
         {{'rentLocation'|transloco}} <b class="text-success" {{contract.rentLocation}}></b>
     </div> -->
 
+
+
+
+
     <div class="row">
         <hr class="col-12" />
     </div>
 
-    <input class="btn btn-outline-info" (click)="toggleCheckBoxes()" [(ngModel)]="selectStuffToReturn"
-        [textContent]="'selectStuffToReturn'|transloco" />
 
-    <div class="contract-item-header row">
-        <div class="col-3 h6 text-info text-center">
-            {{'name'|transloco}}
-        </div>
-
-        <div class="col-3 h6 text-infotext-center">
-            {{'quantity'|transloco}}
-        </div>
-
-        <div class="col-3 h6 text-info text-center">
-            {{'pricePerDay'|transloco}}
-        </div>
-
-        <div class="col-2 h6 text-info text-center">
-            {{'totalPrice'|transloco}}
-        </div>
-
-        <div class="col-1 h6 text-info text-center">
-            @if (selectStuffToReturn) {
-            <label class="container">
-                <input type="checkbox" checked="checked">
-                <span class="checkmark"></span>
-            </label>
-            }
-
-        </div>
-    </div>
-
-    @for (item of contract.items; track $index) {
-
-    <div class="contract-item row">
-        <div class=" col-3 h6 text-center">
-            {{item.stuff.name}}
-        </div>
-
-        <div class="col-3 h6 text-center">
-            {{item.quantity}}
-        </div>
-
-        <div class="col-3 h6 text-center">
-            {{item.pricePerDay}}
-        </div>
-
-        <div class="col-2 h6 text-center">
-            {{item.pricePerDay * item.quantity|number}}
-        </div>
-        <div class="col-1 h6 text-info text-center h-100">
-            @if (selectStuffToReturn) {
-            <label class="container">
-                <input type="checkbox" checked="checked">
-                <span class="checkmark"></span>
-            </label>
-            }
-
-        </div>
-
-        <!-- <div class="col-3 p-2 h6 text-info text-center">
-                <a class="col-4 text-center contract-item-icon" (click)="deleteItem($event)">
-                    <span class="bi bi-eraser-fill"></span>
-                </a>
-
-                <a class="col-4 p-2 text-center contract-item-icon" (click)="editItem($event)">
-                    <span class="bi bi-pencil-fill"></span>
-                </a>
-
-                <a class="col-4 p-2 text-center contract-item-icon" (click)="moreInfo($event)">
-                    <span class="bi bi-info-circle-fill"></span>
-                </a>
-            </div> -->
-    </div>
-    }
+    <app-contract-items [enableCheckBox]="false"></app-contract-items>
 
     <hr />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class=" col-12 col-md-3 m-3  contract-label-container">
         <span class="contract-label">
             {{'prepayment'|transloco}}
         </span>
-        <b class="contract-label-value">{{contract.prePaidMoney|number}}</b>
+        <b class="contract-label-value">{{contractService.contract.prePaidMoney|number}}</b>
     </div>
 
     <div class=" col-12 col-md-3 m-3  contract-label-container">
         <span class="contract-label">
             {{'totalPrice'|transloco}}
         </span>
-        <b class="contract-label-value">{{contract.totalPricePerDay|number}}</b>
+        <b class="contract-label-value">{{contractService.contract.totalPricePerDay|number}}</b>
     </div>
 
 </div>

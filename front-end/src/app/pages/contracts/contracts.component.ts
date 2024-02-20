@@ -10,11 +10,12 @@ import { ContractService } from '../../services/contract.service';
 import { Contract } from '../../models/contract.model';
 import { FormInputComponent } from '../../utils/form-input/form-input.component';
 import { DatePipe, DecimalPipe } from '@angular/common';
+import { ContractItemsComponent } from './contract-items/contract-items.component';
 
 @Component({
   selector: 'app-contracts',
   standalone: true,
-  imports: [NgSelectModule, FormsModule, ReactiveFormsModule, RouterLink, TranslocoPipe, PopUpComponent, FormInputComponent, DatePipe, DecimalPipe],
+  imports: [NgSelectModule, FormsModule, ReactiveFormsModule, RouterLink, TranslocoPipe, PopUpComponent, FormInputComponent, DatePipe, DecimalPipe, ContractItemsComponent],
   templateUrl: './contracts.component.html',
   styleUrl: './contracts.component.scss'
 })

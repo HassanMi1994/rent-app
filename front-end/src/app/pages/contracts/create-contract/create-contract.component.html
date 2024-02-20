@@ -5,8 +5,8 @@
                 [notFoundText]="'notFound'|transloco" class="text-center center" bindValue="id" bindLabel="fullName"
                 [placeholder]="'customer'|transloco" (change)="selectedCustomerChanged($event)" autofocus default>
                 <ng-template ng-option-tmp let-item="item" let-index="index">
-                    <span class="col-6 p-3 text-start border-1 text-success">{{ item.fullName}}</span>
-                    <span class="col-6 p-3 text-start border-1 text-info">{{ item.mobile}}</span>
+                   <span class="bi bi-person"></span> <span class="col-6 p-3 text-start border-1 text-success">{{ item.fullName}}</span>
+                    <span class="col-6 p-3 text-start border-1 text-info">  <span class="bi bi-phone"></span> {{ item.mobile}}</span>
                 </ng-template>
             </ng-select>
         </div>
