@@ -26,7 +26,15 @@ namespace api.Controllers
         public async Task<IActionResult> Create([FromBody] CreateContractDto contract)
         {
             //todo: this should be moved to mapper!
-            var cont = new Contract
+            Contract cont = ConvertContractDtoToContract(contract);
+            await _contractService.Create(cont);
+
+            return Ok();
+        }
+
+        private static Contract ConvertContractDtoToContract(CreateContractDto contract)
+        {
+            return new Contract
             {
                 Date = contract.Date,
                 Items = contract.Items.Select(item => new ContractItem
@@ -44,12 +52,7 @@ namespace api.Controllers
                 TotalPricePerDay = contract.Items.Sum(x => x.PricePerDay * x.Quantity),
                 CustomerID = contract.CustomerID,
             };
-
-            await _contractService.Create(cont);
-
-            return Ok();
         }
-
 
         [HttpGet("{id}")]
         public async Task<Contract> GetByIdAsycn(int id)

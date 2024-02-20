@@ -47,16 +47,20 @@
         class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient">
         {{'rentLocation'|transloco}} <b class="text-success" {{contract.rentLocation}}></b>
     </div> -->
+
     <div class="row">
         <hr class="col-12" />
     </div>
+
+    <input class="btn btn-outline-info" (click)="toggleCheckBoxes()" [(ngModel)]="selectStuffToReturn"
+        [textContent]="'selectStuffToReturn'|transloco" />
 
     <div class="contract-item-header row">
         <div class="col-3 h6 text-info text-center">
             {{'name'|transloco}}
         </div>
 
-        <div class="col-3 h6 text-info text-center">
+        <div class="col-3 h6 text-infotext-center">
             {{'quantity'|transloco}}
         </div>
 
@@ -69,10 +73,13 @@
         </div>
 
         <div class="col-1 h6 text-info text-center">
+            @if (selectStuffToReturn) {
             <label class="container">
                 <input type="checkbox" checked="checked">
                 <span class="checkmark"></span>
-              </label>
+            </label>
+            }
+
         </div>
     </div>
 
@@ -95,10 +102,13 @@
             {{item.pricePerDay * item.quantity|number}}
         </div>
         <div class="col-1 h6 text-info text-center h-100">
-            <label class="container">One
+            @if (selectStuffToReturn) {
+            <label class="container">
                 <input type="checkbox" checked="checked">
                 <span class="checkmark"></span>
-              </label>
+            </label>
+            }
+
         </div>
 
         <!-- <div class="col-3 p-2 h6 text-info text-center">

@@ -62,6 +62,15 @@
       <li><a class="dropdown-item" routerLinkActive="active" (click)="changeLang('ar')">Arabic (عربی)</a></li>
     </ul>
   </li>
+
+  <li class="nav-item" role="presentation">
+    @if (!isDarkMode) {
+    <span class="bi bi-moon-stars-fill nav-link" (click)="toggleDarkMode()"></span>
+    }
+    @if (isDarkMode) {
+    <span class="bi bi-sun nav-link" (click)="toggleDarkMode()"></span>
+    }
+  </li>
   <li>
     <a href=""></a>
   </li>

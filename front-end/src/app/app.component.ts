@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Inject, OnInit, importProvidersFrom, inject } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild, importProvidersFrom, inject } from '@angular/core';
 import { ChildrenOutletContexts, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 import { slideInAnimation } from './animations';
@@ -20,6 +20,7 @@ export class AppComponent implements AfterViewInit {
   title = 'rent-front';
   transLoco: TranslocoService;
   selectedLang: string;
+  isDarkMode: boolean;
 
   constructor(transLang: TranslocoService, private contexts: ChildrenOutletContexts, private location: Location, @Inject(DOCUMENT) private document: Document) {
     this.transLoco = transLang;
@@ -52,5 +53,17 @@ export class AppComponent implements AfterViewInit {
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  }
+
+  toggleDarkMode() {
+    let dark = this.document.querySelector('html')?.getAttribute('data-bs-theme');
+    if (dark == 'dark') {
+      this.document.querySelector('html')?.setAttribute('data-bs-theme', '');
+      this.isDarkMode = false;
+    }
+    else {
+      this.document.querySelector('html')?.setAttribute('data-bs-theme', 'dark');
+      this.isDarkMode = true;
+    }
   }
 }

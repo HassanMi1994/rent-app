@@ -9,10 +9,9 @@
         <app-form-input [labelName]="'search'" (value)="this.stuffService.searchTerm=$event"></app-form-input>
     </div>
 </div>
-<div class="row">
+<div class="row flex-row">
     @for (s of stuffService.filterdStuff; track $index) {
-    <div
-        class="col-12 rounded col-md-3 m-3 text-center rounded-5 border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient customer-template">
+    <div class="col-12 rounded col-md-3 m-3 text-center rounded-5 border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient customer-template">
         <div class="row">
             <div class="col-12 bg-info"></div>
             <div class="col-12 text-primary">

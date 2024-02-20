@@ -47,5 +47,6 @@
     "howManyDaysClaim": "How many days want to rent",
     "datetime": "Date and Time",
     "rentLocation": "Rent Location",
-    "totalPrice": "Total Price"
+    "totalPrice": "Total Price",
+    "selectStuffToReturn":"Select Stuff To Return"
 }

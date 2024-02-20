@@ -18,8 +18,8 @@ import { DecimalPipe } from '@angular/common';
 export class ContractDetailsComponent {
 
   id: number;
-  contractJson: string;
   contract: Contract;
+  selectStuffToReturn: boolean = false;
 
   constructor(private contractService: ContractService, private route: ActivatedRoute) {
 
@@ -30,5 +30,10 @@ export class ContractDetailsComponent {
       });
 
   }
+
+  toggleCheckBoxes() {
+     this.selectStuffToReturn = !this.selectStuffToReturn;
+  }
+
 
 }

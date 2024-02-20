@@ -12,7 +12,8 @@ body {
     @media (max-width: 700px) {
         //background-image: url('assets/images/background-vertical.png');
         background-image: url('assets/images/background-vertical.png');
-        transition-duration: .500ms;
+        filter: invert(100%);
+        transition-duration: 1000ms;
     }
 
     @media (min-width: 700px) {
