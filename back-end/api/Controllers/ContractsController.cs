@@ -17,7 +17,7 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        public IAsyncEnumerable<Contract> GetAll()
+        public IAsyncEnumerable<domain.entities.Contract> GetAll()
         {
             return _contractService.GetAll();
         }
@@ -26,15 +26,15 @@ namespace api.Controllers
         public async Task<IActionResult> Create([FromBody] CreateContractDto contract)
         {
             //todo: this should be moved to mapper!
-            Contract cont = ConvertContractDtoToContract(contract);
+            domain.entities.Contract cont = ConvertContractDtoToContract(contract);
             await _contractService.Create(cont);
 
             return Ok();
         }
 
-        private static Contract ConvertContractDtoToContract(CreateContractDto contract)
+        private static domain.entities.Contract ConvertContractDtoToContract(CreateContractDto contract)
         {
-            return new Contract
+            return new domain.entities.Contract
             {
                 Date = contract.Date,
                 Items = contract.Items.Select(item => new ContractItem
@@ -55,7 +55,7 @@ namespace api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Contract> GetByIdAsycn(int id)
+        public async Task<domain.entities.Contract> GetByIdAsycn(int id)
         {
             return await _contractService.GetByIdAsync(id);
         }

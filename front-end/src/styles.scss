@@ -6,14 +6,14 @@
 
 * {
     font-family: IRANSans !important;
+    color: unset;
 }
 
 body {
     @media (max-width: 700px) {
         //background-image: url('assets/images/background-vertical.png');
         background-image: url('assets/images/background-vertical.png');
-        filter: invert(100%);
-        transition-duration: 1000ms;
+        transition-duration: 2000ms;
     }
 
     @media (min-width: 700px) {

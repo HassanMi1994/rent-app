@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using persistance;
 
@@ -11,9 +12,11 @@ using persistance;
 namespace persistance.Migrations
 {
     [DbContext(typeof(RentDbContext))]
-    partial class RentDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240221214746_added-setting")]
+    partial class addedsetting
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,9 +79,6 @@ namespace persistance.Migrations
                     b.Property<int>("ContractNumber")
                         .HasColumnType("int");
 
-                    b.Property<int>("ContractType")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -92,9 +92,6 @@ namespace persistance.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("PrePaidMoney")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Remaining")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("RentLocation")
@@ -137,8 +134,11 @@ namespace persistance.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("LastStatusChangedDate")
-                        .HasColumnType("datetime2");
+                    b.Property<bool>("IsReturned")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsReturnedOkay")
+                        .HasColumnType("bit");
 
                     b.Property<decimal>("PricePerDay")
                         .HasColumnType("decimal(18,2)");
@@ -148,9 +148,6 @@ namespace persistance.Migrations
 
                     b.Property<DateTime>("RentDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<int>("StuffID")
                         .HasColumnType("int");
@@ -197,28 +194,37 @@ namespace persistance.Migrations
                     b.ToTable("Histories");
                 });
 
-            modelBuilder.Entity("domain.entities.Payment", b =>
+            modelBuilder.Entity("domain.entities.Setting", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("ContractNoSeed")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ConractID")
+                    b.Property<int>("Currency")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ContractID")
+                    b.Property<string>("Locale")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ServiceType")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.Property<int>("TaxPercent")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ContractID");
+                    b.Property<int>("UserID")
+                        .HasColumnType("int");
 
-                    b.ToTable("Payment");
+                    b.HasKey("Id");
+
+                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("domain.entities.Stuff", b =>
@@ -228,9 +234,6 @@ namespace persistance.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<decimal?>("BuyPrice")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -249,9 +252,6 @@ namespace persistance.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("SellPrice")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<int>("ServiceType")
                         .HasColumnType("int");
 
@@ -261,32 +261,6 @@ namespace persistance.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Stuffs");
-                });
-
-            modelBuilder.Entity("domain.entities.UserSetting", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Data")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Settings");
                 });
 
             modelBuilder.Entity("domain.entities.Contract", b =>
@@ -326,18 +300,9 @@ namespace persistance.Migrations
                         .HasForeignKey("ContractItemId");
                 });
 
-            modelBuilder.Entity("domain.entities.Payment", b =>
-                {
-                    b.HasOne("domain.entities.Contract", null)
-                        .WithMany("Payments")
-                        .HasForeignKey("ContractID");
-                });
-
             modelBuilder.Entity("domain.entities.Contract", b =>
                 {
                     b.Navigation("Items");
-
-                    b.Navigation("Payments");
                 });
 
             modelBuilder.Entity("domain.entities.ContractItem", b =>

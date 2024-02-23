@@ -1,5 +1,6 @@
 ﻿using domain.entities;
 using Microsoft.EntityFrameworkCore;
+using persistance.configurations;
 using Rent.Entities;
 
 namespace persistance
@@ -12,8 +13,11 @@ namespace persistance
 
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Stuff> Stuffs { get; set; }
-        public DbSet<Contract> Contracts { get; set; }
-        public DbSet<ContractItem> RentedStuffs { get; set; }
+        public DbSet<domain.entities.Contract> Contracts { get; set; }
+        public DbSet<ContractItem> ContractItems { get; set; }
+        public DbSet<History> Histories { get; set; }
+        public DbSet<UserSetting> Settings { get; set; }
+
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
@@ -38,8 +42,8 @@ namespace persistance
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // modelBuilder.ApplyConfiguration(new BaseEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new HistoryConfiguration());
+            modelBuilder.ApplyConfiguration(new ContractItemConfiguration());
         }
-
-
     }
 }

@@ -14,18 +14,18 @@ namespace application.Services
             _rentDb = rentDb;
         }
 
-        public async Task Create(Contract contract)
+        public async Task Create(domain.entities.Contract contract)
         {
             _rentDb.Add(contract);
             await _rentDb.SaveChangesAsync();
         }
 
-        public IAsyncEnumerable<Contract> GetAll()
+        public IAsyncEnumerable<domain.entities.Contract> GetAll()
         {
             return _rentDb.Contracts.Include(x => x.Customer).OrderByDescending(x => x.CreatedAt).AsAsyncEnumerable();
         }
 
-        public async Task<Contract> GetByIdAsync(int id)
+        public async Task<domain.entities.Contract> GetByIdAsync(int id)
         {
             return await _rentDb
                 .Contracts

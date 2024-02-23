@@ -8,6 +8,7 @@ import { CreateStuffComponent } from './pages/stuff/create-stuff/create-stuff.co
 import { ContractsComponent } from './pages/contracts/contracts.component';
 import { CreateContractComponent } from './pages/contracts/create-contract/create-contract.component';
 import { ContractDetailsComponent } from './pages/contracts/contract-details/contract-details.component';
+import { SettingComponent } from './pages/setting/setting.component';
 
 
 //todo: titles should be set dynamically
@@ -22,6 +23,7 @@ export const routes: Routes = [
     { component: WelcomeComponent, path: ':{lang}/welcome' },
     { component: StuffComponent, path: ':{lang}/stuff' },
     { component: CreateStuffComponent, path: ':{lang}/stuff/new' },
+    { component: SettingComponent, path: ':{lang}/settings' },
     { path: 'en/welcome', redirectTo: 'en/welcome', pathMatch: 'full', },
     { path: '', redirectTo: 'en/welcome', pathMatch: 'full', },
     { path: '**', component: PageNotFoundComponent }

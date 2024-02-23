@@ -3,6 +3,7 @@ import { ChildrenOutletContexts, RouterLink, RouterLinkActive, RouterOutlet } fr
 import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 import { slideInAnimation } from './animations';
 import { CommonModule, Location, DOCUMENT } from '@angular/common';
+import { MenuComponent } from './pages/menu/menu.component';
 
 @Component({
   selector: 'app-root',
@@ -11,41 +12,26 @@ import { CommonModule, Location, DOCUMENT } from '@angular/common';
     RouterLink,
     RouterLinkActive,
     TranslocoPipe,
-    CommonModule,],
+    CommonModule,
+    MenuComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   animations: [slideInAnimation]
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent {
   title = 'rent-front';
-  transLoco: TranslocoService;
-  selectedLang: string;
-  isDarkMode: boolean;
 
-  constructor(transLang: TranslocoService, private contexts: ChildrenOutletContexts, private location: Location, @Inject(DOCUMENT) private document: Document) {
-    this.transLoco = transLang;
-    this.selectedLang = this.transLoco.getDefaultLang().toUpperCase();
+
+
+  constructor(public transLoco: TranslocoService, private contexts: ChildrenOutletContexts,
+    private location: Location,
+    @Inject(DOCUMENT) private document: Document) {
 
   }
-  ngAfterViewInit(): void {
-    if (localStorage != undefined) {
-      let langHistory = localStorage.getItem('selectedLang');
-      if (langHistory !== undefined) {
-        this.selectedLang = langHistory!.toUpperCase();
-        this.transLoco.setActiveLang(langHistory!);
-      }
-    }
-  }
 
-  changeLang(lang: string) {
-    let oldLang = this.transLoco.getActiveLang();
-    let olaPath = this.document.location.pathname;
-    let newRoute = olaPath.replace(`/${oldLang}/`, `/${lang}/`);
-    this.location.replaceState(newRoute);
-    localStorage.setItem('selectedLang', lang);
-    this.selectedLang = lang.toUpperCase();
-    this.transLoco.setActiveLang(lang);
-  }
+
+
+
 
   getRouteAnimationData() {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];
@@ -53,17 +39,5 @@ export class AppComponent implements AfterViewInit {
 
   prepareRoute(outlet: RouterOutlet) {
     return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
-  }
-
-  toggleDarkMode() {
-    let dark = this.document.querySelector('html')?.getAttribute('data-bs-theme');
-    if (dark == 'dark') {
-      this.document.querySelector('html')?.setAttribute('data-bs-theme', '');
-      this.isDarkMode = false;
-    }
-    else {
-      this.document.querySelector('html')?.setAttribute('data-bs-theme', 'dark');
-      this.isDarkMode = true;
-    }
   }
 }

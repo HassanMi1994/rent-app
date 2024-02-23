@@ -1,3 +1,4 @@
+import { ItemStatus } from "./enum/contractStatus.enum";
 import { Stuff } from "./stuff.model";
 
 export class ContractItem {
@@ -7,7 +8,7 @@ export class ContractItem {
     rentDate: Date;
     pricePerDay: number;
     description: string;
-    isReturned: boolean;
-    isReturnedSafe: boolean;
+    status: ItemStatus;
+    lastStatusChangeDate: Date
     stuff: Stuff = new Stuff();
 }

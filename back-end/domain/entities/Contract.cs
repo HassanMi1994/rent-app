@@ -7,17 +7,39 @@ namespace domain.entities
     {
         public int ID { get; set; }
         public int ContractNumber { get; set; }
+        public ContractType ContractType { get; set; }
         public int CustomerID { get; set; }
         public DateTime Date { get; set; }
         public string RentLocation { get; set; }
         public int? HowManyDaysClaim { get; set; }
         public decimal PrePaidMoney { get; set; }
         public decimal TotalPricePerDay { get; set; }
+        public decimal Remaining { get; set; }
         public ContractStatus Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public Customer Customer { get; set; }
         public required ICollection<ContractItem> Items { get; set; }
+        public ICollection<Payment> Payments { get; set; }
+
+
+        public decimal GetHowMuchMoneyShouldBePaid()
+        {
+            var allCost = Items.Sum(x => x.Quantity * x.PricePerDay);
+            return allCost;
+        }
+
+        public decimal GetPaidAmount()
+        {
+            return Payments.Sum(x => x.Amount);
+        }
+    }
+
+    public class Payment
+    {
+        public int ID { get; set; }
+        public int ConractID { get; set; }
+        public decimal Amount { get; set; }
     }
 }
 

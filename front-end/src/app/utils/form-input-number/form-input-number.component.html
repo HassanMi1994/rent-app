@@ -1,6 +1,7 @@
 <div class="form-input-container">
     <div class="form-row">
         <div class="input-data">
+            <!-- {{val|number}} -->
             <input type="number" #input (change)="valueChanged(input.value)" [(ngModel)]="val" required>
             <!-- <ng-content>
                 

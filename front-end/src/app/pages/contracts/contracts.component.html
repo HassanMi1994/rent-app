@@ -6,7 +6,6 @@
 
 <div class="row">
     @for (con of contractService.filterdContracts; track $index) {
-
     <div class="col-12 contract-item
          rounded col-md-3 m-3
           text-center rounded-5
@@ -36,13 +35,3 @@
     }
     <app-pop-up #popup id="morePopUp"></app-pop-up>
 </div>
-
-<!-- <h3>how are you doing?</h3>
-<ng-select style="z-index: 99999999;" class="form-control" [items]="customers" bindLabel="name" bindValue="id"
-    [(ngModel)]="selectedCustomerId">
-</ng-select>
-
-<!-- <ng-select [(ngModel)]="selectedCustomerId">
-    <ng-option *ngFor="let customer of customers" [value]="customer.id">{{customer.firstName}}
-        {{customer.lastName}}</ng-option>
-</ng-select> -->
