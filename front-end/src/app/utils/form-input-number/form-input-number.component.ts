@@ -16,6 +16,11 @@ export class FormInputNumberComponent {
   @ViewChild('input') input: HTMLInputElement;
   @Input() val: number;
 
+  constructor() {
+    if (this.val !== undefined)
+      this.valueChanged(this.val.toString());
+  }
+
   valueChanged(value: string) {
     this.val = parseInt(value);
     console.log(value);

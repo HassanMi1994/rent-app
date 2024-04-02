@@ -2,9 +2,10 @@
 
 namespace domain.abstraction
 {
-    public interface ISettingService
+    public interface IUserConfig
     {
-        Task<UserSetting> GetSettingAsync();
-        Task UpdateAsync(UserSetting setting);
+        Task CreateDefaultConfig();
+        Task<UserConfig> GetSettingAsync();
+        Task UpdateAsync(UserConfig setting);
     }
 }

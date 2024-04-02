@@ -10,7 +10,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient(typeof(ICustomerService), typeof(CustomerService));
             services.AddTransient(typeof(IStuffService), typeof(StuffService));
             services.AddTransient(typeof(IContractService), typeof(ContractService));
-            services.AddTransient(typeof(ISettingService), typeof(SettingService));
+            services.AddTransient(typeof(IUserConfig), typeof(UserConfigService));
+            services.AddTransient(typeof(IUserService), typeof(IUserService));
             return services;
         }
     }

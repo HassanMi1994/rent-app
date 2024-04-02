@@ -1,20 +1,21 @@
 <div class="row">
     <app-form-input-number [labelName]="'contractNoSeed'"
-        (value)="settingService.setting.contractNoSeed=$event"></app-form-input-number>
+        (value)="settingService.config.contractNoSeed=$event"></app-form-input-number>
 </div>
 
 <div class="row">
-    <app-form-input [labelName]="'locale'" (value)="settingService.setting.locale=$event" [val]="settingService.setting.locale"></app-form-input>
+    <app-form-input [labelName]="'locale'" (value)="settingService.config.locale=$event"
+        [val]="settingService.config.locale"></app-form-input>
 </div>
 
 <div class="row">
-    <app-form-input-number [labelName]="'taxPercent'" 
-        (value)="settingService.setting.taxPercent=$event" [val]="settingService.setting.taxPercent"></app-form-input-number>
+    <app-form-input-number [labelName]="'taxPercent'" (value)="settingService.config.taxPercent=$event"
+        [val]="settingService.config.taxPercent"></app-form-input-number>
 </div>
 
 <div class="row">
     <app-form-input-number [labelName]="'serviceType'"
-        (value)="settingService.setting.serviceType=$event"></app-form-input-number>
+        (value)="settingService.config.serviceType=$event"></app-form-input-number>
 </div>
 
 <!-- <div class="row">

@@ -1,3 +1,5 @@
+import exp from "constants";
+
 export enum ContractStatus {
     Draft,
     Opened,
@@ -15,6 +17,11 @@ export enum ServiceType {
     Rent = 1,//001
     Sell = 2,//010
     Both = 3 //011
+}
+
+export enum ContractType {
+    Rent,
+    Sell
 }
 
 export enum ItemStatus {

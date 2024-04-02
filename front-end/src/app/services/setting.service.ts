@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Setting } from '../models/setting.model';
+import { Config } from '../models/userSettingmodel';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -8,20 +8,20 @@ import { HttpClient } from '@angular/common/http';
 })
 export class SettingService {
 
-  setting$: Observable<Setting>
-  setting: Setting;
+  config$: Observable<Config>
+  config: Config;
 
   constructor(private client: HttpClient) {
 
   }
 
-  get(): Observable<Setting> {
-    this.setting$ = this.client.get<Setting>('https://localhost:7053/api/settings');
-    this.setting$.subscribe(x => this.setting = x);
-    return this.setting$;
+  get(): Observable<Config> {
+    this.config$ = this.client.get<Config>('https://localhost:7053/api/config');
+    this.config$.subscribe(x => this.config = x);
+    return this.config$;
   }
 
   patch() {
-    this.client.patch('https://localhost:7053/api/settings', this.setting);
+    this.client.patch('https://localhost:7053/api/config', this.config);
   }
 }

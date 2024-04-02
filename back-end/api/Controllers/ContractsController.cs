@@ -43,7 +43,8 @@ namespace api.Controllers
                     PricePerDay = item.PricePerDay,
                     Quantity = item.Quantity,
                     RentDate = item.RentDate,
-                    StuffID = item.StuffID
+                    StuffID = item.StuffID,
+
                 }).ToList(),
                 Status = domain.enums.ContractStatus.Opened,
                 PrePaidMoney = contract.PrePaidMoney,

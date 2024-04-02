@@ -18,6 +18,10 @@ export class FormInputComponent {
   @Input() val: string
   @ViewChild('input') input: HTMLInputElement;
 
+  constructor(){
+    this.valueChanged(this.val);
+  }
+
   valueChanged(value: string) {
     console.log(value);
     this.value.emit(value);

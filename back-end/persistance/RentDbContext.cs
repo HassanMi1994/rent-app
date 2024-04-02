@@ -9,6 +9,7 @@ namespace persistance
     {
         public RentDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
+
         }
 
         public DbSet<Customer> Customers { get; set; }
@@ -16,7 +17,7 @@ namespace persistance
         public DbSet<domain.entities.Contract> Contracts { get; set; }
         public DbSet<ContractItem> ContractItems { get; set; }
         public DbSet<History> Histories { get; set; }
-        public DbSet<UserSetting> Settings { get; set; }
+        public DbSet<UserConfig> UserConfigs { get; set; }
 
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)

@@ -8,8 +8,8 @@ import { TranslocoPipe } from '@ngneat/transloco';
   selector: 'app-setting',
   standalone: true,
   imports: [FormInputComponent, FormInputNumberComponent, TranslocoPipe],
-  templateUrl: './setting.component.html',
-  styleUrl: './setting.component.scss'
+  templateUrl: './config.component.html',
+  styleUrl: './config.component.scss'
 })
 export class SettingComponent {
 
