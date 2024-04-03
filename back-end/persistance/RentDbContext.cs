@@ -45,6 +45,7 @@ namespace persistance
             // modelBuilder.ApplyConfiguration(new BaseEntityConfiguration());
             modelBuilder.ApplyConfiguration(new HistoryConfiguration());
             modelBuilder.ApplyConfiguration(new ContractItemConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfigConfiguration());
         }
     }
 }

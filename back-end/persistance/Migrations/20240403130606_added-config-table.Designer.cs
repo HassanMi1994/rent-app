@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using persistance;
 
@@ -11,9 +12,11 @@ using persistance;
 namespace persistance.Migrations
 {
     [DbContext(typeof(RentDbContext))]
-    partial class RentDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240403130606_added-config-table")]
+    partial class addedconfigtable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,6 +66,40 @@ namespace persistance.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("domain.entities.Config", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<long>("ContractNoSeed")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("Currency")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DefaultContractType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RentCalculationType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TaxPercent")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserConfigID")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserConfigID")
+                        .IsUnique();
+
+                    b.ToTable("Config");
                 });
 
             modelBuilder.Entity("domain.entities.Contract", b =>
@@ -271,29 +308,11 @@ namespace persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<long>("ContractNoSeed")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Currency")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DefaultContractType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RentCalculationType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TaxPercent")
-                        .HasColumnType("int");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("UserConfigID")
-                        .HasColumnType("int");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");
@@ -301,6 +320,15 @@ namespace persistance.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserConfigs");
+                });
+
+            modelBuilder.Entity("domain.entities.Config", b =>
+                {
+                    b.HasOne("domain.entities.UserConfig", null)
+                        .WithOne("Config")
+                        .HasForeignKey("domain.entities.Config", "UserConfigID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("domain.entities.Contract", b =>
@@ -357,6 +385,12 @@ namespace persistance.Migrations
             modelBuilder.Entity("domain.entities.ContractItem", b =>
                 {
                     b.Navigation("History");
+                });
+
+            modelBuilder.Entity("domain.entities.UserConfig", b =>
+                {
+                    b.Navigation("Config")
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

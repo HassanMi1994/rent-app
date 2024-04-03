@@ -1,4 +1,4 @@
-import { Component, OnChanges, QueryList, SimpleChanges, ViewChild, ViewChildren, input } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, QueryList, SimpleChanges, ViewChild, ViewChildren, input } from '@angular/core';
 import { FormInputComponent } from '../../../utils/form-input/form-input.component';
 import { Contract } from '../../../models/contract.model';
 import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
@@ -23,7 +23,7 @@ import { FormInputDateComponent } from '../../../utils/form-input-date/form-inpu
   templateUrl: './create-contract.component.html',
   styleUrl: './create-contract.component.scss'
 })
-export class CreateContractComponent implements OnChanges {
+export class CreateContractComponent implements OnChanges,AfterViewInit {
 
   @ViewChildren('inputRef') private itemInputs: FormInputComponent[];
   @ViewChild('pricePerDayRef') private pricePerDayInput: FormInputNumberComponent;
@@ -41,6 +41,7 @@ export class CreateContractComponent implements OnChanges {
   public inputSearchStuff$ = new Subject<string>();
 
   @ViewChild('selectStuff') selectStuff: NgSelectComponent
+  @ViewChild('calendar') formInputDate: FormInputDateComponent
 
   constructor(public stuffService: StuffService,
     public customerService: CustomerService,
@@ -58,6 +59,9 @@ export class CreateContractComponent implements OnChanges {
       .pipe(map((term) => this.searchInCustomers(term)))
     //#endregion
 
+  }
+  ngAfterViewInit(): void {
+    this.formInputDate.setValue(new Date());
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.totalPriceForItem = this.selectedStuff.quantity * this.pricePerDayInput.getValue();

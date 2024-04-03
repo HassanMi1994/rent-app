@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormInputComponent } from '../../utils/form-input/form-input.component';
 import { FormInputNumberComponent } from '../../utils/form-input-number/form-input-number.component';
-import { SettingService } from '../../services/setting.service';
+import { SettingService } from '../../services/userConfig.service';
 import { TranslocoPipe } from '@ngneat/transloco';
 
 @Component({

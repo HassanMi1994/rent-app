@@ -1,38 +1,23 @@
 <div class="row">
-    <app-form-input-number [labelName]="'contractNoSeed'"
-        (value)="settingService.config.contractNoSeed=$event"></app-form-input-number>
+    <app-form-input-number [labelName]="'contractNoSeed'" (value)="settingService.userConfig.contractNoSeed=$event"
+        [val]="settingService.userConfig.contractNoSeed"></app-form-input-number>
+</div>
+
+
+<div class="row">
+    <app-form-input-number [labelName]="'taxPercent'" (value)="settingService.userConfig.taxPercent=$event"
+        [val]="settingService.userConfig.taxPercent"></app-form-input-number>
 </div>
 
 <div class="row">
-    <app-form-input [labelName]="'locale'" (value)="settingService.config.locale=$event"
-        [val]="settingService.config.locale"></app-form-input>
-</div>
-
-<div class="row">
-    <app-form-input-number [labelName]="'taxPercent'" (value)="settingService.config.taxPercent=$event"
-        [val]="settingService.config.taxPercent"></app-form-input-number>
-</div>
-
-<div class="row">
-    <app-form-input-number [labelName]="'serviceType'"
-        (value)="settingService.config.serviceType=$event"></app-form-input-number>
-</div>
-
-<!-- <div class="row">
     <select>
-        <option value="Rent" selected>Rent</option>
-        <option value="Sell">Sell</option>
-        <option value="Both">Both</option>
+        <option value="Rent">Rent text</option>
+        <option value="Sell">Sell text</option>
     </select>
 </div>
 
-<div class="row form-control">
-    <select>
-        <option value="Hourly">{{'hourly'|transloco}}</option>
-        <option value="DailyRoundUp">{{'dailyRoundUp'|transloco}}</option>
-        <option value="DailyRoundDown">{{'dailyRoundDown'|transloco}}</option>
-    </select>
-</div> -->
+
+
 
 <div class="row">
     <button class="btn btn-outline-primary" (click)="save()">Sve</button>

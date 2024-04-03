@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace application.Services
 {
-    public class UserConfigService : IUserConfig
+    public class UserConfigService : IUserConfigService
     {
         RentDbContext _rentDb;
         IUserService _userService;
@@ -24,10 +24,10 @@ namespace application.Services
             await _rentDb.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Config config)
+        public async Task UpdateAsync(UserConfig config)
         {
             var userConfig = await GetSettingAsync();
-            userConfig.Data = JsonSerializer.Serialize(config);
+            userConfig = config;
             userConfig.UpdatedAt = DateTime.Now;
             await _rentDb.SaveChangesAsync();
         }
@@ -37,23 +37,19 @@ namespace application.Services
             var userConfig = await _rentDb.UserConfigs.FirstOrDefaultAsync(x => x.UserID == _userService.GetCurrentUserID());
             if (userConfig == null)
             {
-                userConfig = new UserConfig
-                {
-                    CreatedAt = DateTime.Now,
-                    Data = UserConfig.CreateDefaultConfig(_userService.Id).Serialize(),
-                    UserID = _userService.GetCurrentUserID(),
-                };
+                userConfig = UserConfig.CreateDefaultConfig(_userService.GetCurrentUserID());
                 _rentDb.UserConfigs.Add(userConfig);
                 await _rentDb.SaveChangesAsync();
-            }
+            };
             return userConfig;
         }
 
-        public async Task UpdateAsync(UserConfig userConfig)
-        {
-            var setting = GetSettingAsync();
-            _rentDb.UserConfigs.Update(userConfig);
-            await _rentDb.SaveChangesAsync();
-        }
+
+        //public async Task UpdateAsync(UserConfig userConfig)
+        //{
+        //    var setting = GetSettingAsync();
+        //    _rentDb.UserConfigs.Update(userConfig);
+        //    await _rentDb.SaveChangesAsync();
+        //}
     }
 }

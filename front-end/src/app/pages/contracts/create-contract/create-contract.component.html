@@ -13,14 +13,16 @@
 
         <div class="row">
             <div class="col-6">
-                <app-form-input-date [labelName]="'date'" (value)="contract.date=($event)"></app-form-input-date>
+                <app-form-input-date #calender [labelName]="'date'" (value)="contract.date=($event)"></app-form-input-date>
             </div>
 
             <div class="col-6">
                 @if (contract.date!=undefined)
                 {
-                <p class="text-success h4 p-5">{{contract.date.toLocaleDateString('fa-Ir')}}
-                    {{contract.date.getHours()|number:'2.0'}}:{{contract.date.getMinutes()|number:'2.0'}}</p>
+                <p class="text-success h4 p-5">{{
+                    contract.date.toLocaleDateString('fa-Ir')}}
+                    {{contract.date.getHours()|number:'2.0'}}:
+                    {{contract.date.getMinutes()|number:'2.0'}}</p>
                 }
             </div>
         </div>

@@ -8,9 +8,9 @@ namespace api.Controllers
     [ApiController]
     public class UserConfigController : Controller
     {
-        private readonly IUserConfig _userConfig;
+        private readonly IUserConfigService _userConfig;
 
-        public UserConfigController(IUserConfig settingService)
+        public UserConfigController(IUserConfigService settingService)
         {
             _userConfig = settingService;
         }
