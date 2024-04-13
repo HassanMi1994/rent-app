@@ -11,7 +11,7 @@ using persistance;
 
 namespace persistance.Migrations
 {
-    [DbContext(typeof(RentDbContext))]
+    [DbContext(typeof(RsaDbContext))]
     [Migration("20240221221019_added-rent-calcuation")]
     partial class addedrentcalcuation
     {

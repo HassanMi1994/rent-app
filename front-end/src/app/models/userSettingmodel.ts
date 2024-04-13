@@ -1,4 +1,4 @@
-import { ContractType, Currency, RentCalculationType, ServiceType } from "./enum/contractStatus.enum"
+import { ContractType, Currency, RentCalculationType } from "./enum/allEnums.enum"
 
 export class UserConfig {
 
@@ -8,7 +8,7 @@ export class UserConfig {
     //locale: string
     taxPercent: number
     DefaultContractType: ContractType
-    serviceType: ServiceType
+    serviceType: number
     rentCalculationType: RentCalculationType
     currency: Currency
     createdAt: Date

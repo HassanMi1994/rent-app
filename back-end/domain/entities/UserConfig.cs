@@ -11,13 +11,13 @@ namespace domain.entities
         public int UserConfigID { get; set; }
         public long ContractNoSeed { get; set; }
         public int TaxPercent { get; set; }
-        public ContractType DefaultContractType { get; set; }
+        public ServiceType ServiceType { get; set; }
         public RentCalculationType RentCalculationType { get; set; }
         public Currency Currency { get; set; }
 
         public static UserConfig Default => new UserConfig
         {
-            DefaultContractType = ContractType.Rent,
+            ServiceType = ServiceType.Rent,
             ContractNoSeed = 630823,
             Currency = Currency.Toman,
             TaxPercent = 9,
@@ -32,9 +32,9 @@ namespace domain.entities
                 CreatedAt = DateTime.Now,
                 ContractNoSeed = 630823,
                 TaxPercent = 9,
-                DefaultContractType = enums.ContractType.Rent,
-                Currency = enums.Currency.Toman,
-                RentCalculationType = enums.RentCalculationType.DailyRoundToDown,
+                ServiceType = ServiceType.Rent,
+                Currency = Currency.Toman,
+                RentCalculationType = RentCalculationType.DailyRoundToDown,
             };
         }
     }

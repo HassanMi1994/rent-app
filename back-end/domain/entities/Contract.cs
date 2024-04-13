@@ -7,7 +7,7 @@ namespace domain.entities
     {
         public int ID { get; set; }
         public int ContractNumber { get; set; }
-        public ContractType ContractType { get; set; }
+        public ServiceType ContractType { get; set; }
         public int CustomerID { get; set; }
         public DateTime Date { get; set; }
         public string RentLocation { get; set; }

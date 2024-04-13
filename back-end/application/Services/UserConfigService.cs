@@ -2,17 +2,15 @@
 using domain.entities;
 using Microsoft.EntityFrameworkCore;
 using persistance;
-using System.Runtime.InteropServices;
-using System.Text.Json;
 
 namespace application.Services
 {
     public class UserConfigService : IUserConfigService
     {
-        RentDbContext _rentDb;
+        persistance.RsaDbContext _rentDb;
         IUserService _userService;
 
-        public UserConfigService(RentDbContext rentDb, IUserService userService)
+        public UserConfigService(persistance.RsaDbContext rentDb, IUserService userService)
         {
             _userService = userService;
             _rentDb = rentDb;
@@ -20,7 +18,7 @@ namespace application.Services
 
         public async Task CreateDefaultConfig()
         {
-            _rentDb.UserConfigs.Add(UserConfig.CreateDefaultConfig(_userService.Id));
+            _rentDb.UserConfigs.Add(UserConfig.CreateDefaultConfig(_userService.GetCurrentUserID()));
             await _rentDb.SaveChangesAsync();
         }
 

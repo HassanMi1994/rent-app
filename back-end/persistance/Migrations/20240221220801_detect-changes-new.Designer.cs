@@ -11,7 +11,7 @@ using persistance;
 
 namespace persistance.Migrations
 {
-    [DbContext(typeof(RentDbContext))]
+    [DbContext(typeof(RsaDbContext))]
     [Migration("20240221220801_detect-changes-new")]
     partial class detectchangesnew
     {

@@ -10,7 +10,7 @@ using persistance;
 
 namespace persistance.Migrations
 {
-    [DbContext(typeof(RentDbContext))]
+    [DbContext(typeof(RsaDbContext))]
     [Migration("20240131084700_change-column-name")]
     partial class changecolumnname
     {

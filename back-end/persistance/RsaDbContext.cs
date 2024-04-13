@@ -1,15 +1,17 @@
 ﻿using domain.entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using persistance.configurations;
 using Rent.Entities;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace persistance
 {
-    public class RentDbContext : DbContext
+    public class RsaDbContext : IdentityDbContext<User>
     {
-        public RentDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
+        public RsaDbContext(DbContextOptions dbContextOptions) : base(dbContextOptions)
         {
-
         }
 
         public DbSet<Customer> Customers { get; set; }
@@ -25,15 +27,16 @@ namespace persistance
 
             var entries = ChangeTracker.Entries().Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
 
+
             foreach (var entityEntry in entries)
             {
 
                 if (entityEntry.State == EntityState.Modified)
-                    if (entityEntry.Property(nameof(IBaseEntity.UpdatedAt)) is not null)
+                    if (entityEntry.GetType().GetProperty(nameof(IBaseEntity.UpdatedAt)) != null)
                         entityEntry.Property(nameof(IBaseEntity.UpdatedAt)).CurrentValue = DateTime.UtcNow;
 
                 if (entityEntry.State == EntityState.Added)
-                    if (entityEntry.Property(nameof(IBaseEntity.CreatedAt)) is not null)
+                    if (entityEntry.GetType().GetProperty(nameof(IBaseEntity.CreatedAt)) != null)
                         entityEntry.Property(nameof(IBaseEntity.CreatedAt)).CurrentValue = DateTime.UtcNow;
 
             }
@@ -42,6 +45,7 @@ namespace persistance
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             // modelBuilder.ApplyConfiguration(new BaseEntityConfiguration());
             modelBuilder.ApplyConfiguration(new HistoryConfiguration());
             modelBuilder.ApplyConfiguration(new ContractItemConfiguration());

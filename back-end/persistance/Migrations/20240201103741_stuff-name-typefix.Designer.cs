@@ -10,7 +10,7 @@ using persistance;
 
 namespace persistance.Migrations
 {
-    [DbContext(typeof(RentDbContext))]
+    [DbContext(typeof(RsaDbContext))]
     [Migration("20240201103741_stuff-name-typefix")]
     partial class stuffnametypefix
     {

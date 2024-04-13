@@ -7,9 +7,9 @@ namespace application.Services
 {
     public class CustomerService : ICustomerService
     {
-        RentDbContext _rentDb;
+        persistance.RsaDbContext _rentDb;
 
-        public CustomerService(RentDbContext rentDb)
+        public CustomerService(persistance.RsaDbContext rentDb)
         {
             _rentDb = rentDb;
         }

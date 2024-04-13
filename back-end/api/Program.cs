@@ -1,13 +1,20 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using domain.entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Web;
 using persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddMicrosoftIdentityWebApi(builder.Configuration.GetSection("AzureAd"));
+builder.Services.AddDbContext<RsaDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]);
+});
+
+builder.Services.AddAuthorization(options => { });
+
+builder.Services.AddIdentityApiEndpoints<User>()
+    .AddRoles<IdentityRole>()//added for testing
+    .AddEntityFrameworkStores<RsaDbContext>();
 
 builder.Services.AddControllers()
     .AddJsonOptions(
@@ -18,10 +25,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddRentAppServices();
 
-builder.Services.AddDbContext<RentDbContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:DefaultConnection"]);
-});
+//builder.Services.AddIdentityApiEndpoints<User>()
+//    .AddEntityFrameworkStores<RsaDbContext>();
 
 var corsPolicyName = "_corsPolicyName";
 builder.Services.AddCors(option => option.AddPolicy(name: corsPolicyName, policy =>
@@ -33,6 +38,10 @@ builder.Services.AddCors(option => option.AddPolicy(name: corsPolicyName, policy
 }));
 
 var app = builder.Build();
+
+app.MapIdentityApi<User>();
+
+app.MapSwagger().RequireAuthorization();
 
 
 // Configure the HTTP request pipeline.

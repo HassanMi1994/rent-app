@@ -13,12 +13,22 @@ export enum Currency {
     Toman,
 }
 
-export enum ServiceType {
-    Rent = 1,//001
-    Sell = 2,//010
-    Both = 3 //011
-}
+export class StaticModels {
+    ServiceType = [
+        {
+            Name: 'Rent',
+            Id: 1
+        },
+        {
+            Name: 'Sell',
+            Id: 2
+        },
+        {
+            Name: 'Both',
+            Id: 3
+        }];
 
+}
 export enum ContractType {
     Rent,
     Sell

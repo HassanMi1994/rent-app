@@ -10,7 +10,7 @@ using persistance;
 
 namespace persistance.Migrations
 {
-    [DbContext(typeof(RentDbContext))]
+    [DbContext(typeof(RsaDbContext))]
     [Migration("20240201102147_stuff-table")]
     partial class stufftable
     {

@@ -7,9 +7,9 @@ namespace application.Services
 {
     public class ContractService : IContractService
     {
-        RentDbContext _rentDb;
+        persistance.RsaDbContext _rentDb;
 
-        public ContractService(RentDbContext rentDb)
+        public ContractService(persistance.RsaDbContext rentDb)
         {
             _rentDb = rentDb;
         }

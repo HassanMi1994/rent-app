@@ -11,7 +11,7 @@ using persistance;
 
 namespace persistance.Migrations
 {
-    [DbContext(typeof(RentDbContext))]
+    [DbContext(typeof(RsaDbContext))]
     [Migration("20240216211157_added-base-entity-to-contract-items")]
     partial class addedbaseentitytocontractitems
     {

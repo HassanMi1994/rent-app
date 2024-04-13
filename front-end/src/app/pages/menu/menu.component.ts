@@ -26,7 +26,6 @@ export class MenuComponent implements AfterViewInit {
     }
   }
 
-
   changeLang(lang: string) {
     let oldLang = this.transLoco.getActiveLang();
     let olaPath = document.location.pathname;

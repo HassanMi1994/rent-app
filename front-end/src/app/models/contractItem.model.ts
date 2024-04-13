@@ -1,4 +1,4 @@
-import { ItemStatus } from "./enum/contractStatus.enum";
+import { ItemStatus } from "./enum/allEnums.enum";
 import { Stuff } from "./stuff.model";
 
 export class ContractItem {

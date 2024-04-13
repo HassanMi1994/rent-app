@@ -10,15 +10,13 @@
 </div>
 
 <div class="row">
-    <select>
-        <option value="Rent">Rent text</option>
-        <option value="Sell">Sell text</option>
-    </select>
+    <ng-select [(ngModel)]="settingService.userConfig.serviceType">
+        <ng-option [value]="1">{{'Rent'|transloco}}</ng-option>
+        <ng-option [value]="2">{{'Sell'|transloco}}</ng-option>
+        <ng-option [value]="3">{{'Both'|transloco}}</ng-option>
+    </ng-select>
 </div>
 
-
-
-
 <div class="row">
-    <button class="btn btn-outline-primary" (click)="save()">Sve</button>
+    <button class="btn btn-outline-primary" (click)="save()">{{'save'|transloco}}</button>
 </div>

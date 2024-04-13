@@ -57,5 +57,8 @@
     "taxPercent": "Tax Percent",
     "serviceType": "Service Type",
     "contractNoSeed": "Contract No Seed",
-    "underDev":"This site is under development! Please wait for final result!!!"
+    "underDev": "This site is under development! Please wait for final result!!!",
+    "rent": "Rent",
+    "sell": "Sell",
+    "both": "Both"
 }

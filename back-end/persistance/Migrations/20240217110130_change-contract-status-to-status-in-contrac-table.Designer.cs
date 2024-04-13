@@ -11,7 +11,7 @@ using persistance;
 
 namespace persistance.Migrations
 {
-    [DbContext(typeof(RentDbContext))]
+    [DbContext(typeof(RsaDbContext))]
     [Migration("20240217110130_change-contract-status-to-status-in-contrac-table")]
     partial class changecontractstatustostatusincontractable
     {
