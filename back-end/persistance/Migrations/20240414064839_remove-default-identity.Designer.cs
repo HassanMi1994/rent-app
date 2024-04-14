@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using persistance;
 
@@ -11,9 +12,11 @@ using persistance;
 namespace persistance.Migrations
 {
     [DbContext(typeof(RsaDbContext))]
-    partial class RentDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240414064839_remove-default-identity")]
+    partial class removedefaultidentity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -221,29 +224,6 @@ namespace persistance.Migrations
                     b.ToTable("Payment");
                 });
 
-            modelBuilder.Entity("domain.entities.Store", b =>
-                {
-                    b.Property<long>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ID"));
-
-                    b.Property<bool>("IsDemoStore")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ServiceType")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Stores");
-                });
-
             modelBuilder.Entity("domain.entities.Stuff", b =>
                 {
                     b.Property<int>("ID")
@@ -284,39 +264,6 @@ namespace persistance.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Stuffs");
-                });
-
-            modelBuilder.Entity("domain.entities.User", b =>
-                {
-                    b.Property<long>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ID"));
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Mobile")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("StoreID")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("StoreID");
-
-                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("domain.entities.UserConfig", b =>
@@ -403,17 +350,6 @@ namespace persistance.Migrations
                         .HasForeignKey("ContractID");
                 });
 
-            modelBuilder.Entity("domain.entities.User", b =>
-                {
-                    b.HasOne("domain.entities.Store", "Store")
-                        .WithMany("Users")
-                        .HasForeignKey("StoreID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Store");
-                });
-
             modelBuilder.Entity("domain.entities.Contract", b =>
                 {
                     b.Navigation("Items");
@@ -424,11 +360,6 @@ namespace persistance.Migrations
             modelBuilder.Entity("domain.entities.ContractItem", b =>
                 {
                     b.Navigation("History");
-                });
-
-            modelBuilder.Entity("domain.entities.Store", b =>
-                {
-                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

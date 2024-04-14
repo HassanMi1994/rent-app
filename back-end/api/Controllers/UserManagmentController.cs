@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
-    [Route("api/user-managment")]
+    [Route("api/users")]
     [ApiController]
     public class UserManagmentController : ControllerBase
     {
@@ -20,11 +20,19 @@ namespace api.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost]
+        [HttpPost("sign-up")]
         public IActionResult AddUser(AddStoreDto user)
         {
             _userService.CreateStore(user);
             return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpPost("login")]
+        public async Task<string> GetToken(string email, string password)
+        {
+            var token = await _userService.GenerateJwtToken(email, password);
+            return token;
         }
     }
 }

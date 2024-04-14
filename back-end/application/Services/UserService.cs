@@ -1,28 +1,27 @@
 ﻿
 using application.Models.User;
+using application.Security;
 using domain.abstraction;
 using domain.entities;
+using domain.Exceptions;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using persistance;
+using System.Extentions;
 
 namespace application.Services
 {
     public class UserService : IUserService
     {
         public int Id => 1;//todo: should implement 
-        public UserManager<User> UserManager { get; set; }
-        public SignInManager<User> _signInManager { get; set; }
-        public persistance.RsaDbContext _rsaDbContext { get; set; }
-        private RoleManager<IdentityRole> _roleManager { get; set; }
 
-        public UserService(UserManager<User> userManager, SignInManager<User> signInManager, RsaDbContext rsaDbContext, RoleManager<IdentityRole> roleManager)
+        public RsaDbContext _rsaDbContext { get; set; }
+        private PasswordHasher<User> passwordHasher;
+
+        public UserService(RsaDbContext rsaDbContext)
         {
-            UserManager = userManager;
-            _signInManager = signInManager;
             _rsaDbContext = rsaDbContext;
-            _roleManager = roleManager;
+            passwordHasher = new PasswordHasher<User>();
         }
 
         public async Task<object?> GetById(int userId)
@@ -32,45 +31,53 @@ namespace application.Services
 
         public async Task CreateStore(AddStoreDto addStoreDto)
         {
-            var pass = addStoreDto.Password;
-            try
+            var pass = addStoreDto.Password.GetStringSha256Hash();
+
+            //todo: check if store exisit
+            //todo: check if user exisit before!
+
+            var store = new Store()
             {
-                _roleManager.CreateAsync(new IdentityRole { Name = "Admin" });
-                var newUser = new User()
-                {
-                    UserName = addStoreDto.Email,
-                    Email = addStoreDto.Email,
-                    IsAdmin = true,
-                    PhoneNumber = addStoreDto.Mobile,
-                    StoreName = addStoreDto.StoreName,
-                    IsDemoAccount = false,
-                    ServiceType = domain.enums.ServiceType.Sell,
-                    NormalizedEmail = addStoreDto.Email,
-                    NormalizedUserName = addStoreDto.Email,
-
-                };
-                await UserManager.CreateAsync(newUser, pass);
-                //await _userStore.SetUserNameAsync(newUser, newUser.UserName, CancellationToken.None);
-
-                //var result = await UserManager.CreateAsync(newUser, pass);
-                //_con
-                //if (result.Succeeded)
-                //{
-
-                //}
-
-            }
-            catch (Exception ex)
+                Name = addStoreDto.StoreName,
+                IsDemoStore = false,
+                ServiceType = addStoreDto.ServiceType,
+                Users = new List<User>()
+            };
+            store.Users.Add(new User()
             {
-                Console.WriteLine(ex);
-            }
+                Email = addStoreDto.Email,
+                IsAdmin = true,
+                Mobile = addStoreDto.Mobile,
+                Password = pass,
+            });
 
+
+            await _rsaDbContext.Stores.AddAsync(store);
+            await _rsaDbContext.SaveChangesAsync();
+        }
+
+        public async Task<string> GenerateJwtToken(string userName, string password)
+        {
+            var hashedPass = password.GetStringSha256Hash();
+
+            var validUser = await _rsaDbContext.Users.FirstOrDefaultAsync(x => x.Email == userName && x.Password == hashedPass);
+            if (validUser == null)
+                throw new ExceptionBase(Exceptions.InvalidUserPass);
+
+            var claims = new Dictionary<string, object>
+            {
+                {"UserID", validUser.ID },
+                {"StoreID",validUser.StoreID },
+                {"Email",validUser.Email },
+                {"IsAdmin",validUser.IsAdmin }
+            };
+
+            return Jwt.TokenGenerator(claims);
         }
 
         public int GetCurrentUserID()
         {
             return 1;
         }
-
     }
 }

@@ -1,8 +1,11 @@
-﻿namespace application.Models.User
+﻿using domain.enums;
+
+namespace application.Models.User
 {
     public class AddStoreDto
     {
         public string Email { get; set; }
+        public ServiceType ServiceType { get; set; }
         public string StoreName { get; set; }
         public string FullName { get; set; }
         public string Password { get; set; }

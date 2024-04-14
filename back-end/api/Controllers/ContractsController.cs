@@ -1,4 +1,5 @@
-﻿using application.Models.Contract;
+﻿using api.Middleware;
+using application.Models.Contract;
 using domain.abstraction;
 using domain.entities;
 using Microsoft.AspNetCore.Mvc;
@@ -6,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace api.Controllers
 {
     [Route("api/contracts")]
+    [Auth(domain.enums.RoleType.Admin)]
     [ApiController]
     public class ContractsController : Controller
     {
