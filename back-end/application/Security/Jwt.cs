@@ -34,6 +34,7 @@ namespace application.Security
 
         public static bool ValidateToken(string authToken)
         {
+            authToken = authToken.Split(' ')[1];
             if (string.IsNullOrEmpty(authToken)) { return false; }
             var tokenHandler = new JwtSecurityTokenHandler();
             var validationParameters = GetValidationParameters();

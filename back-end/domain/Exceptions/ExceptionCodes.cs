@@ -1,6 +1,6 @@
 ﻿namespace domain.Exceptions
 {
-    public class Exceptions
+    public class ExceptionCodes
     {
         public const int InvalidUserPass = 401;
     }

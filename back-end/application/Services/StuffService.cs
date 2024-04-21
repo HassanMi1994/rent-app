@@ -7,9 +7,9 @@ namespace application.Services
 {
     public class StuffService : IStuffService
     {
-        private readonly persistance.RsaDbContext rentDbContext;
+        private readonly RsaDbContext rentDbContext;
 
-        public StuffService(persistance.RsaDbContext rentDbContext)
+        public StuffService(RsaDbContext rentDbContext)
         {
             this.rentDbContext = rentDbContext;
         }

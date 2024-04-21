@@ -78,8 +78,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors(corsPolicyName);
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<AuthMiddleware>();
-app.UseAuthorization();
+//app.UseAuthorization();
 app.MapControllers();
 
 app.Run();

@@ -1,6 +1,5 @@
 ﻿using domain.entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
 using persistance.configurations;
 using Rent.Entities;
 
@@ -22,23 +21,23 @@ namespace persistance
         public DbSet<User> Users { get; set; }
 
 
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
-
             var entries = ChangeTracker.Entries().Where(e => e.State == EntityState.Added || e.State == EntityState.Modified);
 
-            foreach (var entityEntry in entries)
+            foreach (var entity in entries)
             {
-                if (entityEntry.State == EntityState.Modified)
-                    if (entityEntry.GetType().GetProperty(nameof(IBaseEntity.UpdatedAt)) != null)
-                        entityEntry.Property(nameof(IBaseEntity.UpdatedAt)).CurrentValue = DateTime.UtcNow;
+                if (entity.State == EntityState.Modified)
+                    if (entity.GetType().GetProperty(nameof(IBaseEntity.UpdatedAt)) != null)
+                        entity.Property(nameof(IBaseEntity.UpdatedAt)).CurrentValue = DateTime.UtcNow;
 
-                if (entityEntry.State == EntityState.Added)
-                    if (entityEntry.GetType().GetProperty(nameof(IBaseEntity.CreatedAt)) != null)
-                        entityEntry.Property(nameof(IBaseEntity.CreatedAt)).CurrentValue = DateTime.UtcNow;
-
+                if (entity.State == EntityState.Added)
+                    if (entity.GetType().GetProperty(nameof(IBaseEntity.CreatedAt)) != null)
+                        entity.Property(nameof(IBaseEntity.CreatedAt)).CurrentValue = DateTime.UtcNow;
             }
-            return base.SaveChangesAsync(cancellationToken);
+
+            int count = await base.SaveChangesAsync(cancellationToken);
+            return count;
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

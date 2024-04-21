@@ -29,7 +29,7 @@ namespace application.Services
             throw new NotImplementedException();
         }
 
-        public async Task CreateStore(AddStoreDto addStoreDto)
+        public async Task CreateStoreAsync(AddStoreDto addStoreDto)
         {
             var pass = addStoreDto.Password.GetStringSha256Hash();
 
@@ -56,13 +56,13 @@ namespace application.Services
             await _rsaDbContext.SaveChangesAsync();
         }
 
-        public async Task<string> GenerateJwtToken(string userName, string password)
+        public async Task<string> GenerateJwtTokenAsync(string userName, string password)
         {
             var hashedPass = password.GetStringSha256Hash();
 
             var validUser = await _rsaDbContext.Users.FirstOrDefaultAsync(x => x.Email == userName && x.Password == hashedPass);
             if (validUser == null)
-                throw new ExceptionBase(Exceptions.InvalidUserPass);
+                throw new ExceptionBase(ExceptionCodes.InvalidUserPass);
 
             var claims = new Dictionary<string, object>
             {

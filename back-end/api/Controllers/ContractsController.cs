@@ -28,15 +28,15 @@ namespace api.Controllers
         public async Task<IActionResult> Create([FromBody] CreateContractDto contract)
         {
             //todo: this should be moved to mapper!
-            domain.entities.Contract cont = ConvertContractDtoToContract(contract);
+            Contract cont = ConvertContractDtoToContract(contract);
             await _contractService.Create(cont);
 
             return Ok();
         }
 
-        private static domain.entities.Contract ConvertContractDtoToContract(CreateContractDto contract)
+        private static Contract ConvertContractDtoToContract(CreateContractDto contract)
         {
-            return new domain.entities.Contract
+            return new Contract
             {
                 Date = contract.Date,
                 Items = contract.Items.Select(item => new ContractItem
@@ -58,7 +58,7 @@ namespace api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<domain.entities.Contract> GetByIdAsycn(int id)
+        public async Task<Contract> GetByIdAsycn(int id)
         {
             return await _contractService.GetByIdAsync(id);
         }

@@ -1,9 +1,6 @@
 ﻿using application.Models.User;
-using application.Services;
 using domain.abstraction;
-using domain.entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
@@ -21,9 +18,9 @@ namespace api.Controllers
 
         [AllowAnonymous]
         [HttpPost("sign-up")]
-        public IActionResult AddUser(AddStoreDto user)
+        public async Task<IActionResult> AddUser(AddStoreDto user)
         {
-            _userService.CreateStore(user);
+            await _userService.CreateStoreAsync(user);
             return Ok();
         }
 
@@ -31,7 +28,7 @@ namespace api.Controllers
         [HttpPost("login")]
         public async Task<string> GetToken(string email, string password)
         {
-            var token = await _userService.GenerateJwtToken(email, password);
+            var token = await _userService.GenerateJwtTokenAsync(email, password);
             return token;
         }
     }
