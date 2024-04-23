@@ -28,7 +28,6 @@ export class StuffService {
     return this.stuff$;
   }
 
-  
   private _searchTerm: string = '';
   get searchTerm(): string {
     return this._searchTerm;

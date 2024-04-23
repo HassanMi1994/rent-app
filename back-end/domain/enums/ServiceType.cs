@@ -6,20 +6,18 @@
         Toman,
     }
 
-    [Flags]
     public enum ServiceType
     {
-        Rent = 1,//001
-        Sell = 2,//010
-        Both = 3 //011
+        Rent = 1,
+        Sell = 2,
     }
 
     public enum ItemStatus
     {
-        Renting,
-        Sold,
-        ReturnedOk,
-        ReurnedNotOk
+        Renting = 1,
+        ReturnedOk = 2,
+        ReurnedNotOk = 3,
+        Sold = 4,
     }
 
     public enum RentCalculationType

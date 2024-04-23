@@ -60,5 +60,7 @@
     "underDev": "This site is under development! Please wait for final result!!!",
     "rent": "Rent",
     "sell": "Sell",
-    "both": "Both"
+    "both": "Both",
+    "login": "Login",
+    "signUp": "Sign Up"
 }

@@ -9,12 +9,16 @@ import { ContractsComponent } from './pages/contracts/contracts.component';
 import { CreateContractComponent } from './pages/contracts/create-contract/create-contract.component';
 import { ContractDetailsComponent } from './pages/contracts/contract-details/contract-details.component';
 import { SettingComponent } from './pages/config/config.component';
+import { LoginComponent } from './pages/_login_signup/login/login.component';
+import { SignUpComponent } from './pages/_login_signup/sign-up/sign-up.component';
+
 
 
 //todo: titles should be set dynamically
 
 export const routes: Routes = [
-
+    { component: LoginComponent, path: ':{lang}/login' },
+    { component: SignUpComponent, path: ':{lang}/sign-up' },
     { component: ContractsComponent, path: ':{lang}/contracts', },
     { component: CreateContractComponent, path: ':{lang}/contracts/new', },
     { component: ContractDetailsComponent, path: ':{lang}/contracts/details/:{id}}', },

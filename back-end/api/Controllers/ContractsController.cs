@@ -19,7 +19,7 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        public IAsyncEnumerable<domain.entities.Contract> GetAll()
+        public IAsyncEnumerable<Contract> GetAll()
         {
             return _contractService.GetAll();
         }
