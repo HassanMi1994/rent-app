@@ -3,8 +3,9 @@ import { never } from "rxjs";
 
 export class SignUp {
     email: string;
+    fullName: string;
     storeName: string;
-    serviceType: string;
+    serviceType: number = 1;
     mobile: string;
     password: string;
     confirmPasswrod: string;
@@ -16,6 +17,9 @@ export class SignUpValidation extends Validator<SignUp> {
 
         this.ruleFor('email')
             .emailAddress();
+
+        this.ruleFor('fullName')
+            .notEmpty();
 
         this.ruleFor('password')
             .minLength(6);

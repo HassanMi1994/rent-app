@@ -10,13 +10,5 @@
 </div>
 
 <div class="row">
-    <ng-select [(ngModel)]="settingService.userConfig.serviceType">
-        <ng-option [value]="1">{{'Rent'|transloco}}</ng-option>
-        <ng-option [value]="2">{{'Sell'|transloco}}</ng-option>
-        <ng-option [value]="3">{{'Both'|transloco}}</ng-option>
-    </ng-select>
-</div>
-
-<div class="row">
     <button class="btn btn-outline-primary" (click)="save()">{{'save'|transloco}}</button>
 </div>

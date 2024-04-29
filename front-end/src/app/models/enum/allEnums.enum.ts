@@ -22,13 +22,9 @@ export class StaticModels {
         {
             Name: 'Sell',
             Id: 2
-        },
-        {
-            Name: 'Both',
-            Id: 3
         }];
-
 }
+
 export enum ContractType {
     Rent,
     Sell

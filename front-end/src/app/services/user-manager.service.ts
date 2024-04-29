@@ -9,8 +9,8 @@ import { SignUp } from '../models/sign-up.model';
 export class UserManagerService {
 
   token: string;
-  loginModel: Login
-  signUpModel: SignUp
+  public loginModel: Login = new Login();
+  public signUpModel: SignUp = new SignUp();
 
   constructor(private client: HttpClient) {
 

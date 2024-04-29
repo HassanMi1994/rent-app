@@ -14,11 +14,12 @@ import { FormsModule } from '@angular/forms';
 export class FormInputComponent {
   @Input() labelName: string;
   @Input() readOnly: boolean = false;
+  @Input() type: string;
   @Output() value = new EventEmitter<string>();
   @Input() val: string
   @ViewChild('input') input: HTMLInputElement;
 
-  constructor(){
+  constructor() {
     this.valueChanged(this.val);
   }
 
@@ -40,5 +41,10 @@ export class FormInputComponent {
 
   getValue() {
     return this.val;
+  }
+
+  getType(): string {
+
+    return this.type;
   }
 }

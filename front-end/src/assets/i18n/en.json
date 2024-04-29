@@ -62,5 +62,9 @@
     "sell": "Sell",
     "both": "Both",
     "login": "Login",
-    "signUp": "Sign Up"
+    "signUp": "Sign Up",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "storeName": "Store Name",
+    "email": "Email"
 }
