@@ -6,6 +6,7 @@ namespace domain.entities
     {
         public long ID { get; set; }
         public long StoreID { get; set; }
+        public string FullName { get; set; }
         public string Email { get; set; }
         public string Mobile { get; set; }
         public bool IsAdmin { get; set; }

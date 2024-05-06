@@ -18,7 +18,7 @@ namespace application.Services
 
         public async Task CreateDefaultConfig()
         {
-            _rentDb.UserConfigs.Add(UserConfig.CreateDefaultConfig(_userService.GetCurrentUserID()));
+            _rentDb.UserConfigs.Add(UserConfig.CreateDefaultConfig(_userService.GetUserID()));
             await _rentDb.SaveChangesAsync();
         }
 
@@ -32,10 +32,10 @@ namespace application.Services
 
         public async Task<UserConfig> GetSettingAsync()
         {
-            var userConfig = await _rentDb.UserConfigs.FirstOrDefaultAsync(x => x.UserID == _userService.GetCurrentUserID());
+            var userConfig = await _rentDb.UserConfigs.FirstOrDefaultAsync(x => x.UserID == _userService.GetUserID());
             if (userConfig == null)
             {
-                userConfig = UserConfig.CreateDefaultConfig(_userService.GetCurrentUserID());
+                userConfig = UserConfig.CreateDefaultConfig(_userService.GetUserID());
                 _rentDb.UserConfigs.Add(userConfig);
                 await _rentDb.SaveChangesAsync();
             };

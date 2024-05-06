@@ -2,8 +2,10 @@
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,6 +57,14 @@ namespace application.Security
                 ValidAudience = "Rent Sell App",
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(SECURITY_KEY)) // The same key as the one that generate the token
             };
+        }
+
+        public static IEnumerable<Claim> GetClaimsFromJwt(string jwtToken)
+        {
+            var stream = jwtToken.Split(' ')[1];
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadJwtToken(stream);
+            return jsonToken.Claims;
         }
 
 

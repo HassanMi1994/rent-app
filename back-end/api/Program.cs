@@ -51,6 +51,7 @@ builder.Services.AddSwaggerGen(setup =>
 #endregion
 
 builder.Services.AddRentAppServices();
+builder.Services.AddHttpContextAccessor();
 
 //builder.Services.AddIdentityApiEndpoints<User>()
 //    .AddEntityFrameworkStores<RsaDbContext>();

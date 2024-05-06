@@ -6,7 +6,10 @@ namespace domain.abstraction
     public interface IUserService
     {
         Task CreateStoreAsync(AddStoreDto addStoreDto);
-        Task<string> GenerateJwtTokenAsync(string userName, string password);
-        int GetCurrentUserID();
+        Task<UserInfoDto> GenerateJwtTokenAsync(string userName, string password);
+        long UserID { get; }
+        long StoreID { get; }
+
+        Dictionary<string, string> GetUserClaims();
     }
 }

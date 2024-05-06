@@ -49,7 +49,7 @@
     "rentLocation": "Rent Location",
     "totalPrice": "Total Price",
     "selectStuffToReturn": "Select Stuff To Return",
-    "setting": "Setting",
+    "settings": "Settings",
     "hourly": "Hourly",
     "dailyRoundDown": "Daily Round Down",
     "dailyRoundUp": "Daily Round Up",
@@ -61,10 +61,12 @@
     "rent": "Rent",
     "sell": "Sell",
     "both": "Both",
-    "login": "Login",
+    "login": "Log In",
+    "logOut": "Log Out",
     "signUp": "Sign Up",
     "password": "Password",
     "confirmPassword": "Confirm Password",
     "storeName": "Store Name",
-    "email": "Email"
+    "email": "Email",
+    "welcome": "Welcome"
 }

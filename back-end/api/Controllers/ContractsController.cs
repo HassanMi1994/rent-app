@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
+    [Auth(domain.enums.RoleType.Normal)]
     [Route("api/contracts")]
-    [Auth(domain.enums.RoleType.Admin)]
     [ApiController]
     public class ContractsController : Controller
     {

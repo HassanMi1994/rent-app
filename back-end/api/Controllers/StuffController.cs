@@ -1,11 +1,12 @@
-﻿using domain.abstraction;
+﻿using api.Middleware;
+using domain.abstraction;
 using domain.entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
+    [Auth(domain.enums.RoleType.Normal)]
     [Route("api/stuff")]
-
     public class StuffController : ControllerBase
     {
 

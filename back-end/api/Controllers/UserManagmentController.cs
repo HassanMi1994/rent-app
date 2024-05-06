@@ -1,4 +1,5 @@
-﻿using application.Models.User;
+﻿using api.Middleware;
+using application.Models.User;
 using domain.abstraction;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,10 +27,17 @@ namespace api.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<string> GetToken(string email, string password)
+        public async Task<IActionResult> GetToken(LoginUserDto loginUserDto)
         {
-            var token = await _userService.GenerateJwtTokenAsync(email, password);
-            return token;
+            var token = await _userService.GenerateJwtTokenAsync(loginUserDto.Email, loginUserDto.Password);
+            return Ok(token);
+        }
+
+        [HttpGet("UserCalaims")]
+        [Auth(domain.enums.RoleType.Normal)]
+        public async Task<IActionResult> GetUserClaims()
+        {
+            return Ok(_userService.GetUserClaims());
         }
     }
 }

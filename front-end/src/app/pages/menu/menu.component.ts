@@ -2,6 +2,7 @@ import { DOCUMENT, Location } from '@angular/common';
 import { AfterViewInit, Component, Inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
+import { UserManagerService } from '../../services/user-manager.service';
 
 @Component({
   selector: 'app-menu',
@@ -13,7 +14,7 @@ import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 export class MenuComponent implements AfterViewInit {
   isDarkMode: boolean;
   selectedLang: string;
-  constructor(public transLoco: TranslocoService, @Inject(DOCUMENT) document: Document, private location: Location) {
+  constructor(public transLoco: TranslocoService, @Inject(DOCUMENT) document: Document, private location: Location, public userManager: UserManagerService) {
     this.selectedLang = this.transLoco.getDefaultLang().toUpperCase();
   }
   ngAfterViewInit(): void {

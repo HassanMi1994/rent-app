@@ -1,9 +1,11 @@
-﻿using domain.abstraction;
+﻿using api.Middleware;
+using domain.abstraction;
 using domain.entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.Controllers
 {
+    [Auth(domain.enums.RoleType.Admin)]
     [Route("api/config")]
     [ApiController]
     public class UserConfigController : Controller

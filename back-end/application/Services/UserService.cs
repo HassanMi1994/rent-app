@@ -4,6 +4,7 @@ using application.Security;
 using domain.abstraction;
 using domain.entities;
 using domain.Exceptions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using persistance;
@@ -14,14 +15,16 @@ namespace application.Services
     public class UserService : IUserService
     {
         public int Id => 1;//todo: should implement 
+        private IHttpContextAccessor httpContextAccessor;
 
         public RsaDbContext _rsaDbContext { get; set; }
         private PasswordHasher<User> passwordHasher;
 
-        public UserService(RsaDbContext rsaDbContext)
+        public UserService(RsaDbContext rsaDbContext, IHttpContextAccessor contextAccessor)
         {
             _rsaDbContext = rsaDbContext;
             passwordHasher = new PasswordHasher<User>();
+            this.httpContextAccessor = contextAccessor;
         }
 
         public async Task<object?> GetById(int userId)
@@ -47,8 +50,10 @@ namespace application.Services
             {
                 Email = addStoreDto.Email,
                 IsAdmin = true,
+                FullName = addStoreDto.FullName,
                 Mobile = addStoreDto.Mobile,
                 Password = pass,
+
             });
 
 
@@ -56,11 +61,11 @@ namespace application.Services
             await _rsaDbContext.SaveChangesAsync();
         }
 
-        public async Task<string> GenerateJwtTokenAsync(string userName, string password)
+        public async Task<UserInfoDto> GenerateJwtTokenAsync(string userName, string password)
         {
             var hashedPass = password.GetStringSha256Hash();
 
-            var validUser = await _rsaDbContext.Users.FirstOrDefaultAsync(x => x.Email == userName && x.Password == hashedPass);
+            var validUser = await _rsaDbContext.Users.Include(x => x.Store).FirstOrDefaultAsync(x => x.Email == userName && x.Password == hashedPass);
             if (validUser == null)
                 throw new ExceptionBase(ExceptionCodes.InvalidUserPass);
 
@@ -72,12 +77,34 @@ namespace application.Services
                 {"IsAdmin",validUser.IsAdmin }
             };
 
-            return Jwt.TokenGenerator(claims);
+            var token = Jwt.TokenGenerator(claims);
+            return new UserInfoDto
+            {
+                Email = validUser.Email,
+                IsAdmin = validUser.IsAdmin,
+                JwtKey = token,
+                StoreID = validUser.StoreID,
+                StoreName = validUser.Store.Name,
+                UserID = validUser.ID,
+                FullName = validUser.FullName
+            };
         }
 
-        public int GetCurrentUserID()
+        public Dictionary<string, string> GetUserClaims()
         {
-            return 1;
+            var jwt = this.httpContextAccessor.HttpContext.Request.Headers["Authorization"];
+            if (!string.IsNullOrEmpty(jwt))
+            {
+                var keyvalues = Jwt.GetClaimsFromJwt(jwt).Select(x => new KeyValuePair<string, string>(x.Type, x.Value));
+                return new Dictionary<string, string>(keyvalues);
+            }
+            return new Dictionary<string, string>();
         }
+
+        public long UserID =>
+            long.Parse(GetUserClaims().First(x => x.Key == "UserID").Value);
+
+        public long StoreID =>
+            long.Parse(GetUserClaims().First(x => x.Key == "StoreID").Value);
     }
 }
