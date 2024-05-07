@@ -12,7 +12,7 @@ import { TranslocoService } from '@ngneat/transloco';
 export class UserManagerService {
 
   token: string;
-  public userInfo: UserInfo;
+  public userInfo: UserInfo = new UserInfo();
   public loginModel: Login = new Login();
   public signUpModel: SignUp = new SignUp();
   cookieService = inject(CookieService);

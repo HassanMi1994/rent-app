@@ -48,8 +48,12 @@ namespace api.Controllers
                     StuffID = item.StuffID,
 
                 }).ToList(),
+                Payments = contract.Payments.Select(x => new Payment
+                {
+                    Amount = x.Amount,
+                    PaymentType = x.PaymentType
+                }).ToList(),
                 Status = domain.enums.ContractStatus.Opened,
-                PrePaidMoney = contract.PrePaidMoney,
                 HowManyDaysClaim = contract.HowManyDaysClaim,
                 RentLocation = contract.RentLocation,
                 TotalPricePerDay = contract.Items.Sum(x => x.PricePerDay * x.Quantity),
@@ -58,9 +62,16 @@ namespace api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<Contract> GetByIdAsycn(int id)
+        public async Task<Contract> GetByIdAsync(int id)
         {
             return await _contractService.GetByIdAsync(id);
+        }
+
+        [HttpPost("{id}/add-payment")]
+        public async Task<IActionResult> AddPayment([FromRoute] long id, Payment payment)
+        {
+            await _contractService.AddPaymentAsync(id, payment);
+            return Ok();
         }
     }
 }

@@ -59,6 +59,13 @@
 
     <app-contract-items [enableCheckBox]="false"></app-contract-items>
 
+
+
+    <hr />
+    <div class="col-12 col-md-4">
+        <app-add-payment [sendForServer]="true"></app-add-payment>
+    </div>
+
     <hr />
 
 
@@ -96,9 +103,9 @@
 
     <div class=" col-12 col-md-3 m-3  contract-label-container">
         <span class="contract-label">
-            {{'prepayment'|transloco}}
+            {{'totalPaid'|transloco}}
         </span>
-        <b class="contract-label-value">{{contractService.contract.prePaidMoney|number}}</b>
+        <b class="contract-label-value">{{contractService.contract.totalPaidAmount|number}}</b>
     </div>
 
     <div class=" col-12 col-md-3 m-3  contract-label-container">

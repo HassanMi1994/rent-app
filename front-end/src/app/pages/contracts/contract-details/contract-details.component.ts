@@ -6,11 +6,12 @@ import { TranslocoPipe } from '@ngneat/transloco';
 import { FormsModule } from '@angular/forms';
 import { DecimalPipe } from '@angular/common';
 import { ContractItemsComponent } from '../contract-items/contract-items.component';
+import { AddPaymentComponent } from '../add-payment/add-payment.component';
 
 @Component({
   selector: 'app-contract-details',
   standalone: true,
-  imports: [TranslocoPipe, FormsModule, DecimalPipe, ContractItemsComponent],
+  imports: [TranslocoPipe, FormsModule, DecimalPipe, ContractItemsComponent,AddPaymentComponent],
   templateUrl: './contract-details.component.html',
   styleUrl: './contract-details.component.scss'
 })

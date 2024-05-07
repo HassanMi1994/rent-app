@@ -83,7 +83,7 @@
     </li>
 
 
-    @if(!userManager?.userInfo?.isLoggedIn)
+    @if(!userManager.userInfo?.isLoggedIn)
     {
     <li class="nav-item float-end" role="presentation">
         <a [routerLink]="[transLoco.getActiveLang(),'login']" class="nav-link" data-bs-toggle="tab"

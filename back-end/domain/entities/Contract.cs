@@ -12,8 +12,15 @@ namespace domain.entities
         public DateTime Date { get; set; }
         public string RentLocation { get; set; }
         public int? HowManyDaysClaim { get; set; }
-        public decimal PrePaidMoney { get; set; }
         public decimal TotalPricePerDay { get; set; }
+
+        public decimal TotalPaidAmount
+        {
+            get
+            {
+                return GetPaidAmount();
+            }
+        }
         public decimal Remaining { get; set; }
         public ContractStatus Status { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -21,7 +28,6 @@ namespace domain.entities
         public Customer Customer { get; set; }
         public required ICollection<ContractItem> Items { get; set; }
         public ICollection<Payment> Payments { get; set; }
-
 
         public decimal GetHowMuchMoneyShouldBePaid()
         {
@@ -31,15 +37,13 @@ namespace domain.entities
 
         public decimal GetPaidAmount()
         {
-            return Payments.Sum(x => x.Amount);
+            return Payments?.Sum(x => x.Amount) ?? 0;
         }
-    }
 
-    public class Payment
-    {
-        public int ID { get; set; }
-        public int ConractID { get; set; }
-        public decimal Amount { get; set; }
+        public void AddPyament(Payment payment)
+        {
+            Payments.Add(payment);
+        }
     }
 }
 

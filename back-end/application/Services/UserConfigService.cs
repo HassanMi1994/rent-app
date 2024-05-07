@@ -7,7 +7,7 @@ namespace application.Services
 {
     public class UserConfigService : IUserConfigService
     {
-        persistance.RsaDbContext _rentDb;
+        RsaDbContext _rentDb;
         IUserService _userService;
 
         public UserConfigService(persistance.RsaDbContext rentDb, IUserService userService)
@@ -18,7 +18,7 @@ namespace application.Services
 
         public async Task CreateDefaultConfig()
         {
-            _rentDb.UserConfigs.Add(UserConfig.CreateDefaultConfig(_userService.GetUserID()));
+            _rentDb.UserConfigs.Add(UserConfig.CreateDefaultConfig(_userService.UserID));
             await _rentDb.SaveChangesAsync();
         }
 
@@ -32,10 +32,10 @@ namespace application.Services
 
         public async Task<UserConfig> GetSettingAsync()
         {
-            var userConfig = await _rentDb.UserConfigs.FirstOrDefaultAsync(x => x.UserID == _userService.GetUserID());
+            var userConfig = await _rentDb.UserConfigs.FirstOrDefaultAsync(x => x.UserID == _userService.UserID);
             if (userConfig == null)
             {
-                userConfig = UserConfig.CreateDefaultConfig(_userService.GetUserID());
+                userConfig = UserConfig.CreateDefaultConfig(_userService.UserID);
                 _rentDb.UserConfigs.Add(userConfig);
                 await _rentDb.SaveChangesAsync();
             };

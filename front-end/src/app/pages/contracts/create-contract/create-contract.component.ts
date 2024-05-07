@@ -9,21 +9,22 @@ import { Customer } from '../../../models/customer.model';
 import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { Observable, Subject, map } from 'rxjs';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { ContractService } from '../../../services/contract.service';
 import { FormInputNumberComponent } from '../../../utils/form-input-number/form-input-number.component';
 import { ContractItem } from '../../../models/contractItem.model';
 import { FormInputDateComponent } from '../../../utils/form-input-date/form-input-date.component';
+import { AddPaymentComponent } from '../add-payment/add-payment.component';
 
 @Component({
   selector: 'app-create-contract',
   standalone: true,
-  imports: [FormInputComponent, TranslocoPipe, NgSelectModule, FormsModule, CommonModule, RouterLink, FormInputNumberComponent, FormInputComponent, FormInputDateComponent],
+  imports: [FormInputComponent, TranslocoPipe, NgSelectModule, FormsModule, CommonModule, RouterLink, FormInputNumberComponent, FormInputComponent, FormInputDateComponent, AddPaymentComponent, DecimalPipe],
   templateUrl: './create-contract.component.html',
   styleUrl: './create-contract.component.scss'
 })
-export class CreateContractComponent implements OnChanges,AfterViewInit {
+export class CreateContractComponent implements OnChanges, AfterViewInit {
 
   @ViewChildren('inputRef') private itemInputs: FormInputComponent[];
   @ViewChild('pricePerDayRef') private pricePerDayInput: FormInputNumberComponent;

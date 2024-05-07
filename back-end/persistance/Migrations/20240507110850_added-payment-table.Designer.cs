@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using persistance;
 
@@ -11,9 +12,11 @@ using persistance;
 namespace persistance.Migrations
 {
     [DbContext(typeof(RsaDbContext))]
-    partial class RentDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240507110850_added-payment-table")]
+    partial class addedpaymenttable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -211,7 +214,7 @@ namespace persistance.Migrations
                     b.Property<int?>("ContractID")
                         .HasColumnType("int");
 
-                    b.Property<int>("PaymentType")
+                    b.Property<int>("PyamentType")
                         .HasColumnType("int");
 
                     b.HasKey("ID");

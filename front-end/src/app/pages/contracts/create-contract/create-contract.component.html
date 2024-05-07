@@ -5,15 +5,18 @@
                 [notFoundText]="'notFound'|transloco" class="text-center center" bindValue="id" bindLabel="fullName"
                 [placeholder]="'customer'|transloco" (change)="selectedCustomerChanged($event)" autofocus default>
                 <ng-template ng-option-tmp let-item="item" let-index="index">
-                   <span class="bi bi-person"></span> <span class="col-6 p-3 text-start border-1 text-success">{{ item.fullName}}</span>
-                    <span class="col-6 p-3 text-start border-1 text-info">  <span class="bi bi-phone"></span> {{ item.mobile}}</span>
+                    <span class="bi bi-person"></span> <span class="col-6 p-3 text-start border-1 text-success">{{
+                        item.fullName}}</span>
+                    <span class="col-6 p-3 text-start border-1 text-info"> <span class="bi bi-phone"></span> {{
+                        item.mobile}}</span>
                 </ng-template>
             </ng-select>
         </div>
 
         <div class="row">
             <div class="col-6">
-                <app-form-input-date #calender [labelName]="'date'" (value)="contract.date=($event)"></app-form-input-date>
+                <app-form-input-date #calender [labelName]="'date'"
+                    (value)="contract.date=($event)"></app-form-input-date>
             </div>
 
             <div class="col-6">
@@ -32,11 +35,6 @@
         </div>
 
         <div class="col-12">
-            <app-form-input-number [labelName]="'prepayment'"
-                (value)="contract.prePaidMoney=($event)"></app-form-input-number>
-        </div>
-
-        <div class="col-12">
             <app-form-input-number [labelName]="'howManyDaysClaim'"
                 (value)="contract.howManyDaysClaim=($event)"></app-form-input-number>
         </div>
@@ -47,6 +45,8 @@
         data-bs-target="#modalId">
         {{'selectStuff'|transloco}}
     </button>
+
+
 
     <div class="row">
         <div class="contract-item-header row">
@@ -80,11 +80,11 @@
             </div>
 
             <div class="col-2 h6 text-center">
-                {{item.pricePerDay}}
+                {{item.pricePerDay|number}}
             </div>
 
             <div class="col-2 h6 text-center">
-                {{item.pricePerDay * item.quantity}}
+                {{item.pricePerDay * item.quantity | number}}
             </div>
 
             <div class="col-2 p-2 h6 text-info text-center">
@@ -97,6 +97,8 @@
             </div>
         </div>
         }
+
+        <app-add-payment></app-add-payment>
 
         @if(this.contract.items.length>0){
         <div class="row fix-save-button">

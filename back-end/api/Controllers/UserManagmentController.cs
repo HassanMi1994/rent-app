@@ -27,7 +27,7 @@ namespace api.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public async Task<IActionResult> GetToken(LoginUserDto loginUserDto)
+        public async Task<IActionResult> Login(LoginUserDto loginUserDto)
         {
             var token = await _userService.GenerateJwtTokenAsync(loginUserDto.Email, loginUserDto.Password);
             return Ok(token);

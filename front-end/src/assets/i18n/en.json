@@ -13,7 +13,7 @@
     "refereeName": "Referee Name",
     "save": "Save",
     "cancel": "Cancel",
-    "app-name": "Rent Stuff",
+    "app-name": "Rent | Sell app",
     "customers": "Customers",
     "new-customer": "New Customer",
     "customer": "Customer",
@@ -68,5 +68,11 @@
     "confirmPassword": "Confirm Password",
     "storeName": "Store Name",
     "email": "Email",
-    "welcome": "Welcome"
+    "welcome": "Welcome",
+    "cash": "Cash",
+    "card": "Card",
+    "addPayment": "Add Payment",
+    "amount": "Amount",
+    "totalPaid": "Total Paid",
+    "paymentType": "Payment Type"
 }

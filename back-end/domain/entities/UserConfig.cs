@@ -5,7 +5,7 @@ namespace domain.entities
     public class UserConfig : IBaseEntity
     {
         public int Id { get; set; }
-        public int UserID { get; set; }
+        public long UserID { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public int UserConfigID { get; set; }
@@ -24,7 +24,7 @@ namespace domain.entities
             RentCalculationType = RentCalculationType.Hourly,
         };
 
-        public static UserConfig CreateDefaultConfig(int userID)
+        public static UserConfig CreateDefaultConfig(long userID)
         {
             return new UserConfig
             {

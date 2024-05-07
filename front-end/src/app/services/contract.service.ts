@@ -2,6 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Contract } from '../models/contract.model';
+import { PaymentType } from '../models/enum/allEnums.enum';
+
+export class Payment {
+  amount: number;
+  paymentType: PaymentType
+}
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +19,8 @@ export class ContractService {
   contracts: Contract[];
   filterdContracts: Contract[];
   selectedContractId: number = 0;
-  contract: Contract;
+  contract: Contract = new Contract();
+  newPayment: Payment = new Payment();
 
   public _searchTerm: string = '';
 
@@ -29,8 +36,19 @@ export class ContractService {
   }
 
   create(contract: Contract) {
+    contract.payments=this.contract.payments;
     this.client.post('https://localhost:7053/api/contracts', contract)
       .subscribe(x => this.contracts = this.filterdContracts = [contract, ...this.contracts]);
+  }
+
+  addPaymentLocaly() {
+    this.contract.payments.push(this.newPayment);
+    this.newPayment=new Payment();
+  }
+
+  addPayment() {
+    this.client.post(`https://localhost:7053/api/contracts/` + this.contract.id + '/add-payment', this.newPayment)
+      .subscribe(x => this.newPayment = new Payment())
   }
 
   getAll(): Observable<Contract[]> {

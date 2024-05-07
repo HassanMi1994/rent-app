@@ -42,3 +42,8 @@ export enum RentCalculationType {
     DailyRoundToUp,
     DailyRoundToDown
 }
+
+export enum PaymentType {
+    Card = 1,
+    Cash = 2
+}
