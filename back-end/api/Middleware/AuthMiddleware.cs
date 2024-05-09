@@ -24,10 +24,14 @@ namespace api.Middleware
             if (hasAuthorizeAttribute != null)
             {
                 var authorization = context.Request.Headers["authorization"].ToString();
+                if (authorization.Length == 0)
+                {
+                    throw new ExceptionBase(ExceptionCodes.NotAuthorized);
+                }
                 var isValid = Jwt.ValidateToken(authorization);
                 if (!isValid)
                 {
-                    throw new ExceptionBase(401);
+                    throw new ExceptionBase(ExceptionCodes.NotAuthorized);
                 }
             }
             await _next(context);

@@ -12,6 +12,7 @@ namespace domain.entities
         public decimal? BuyPrice { get; set; }
         public decimal? SellPrice { get; set; }
         public int Quantity { get; set; }
+        public int Remaining { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }

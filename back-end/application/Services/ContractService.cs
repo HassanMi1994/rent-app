@@ -47,8 +47,34 @@ namespace application.Services
                 .Include(x => x.Payments)
                 .Include(x => x.Items)
                     .ThenInclude(x => x.Stuff)
+                .Include(x => x.Items)
+                    .ThenInclude(x => x.ReturnedItems)
                 .FirstOrDefaultAsync(x => x.ID == id);
         }
 
+        public async Task<Contract> ReturnOneItem(long contractID, ReturnedItem returnedItem)
+        {
+            var contract = await _rentDb.Contracts
+                .LoadWithAllChildrens()
+                .FirstOrDefaultAsync(x => x.ID == contractID);
+            contract.ReturnPartialItem(returnedItem);
+            await _rentDb.SaveChangesAsync();
+            return contract;
+        }
+
+    }
+
+    public static class ContractExtentions
+    {
+        public static IQueryable<Contract> LoadWithAllChildrens(this IQueryable<Contract> query)
+        {
+            return query.Include(x => x.Customer)
+                    .Include(x => x.Payments)
+                    .Include(x => x.Items)
+                        .ThenInclude(x => x.Stuff)
+                    .Include(x => x.Items)
+                        .ThenInclude(x => x.ReturnedItems);
+
+        }
     }
 }

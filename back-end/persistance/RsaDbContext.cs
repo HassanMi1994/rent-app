@@ -16,6 +16,7 @@ namespace persistance
         public DbSet<Stuff> Stuffs { get; set; }
         public DbSet<Contract> Contracts { get; set; }
         public DbSet<ContractItem> ContractItems { get; set; }
+        public DbSet<ReturnedItem> ReturnedItems { get; set; }
         public DbSet<History> Histories { get; set; }
         public DbSet<UserConfig> UserConfigs { get; set; }
         public DbSet<User> Users { get; set; }

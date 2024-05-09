@@ -3,6 +3,7 @@ using application.Models.User;
 using application.Security;
 using domain.abstraction;
 using domain.entities;
+using domain.enums;
 using domain.Exceptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -12,6 +13,15 @@ using System.Extentions;
 
 namespace application.Services
 {
+    public class AppClaims
+    {
+        public static string UserID = "UserID";
+        public static string StoreID = "StoreID";
+        public static string Email = "Email";
+        public static string IsAdmin = "IsAdmin";
+        public static string ServiceType = "ServiceType";
+    }
+
     public class UserService : IUserService
     {
         public int Id => 1;//todo: should implement 
@@ -67,14 +77,15 @@ namespace application.Services
 
             var validUser = await _rsaDbContext.Users.Include(x => x.Store).FirstOrDefaultAsync(x => x.Email == userName && x.Password == hashedPass);
             if (validUser == null)
-                throw new ExceptionBase(ExceptionCodes.InvalidUserPass);
+                throw new ExceptionBase(ExceptionCodes.NotAuthorized);
 
             var claims = new Dictionary<string, object>
             {
-                {"UserID", validUser.ID },
-                {"StoreID",validUser.StoreID },
-                {"Email",validUser.Email },
-                {"IsAdmin",validUser.IsAdmin }
+                {AppClaims.UserID, validUser.ID },
+                {AppClaims.StoreID,validUser.StoreID },
+                {AppClaims.Email,validUser.Email },
+                {AppClaims.IsAdmin,validUser.IsAdmin },
+                {AppClaims.ServiceType, (int)validUser.Store.ServiceType }
             };
 
             var token = Jwt.TokenGenerator(claims);
@@ -86,7 +97,8 @@ namespace application.Services
                 StoreID = validUser.StoreID,
                 StoreName = validUser.Store.Name,
                 UserID = validUser.ID,
-                FullName = validUser.FullName
+                FullName = validUser.FullName,
+                ServiceType = validUser.Store.ServiceType
             };
         }
 
@@ -102,9 +114,12 @@ namespace application.Services
         }
 
         public long UserID =>
-            long.Parse(GetUserClaims().First(x => x.Key == "UserID").Value);
+            long.Parse(GetUserClaims().First(x => x.Key == AppClaims.UserID).Value);
 
         public long StoreID =>
-            long.Parse(GetUserClaims().First(x => x.Key == "StoreID").Value);
+            long.Parse(GetUserClaims().First(x => x.Key == AppClaims.StoreID).Value);
+
+        public ServiceType ServiceType =>
+             (ServiceType)int.Parse(GetUserClaims().First(x => x.Key == AppClaims.ServiceType).Value);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using application.Models.User;
+using domain.enums;
 using Microsoft.AspNetCore.Identity;
 
 namespace domain.abstraction
@@ -9,6 +10,7 @@ namespace domain.abstraction
         Task<UserInfoDto> GenerateJwtTokenAsync(string userName, string password);
         long UserID { get; }
         long StoreID { get; }
+        ServiceType ServiceType{ get; }
 
         Dictionary<string, string> GetUserClaims();
     }

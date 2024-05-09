@@ -1,4 +1,6 @@
-﻿namespace application.Models.User
+﻿using domain.enums;
+
+namespace application.Models.User
 {
     public class UserInfoDto
     {
@@ -9,5 +11,6 @@
         public long StoreID { get; set; }
         public string Email { get; set; }
         public bool IsAdmin { get; set; }
+        public ServiceType ServiceType { get; set; }
     }
 }

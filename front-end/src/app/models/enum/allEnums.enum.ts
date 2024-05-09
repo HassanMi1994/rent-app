@@ -1,18 +1,7 @@
 import exp from "constants";
+import { ContractType } from "./ContractType";
 
-export enum ContractStatus {
-    Draft,
-    Opened,
-    ReturnedEverythingButShouldGiveMoney,
-    DoesNotRespond,
-    ClosedSuccessfuly,
-}
-
-export enum Currency {
-    USDollar,
-    Toman,
-}
-
+//todo: need to check if this static model is used, and refine it!
 export class StaticModels {
     ServiceType = [
         {
@@ -25,25 +14,4 @@ export class StaticModels {
         }];
 }
 
-export enum ContractType {
-    Rent,
-    Sell
-}
-
-export enum ItemStatus {
-    Renting,
-    Sold,
-    ReturnedOk,
-    ReurnedNotOk
-}
-
-export enum RentCalculationType {
-    Hourly,
-    DailyRoundToUp,
-    DailyRoundToDown
-}
-
-export enum PaymentType {
-    Card = 1,
-    Cash = 2
-}
+export default ContractType;

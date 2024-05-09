@@ -31,7 +31,7 @@ export class Contract extends baseModel {
         // this.persianDateTime = `${this.date.toLocaleDateString('fa-IR')} ${this.date.getHours()}:${this.date.getMinutes()}`;
     }
 
-    public addPayment(payment: Payment) {
+    addPayment(payment: Payment) {
         this.payments.push(payment);
     }
 }

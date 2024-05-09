@@ -4,14 +4,15 @@ import { ActivatedRoute } from '@angular/router';
 import { Contract } from '../../../models/contract.model';
 import { TranslocoPipe } from '@ngneat/transloco';
 import { FormsModule } from '@angular/forms';
-import { DecimalPipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { ContractItemsComponent } from '../contract-items/contract-items.component';
 import { AddPaymentComponent } from '../add-payment/add-payment.component';
+import { ReturnItemComponent } from '../return-item/return-item.component';
 
 @Component({
   selector: 'app-contract-details',
   standalone: true,
-  imports: [TranslocoPipe, FormsModule, DecimalPipe, ContractItemsComponent,AddPaymentComponent],
+  imports: [TranslocoPipe, FormsModule, DecimalPipe, ContractItemsComponent, AddPaymentComponent, DatePipe],
   templateUrl: './contract-details.component.html',
   styleUrl: './contract-details.component.scss'
 })

@@ -4,11 +4,12 @@ import { ContractService } from '../../../services/contract.service';
 import { FormsModule } from '@angular/forms';
 import { DecimalPipe } from '@angular/common';
 import { CustomerService } from '../../../services/customer.service';
+import { ReturnItemComponent } from '../return-item/return-item.component';
 
 @Component({
   selector: 'app-contract-items',
   standalone: true,
-  imports: [TranslocoPipe, FormsModule, DecimalPipe],
+  imports: [TranslocoPipe, FormsModule, DecimalPipe, ReturnItemComponent],
   templateUrl: './contract-items.component.html',
   styleUrl: './contract-items.component.scss'
 })

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Contract } from '../models/contract.model';
-import { PaymentType } from '../models/enum/allEnums.enum';
+import { PaymentType } from "../models/enum/PaymentType";
+import { ReturnedItem } from '../models/returnedItem.model';
 
 export class Payment {
   amount: number;
@@ -21,6 +22,7 @@ export class ContractService {
   selectedContractId: number = 0;
   contract: Contract = new Contract();
   newPayment: Payment = new Payment();
+  newReturnItem: ReturnedItem = new ReturnedItem();
 
   public _searchTerm: string = '';
 
@@ -36,14 +38,14 @@ export class ContractService {
   }
 
   create(contract: Contract) {
-    contract.payments=this.contract.payments;
+    contract.payments = this.contract.payments;
     this.client.post('https://localhost:7053/api/contracts', contract)
       .subscribe(x => this.contracts = this.filterdContracts = [contract, ...this.contracts]);
   }
 
   addPaymentLocaly() {
     this.contract.payments.push(this.newPayment);
-    this.newPayment=new Payment();
+    this.newPayment = new Payment();
   }
 
   addPayment() {

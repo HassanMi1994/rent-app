@@ -1,4 +1,5 @@
-import { ItemStatus } from "./enum/allEnums.enum";
+import { ItemStatus } from "./enum/ItemStatus";
+import { ReturnedItem } from "./returnedItem.model";
 import { Stuff } from "./stuff.model";
 
 export class ContractItem {
@@ -11,4 +12,5 @@ export class ContractItem {
     status: ItemStatus;
     lastStatusChangeDate: Date
     stuff: Stuff = new Stuff();
+    returnItems: ReturnedItem[] = [];
 }

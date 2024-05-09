@@ -8,7 +8,7 @@
   <app-form-input [labelName]="'search'" (value)="searchTerm=$event"></app-form-input>
 </div>
 
-<div class="row">
+<div class="row justify-content-center">
   @for (cus of customerService.filterdCustomers; track $index) {
   <div
     class="col-12 rounded col-md-3 m-3 text-center rounded-5 border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient customer-template">

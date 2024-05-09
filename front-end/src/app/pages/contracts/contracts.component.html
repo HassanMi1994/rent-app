@@ -4,10 +4,10 @@
     <app-form-input [labelName]="'search'" (value)="contractService.searchTerm=$event"></app-form-input>
 </div>
 
-<div class="row">
+<div class="row justify-content-center">
     @for (con of contractService.filterdContracts; track $index) {
     <div class="col-12 contract-item
-         rounded col-md-3 m-3
+         rounded col-md-3 m-4
           text-center rounded-5
            border-info border-4 shadow-lg
             bg-body-secondary bg-opacity-50
@@ -19,11 +19,11 @@
                     <b class="text-info"> {{con.customer.fullName}} </b>
                 </div>
                 <div class="col-12 text-primary">
-                    <b> {{ con.createdAt|date:'yyyy-mm-dd HH:mm'}} </b>
+                    <b> {{ con.date|date:'yyyy-mm-dd HH:mm'}} </b>
                     <!-- <b class="text-success"> {{con.totalPayment()}}</b> -->
                 </div>
                 <div class="col-12 border-3">
-                    {{con.totalPricePerDay | number}}
+                  {{'totalPaid'|transloco}}  {{con.totalPaidAmount| number}}
                 </div>
                 <div class="col-12 border-3 link-body-emphasis">
                     <button class="btn"><span class="bi bi-eye" (click)="showMoreInfo($event,con.id)"></span></button>

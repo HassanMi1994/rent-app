@@ -74,5 +74,11 @@
     "addPayment": "Add Payment",
     "amount": "Amount",
     "totalPaid": "Total Paid",
-    "paymentType": "Payment Type"
+    "paymentType": "Payment Type",
+    "newPayment": "New Payment",
+    "return": "Return",
+    "returnItem": "Return Item",
+    "price": "Price",
+    "ok": "OK",
+    "notOk": "Not OK"
 }

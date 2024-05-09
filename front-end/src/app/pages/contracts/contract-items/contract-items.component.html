@@ -45,6 +45,9 @@
         {{item.pricePerDay * item.quantity|number}}
     </div>
 
+    <div class="col-1 h6">
+        <app-return-item [item]="item"></app-return-item>
+    </div>
     @if(enableCheckBox)
     {
     <div class="col-1 h6 text-info text-center h-100">

@@ -1,14 +1,19 @@
 @if (contractService.contract !==undefined) {
-<div class="row">
-    <!-- <div
+<div class="row justify-content-center">
+    <div
         class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient">
-        {{'date'|transloco}} <b class="text-info" {{contract.date}}></b>
-    </div> -->
+
+        <span class="contract-label">
+            {{'date'|transloco}}
+        </span>
+        <b class="contract-label-value" >{{contractService.contract.date|date:'yyyy-mm-dd HH:mm'}}</b> 
+    </div>
+
     <div class=" col-12 col-md-3 m-3  contract-label-container">
         <span class="contract-label">
             {{'fullName'|transloco}}
         </span>
-        <b class="contract-label-value">{{contractService.contract.customer.fullName}}</b>
+        <b class="">{{contractService.contract.customer.fullName}}</b>
     </div>
     <div class=" col-12 col-md-3 m-3  contract-label-container">
         {{contractService.contract.persianDateTime}}
@@ -43,6 +48,11 @@
         <b class="text-success">{{contractService.contract.howManyDaysClaim|number}}</b>
 
     </div>
+</div>
+<div class="row">
+
+
+
     <!-- <div
         class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient">
         {{'rentLocation'|transloco}} <b class="text-success" {{contract.rentLocation}}></b>

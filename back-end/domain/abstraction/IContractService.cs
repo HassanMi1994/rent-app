@@ -8,5 +8,6 @@ namespace domain.abstraction
         Task Create(entities.Contract contract);
         IAsyncEnumerable<entities.Contract> GetAll();
         Task<entities.Contract> GetByIdAsync(int id);
+        Task<Contract> ReturnOneItem(long contractID, ReturnedItem returnedItem);
     }
 }

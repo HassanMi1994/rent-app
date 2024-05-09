@@ -1,4 +1,6 @@
-import { ContractType, Currency, RentCalculationType } from "./enum/allEnums.enum"
+import { ContractType } from "./enum/ContractType"
+import { Currency } from "./enum/Currency"
+import { RentCalculationType } from "./enum/RentCalculationType"
 
 export class UserConfig {
 

@@ -20,10 +20,13 @@ namespace api.Middleware
             catch (ExceptionBase appException)
             {
                 context.Response.Clear();
-                context.Response.StatusCode = appException.ExceptoinCode;
+                context.Response.StatusCode = (int)appException.ExceptoinCode;
             }
-
-
+            catch (Exception notHandled)
+            {
+                //todo: save log...
+                throw;
+            }
         }
     }
 }

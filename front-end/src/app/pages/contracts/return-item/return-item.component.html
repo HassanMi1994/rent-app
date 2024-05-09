@@ -1,66 +1,49 @@
 <button type="button" class="btn btn-outline-primary btn-lg col-12" data-bs-toggle="modal"
-    data-bs-target="#addPaymentModal">
-    {{'addPayment'|transloco}}
+    data-bs-target="#addReturnItem">
+    {{'return'|transloco}}
 </button>
 
 
-
-<div class="contract-item-header row">
-    <div class="col-6 h6 text-info text-center">
-        {{'amount'|transloco}}
-    </div>
-
-    <div class="col-6 h6 text-info text-center">
-        {{'paymentType'|transloco}}
-    </div>
-
-</div>
-
-@for (item of contractService?.contract?.payments; track $index) {
-
-<div class="contract-item row table-hover">
-    <div class=" col-6 h6 text-center">
-        {{item.amount|number}}
-    </div>
-
-    <div class="col-6 h6 text-center">
-        @if(item.paymentType==1){
-        {{'card'|transloco}}
-        }
-        @else {
-        {{'cash'|transloco}}
-        }
-    </div>
-</div>
-}
-
 <!-- Modal -->
-<div class="modal fade add-new-item-modal" id="addPaymentModal" tabindex="-1" role="dialog"
-    aria-labelledby="modalTitleId" aria-hidden="true">
+<div class="modal fade add-new-item-modal" id="addReturnItem" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg modal-fullscreen-sm-down" role="document">
         <!-- <div class="modal-dialog modal-sm modal-fullscreen" role="document"> -->
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" style="text-align: center;width: 100%;" id="modalTitleId">
-                    {{"newPayment"|transloco}}
+                    {{"returnItem"|transloco}}
                 </h5>
+                <h6>
+                    {{item.stuff.name}}
+                </h6>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
             <div class="modal-body">
 
                 <div class="col-12">
-                    <app-form-input-number #amountRef [labelName]="'amount'"
-                        (value)="contractService.newPayment.amount=($event)"></app-form-input-number>
+                    <app-form-input-number [labelName]="'quantity'"
+                        (value)="contractService.newReturnItem.quantity=($event)"></app-form-input-number>
+                </div>
+
+                
+                <div class="col-12">
+                    <app-form-input-date [labelName]="'date'" [draggable]="true"
+                    (value)="contractService.newReturnItem.returnDateTime=($event)"></app-form-input-date>
+                </div>
+        
+                <div class="col-12">
+                    <app-form-input-number [labelName]="'price'"
+                        (value)="contractService.newReturnItem.price=($event)"></app-form-input-number>
                 </div>
 
                 <div class="col-12">
-                    <ng-select [(ngModel)]="contractService.newPayment.paymentType">
-                        <ng-option [value]="1">{{'cash'|transloco}}</ng-option>
-                        <ng-option [value]="2">{{'card'|transloco}}</ng-option>
+                    <ng-select [(ngModel)]="contractService.newReturnItem.itemStatus">
+                        <ng-option [value]="1">{{'ok'|transloco}}</ng-option>
+                        <ng-option [value]="2">{{'notOk'|transloco}}</ng-option>
                     </ng-select>
                 </div>
-
             </div>
 
             <!-- modal footer -->
@@ -71,9 +54,9 @@
                     <div class="row">
                         <div class="col-12 col-md-6 p-3">
                             <div>
-                                <button type="button" class="btn btn-outline-primary col-12" (click)="addPayment()">
+                                <button type="button" class="btn btn-outline-primary col-12" (click)="addReturnItem()">
                                     <span class="bi bi-plus-lg"></span>
-                                    {{"add" |transloco}}</button>
+                                    {{"return" |transloco}}</button>
                             </div>
 
                         </div>
