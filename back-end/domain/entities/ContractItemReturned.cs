@@ -11,6 +11,7 @@ namespace domain.entities
         public int ContractItemID { get; set; }
         public int Quantity { get; set; }
         public decimal Price { get; set; }//calculated price or entered price.
+        public decimal CalculatedPrice { get; set; }
         public DateTime ReturnDateTime { get; set; }
         public ReturnStatus ItemStatus { get; set; }
     }

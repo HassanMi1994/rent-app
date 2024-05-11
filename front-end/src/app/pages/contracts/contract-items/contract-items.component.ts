@@ -2,14 +2,15 @@ import { Component, Input, ViewChildren, input } from '@angular/core';
 import { TranslocoPipe } from '@ngneat/transloco';
 import { ContractService } from '../../../services/contract.service';
 import { FormsModule } from '@angular/forms';
-import { DecimalPipe } from '@angular/common';
+import { DatePipe, DecimalPipe } from '@angular/common';
 import { CustomerService } from '../../../services/customer.service';
 import { ReturnItemComponent } from '../return-item/return-item.component';
+import { ReturnedItemsComponent } from '../returned-items/returned-items.component';
 
 @Component({
   selector: 'app-contract-items',
   standalone: true,
-  imports: [TranslocoPipe, FormsModule, DecimalPipe, ReturnItemComponent],
+  imports: [TranslocoPipe, FormsModule, DecimalPipe, ReturnItemComponent, DatePipe, ReturnedItemsComponent],
   templateUrl: './contract-items.component.html',
   styleUrl: './contract-items.component.scss'
 })

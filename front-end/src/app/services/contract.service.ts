@@ -53,6 +53,15 @@ export class ContractService {
       .subscribe(x => this.newPayment = new Payment())
   }
 
+  addReturn() {
+    var observable = this.client.post<Contract>(`https://localhost:7053/api/contracts/` + this.contract.id + '/return-item', this.newReturnItem);
+    observable.subscribe(x => {
+      this.newReturnItem = new ReturnedItem();
+      this.contract = x;
+    });
+    return observable;
+  }
+
   getAll(): Observable<Contract[]> {
     this.contracts$ = this.client.get<Contract[]>('https://localhost:7053/api/contracts');
     this.contracts$.subscribe(x => this.contracts = this.filterdContracts = x);

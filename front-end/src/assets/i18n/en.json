@@ -80,5 +80,9 @@
     "returnItem": "Return Item",
     "price": "Price",
     "ok": "OK",
-    "notOk": "Not OK"
+    "notOk": "Not OK",
+    "remainingItems": "Remaining Items",
+    "rentDate": "Rent Date",
+    "calculatedPrice": "Calculated Price",
+    "days": "Day(s)"
 }

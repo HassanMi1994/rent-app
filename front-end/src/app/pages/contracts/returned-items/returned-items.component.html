@@ -1,0 +1,98 @@
+<button type="button" class="bi bi-eye-fill col-12" data-bs-toggle="modal"
+    [attr.data-bs-target]="'#returnHistoryModal'+this.contractItemID">
+
+</button>
+
+
+<!-- Modal -->
+<div class="modal fade add-new-item-modal" [id]="'returnHistoryModal'+contractItemID" id="addReturnItem" tabindex="-1"
+    role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-fullscreen-sm-down" role="document">
+        <!-- <div class="modal-dialog modal-sm modal-fullscreen" role="document"> -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="text-align: center;width: 100%;" id="modalTitleId">
+                    {{"returnItem"|transloco}}
+                </h5>
+                <h6>
+                    <!-- {{contractService.contract.items.find}} -->
+                </h6>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-2 h6 text-center">
+                        {{'quantity'|transloco}}
+                    </div>
+
+                    <div class=" col-3 h6 text-center">
+                        {{'price'|transloco}}
+                    </div>
+
+                    <div class="col-2 h6 text-center">
+                        {{'calculatedPrice'|transloco}}
+                    </div>
+
+                    <div class="col-2 h6 text-center">
+                        {{'itemStatus'|transloco}}
+                    </div>
+
+                    <div class="col-2 h6 text-center">
+                        {{'date'|transloco}}
+                    </div>
+                </div>
+                @for (returnItem of returnItems; track $index)
+                {
+                <div class="row">
+                    <div class="col-2 h6 text-center">
+                        {{returnItem.quantity}}
+                    </div>
+
+                    <div class=" col-3 h6 text-center">
+                        {{returnItem.price|number}}
+                    </div>
+
+                    <div class="col-2 h6 text-center">
+                        {{returnItem.calculatedPrice|number}}
+                    </div>
+
+                    <div class="col-2 h6 text-center">
+                        @if(returnItem.itemStatus==1)
+                        {
+                            {{'ok'|transloco}}
+                        }
+                        @else {
+                            {{'notOk'|transloco}}
+                        }
+                        <!-- {{returnItem.itemStatus}} -->
+                    </div>
+
+                    <div class="col-2 h6 text-center">
+                        {{returnItem.returnDateTime|date}}
+                    </div>
+                </div>
+                }
+            </div>
+
+            <!-- modal footer -->
+            <div class="modal-footer p-4">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-12 col-md-6 p-3">
+                            <div>
+                                <button type="button" class="btn btn-outline-dark col-12 " data-bs-dismiss="modal"
+                                    aria-label="Close">
+                                    <span class="bi bi-door-open"></span>
+                                    {{"close" |transloco}}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

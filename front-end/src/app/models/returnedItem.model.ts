@@ -6,6 +6,7 @@ export class ReturnedItem {
     contractItemID: number;
     quantity: number;
     price: number;
+    calculatedPrice: number;
     returnDateTime: Date = new Date();
     itemStatus: ReturnStatus;
 }

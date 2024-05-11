@@ -3,11 +3,8 @@
         {{'name'|transloco}}
     </div>
 
-    <div class="col-3 h6 text-info text-center">
-        {{'quantity'|transloco}}
-    </div>
 
-    <div class="col-3 h6 text-info text-center">
+    <div class="col-2 h6 text-info text-center">
         {{'pricePerDay'|transloco}}
     </div>
 
@@ -15,7 +12,14 @@
         {{'totalPrice'|transloco}}
     </div>
 
-    <div class="col-1 h6 text-info text-center">
+    <div class="col-2 h6 text-info text-center">
+        {{'quantity'|transloco}}
+    </div>
+
+    <div class="col-2 h6 text-info text-center">
+        {{'remainingItems'|transloco}}
+    </div>
+    <!-- <div class="col-1 h6 text-info text-center">
         @if (enableCheckBox) {
         <label class="container">
             <input type="checkbox" [(ngModel)]="selectAll" checked="checked">
@@ -23,7 +27,7 @@
         </label>
         }
 
-    </div>
+    </div> -->
 </div>
 
 @for (item of contractService.contract.items; track $index) {
@@ -33,11 +37,8 @@
         {{item.stuff.name}}
     </div>
 
-    <div class="col-3 h6 text-center">
-        {{item.quantity}}
-    </div>
 
-    <div class="col-3 h6 text-center">
+    <div class="col-2 h6 text-center">
         {{item.pricePerDay | number}}
     </div>
 
@@ -45,10 +46,25 @@
         {{item.pricePerDay * item.quantity|number}}
     </div>
 
-    <div class="col-1 h6">
-        <app-return-item [item]="item"></app-return-item>
+    <div class="col-2 h6 text-center">
+        {{item.quantity}}
     </div>
-    @if(enableCheckBox)
+    <div class="col-2 h6 text-center">
+        {{item.remainingItems|number}}
+    </div>
+
+    <div class="col-1 h6">
+
+        <app-return-item [item]="item" [contractItemID]="item.id"></app-return-item>
+
+        <app-returned-items [returnItems]="item.returnedItems" [contractItemID]="item.id"></app-returned-items>
+
+    </div>
+
+
+
+    <hr />
+    <!-- @if(enableCheckBox)
     {
     <div class="col-1 h6 text-info text-center h-100">
         <label class="container">
@@ -56,7 +72,7 @@
             <span class="checkmark"></span>
         </label>
     </div>
-    }
+    } -->
 
 
     <!-- <div class="col-3 p-2 h6 text-info text-center">

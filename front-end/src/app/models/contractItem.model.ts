@@ -8,9 +8,11 @@ export class ContractItem {
     quantity: number;
     rentDate: Date;
     pricePerDay: number;
+    remainingItems: number;
+    isReadyToClose: boolean;
     description: string;
     status: ItemStatus;
     lastStatusChangeDate: Date
     stuff: Stuff = new Stuff();
-    returnItems: ReturnedItem[] = [];
+    returnedItems: ReturnedItem[] = [];
 }

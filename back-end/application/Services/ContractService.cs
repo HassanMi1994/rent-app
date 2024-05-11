@@ -1,5 +1,6 @@
 ﻿using domain.abstraction;
 using domain.entities;
+using domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using persistance;
 
@@ -39,7 +40,7 @@ namespace application.Services
                 .OrderByDescending(x => x.CreatedAt).AsAsyncEnumerable();
         }
 
-        public async Task<domain.entities.Contract> GetByIdAsync(int id)
+        public async Task<Contract> GetByIdAsync(int id)
         {
             return await _rentDb
                 .Contracts
@@ -57,7 +58,12 @@ namespace application.Services
             var contract = await _rentDb.Contracts
                 .LoadWithAllChildrens()
                 .FirstOrDefaultAsync(x => x.ID == contractID);
+
+            if (contract == null)
+                throw new ExceptionBase(ExceptionCodes.ItemNotFound);
+
             contract.ReturnPartialItem(returnedItem);
+
             await _rentDb.SaveChangesAsync();
             return contract;
         }

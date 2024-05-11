@@ -53,6 +53,7 @@ export class CreateContractComponent implements OnChanges, AfterViewInit {
     //#region stuff
 
     this.stuffService.getStuff();
+    contractService.contract = new Contract();
     this.inputSearchStuff$.pipe(map((term) => { this.searchInStuff(term) }));
     //#endregion
 

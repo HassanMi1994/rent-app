@@ -1,12 +1,12 @@
 <button type="button" class="btn btn-outline-primary btn-lg col-12" data-bs-toggle="modal"
-    data-bs-target="#addReturnItem">
+    [attr.data-bs-target]="'#addReturnItem'+this.contractItemID">
     {{'return'|transloco}}
 </button>
 
 
 <!-- Modal -->
-<div class="modal fade add-new-item-modal" id="addReturnItem" tabindex="-1" role="dialog" aria-labelledby="modalTitleId"
-    aria-hidden="true">
+<div class="modal fade add-new-item-modal" [id]="'addReturnItem'+contractItemID" id="addReturnItem" tabindex="-1"
+    role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-fullscreen-sm-down" role="document">
         <!-- <div class="modal-dialog modal-sm modal-fullscreen" role="document"> -->
         <div class="modal-content">
@@ -27,16 +27,25 @@
                         (value)="contractService.newReturnItem.quantity=($event)"></app-form-input-number>
                 </div>
 
-                
+
                 <div class="col-12">
                     <app-form-input-date [labelName]="'date'" [draggable]="true"
-                    (value)="contractService.newReturnItem.returnDateTime=($event)"></app-form-input-date>
+                        (value)="contractService.newReturnItem.returnDateTime=($event)"></app-form-input-date>
                 </div>
-        
+
                 <div class="col-12">
-                    <app-form-input-number [labelName]="'price'"
+                    <div class="col-6">{{'rentDate'|transloco}} <span class="text-info"> {{item.rentDate}} </span></div>
+                    <div class="col-6">{{'calculatedPrice'|transloco}} <span class="text-info">: {{howManyDaysRounded}}
+                            {{'days'|transloco}} * {{contractService.newReturnItem.quantity}} *
+                            {{item.pricePerDay|number}} =
+                            {{calculatedPrice}}
+                        </span></div>
+                </div>
+                <div class="col-12">
+                    <app-form-input-number #priceInput [labelName]="'price'"
                         (value)="contractService.newReturnItem.price=($event)"></app-form-input-number>
                 </div>
+
 
                 <div class="col-12">
                     <ng-select [(ngModel)]="contractService.newReturnItem.itemStatus">
