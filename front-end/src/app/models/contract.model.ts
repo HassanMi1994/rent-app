@@ -2,14 +2,7 @@ import { Payment } from "../services/contract.service";
 import { baseModel } from "./base.model"
 import { ContractItem } from "./contractItem.model"
 import { Customer } from "./customer.model"
-
-export enum ContractStatus {
-    Draft,
-    Opened,
-    ReturnedEverythingButShouldGiveMoney,
-    DoesNotRespond,
-    ClosedSuccessfuly,
-}
+import { ContractStatus } from "./enum/ContractStatus";
 
 export class Contract extends baseModel {
 
@@ -20,7 +13,9 @@ export class Contract extends baseModel {
     rentLocation: string;
     howManyDaysClaim: number;
     totalPricePerDay: number;
-    totalPaidAmount: number
+    totalPaidAmount: number;
+    totalPriceForReturnedItems: number;
+    remainItemsToReturn: number;
     status: ContractStatus;
     items: ContractItem[] = [];
     payments: Payment[] = [];

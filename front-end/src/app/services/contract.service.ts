@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Contract } from '../models/contract.model';
 import { PaymentType } from "../models/enum/PaymentType";
 import { ReturnedItem } from '../models/returnedItem.model';
+import { ContractStatus } from '../models/enum/ContractStatus';
 
 export class Payment {
   amount: number;
@@ -43,6 +44,11 @@ export class ContractService {
       .subscribe(x => this.contracts = this.filterdContracts = [contract, ...this.contracts]);
   }
 
+  changeStatus(contractStatus: ContractStatus) {
+    this.client.patch<Contract>(`https://localhost:7053/api/contracts/${this.contract.id}/change-status/${contractStatus}`, contractStatus)
+      .subscribe(x => this.contract = x)
+  }
+
   addPaymentLocaly() {
     this.contract.payments.push(this.newPayment);
     this.newPayment = new Payment();
@@ -54,7 +60,7 @@ export class ContractService {
   }
 
   addReturn() {
-    var observable = this.client.post<Contract>(`https://localhost:7053/api/contracts/` + this.contract.id + '/return-item', this.newReturnItem);
+    var observable = this.client.post<Contract>(`https://localhost:7053/api/contracts/${this.contract.id}/return-item`, this.newReturnItem);
     observable.subscribe(x => {
       this.newReturnItem = new ReturnedItem();
       this.contract = x;

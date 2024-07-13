@@ -8,6 +8,7 @@ import { DatePipe, DecimalPipe } from '@angular/common';
 import { ContractItemsComponent } from '../contract-items/contract-items.component';
 import { AddPaymentComponent } from '../add-payment/add-payment.component';
 import { ReturnItemComponent } from '../return-item/return-item.component';
+import { ContractStatus } from '../../../models/enum/ContractStatus';
 
 @Component({
   selector: 'app-contract-details',
@@ -22,5 +23,10 @@ export class ContractDetailsComponent {
 
   constructor(public contractService: ContractService, private route: ActivatedRoute) {
     contractService.getById();
+  }
+
+  closeContract() {
+
+    this.contractService.changeStatus(ContractStatus.ClosedSuccessfuly);
   }
 }

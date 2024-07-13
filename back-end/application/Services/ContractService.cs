@@ -1,5 +1,6 @@
 ﻿using domain.abstraction;
 using domain.entities;
+using domain.enums;
 using domain.Exceptions;
 using Microsoft.EntityFrameworkCore;
 using persistance;
@@ -63,6 +64,21 @@ namespace application.Services
                 throw new ExceptionBase(ExceptionCodes.ItemNotFound);
 
             contract.ReturnPartialItem(returnedItem);
+
+            await _rentDb.SaveChangesAsync();
+            return contract;
+        }
+
+        public async Task<Contract> ChangeStatus(long contractID, ContractStatus contractStatus)
+        {
+            var contract = await _rentDb.Contracts
+                    .LoadWithAllChildrens()
+                    .FirstOrDefaultAsync(x => x.ID == contractID);
+
+            if (contract == null)
+                throw new ExceptionBase(ExceptionCodes.ItemNotFound);
+
+            contract.ChangeStatus(contractStatus);
 
             await _rentDb.SaveChangesAsync();
             return contract;

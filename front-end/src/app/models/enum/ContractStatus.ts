@@ -1,8 +1,8 @@
 
 export enum ContractStatus {
-    Draft,
-    Opened,
-    ReturnedEverythingButShouldGiveMoney,
-    DoesNotRespond,
-    ClosedSuccessfuly
+    Draft = 1,
+    Opened = 2,
+    ReturnedEverythingButShouldGiveMoney = 3,
+    DoesNotRespond = 4,
+    ClosedSuccessfuly = 5
 }

@@ -91,5 +91,12 @@ namespace api.Controllers
             var contract = await _contractService.ReturnOneItem(id, returnedItem);
             return Ok(contract);
         }
+
+        [HttpPatch("{id}/change-status/{status}")]
+        public async Task<IActionResult> ChangeStatusAsync([FromRoute] long id, ContractStatus status)
+        {
+            var contract = await _contractService.ChangeStatus(id, status);
+            return Ok(contract);
+        }
     }
 }

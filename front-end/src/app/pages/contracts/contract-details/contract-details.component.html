@@ -6,7 +6,7 @@
         <span class="contract-label">
             {{'date'|transloco}}
         </span>
-        <b class="contract-label-value" >{{contractService.contract.date|date:'yyyy-mm-dd HH:mm'}}</b> 
+        <b class="contract-label-value">{{contractService.contract.date|date:'yyyy-mm-dd HH:mm'}}</b>
     </div>
 
     <div class=" col-12 col-md-3 m-3  contract-label-container">
@@ -79,38 +79,6 @@
     <hr />
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <div class=" col-12 col-md-3 m-3  contract-label-container">
         <span class="contract-label">
             {{'totalPaid'|transloco}}
@@ -123,6 +91,39 @@
             {{'totalPrice'|transloco}}
         </span>
         <b class="contract-label-value">{{contractService.contract.totalPricePerDay|number}}</b>
+    </div>
+
+    <div class=" col-12 col-md-3 m-3  contract-label-container">
+        <span class="contract-label">
+            {{'remainItemsToReturn'|transloco}}
+        </span>
+        <b class="contract-label-value">{{contractService.contract.remainItemsToReturn|number}}</b>
+    </div>
+
+
+    <div class=" col-12 col-md-3 m-3  contract-label-container">
+        <span class="contract-label">
+            {{'totalPriceForReturnedItems'|transloco}}
+        </span>
+        <b class="contract-label-value">{{contractService.contract.totalPriceForReturnedItems|number}}</b>
+    </div>
+
+
+    <div class="col-12 col-md-6">
+        @if(contractService.contract.remainItemsToReturn ==0
+        &&
+        contractService.contract.totalPaidAmount>=contractService.contract.totalPriceForReturnedItems){
+        <button class="btn btn-info" type="button" (click)="closeContract()">
+            {{'closeContract'|transloco}}
+        </button>
+        }
+        @if(contractService.contract.totalPaidAmount<contractService.contract.totalPriceForReturnedItems) { <span
+            class="text-danger">
+            <b>
+                {{contractService.contract.totalPriceForReturnedItems-contractService.contract.totalPaidAmount|number}}</b>
+            {{"needToBePaid"|transloco}}
+            </span>
+            }
     </div>
 
 </div>

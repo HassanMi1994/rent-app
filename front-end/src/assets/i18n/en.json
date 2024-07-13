@@ -84,5 +84,9 @@
     "remainingItems": "Remaining Items",
     "rentDate": "Rent Date",
     "calculatedPrice": "Calculated Price",
-    "days": "Day(s)"
+    "days": "Day(s)",
+    "closeContract": "Close Contract",
+    "totalPriceForReturnedItems": "Total Price For Returned Items",
+    "remainItemsToReturn": "Remain Items To Return",
+    "needToBePaid": "Need To Be Paid"
 }

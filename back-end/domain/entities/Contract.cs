@@ -28,6 +28,27 @@ namespace domain.entities
                 return Payments?.Sum(x => x.Amount) ?? 0;
             }
         }
+
+        public int RemainItemsToReturn
+        {
+            get
+            {
+
+                var sum = Items?.Sum(x => x.RemainingItems) ?? 0;
+                return sum;
+
+            }
+        }
+
+        public decimal TotalPriceForReturnedItems
+        {
+            get
+            {
+
+                var totalPrice = Items?.SelectMany(x => x.ReturnedItems)?.Sum(x => x.Price) ?? 0;
+                return totalPrice;
+            }
+        }
         #endregion
 
         #region Children
@@ -79,7 +100,11 @@ namespace domain.entities
             }
         }
 
-
+        public void ChangeStatus(ContractStatus contractStatus)
+        {
+            //todo: check if we can change status(for example check if all items are returned if it is renting business!
+            Status = contractStatus;
+        }
 
         //todo: this option will be implemented in future releases!, and will be public!
         private void ReturnAllItems()
