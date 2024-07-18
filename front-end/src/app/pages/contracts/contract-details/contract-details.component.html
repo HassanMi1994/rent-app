@@ -6,7 +6,7 @@
         <span class="contract-label">
             {{'date'|transloco}}
         </span>
-        <b class="contract-label-value">{{contractService.contract.date|date:'yyyy-mm-dd HH:mm'}}</b>
+        <b class="contract-label-value">{{contractService.contract.date|date:'yyyy-MM-dd HH:mm'}}</b>
     </div>
 
     <div class=" col-12 col-md-3 m-3  contract-label-container">
@@ -110,20 +110,33 @@
 
 
     <div class="col-12 col-md-6">
-        @if(contractService.contract.remainItemsToReturn ==0
-        &&
+        @if(contractService.contract.remainItemsToReturn ==0&&
         contractService.contract.totalPaidAmount>=contractService.contract.totalPriceForReturnedItems){
-        <button class="btn btn-info" type="button" (click)="closeContract()">
+        <button class="btn btn-info col-12" type="button" (click)="closeContract()">
             {{'closeContract'|transloco}}
         </button>
         }
+
+        @if(contractService.contract.remainItemsToReturn >0){
+        <span class="text-info">
+            {{contractService.contract.remainItemsToReturn}}
+            {{"needToBeReturned"|transloco}}
+        </span>
+        }
+
         @if(contractService.contract.totalPaidAmount<contractService.contract.totalPriceForReturnedItems) { <span
             class="text-danger">
             <b>
-                {{contractService.contract.totalPriceForReturnedItems-contractService.contract.totalPaidAmount|number}}</b>
+                {{contractService.contract.totalPriceForReturnedItems-contractService.contract.totalPaidAmount|number}}
+            </b>
             {{"needToBePaid"|transloco}}
             </span>
             }
+            <!-- <h3>
+                {{contractService.contract.totalPriceForReturnedItems-contractService.contract.totalPaidAmount|number}}
+            </h3>
+            <h6>total paid : {{contractService.contract.totalPaidAmount}}</h6>
+            <h6>returned item price : {{contractService.contract.totalPriceForReturnedItems}}</h6> -->
     </div>
 
 </div>

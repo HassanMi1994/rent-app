@@ -4,6 +4,7 @@ import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 import { slideInAnimation } from './animations';
 import { CommonModule, Location, DOCUMENT } from '@angular/common';
 import { MenuComponent } from './pages/menu/menu.component';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ import { MenuComponent } from './pages/menu/menu.component';
     RouterLinkActive,
     TranslocoPipe,
     CommonModule,
-    MenuComponent],
+    MenuComponent,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   animations: [slideInAnimation]
@@ -21,17 +22,13 @@ import { MenuComponent } from './pages/menu/menu.component';
 export class AppComponent {
   title = 'rent-front';
 
-
-
-  constructor(public transLoco: TranslocoService, private contexts: ChildrenOutletContexts,
+  constructor(
+    public transLoco: TranslocoService,
+    private contexts: ChildrenOutletContexts,
     private location: Location,
     @Inject(DOCUMENT) private document: Document) {
 
   }
-
-
-
-
 
   getRouteAnimationData() {
     return this.contexts.getContext('primary')?.route?.snapshot?.data?.['animation'];

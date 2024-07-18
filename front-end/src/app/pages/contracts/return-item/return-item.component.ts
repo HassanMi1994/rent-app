@@ -37,13 +37,13 @@ export class ReturnItemComponent {
   get howManyDaysRounded() {
     return Math.round(this.howManyDay);
   }
-//#endregion
+  //#endregion
 
   get calculatedPrice() {
     //todo: this should use config for rounding the number to up or down
     var calculatedPrice = this.howManyDaysRounded * this.item.pricePerDay * this.contractService.newReturnItem.quantity;
-    if (this.priceInput !== undefined)
-      this.priceInput.setValue(calculatedPrice);
+    // if (this.priceInput !== undefined)
+    //   this.priceInput.setValue(calculatedPrice);
 
     this.contractService.newReturnItem.calculatedPrice = calculatedPrice;
     return Math.round(calculatedPrice);

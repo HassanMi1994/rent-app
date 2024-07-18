@@ -16,10 +16,18 @@ export class FormInputNumberComponent {
   @ViewChild('input') input: HTMLInputElement;
   @Input() val: number;
 
+  isFocused: boolean = false;
+
   constructor() {
     if (this.val !== undefined)
       this.valueChanged(this.val.toString());
   }
+
+  isOnFocus(flag: boolean) {
+    this.isFocused = flag;
+  }
+
+
 
   valueChanged(value: string) {
     this.val = parseInt(value);

@@ -88,5 +88,12 @@
     "closeContract": "Close Contract",
     "totalPriceForReturnedItems": "Total Price For Returned Items",
     "remainItemsToReturn": "Remain Items To Return",
-    "needToBePaid": "Need To Be Paid"
+    "needToBePaid": "Need To Be Paid",
+    "needToBeReturned": "Need To Be Returned Before Closing Contract",
+    "date": "Date",
+    "createdSuccessfuly": "Created Successfuly!",
+    "resp": {
+        "1001": "Items To Return Are More Than Remaining",
+        "200": "Operation successfuly done!"
+    }
 }

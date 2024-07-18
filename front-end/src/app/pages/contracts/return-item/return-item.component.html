@@ -1,7 +1,7 @@
-<button type="button" class="btn btn-outline-primary btn-lg col-12" data-bs-toggle="modal"
+<span type="button" class="btn btn-outline-primary col-10" data-bs-toggle="modal"
     [attr.data-bs-target]="'#addReturnItem'+this.contractItemID">
     {{'return'|transloco}}
-</button>
+</span>
 
 
 <!-- Modal -->
@@ -38,6 +38,7 @@
                     <div class="col-6">{{'calculatedPrice'|transloco}} <span class="text-info">: {{howManyDaysRounded}}
                             {{'days'|transloco}} * {{contractService.newReturnItem.quantity}} *
                             {{item.pricePerDay|number}} =
+                            <!-- {{contractService.newReturnItem.price|number}} = -->
                             {{calculatedPrice}}
                         </span></div>
                 </div>

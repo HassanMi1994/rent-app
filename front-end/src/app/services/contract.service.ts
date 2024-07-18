@@ -55,12 +55,15 @@ export class ContractService {
   }
 
   addPayment() {
-    this.client.post(`https://localhost:7053/api/contracts/` + this.contract.id + '/add-payment', this.newPayment)
-      .subscribe(x => this.newPayment = new Payment())
+    this.client.post<Contract>(`https://localhost:7053/api/contracts/` + this.contract.id + '/add-payment', this.newPayment)
+      .subscribe(x => {
+        this.newPayment = new Payment();
+        this.contract = x;
+      })
   }
 
   addReturn() {
-    var observable = this.client.post<Contract>(`https://localhost:7053/api/contracts/${this.contract.id}/return-item`, this.newReturnItem);
+    let observable = this.client.post<Contract>(`https://localhost:7053/api/contracts/${this.contract.id}/return-item`, this.newReturnItem);
     observable.subscribe(x => {
       this.newReturnItem = new ReturnedItem();
       this.contract = x;

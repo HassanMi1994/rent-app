@@ -32,7 +32,9 @@
 
 @for (item of contractService.contract.items; track $index) {
 
-<div class="contract-item row">
+<div 
+    [classList]="item.remainingItems==0?'contract-item row m-1 align-middle rounded border border-success':'contract-item row m-1 rounded align-middle border border-warning'">
+
     <div class=" col-3 h6 text-center">
         {{item.stuff.name}}
     </div>
@@ -54,16 +56,9 @@
     </div>
 
     <div class="col-1 h6">
-
         <app-return-item [item]="item" [contractItemID]="item.id"></app-return-item>
-
         <app-returned-items [returnItems]="item.returnedItems" [contractItemID]="item.id"></app-returned-items>
-
     </div>
-
-
-
-    <hr />
     <!-- @if(enableCheckBox)
     {
     <div class="col-1 h6 text-info text-center h-100">

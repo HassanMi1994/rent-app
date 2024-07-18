@@ -2,7 +2,8 @@
     <div class="form-row">
         <div class="input-data">
             <!-- {{val|number}} -->
-            <input type="number" #input (change)="valueChanged(input.value)" [(ngModel)]="val" required>
+            <input type="number" #input (change)="valueChanged(input.value)" [(ngModel)]="val"
+             (blur)="isOnFocus(false)" (focus)="isOnFocus(true)" required>
             <!-- <ng-content>
                 
             </ng-content> -->

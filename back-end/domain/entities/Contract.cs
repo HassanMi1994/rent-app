@@ -97,6 +97,10 @@ namespace domain.entities
             //check if all items returned
             if (Items.All(x => x.RemainingItems == 0))
             {
+                if (TotalPaidAmount < TotalPriceForReturnedItems)
+                {
+                    Status = ContractStatus.ReturnedEverythingButShouldGiveMoney;
+                }
             }
         }
 

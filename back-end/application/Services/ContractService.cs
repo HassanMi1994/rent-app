@@ -20,13 +20,14 @@ namespace application.Services
             _rentDb = rentDb;
         }
 
-        public async Task AddPaymentAsync(long contractID, Payment addPyamentDto)
+        public async Task<Contract> AddPaymentAsync(long contractID, Payment addPyamentDto)
         {
             var contract = _rentDb.Contracts.Include(x => x.Payments)
                                 .Where(x => x.ID == contractID).FirstOrDefault();
 
             contract.AddPyament(addPyamentDto);
             await _rentDb.SaveChangesAsync();
+            return contract;
         }
 
         public async Task Create(domain.entities.Contract contract)
@@ -41,7 +42,7 @@ namespace application.Services
                 .OrderByDescending(x => x.CreatedAt).AsAsyncEnumerable();
         }
 
-        public async Task<Contract> GetByIdAsync(int id)
+        public async Task<Contract?> GetByIdAsync(int id)
         {
             return await _rentDb
                 .Contracts

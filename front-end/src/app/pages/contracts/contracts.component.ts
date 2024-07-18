@@ -11,11 +11,14 @@ import { Contract } from '../../models/contract.model';
 import { FormInputComponent } from '../../utils/form-input/form-input.component';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { ContractItemsComponent } from './contract-items/contract-items.component';
+import { ContractStatusComponent } from './contract-status/contract-status.component';
 
 @Component({
   selector: 'app-contracts',
   standalone: true,
-  imports: [NgSelectModule, FormsModule, ReactiveFormsModule, RouterLink, TranslocoPipe, PopUpComponent, FormInputComponent, DatePipe, DecimalPipe, ContractItemsComponent],
+  imports: [NgSelectModule, FormsModule, ReactiveFormsModule,
+    RouterLink, TranslocoPipe, PopUpComponent,
+    FormInputComponent, DatePipe, DecimalPipe, ContractItemsComponent, ContractStatusComponent],
   templateUrl: './contracts.component.html',
   styleUrl: './contracts.component.scss'
 })

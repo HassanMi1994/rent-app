@@ -81,8 +81,8 @@ namespace api.Controllers
         [HttpPost("{id}/add-payment")]
         public async Task<IActionResult> AddPayment([FromRoute] long id, Payment payment)
         {
-            await _contractService.AddPaymentAsync(id, payment);
-            return Ok();
+            var contract = await _contractService.AddPaymentAsync(id, payment);
+            return Ok(contract);
         }
 
         [HttpPost("{id}/return-item")]
