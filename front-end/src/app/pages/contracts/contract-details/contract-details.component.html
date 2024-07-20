@@ -1,143 +1,127 @@
-@if (contractService.contract !==undefined) {
-<div class="row justify-content-center">
-    <div
-        class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient">
+<ng-container *ngIf="(contract$|async) as contract">
+    <div class="row justify-content-center">
+        <div
+            class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient">
 
-        <span class="contract-label">
-            {{'date'|transloco}}
-        </span>
-        <b class="contract-label-value">{{contractService.contract.date|date:'yyyy-MM-dd HH:mm'}}</b>
+            <span class="contract-label">
+                {{'date'|transloco}}
+            </span>
+            <b class="contract-label-value">{{contract.date|date:'yyyy-MM-dd HH:mm'}}</b>
+        </div>
+
+        <div class=" col-12 col-md-3 m-3  contract-label-container">
+            <span class="contract-label">
+                {{'fullName'|transloco}}
+            </span>
+            <b class="">{{contract.customer.fullName}}</b>
+        </div>
+        <div class=" col-12 col-md-3 m-3  contract-label-container">
+            {{contract.persianDateTime}}
+        </div>
+
+        <div class=" col-12 col-md-3 m-3  contract-label-container">
+            <span class="contract-label">
+
+                {{'status'|transloco}}
+            </span>
+            <b class="text-success">{{contract.status}}</b>
+        </div>
+        <div class=" col-12 col-md-3 m-3  contract-label-container">
+
+            <span class="contract-label">
+
+                {{'mobile'|transloco}}
+            </span>
+            <b class="text-success">{{contract.customer.mobile}}</b>
+        </div>
+        <div class=" col-12 col-md-3 m-3  contract-label-container">
+            <span class="contract-label">
+                {{'rentLocation'|transloco}}
+            </span>
+            <b class="text-success">{{contract.rentLocation}}</b>
+        </div>
+
+        <div class=" col-12 col-md-3 m-3  contract-label-container">
+            <span class="contract-label">
+                {{'howManyDaysClaim'|transloco}}
+            </span>
+            <b class="text-success">{{contract.howManyDaysClaim|number}}</b>
+
+        </div>
     </div>
-
-    <div class=" col-12 col-md-3 m-3  contract-label-container">
-        <span class="contract-label">
-            {{'fullName'|transloco}}
-        </span>
-        <b class="">{{contractService.contract.customer.fullName}}</b>
-    </div>
-    <div class=" col-12 col-md-3 m-3  contract-label-container">
-        {{contractService.contract.persianDateTime}}
-    </div>
-
-    <div class=" col-12 col-md-3 m-3  contract-label-container">
-        <span class="contract-label">
-
-            {{'status'|transloco}}
-        </span>
-        <b class="text-success">{{contractService.contract.status}}</b>
-    </div>
-    <div class=" col-12 col-md-3 m-3  contract-label-container">
-
-        <span class="contract-label">
-
-            {{'mobile'|transloco}}
-        </span>
-        <b class="text-success">{{contractService.contract.customer.mobile}}</b>
-    </div>
-    <div class=" col-12 col-md-3 m-3  contract-label-container">
-        <span class="contract-label">
-            {{'rentLocation'|transloco}}
-        </span>
-        <b class="text-success">{{contractService.contract.rentLocation}}</b>
-    </div>
-
-    <div class=" col-12 col-md-3 m-3  contract-label-container">
-        <span class="contract-label">
-            {{'howManyDaysClaim'|transloco}}
-        </span>
-        <b class="text-success">{{contractService.contract.howManyDaysClaim|number}}</b>
-
-    </div>
-</div>
-<div class="row">
-
-
-
-    <!-- <div
-        class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient">
-        {{'rentLocation'|transloco}} <b class="text-success" {{contract.rentLocation}}></b>
-    </div> -->
-
-
-
-
-
     <div class="row">
-        <hr class="col-12" />
-    </div>
+
+        <div class="row">
+            <hr class="col-12" />
+        </div>
 
 
-    <app-contract-items [enableCheckBox]="false"></app-contract-items>
+        <app-contract-items [enableCheckBox]="false"></app-contract-items>
 
 
 
-    <hr />
-    <div class="col-12 col-md-4">
-        <app-add-payment [sendForServer]="true"></app-add-payment>
-    </div>
+        <hr />
+        <div class="col-12 col-md-4">
+            <app-add-payment (newPaymentAdded)="updateUI($event)" [sendForServer]="true"></app-add-payment>
+        </div>
 
-    <hr />
-
-
-    <div class=" col-12 col-md-3 m-3  contract-label-container">
-        <span class="contract-label">
-            {{'totalPaid'|transloco}}
-        </span>
-        <b class="contract-label-value">{{contractService.contract.totalPaidAmount|number}}</b>
-    </div>
-
-    <div class=" col-12 col-md-3 m-3  contract-label-container">
-        <span class="contract-label">
-            {{'totalPrice'|transloco}}
-        </span>
-        <b class="contract-label-value">{{contractService.contract.totalPricePerDay|number}}</b>
-    </div>
-
-    <div class=" col-12 col-md-3 m-3  contract-label-container">
-        <span class="contract-label">
-            {{'remainItemsToReturn'|transloco}}
-        </span>
-        <b class="contract-label-value">{{contractService.contract.remainItemsToReturn|number}}</b>
-    </div>
+        <hr />
 
 
-    <div class=" col-12 col-md-3 m-3  contract-label-container">
-        <span class="contract-label">
-            {{'totalPriceForReturnedItems'|transloco}}
-        </span>
-        <b class="contract-label-value">{{contractService.contract.totalPriceForReturnedItems|number}}</b>
-    </div>
+        <div class=" col-12 col-md-3 m-3  contract-label-container">
+            <span class="contract-label">
+                {{'totalPaid'|transloco}}
+            </span>
+            <b class="contract-label-value">{{contract.totalPaidAmount|number}}</b>
+            <label [(ngModel)]="contract.totalPaidAmount">{{contract.totalPaidAmount|number}}</label>
+        </div>
+
+        <div class=" col-12 col-md-3 m-3  contract-label-container">
+            <span class="contract-label">
+                {{'totalPrice'|transloco}}
+            </span>
+            <b class="contract-label-value">{{contract.totalPricePerDay|number}}</b>
+        </div>
+
+        <div class=" col-12 col-md-3 m-3  contract-label-container">
+            <span class="contract-label">
+                {{'remainItemsToReturn'|transloco}}
+            </span>
+            <b class="contract-label-value">{{contract.remainItemsToReturn|number}}</b>
+        </div>
 
 
-    <div class="col-12 col-md-6">
-        @if(contractService.contract.remainItemsToReturn ==0&&
-        contractService.contract.totalPaidAmount>=contractService.contract.totalPriceForReturnedItems){
-        <button class="btn btn-info col-12" type="button" (click)="closeContract()">
-            {{'closeContract'|transloco}}
-        </button>
-        }
+        <div class=" col-12 col-md-3 m-3  contract-label-container">
+            <span class="contract-label">
+                {{'totalPriceForReturnedItems'|transloco}}
+            </span>
+            <b class="contract-label-value">{{contract.totalPriceForReturnedItems|number}}</b>
+        </div>
 
-        @if(contractService.contract.remainItemsToReturn >0){
-        <span class="text-info">
-            {{contractService.contract.remainItemsToReturn}}
-            {{"needToBeReturned"|transloco}}
-        </span>
-        }
 
-        @if(contractService.contract.totalPaidAmount<contractService.contract.totalPriceForReturnedItems) { <span
-            class="text-danger">
-            <b>
-                {{contractService.contract.totalPriceForReturnedItems-contractService.contract.totalPaidAmount|number}}
-            </b>
-            {{"needToBePaid"|transloco}}
+        <div class="col-12 col-md-6">
+            @if(contract.remainItemsToReturn ==0&&
+            contract.totalPaidAmount>=contract.totalPriceForReturnedItems){
+            <button class="btn btn-info col-12" type="button" (click)="closeContract()">
+                {{'closeContract'|transloco}}
+            </button>
+            }
+
+            @if(contract.remainItemsToReturn >0){
+            <span class="text-info">
+                {{contract.remainItemsToReturn}}
+                {{"needToBeReturned"|transloco}}
             </span>
             }
-            <!-- <h3>
-                {{contractService.contract.totalPriceForReturnedItems-contractService.contract.totalPaidAmount|number}}
-            </h3>
-            <h6>total paid : {{contractService.contract.totalPaidAmount}}</h6>
-            <h6>returned item price : {{contractService.contract.totalPriceForReturnedItems}}</h6> -->
-    </div>
 
-</div>
-}
+            @if(contract.totalPaidAmount<contract.totalPriceForReturnedItems) { <span class="text-danger">
+                <b>
+                    {{contract.totalPriceForReturnedItems-contract.totalPaidAmount|number}}
+                </b>
+                {{"needToBePaid"|transloco}}
+                </span>
+                }
+        </div>
+
+    </div>
+</ng-container>

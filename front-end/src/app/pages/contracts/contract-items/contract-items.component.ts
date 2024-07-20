@@ -36,7 +36,7 @@ export class ContractItemsComponent {
   }
 
   constructor(public contractService: ContractService) {
-    this.contractService.getById();
+    // this.contractService.getById();
   }
 
 }

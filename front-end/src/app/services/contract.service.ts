@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Contract } from '../models/contract.model';
 import { PaymentType } from "../models/enum/PaymentType";
@@ -21,6 +21,7 @@ export class ContractService {
   contracts: Contract[];
   filterdContracts: Contract[];
   selectedContractId: number = 0;
+  contract$: Subject<Contract> = new Subject<Contract>();
   contract: Contract = new Contract();
   newPayment: Payment = new Payment();
   newReturnItem: ReturnedItem = new ReturnedItem();
@@ -45,8 +46,11 @@ export class ContractService {
   }
 
   changeStatus(contractStatus: ContractStatus) {
-    this.client.patch<Contract>(`https://localhost:7053/api/contracts/${this.contract.id}/change-status/${contractStatus}`, contractStatus)
-      .subscribe(x => this.contract = x)
+    let observable = this.client.patch<Contract>(`https://localhost:7053/api/contracts/${this.contract.id}/change-status/${contractStatus}`, contractStatus);
+    observable.subscribe(x => {
+      this.contract = x;
+      this.contract$.next(x);
+    });
   }
 
   addPaymentLocaly() {
@@ -55,11 +59,13 @@ export class ContractService {
   }
 
   addPayment() {
-    this.client.post<Contract>(`https://localhost:7053/api/contracts/` + this.contract.id + '/add-payment', this.newPayment)
-      .subscribe(x => {
-        this.newPayment = new Payment();
-        this.contract = x;
-      })
+    let observable = this.client.post<Contract>(`https://localhost:7053/api/contracts/` + this.contract.id + '/add-payment', this.newPayment);
+    observable.subscribe(x => {
+      this.newPayment = new Payment();
+      this.contract = x;
+      this.contract$.next(x);
+    });
+    return observable
   }
 
   addReturn() {
@@ -67,6 +73,7 @@ export class ContractService {
     observable.subscribe(x => {
       this.newReturnItem = new ReturnedItem();
       this.contract = x;
+      this.contract$.next(x);
     });
     return observable;
   }
@@ -79,7 +86,10 @@ export class ContractService {
 
   getById(): Observable<Contract> {
     let observable = this.client.get<Contract>(`https://localhost:7053/api/contracts/${this.selectedContractId}`);
-    observable.subscribe(x => this.contract = x);
+    observable.subscribe(x => {
+      this.contract = x;
+      this.contract$.next(x);
+    });
     return observable;
   }
 
