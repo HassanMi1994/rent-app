@@ -22,7 +22,7 @@ namespace application.Services
 
         public async Task<Contract> AddPaymentAsync(long contractID, Payment addPyamentDto)
         {
-            var contract = _rentDb.Contracts.Include(x => x.Payments)
+            var contract = _rentDb.Contracts.LoadWithAllChildrens()
                                 .Where(x => x.ID == contractID).FirstOrDefault();
 
             contract.AddPyament(addPyamentDto);

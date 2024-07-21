@@ -1,4 +1,5 @@
 <ng-container *ngIf="(contract$|async) as contract">
+    @if(contract !==undefined || contract !==null){
     <div class="row justify-content-center">
         <div
             class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient">
@@ -13,7 +14,7 @@
             <span class="contract-label">
                 {{'fullName'|transloco}}
             </span>
-            <b class="">{{contract.customer.fullName}}</b>
+            <b class="">{{contract?.customer?.fullName??""}}</b>
         </div>
         <div class=" col-12 col-md-3 m-3  contract-label-container">
             {{contract.persianDateTime}}
@@ -124,4 +125,6 @@
         </div>
 
     </div>
+    }
+
 </ng-container>

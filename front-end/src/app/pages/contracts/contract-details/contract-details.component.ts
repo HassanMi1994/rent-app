@@ -9,7 +9,7 @@ import { ContractItemsComponent } from '../contract-items/contract-items.compone
 import { AddPaymentComponent } from '../add-payment/add-payment.component';
 import { ReturnItemComponent } from '../return-item/return-item.component';
 import { ContractStatus } from '../../../models/enum/ContractStatus';
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-contract-details',
@@ -18,15 +18,21 @@ import { Subject } from 'rxjs';
   templateUrl: './contract-details.component.html',
   styleUrl: './contract-details.component.scss'
 })
-export class ContractDetailsComponent {
+export class ContractDetailsComponent implements OnInit {
 
   id: number;
   isDirty: boolean = false;
-  contract$: Subject<Contract> = new Subject();
+  contract$: BehaviorSubject<Contract> = new BehaviorSubject(new Contract());
 
   constructor(public contractService: ContractService, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {
-    contractService.getById()
-      .subscribe(x => this.contract$.next(x));
+
+  }
+  ngOnInit(): void {
+    this.contractService.getById()
+      .subscribe(x => {
+        this.contract$.next(x);
+        this.cdr.detectChanges();
+      });
   }
 
   closeContract() {
@@ -35,8 +41,7 @@ export class ContractDetailsComponent {
 
   updateUI(contract: Contract) {
     this.contract$.next(contract);
-    this.cdr.detectChanges();
-    window.location.reload();
+    console.warn(contract);
     // this.isDirty = true;
     // this.cd.detectChanges();
     // this.cd.reattach();
