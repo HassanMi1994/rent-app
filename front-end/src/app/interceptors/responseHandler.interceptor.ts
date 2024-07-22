@@ -13,8 +13,7 @@ export function responseHandlerInterceptor(req: HttpRequest<unknown>, next: Http
 
   return next(req).pipe(tap(event => {
     if (event.type === HttpEventType.ResponseHeader) {
-      //   toast.info(translate.translate(`resp.${event.status}`), undefined, { timeOut: 1000, extendedTimeOut: 1000 });  
-      // console.log(req.url, 'returned a response with status', event.status);
+      toast.info(translate.translate(`resp.${event.status}`), undefined, { timeOut: 1000, extendedTimeOut: 1000 });
     }
   }));
 }

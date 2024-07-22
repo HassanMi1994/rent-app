@@ -1,4 +1,4 @@
-<ng-container *ngIf="(contract$|async) as contract">
+<ng-container *ngIf="(contractService.contract$|async) as contract">
     @if(contract !==undefined || contract !==null){
     <div class="row justify-content-center">
         <div
@@ -21,8 +21,8 @@
         </div>
 
         <div class=" col-12 col-md-3 m-3  contract-label-container">
+            <app-contract-status [contract]="contract"></app-contract-status>
             <span class="contract-label">
-
                 {{'status'|transloco}}
             </span>
             <b class="text-success">{{contract.status}}</b>
@@ -63,7 +63,7 @@
 
         <hr />
         <div class="col-12 col-md-4">
-            <app-add-payment (newPaymentAdded)="updateUI($event)" [sendForServer]="true"></app-add-payment>
+            <app-add-payment [sendForServer]="true"></app-add-payment>
         </div>
 
         <hr />
@@ -74,7 +74,6 @@
                 {{'totalPaid'|transloco}}
             </span>
             <b class="contract-label-value">{{contract.totalPaidAmount|number}}</b>
-            <label [(ngModel)]="contract.totalPaidAmount">{{contract.totalPaidAmount|number}}</label>
         </div>
 
         <div class=" col-12 col-md-3 m-3  contract-label-container">

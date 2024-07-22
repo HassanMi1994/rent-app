@@ -2,11 +2,11 @@
     <li class="nav-item">
         <a [routerLink]="[this.transLoco.getActiveLang(),'welcome']" class="nav-link active" data-bs-toggle="tab"
             aria-current="page" routerLinkActive="active"> <span class="bi bi-house"></span>
-            {{'app-name'|transloco}} <b>{{userManager?.userInfo!==null?"":" - "}} {{
-                userManager?.userInfo?.storeName}}</b></a>
+            {{'app-name'|transloco}} <b>{{userManager.userInfo!==null?"":" - "}} {{
+                userManager.userInfo.storeName}}</b></a>
     </li>
 
-    @if(userManager?.userInfo?.isLoggedIn){
+    @if(userManager.userInfo.isLoggedIn){
     <li class="nav-item" role="presentation">
         <a [routerLink]="[this.transLoco.getActiveLang(),'contracts']" class="nav-link" data-bs-toggle="tab"
             routerLinkActive="active"><span class="bi bi-card-list"></span> {{'contracts'|transloco}}</a>
@@ -83,7 +83,7 @@
     </li>
 
 
-    @if(!userManager.userInfo?.isLoggedIn)
+    @if(!userManager.userInfo.isLoggedIn)
     {
     <li class="nav-item float-end" role="presentation">
         <a [routerLink]="[transLoco.getActiveLang(),'login']" class="nav-link" data-bs-toggle="tab"

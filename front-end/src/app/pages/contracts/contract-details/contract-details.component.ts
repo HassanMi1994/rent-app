@@ -10,11 +10,12 @@ import { AddPaymentComponent } from '../add-payment/add-payment.component';
 import { ReturnItemComponent } from '../return-item/return-item.component';
 import { ContractStatus } from '../../../models/enum/ContractStatus';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { ContractStatusComponent } from '../contract-status/contract-status.component';
 
 @Component({
   selector: 'app-contract-details',
   standalone: true,
-  imports: [TranslocoPipe, FormsModule, DecimalPipe, ContractItemsComponent, AddPaymentComponent, DatePipe, AsyncPipe, CommonModule],
+  imports: [TranslocoPipe, FormsModule, DecimalPipe, ContractItemsComponent, AddPaymentComponent, DatePipe, AsyncPipe, CommonModule, ContractStatusComponent],
   templateUrl: './contract-details.component.html',
   styleUrl: './contract-details.component.scss'
 })
@@ -22,29 +23,26 @@ export class ContractDetailsComponent implements OnInit {
 
   id: number;
   isDirty: boolean = false;
-  contract$: BehaviorSubject<Contract> = new BehaviorSubject(new Contract());
 
-  constructor(public contractService: ContractService, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {
+  constructor(public contractService: ContractService, private route: ActivatedRoute) {
 
   }
   ngOnInit(): void {
-    this.contractService.getById()
-      .subscribe(x => {
-        this.contract$.next(x);
-        this.cdr.detectChanges();
-      });
+    if (this.contractService.selectedContractId !== null && this.contractService.selectedContractId !== 0) {
+      this.contractService.getById();
+    } else {
+      let id = this.route.snapshot.params['{id}}']
+      // let id = this.route.snapshot.paramMap.get('id');
+      if (id !== undefined && id !== null) {
+        this.contractService.selectedContractId = + id;
+        this.contractService.getById();
+      }
+
+
+    }
   }
 
   closeContract() {
     this.contractService.changeStatus(ContractStatus.ClosedSuccessfuly);
-  }
-
-  updateUI(contract: Contract) {
-    this.contract$.next(contract);
-    console.warn(contract);
-    // this.isDirty = true;
-    // this.cd.detectChanges();
-    // this.cd.reattach();
-    // this.isDirty = false;
   }
 }

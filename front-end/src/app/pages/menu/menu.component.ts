@@ -14,12 +14,14 @@ import { UserManagerService } from '../../services/user-manager.service';
 export class MenuComponent implements AfterViewInit {
   isDarkMode: boolean;
   selectedLang: string;
+  ls: Storage | undefined;
   constructor(public transLoco: TranslocoService, @Inject(DOCUMENT) document: Document, private location: Location, public userManager: UserManagerService) {
     this.selectedLang = this.transLoco.getDefaultLang().toUpperCase();
+    this.ls = document.defaultView?.localStorage;
   }
   ngAfterViewInit(): void {
-    if (localStorage != undefined) {
-      let langHistory = localStorage.getItem('selectedLang');
+    if (this.ls) {
+      let langHistory = this.ls.getItem('selectedLang');
       if (langHistory !== undefined) {
         this.selectedLang = langHistory!.toUpperCase();
         this.transLoco.setActiveLang(langHistory!);
@@ -32,7 +34,9 @@ export class MenuComponent implements AfterViewInit {
     let olaPath = document.location.pathname;
     let newRoute = olaPath.replace(`/${oldLang}/`, `/${lang}/`);
     this.location.replaceState(newRoute);
-    localStorage.setItem('selectedLang', lang);
+    if (this.ls) {
+      this.ls.setItem('selectedLang', lang);
+    }
     this.selectedLang = lang.toUpperCase();
     this.transLoco.setActiveLang(lang);
   }

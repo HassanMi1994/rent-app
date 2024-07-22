@@ -93,6 +93,7 @@ namespace domain.entities
             }
 
             item.ReturnedItems.Add(returnedItem);
+            //todo: add returned items to the available quantity of the stuff! very important>>>???!!!
 
             //check if all items returned
             if (Items.All(x => x.RemainingItems == 0))

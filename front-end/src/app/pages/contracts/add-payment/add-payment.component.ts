@@ -19,16 +19,12 @@ export class AddPaymentComponent {
 
   @ViewChild('amountRef') amountInput: FormInputNumberComponent;
   @Input() sendForServer: boolean = false;
-  @Output() newPaymentAdded = new EventEmitter<Contract>();
   constructor(public contractService: ContractService, ch: ChangeDetectorRef) {
   }
 
   addPayment() {
     if (this.sendForServer) {
-      let observable = this.contractService.addPayment();
-      observable.subscribe(c => {
-        this.newPaymentAdded.emit(c);
-      })
+      this.contractService.addPayment();
     }
     this.contractService.addPaymentLocaly();
     this.amountInput.setValue(0);
