@@ -22,7 +22,9 @@ export class SettingService {
     return this.userConfig$;
   }
 
-  patch() {
-    this.client.patch('https://localhost:7053/api/config', this.userConfig);
+  patch(): Observable<UserConfig> {
+    this.userConfig$ = this.client.patch<UserConfig>('https://localhost:7053/api/config', this.userConfig);
+    this.userConfig$.subscribe(x => this.userConfig = x);
+    return this.userConfig$;
   }
 }

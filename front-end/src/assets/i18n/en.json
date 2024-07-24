@@ -94,6 +94,9 @@
     "createdSuccessfuly": "Created Successfuly!",
     "resp": {
         "1001": "Items To Return Are More Than Remaining",
-        "200": "Operation successfuly done!"
-    }
+        "200": "Operation done successfuly!"
+    },
+    "persian": "Persian",
+    "georgian": "Georgian",
+    "contractNo": "Contract No."
 }

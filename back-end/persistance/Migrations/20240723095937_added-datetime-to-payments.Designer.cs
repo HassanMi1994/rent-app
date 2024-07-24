@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using persistance;
 
@@ -11,9 +12,11 @@ using persistance;
 namespace persistance.Migrations
 {
     [DbContext(typeof(RsaDbContext))]
-    partial class RsaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240723095937_added-datetime-to-payments")]
+    partial class addeddatetimetopayments
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,8 +76,8 @@ namespace persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<long>("ContractNumber")
-                        .HasColumnType("bigint");
+                    b.Property<int>("ContractNumber")
+                        .HasColumnType("int");
 
                     b.Property<int>("ContractType")
                         .HasColumnType("int");
@@ -98,9 +101,6 @@ namespace persistance.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<long>("StoreID")
-                        .HasColumnType("bigint");
-
                     b.Property<decimal>("TotalPricePerDay")
                         .HasColumnType("decimal(18,2)");
 
@@ -110,8 +110,6 @@ namespace persistance.Migrations
                     b.HasKey("ID");
 
                     b.HasIndex("CustomerID");
-
-                    b.HasIndex("StoreID");
 
                     b.ToTable("Contracts");
                 });
@@ -369,9 +367,6 @@ namespace persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CalendarType")
-                        .HasColumnType("int");
-
                     b.Property<long>("ContractNoSeed")
                         .HasColumnType("bigint");
 
@@ -381,23 +376,20 @@ namespace persistance.Migrations
                     b.Property<int>("Currency")
                         .HasColumnType("int");
 
-                    b.Property<long?>("LastContractNoSeed")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("RentCalculationType")
                         .HasColumnType("int");
 
                     b.Property<int>("ServiceType")
                         .HasColumnType("int");
 
-                    b.Property<long>("StoreID")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("TaxPercent")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("UserConfigID")
+                        .HasColumnType("int");
 
                     b.Property<long>("UserID")
                         .HasColumnType("bigint");
@@ -415,15 +407,7 @@ namespace persistance.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("domain.entities.Store", "Store")
-                        .WithMany("Contracts")
-                        .HasForeignKey("StoreID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Customer");
-
-                    b.Navigation("Store");
                 });
 
             modelBuilder.Entity("domain.entities.ContractItem", b =>
@@ -497,8 +481,6 @@ namespace persistance.Migrations
 
             modelBuilder.Entity("domain.entities.Store", b =>
                 {
-                    b.Navigation("Contracts");
-
                     b.Navigation("Users");
                 });
 #pragma warning restore 612, 618

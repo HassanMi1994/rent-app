@@ -8,11 +8,12 @@ import { FormsModule } from '@angular/forms';
 import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
 import { FormInputDateComponent } from '../../../utils/form-input-date/form-input-date.component';
 import { ContractItem } from '../../../models/contractItem.model';
+import { ConfigDateComponent } from '../../../utils/config-date/config-date.component';
 
 @Component({
   selector: 'app-return-item',
   standalone: true,
-  imports: [FormInputComponent, FormInputNumberComponent, FormInputDateComponent, TranslocoPipe, DecimalPipe, FormsModule, NgSelectModule],
+  imports: [FormInputComponent, FormInputNumberComponent, FormInputDateComponent, TranslocoPipe, DecimalPipe, FormsModule, ConfigDateComponent, NgSelectModule],
   templateUrl: './return-item.component.html',
   styleUrl: './return-item.component.scss'
 })

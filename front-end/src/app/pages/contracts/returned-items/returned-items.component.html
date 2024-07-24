@@ -59,16 +59,16 @@
                     <div class="col-2 h6 text-center">
                         @if(returnItem.itemStatus==1)
                         {
-                            {{'ok'|transloco}}
+                        {{'ok'|transloco}}
                         }
                         @else {
-                            {{'notOk'|transloco}}
+                        {{'notOk'|transloco}}
                         }
                         <!-- {{returnItem.itemStatus}} -->
                     </div>
 
                     <div class="col-2 h6 text-center">
-                        {{returnItem.returnDateTime|date}}
+                        <app-config-date [date]="returnItem.returnDateTime"></app-config-date>
                     </div>
                 </div>
                 }

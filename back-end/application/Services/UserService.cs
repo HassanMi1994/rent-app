@@ -46,8 +46,8 @@ namespace application.Services
         {
             var pass = addStoreDto.Password.GetStringSha256Hash();
 
-            //todo: check if store exisit
-            //todo: check if user exisit before!
+            //todo: check if store exist
+            //todo: check if user exist before!
 
             var store = new Store()
             {

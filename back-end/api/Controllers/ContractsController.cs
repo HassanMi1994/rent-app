@@ -32,9 +32,9 @@ namespace api.Controllers
         {
             //todo: this should be moved to mapper!
             Contract cont = ConvertContractDtoToContract(contract);
-            await _contractService.Create(cont);
+            var result = await _contractService.Create(cont);
 
-            return Ok();
+            return Ok(result);
         }
 
         private Contract ConvertContractDtoToContract(CreateContractDto contract)
@@ -65,7 +65,6 @@ namespace api.Controllers
                     PaymentType = x.PaymentType
                 }).ToList(),
                 Status = ContractStatus.Opened,
-                HowManyDaysClaim = contract.HowManyDaysClaim,
                 RentLocation = contract.RentLocation,
                 TotalPricePerDay = contract.Items.Sum(x => x.PricePerDay * x.Quantity),
                 CustomerID = contract.CustomerID,

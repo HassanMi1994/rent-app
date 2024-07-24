@@ -10,49 +10,62 @@ namespace application.Services
     public class ContractService : IContractService
     {
         persistance.RsaDbContext _rentDb;
+        private readonly IUserService _userService;
+        private readonly IUserConfigService _userConfigService;
 
-        public ContractService()
-        {
-        }
-
-        public ContractService(persistance.RsaDbContext rentDb)
+        public ContractService(RsaDbContext rentDb, IUserService userService, IUserConfigService userConfigService)
         {
             _rentDb = rentDb;
+            _userService = userService;
+            _userConfigService = userConfigService;
         }
 
-        public async Task<Contract> AddPaymentAsync(long contractID, Payment addPyamentDto)
+        public async Task<Contract> AddPaymentAsync(long contractID, Payment addPaymentDto)
         {
             var contract = _rentDb.Contracts.LoadWithAllChildrens()
                                 .Where(x => x.ID == contractID).FirstOrDefault();
 
-            contract.AddPyament(addPyamentDto);
+            if (contract == null)
+                throw new ExceptionBase(ExceptionCodes.ItemNotFound);
+
+            contract.AddPyament(addPaymentDto);
+            await _rentDb.SaveChangesAsync();
+
+            return contract;
+        }
+
+        public async Task<Contract> Create(domain.entities.Contract contract)
+        {
+            contract.StoreID = _userService.StoreID;
+            contract.ContractNumber = await _userConfigService.GetNextContractNo();
+            _rentDb.Add(contract);
             await _rentDb.SaveChangesAsync();
             return contract;
         }
 
-        public async Task Create(domain.entities.Contract contract)
-        {
-            _rentDb.Add(contract);
-            await _rentDb.SaveChangesAsync();
-        }
-
         public IAsyncEnumerable<domain.entities.Contract> GetAll()
         {
-            return _rentDb.Contracts.Include(x => x.Customer).Include(x => x.Payments)
-                .OrderByDescending(x => x.CreatedAt).AsAsyncEnumerable();
+            return _rentDb.Contracts
+                .Include(x => x.Customer)
+                .Include(x => x.Payments)
+                .Where(x => x.StoreID == _userService.StoreID)
+                    .OrderByDescending(x => x.CreatedAt)
+                .AsAsyncEnumerable();
         }
 
         public async Task<Contract?> GetByIdAsync(int id)
         {
-            return await _rentDb
-                .Contracts
-                .Include(x => x.Customer)
-                .Include(x => x.Payments)
-                .Include(x => x.Items)
-                    .ThenInclude(x => x.Stuff)
-                .Include(x => x.Items)
-                    .ThenInclude(x => x.ReturnedItems)
-                .FirstOrDefaultAsync(x => x.ID == id);
+            var contract = await _rentDb
+                .Contracts.LoadWithAllChildrens().FirstOrDefaultAsync(x => x.ID == id);
+
+            if (contract == null)
+                throw new ExceptionBase(ExceptionCodes.ItemNotFound);
+
+            if (contract.StoreID != _userService.StoreID)
+            {
+                throw new ExceptionBase(ExceptionCodes.NotAuthorized);
+            }
+            return contract;
         }
 
         public async Task<Contract> ReturnOneItem(long contractID, ReturnedItem returnedItem)
@@ -84,19 +97,19 @@ namespace application.Services
             await _rentDb.SaveChangesAsync();
             return contract;
         }
-
     }
 
     public static class ContractExtentions
     {
         public static IQueryable<Contract> LoadWithAllChildrens(this IQueryable<Contract> query)
         {
-            return query.Include(x => x.Customer)
-                    .Include(x => x.Payments)
-                    .Include(x => x.Items)
-                        .ThenInclude(x => x.Stuff)
-                    .Include(x => x.Items)
-                        .ThenInclude(x => x.ReturnedItems);
+            return query
+                .Include(x => x.Customer)
+                .Include(x => x.Payments)
+                .Include(x => x.Items)
+                   .ThenInclude(x => x.Stuff)
+                .Include(x => x.Items)
+                   .ThenInclude(x => x.ReturnedItems);
 
         }
     }

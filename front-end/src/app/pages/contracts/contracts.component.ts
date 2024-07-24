@@ -12,13 +12,14 @@ import { FormInputComponent } from '../../utils/form-input/form-input.component'
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { ContractItemsComponent } from './contract-items/contract-items.component';
 import { ContractStatusComponent } from './contract-status/contract-status.component';
+import { ConfigDateComponent } from '../../utils/config-date/config-date.component';
 
 @Component({
   selector: 'app-contracts',
   standalone: true,
   imports: [NgSelectModule, FormsModule, ReactiveFormsModule,
     RouterLink, TranslocoPipe, PopUpComponent,
-    FormInputComponent, DatePipe, DecimalPipe, ContractItemsComponent, ContractStatusComponent],
+    FormInputComponent, DatePipe, DecimalPipe, ContractItemsComponent, ConfigDateComponent, ContractStatusComponent],
   templateUrl: './contracts.component.html',
   styleUrl: './contracts.component.scss'
 })
@@ -31,12 +32,7 @@ export class ContractsComponent {
 
   constructor(private customerService: CustomerService, public contractService: ContractService, transLoco: TranslocoService) {
     this.transLoco = transLoco;
-    this.customerService.getAll();
     this.contractService.getAll();
-  }
-
-  selectedContractChanged(id: number) {
-    this.contractService.selectedContractId = id;
   }
 
   showMoreInfo(e: MouseEvent, contractId: number) {

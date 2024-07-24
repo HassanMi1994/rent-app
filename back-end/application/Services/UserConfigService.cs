@@ -18,16 +18,23 @@ namespace application.Services
 
         public async Task CreateDefaultConfig()
         {
-            _rentDb.UserConfigs.Add(UserConfig.CreateDefaultConfig(_userService.UserID));
+            _rentDb.UserConfigs.Add(UserConfig.CreateDefaultConfig(_userService.UserID, _userService.StoreID));
             await _rentDb.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(UserConfig config)
+        public async Task<UserConfig> UpdateAsync(UserConfig config)
         {
             var userConfig = await GetSettingAsync();
-            userConfig = config;
-            userConfig.UpdatedAt = DateTime.Now;
+            var preservedContractNo = userConfig.ContractNoSeed;
+            //userConfig = config;
+            if (userConfig.CanChangeContractNo)
+            {
+                userConfig.ContractNoSeed = config.ContractNoSeed;
+            }
+            userConfig.CalendarType = config.CalendarType;
+            userConfig.TaxPercent = config.TaxPercent;
             await _rentDb.SaveChangesAsync();
+            return userConfig;
         }
 
         public async Task<UserConfig> GetSettingAsync()
@@ -35,13 +42,19 @@ namespace application.Services
             var userConfig = await _rentDb.UserConfigs.FirstOrDefaultAsync(x => x.UserID == _userService.UserID);
             if (userConfig == null)
             {
-                userConfig = UserConfig.CreateDefaultConfig(_userService.UserID);
+                userConfig = UserConfig.CreateDefaultConfig(_userService.UserID, _userService.StoreID);
                 _rentDb.UserConfigs.Add(userConfig);
                 await _rentDb.SaveChangesAsync();
             };
             return userConfig;
         }
 
+        public async Task<long> GetNextContractNo()
+        {
+            var config = await GetSettingAsync();
+            var next = config.GetNextContractNo();
+            return next;
+        }
 
         //public async Task UpdateAsync(UserConfig userConfig)
         //{

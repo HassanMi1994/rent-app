@@ -6,7 +6,6 @@ namespace application.Models.Contract
     public class CreateContractDto
     {
         public int CustomerID { get; set; }
-        public int? HowManyDaysClaim { get; set; }
         public string RentLocation { get; set; }
         public DateTime Date { get; set; }
         public ICollection<ContractItemDto> Items { get; set; }

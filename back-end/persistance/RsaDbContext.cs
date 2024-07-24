@@ -29,12 +29,12 @@ namespace persistance
             foreach (var entity in entries)
             {
                 if (entity.State == EntityState.Modified)
-                    if (entity.GetType().GetProperty(nameof(IBaseEntity.UpdatedAt)) != null)
-                        entity.Property(nameof(IBaseEntity.UpdatedAt)).CurrentValue = DateTime.UtcNow;
+                    if (entity.Properties.Where(x => x.Metadata.Name == nameof(IBaseEntity.UpdatedAt)).Count() == 1)
+                        entity.Property(nameof(IBaseEntity.UpdatedAt)).CurrentValue = DateTime.Now;
 
                 if (entity.State == EntityState.Added)
-                    if (entity.GetType().GetProperty(nameof(IBaseEntity.CreatedAt)) != null)
-                        entity.Property(nameof(IBaseEntity.CreatedAt)).CurrentValue = DateTime.UtcNow;
+                    if (entity.Properties.Where(x => x.Metadata.Name == nameof(IBaseEntity.CreatedAt)).Count() == 1)
+                        entity.Property(nameof(IBaseEntity.CreatedAt)).CurrentValue = DateTime.Now;
             }
 
             int count = await base.SaveChangesAsync(cancellationToken);

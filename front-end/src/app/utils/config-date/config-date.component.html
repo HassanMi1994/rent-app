@@ -1,0 +1,15 @@
+@if(calendarType == 1)
+{
+<b>
+    {{persian}}
+</b>
+<!-- {{date.toLocaleDateString('fa-Ir')}} -->
+}
+
+@if(calendarType == 2)
+{
+<b>
+    {{date|date:'yyyy/MM/dd HH:mm'}}
+</b>
+
+}

@@ -34,7 +34,9 @@
                 </div>
 
                 <div class="col-12">
-                    <div class="col-6">{{'rentDate'|transloco}} <span class="text-info"> {{item.rentDate}} </span></div>
+                    <div class="col-6">{{'rentDate'|transloco}}
+                        <app-config-date [date]="item.rentDate"> </app-config-date>
+                    </div>
                     <div class="col-6">{{'calculatedPrice'|transloco}} <span class="text-info">: {{howManyDaysRounded}}
                             {{'days'|transloco}} * {{contractService.newReturnItem.quantity}} *
                             {{item.pricePerDay|number}} =

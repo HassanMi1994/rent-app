@@ -7,11 +7,12 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Contract } from '../../../models/contract.model';
+import { ConfigDateComponent } from '../../../utils/config-date/config-date.component';
 
 @Component({
   selector: 'app-add-payment',
   standalone: true,
-  imports: [TranslocoPipe, FormInputNumberComponent, FormInputComponent, NgSelectModule, CommonModule, FormsModule, DecimalPipe],
+  imports: [TranslocoPipe, FormInputNumberComponent, FormInputComponent, NgSelectModule, CommonModule, FormsModule, DecimalPipe, ConfigDateComponent],
   templateUrl: './add-payment.component.html',
   styleUrl: './add-payment.component.scss'
 })
@@ -19,7 +20,7 @@ export class AddPaymentComponent {
 
   @ViewChild('amountRef') amountInput: FormInputNumberComponent;
   @Input() sendForServer: boolean = false;
-  constructor(public contractService: ContractService, ch: ChangeDetectorRef) {
+  constructor(public contractService: ContractService) {
   }
 
   addPayment() {

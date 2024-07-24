@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnChanges, QueryList, SimpleChanges, ViewChild, ViewChildren, input } from '@angular/core';
+import { AfterViewInit, Component, OnChanges, OnInit, QueryList, SimpleChanges, ViewChild, ViewChildren, input } from '@angular/core';
 import { FormInputComponent } from '../../../utils/form-input/form-input.component';
 import { Contract } from '../../../models/contract.model';
 import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
@@ -24,7 +24,7 @@ import { AddPaymentComponent } from '../add-payment/add-payment.component';
   templateUrl: './create-contract.component.html',
   styleUrl: './create-contract.component.scss'
 })
-export class CreateContractComponent implements OnChanges, AfterViewInit {
+export class CreateContractComponent implements OnInit, OnChanges, AfterViewInit {
 
   @ViewChildren('inputRef') private itemInputs: FormInputComponent[];
   @ViewChild('pricePerDayRef') private pricePerDayInput: FormInputNumberComponent;
@@ -42,7 +42,18 @@ export class CreateContractComponent implements OnChanges, AfterViewInit {
   public inputSearchStuff$ = new Subject<string>();
 
   @ViewChild('selectStuff') selectStuff: NgSelectComponent
-  @ViewChild('calendar') formInputDate: FormInputDateComponent
+  @ViewChild('calendar') formInputDate: FormInputDateComponent = new FormInputDateComponent();
+
+  get isValid(): boolean {
+    if (this.contract.items.length > 0
+      && this.contract.customerID > 0
+      && this.contract.rentLocation.length > 5) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  };
 
   constructor(public stuffService: StuffService,
     public customerService: CustomerService,
@@ -51,7 +62,6 @@ export class CreateContractComponent implements OnChanges, AfterViewInit {
     private transLoco: TranslocoService) {
 
     //#region stuff
-
     this.stuffService.getStuff();
     contractService.contract = new Contract();
     this.inputSearchStuff$.pipe(map((term) => { this.searchInStuff(term) }));
@@ -61,6 +71,9 @@ export class CreateContractComponent implements OnChanges, AfterViewInit {
       .pipe(map((term) => this.searchInCustomers(term)))
     //#endregion
 
+  }
+  ngOnInit(): void {
+    this.customerService.getAll();
   }
   ngAfterViewInit(): void {
     this.formInputDate.setValue(new Date());
@@ -106,8 +119,6 @@ export class CreateContractComponent implements OnChanges, AfterViewInit {
   }
 
   deleteItem(event: Event) {
-    console.log(this.contract);
-    console.log(this.contractItem);
     let element = event.srcElement as HTMLElement;
     let contractItem = element.closest('.contract-item') as HTMLDivElement;
     contractItem.remove();

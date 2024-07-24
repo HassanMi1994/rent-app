@@ -11,11 +11,12 @@ import { ReturnItemComponent } from '../return-item/return-item.component';
 import { ContractStatus } from '../../../models/enum/ContractStatus';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { ContractStatusComponent } from '../contract-status/contract-status.component';
+import { ConfigDateComponent } from '../../../utils/config-date/config-date.component';
 
 @Component({
   selector: 'app-contract-details',
   standalone: true,
-  imports: [TranslocoPipe, FormsModule, DecimalPipe, ContractItemsComponent, AddPaymentComponent, DatePipe, AsyncPipe, CommonModule, ContractStatusComponent],
+  imports: [TranslocoPipe, FormsModule, DecimalPipe, ContractItemsComponent, ConfigDateComponent, AddPaymentComponent, DatePipe, AsyncPipe, CommonModule, ContractStatusComponent],
   templateUrl: './contract-details.component.html',
   styleUrl: './contract-details.component.scss'
 })
@@ -28,18 +29,9 @@ export class ContractDetailsComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    if (this.contractService.selectedContractId !== null && this.contractService.selectedContractId !== 0) {
-      this.contractService.getById();
-    } else {
-      let id = this.route.snapshot.params['{id}}']
-      // let id = this.route.snapshot.paramMap.get('id');
-      if (id !== undefined && id !== null) {
-        this.contractService.selectedContractId = + id;
-        this.contractService.getById();
-      }
-
-
-    }
+    let id = this.route.snapshot.params['{id}}'];
+    this.contractService.selectedContractId = + id;
+    this.contractService.getById()
   }
 
   closeContract() {

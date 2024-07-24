@@ -1,8 +1,7 @@
 <div class="form-input-container">
     <div class="form-row">
         <div class="input-data">
-            <input type="text" [type]="getType()" #input (change)="valueChanged(input.value)" [(ngModel)]="val"
-                required>
+            <input type="text" [type]="getType()" #input (change)="valueChanged(input.value)" [required]="isRequired" [(ngModel)]="val">
             <!-- <ng-content>
                 
             </ng-content> -->

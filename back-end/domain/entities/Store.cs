@@ -9,5 +9,6 @@ namespace domain.entities
         public ServiceType ServiceType { get; set; }
         public bool IsDemoStore { get; set; }
         public ICollection<User> Users { get; set; }
+        public ICollection<Contract>? Contracts { get; set; }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using application.Security;
 using domain.Exceptions;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Features;
-using System.Globalization;
-using System.Net;
 
 namespace api.Middleware
 {

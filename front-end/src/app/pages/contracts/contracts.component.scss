@@ -2,13 +2,15 @@
     background-color: rgba(0, 0, 0, 0.486);
     border-radius: 10% !important;
     border-color: rgba(17, 243, 213, 0.5) !important;
+    cursor: pointer;
 
 }
 
-.contract-item{
+.contract-item {
     transition-duration: 300ms;
     border-color: rgb(0 180 255 / 50%) !important;
     border-style: outset;
+    cursor: pointer;
 }
 
 a {
@@ -16,6 +18,6 @@ a {
     color: unset;
 }
 
-a:hover{
+a:hover {
     background-color: alpha($color: #a674f775);
 }

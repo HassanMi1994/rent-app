@@ -24,19 +24,13 @@
                 {
                 <p class="text-success h4 p-5">{{
                     contract.date.toLocaleDateString('fa-Ir')}}
-                    {{contract.date.getHours()|number:'2.0'}}:
-                    {{contract.date.getMinutes()|number:'2.0'}}</p>
+                    {{contract.date.getHours()|number:'2.0'}}:{{contract.date.getMinutes()|number:'2.0'}}</p>
                 }
             </div>
         </div>
 
         <div class="col-12">
             <app-form-input [labelName]="'rentLocation'" (value)="contract.rentLocation=($event)"></app-form-input>
-        </div>
-
-        <div class="col-12">
-            <app-form-input-number [labelName]="'howManyDaysClaim'"
-                (value)="contract.howManyDaysClaim=($event)"></app-form-input-number>
         </div>
     </div>
 
@@ -58,11 +52,11 @@
                 {{'quantity'|transloco}}
             </div>
 
-            <div class="col-3 h6 text-info text-center">
+            <div class="col-2 h6 text-info text-center">
                 {{'pricePerDay'|transloco}}
             </div>
 
-            <div class="col-3 h6 text-info text-center">
+            <div class="col-2 h6 text-info text-center">
                 {{'totalPrice'|transloco}}
             </div>
 
@@ -98,9 +92,13 @@
         </div>
         }
 
+        <br />
+        <br />
+        <hr />
+
         <app-add-payment></app-add-payment>
 
-        @if(this.contract.items.length>0){
+        @if(isValid){
         <div class="row fix-save-button">
             <button class="btn btn-outline-success col-8 " (click)="save()">{{'save'|transloco}}</button>
         </div>
@@ -136,17 +134,17 @@
 
                     <div class="col-12">
                         <app-form-input-number #pricePerDayRef [labelName]="'pricePerDay'"
-                            (value)="contractItem.pricePerDay=($event)"></app-form-input-number>
+                            (value)="contractItem.pricePerDay=$event"></app-form-input-number>
                     </div>
 
                     <div class="col-12">
                         <app-form-input-number #inputRef [labelName]="'quantity'"
-                            (value)="contractItem.quantity=($event)"></app-form-input-number>
+                            (value)="contractItem.quantity=$event"></app-form-input-number>
                     </div>
 
                     <div class="col-12">
                         <app-form-input #inputRef [labelName]="'description'"
-                            (value)="contractItem.description=($event)"></app-form-input>
+                            (value)="contractItem.description=$event"></app-form-input>
                     </div>
                 </div>
 

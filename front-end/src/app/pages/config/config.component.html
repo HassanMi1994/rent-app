@@ -10,5 +10,13 @@
 </div>
 
 <div class="row">
+    <ng-select [(ngModel)]="settingService.userConfig.calendarType">
+        <ng-option [value]="1">{{'persian'|transloco}}</ng-option>
+        <ng-option [value]="2">{{'georgian'|transloco}}</ng-option>
+    </ng-select>
+</div>
+
+
+<div class="row">
     <button class="btn btn-outline-primary" (click)="save()">{{'save'|transloco}}</button>
 </div>

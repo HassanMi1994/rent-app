@@ -6,6 +6,12 @@
         Toman,
     }
 
+    public enum CalendarType
+    {
+        Persian = 1,
+        Georgian = 2
+    }
+
     public enum ServiceType
     {
         Rent = 1,

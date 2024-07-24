@@ -6,6 +6,7 @@
         Opened = 2,
         ReturnedEverythingButShouldGiveMoney = 3,
         DoesNotRespond = 4,
-        ClosedSuccessfuly = 5
+        ReadyToBeClosed = 5,
+        ClosedSuccessfuly = 6
     }
 }

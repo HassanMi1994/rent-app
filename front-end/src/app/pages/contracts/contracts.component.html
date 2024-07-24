@@ -13,20 +13,20 @@
             bg-body-secondary bg-opacity-50
              bg-gradient customer-template">
         <div class="row">
-            <a (click)="selectedContractChanged(con.id)" [routerLink]="['details',con.id]">
+            <a [routerLink]="['details',con.id]">
                 <div class="col-12 bg-info"></div>
                 <div class="col-12 text-primary">
                     <b class="text-info"> {{con.customer.fullName}} </b>
                 </div>
                 <div class="col-12 text-primary">
-                    <b> {{ con.date|date:'yyyy-MM-dd HH:mm'}} </b>
+                    <b> <app-config-date [date]="con.date"></app-config-date> </b>
                     <!-- <b class="text-success"> {{con.totalPayment()}}</b> -->
                 </div>
                 <div class="col-12 border-3">
                     {{'totalPaid'|transloco}} {{con.totalPaidAmount| number}}
                 </div>
                 <div class="col-12 border-3">
-                    <app-contract-status [contract]="con"/>
+                    <app-contract-status [contract]="con" />
                 </div>
                 <div class="col-12 border-3 link-body-emphasis">
                     <button class="btn"><span class="bi bi-eye" (click)="showMoreInfo($event,con.id)"></span></button>

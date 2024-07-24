@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using persistance;
 
@@ -11,9 +12,11 @@ using persistance;
 namespace persistance.Migrations
 {
     [DbContext(typeof(RsaDbContext))]
-    partial class RsaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240723111826_added-storeid-in-contract")]
+    partial class addedstoreidincontract
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,8 +76,8 @@ namespace persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<long>("ContractNumber")
-                        .HasColumnType("bigint");
+                    b.Property<int>("ContractNumber")
+                        .HasColumnType("int");
 
                     b.Property<int>("ContractType")
                         .HasColumnType("int");
@@ -369,9 +372,6 @@ namespace persistance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CalendarType")
-                        .HasColumnType("int");
-
                     b.Property<long>("ContractNoSeed")
                         .HasColumnType("bigint");
 
@@ -381,23 +381,20 @@ namespace persistance.Migrations
                     b.Property<int>("Currency")
                         .HasColumnType("int");
 
-                    b.Property<long?>("LastContractNoSeed")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("RentCalculationType")
                         .HasColumnType("int");
 
                     b.Property<int>("ServiceType")
                         .HasColumnType("int");
 
-                    b.Property<long>("StoreID")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("TaxPercent")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("UserConfigID")
+                        .HasColumnType("int");
 
                     b.Property<long>("UserID")
                         .HasColumnType("bigint");

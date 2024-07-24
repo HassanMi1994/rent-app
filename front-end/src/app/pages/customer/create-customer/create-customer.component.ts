@@ -14,18 +14,6 @@ import { CustomerService } from '../../../services/customer.service';
   imports: [TranslocoPipe, FormInputComponent, RouterLink, FormsModule],
   templateUrl: './create-customer.component.html',
   styleUrl: './create-customer.component.scss',
-  animations: [
-    trigger('flyInOut', [
-      state('in', style({ transform: 'translateX(0)' })),
-      transition('void => *', [
-        style({ transform: 'translateX(-100%)' }),
-        animate(100)
-      ]),
-      transition('* => void', [
-        animate(100, style({ transform: 'translateX(100%)' }))
-      ])
-    ])
-  ]
 })
 export class CreateCustomerComponent {
   customer: Customer = new Customer();

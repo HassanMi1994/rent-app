@@ -5,7 +5,8 @@ namespace domain.abstraction
     public interface IUserConfigService
     {
         Task CreateDefaultConfig();
+        Task<long> GetNextContractNo();
         Task<UserConfig> GetSettingAsync();
-        Task UpdateAsync(UserConfig setting);
+        Task<UserConfig> UpdateAsync(UserConfig setting);
     }
 }

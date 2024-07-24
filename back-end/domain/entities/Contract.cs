@@ -7,18 +7,19 @@ namespace domain.entities
     public class Contract : IBaseEntity
     {
         public int ID { get; set; }
-        public int ContractNumber { get; set; }
+        public long ContractNumber { get; set; }
         public ServiceType ContractType { get; set; }
         public int CustomerID { get; set; }
         public DateTime Date { get; set; }
         public string RentLocation { get; set; }
-        public int? HowManyDaysClaim { get; set; }
         public decimal TotalPricePerDay { get; set; }
         public decimal Remaining { get; set; }
         public ContractStatus Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public Customer Customer { get; set; }
+        public long StoreID { get; set; }
+        public Store Store { get; set; }
 
         #region Calculated Fields
         public decimal TotalPaidAmount
@@ -44,7 +45,6 @@ namespace domain.entities
         {
             get
             {
-
                 var totalPrice = Items?.SelectMany(x => x.ReturnedItems)?.Sum(x => x.Price) ?? 0;
                 return totalPrice;
             }
@@ -65,7 +65,9 @@ namespace domain.entities
         public void AddPyament(Payment payment)
         {
             CanChange();
+            payment.DateTime = DateTime.Now;
             Payments.Add(payment);
+            CheckForChangingStatus();
         }
 
         private void CanChange()
@@ -73,6 +75,25 @@ namespace domain.entities
             if (Status == ContractStatus.ClosedSuccessfuly)
             {
                 throw new ExceptionBase(ExceptionCodes.ContractIsClosedSuccuessfulyCannotBeChanged);
+            }
+        }
+
+        public void CheckForChangingStatus()
+        {
+            //check if all items returned
+            CanChange();
+            if (Items.All(x => x.RemainingItems == 0))
+            {
+                if (TotalPaidAmount < TotalPriceForReturnedItems)
+                {
+                    Status = ContractStatus.ReturnedEverythingButShouldGiveMoney;
+                }
+
+                //todo: this should change! for example if customer paid more money, we should inform!
+                if (TotalPaidAmount >= TotalPriceForReturnedItems)
+                {
+                    Status = ContractStatus.ReadyToBeClosed;
+                }
             }
         }
 
@@ -94,15 +115,7 @@ namespace domain.entities
 
             item.ReturnedItems.Add(returnedItem);
             //todo: add returned items to the available quantity of the stuff! very important>>>???!!!
-
-            //check if all items returned
-            if (Items.All(x => x.RemainingItems == 0))
-            {
-                if (TotalPaidAmount < TotalPriceForReturnedItems)
-                {
-                    Status = ContractStatus.ReturnedEverythingButShouldGiveMoney;
-                }
-            }
+            CheckForChangingStatus();
         }
 
         public void ChangeStatus(ContractStatus contractStatus)

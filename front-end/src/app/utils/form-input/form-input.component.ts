@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { TranslocoPipe } from '@ngneat/transloco';
 import { } from 'stream';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, RequiredValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-form-input',
@@ -11,7 +11,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './form-input.component.html',
   styleUrl: './form-input.component.scss',
 })
-export class FormInputComponent {
+export class FormInputComponent implements OnChanges {
   @Input() labelName: string;
   @Input() readOnly: boolean = false;
   @Input() type: string;
@@ -19,8 +19,12 @@ export class FormInputComponent {
   @Input() val: string
   @ViewChild('input') input: HTMLInputElement;
 
+  isRequired: boolean = true;
+
   constructor() {
     this.valueChanged(this.val);
+  }
+  ngOnChanges(changes: SimpleChanges): void {
   }
 
   valueChanged(value: string) {

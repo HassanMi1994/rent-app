@@ -1,4 +1,5 @@
 ﻿using domain.enums;
+using Microsoft.VisualBasic;
 using System.Text.Json;
 
 namespace domain.entities
@@ -25,7 +26,7 @@ namespace domain.entities
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public ICollection<History>? History { get; set; }
-        public ICollection<ReturnedItem>? ReturnedItems { get; set; }
+        public ICollection<ReturnedItem> ReturnedItems { get; set; } = new List<ReturnedItem>();
 
         public void AddHistory()
         {

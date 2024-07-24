@@ -9,6 +9,7 @@ import { ContractStatus } from '../models/enum/ContractStatus';
 export class Payment {
   amount: number;
   paymentType: PaymentType
+  dateTime: Date
 }
 
 @Injectable({
@@ -41,8 +42,12 @@ export class ContractService {
 
   create(contract: Contract) {
     contract.payments = this.contract.payments;
-    this.client.post('https://localhost:7053/api/contracts', contract)
-      .subscribe(x => this.contracts = this.filterdContracts = [contract, ...this.contracts]);
+    this.client.post<Contract>('https://localhost:7053/api/contracts', contract)
+      .subscribe(x => {
+        //todo: this won't work because we don't load the customer so temprairly we will use getAll();
+        // this.contracts = this.filterdContracts = [x, ...this.contracts];
+        this.getAll();
+      });
   }
 
   changeStatus(contractStatus: ContractStatus) {

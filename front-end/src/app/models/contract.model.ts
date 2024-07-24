@@ -8,10 +8,11 @@ export class Contract extends baseModel {
 
     id: number;
     customerID: number;
+    contractNumber:number;
     date: Date;
     persianDateTime: string;
     rentLocation: string;
-    howManyDaysClaim: number;
+    // howManyDaysClaim: number;
     totalPricePerDay: number;
     totalPaidAmount: number;
     totalPriceForReturnedItems: number;

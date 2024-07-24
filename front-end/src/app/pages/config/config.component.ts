@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormInputComponent } from '../../utils/form-input/form-input.component';
 import { FormInputNumberComponent } from '../../utils/form-input-number/form-input-number.component';
-import { SettingService } from '../../services/userConfig.service';
+import { SettingService } from '../../services/setting.service';
 import { TranslocoPipe } from '@ngneat/transloco';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { StaticModels } from '../../models/enum/allEnums.enum';
@@ -20,7 +20,6 @@ export class SettingComponent {
 
   constructor(public settingService: SettingService) {
     settingService.get();
-
   }
 
   save() {
