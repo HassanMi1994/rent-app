@@ -21,7 +21,9 @@
         /// </summary>
         ContractIsClosedSuccuessfulyCannotBeChanged = 1002,
 
-        UserAlreadyExist = 1401
+        UserAlreadyExist = 1401,
+        OnlyForAdminUsers = 1420
+
 
 
         #endregion

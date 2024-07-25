@@ -96,7 +96,8 @@
         "200": "Operation done successfuly!",
         "401": "You Are NOT Logged In, Please Sign In First",
         "1001": "Items To Return Are More Than Remaining",
-        "1002": "Contract Is Closed Succuessfuly, So Cannot Be Changed!"
+        "1002": "Contract Is Closed Succuessfuly, So Cannot Be Changed!",
+        "1420": "Only For Admin User!"
     },
     "calendarType": "Calendar Type",
     "persian": "Persian",

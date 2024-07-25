@@ -6,7 +6,7 @@ namespace api.Middleware
     {
         public RoleType RoleType { get; set; }
 
-        public AuthAttribute(RoleType role)
+        public AuthAttribute(RoleType role = RoleType.Normal)
         {
             this.RoleType = role;
         }
