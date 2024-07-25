@@ -48,6 +48,7 @@ namespace application.Services
 
             //todo: check if store exist
             //todo: check if user exist before!
+            await ThrowIfUserExist(addStoreDto.Email);
 
             var store = new Store()
             {
@@ -69,6 +70,40 @@ namespace application.Services
 
             await _rsaDbContext.Stores.AddAsync(store);
             await _rsaDbContext.SaveChangesAsync();
+        }
+
+        private async Task ThrowIfUserExist(string email)
+        {
+            bool isInvalidUserName = await _rsaDbContext.Users
+                 .AnyAsync(x => x.Email.ToLower() == email.ToLower());
+
+            if (isInvalidUserName)
+            {
+                throw new ExceptionBase(ExceptionCodes.UserAlreadyExist);
+            }
+        }
+
+        public async Task CreateNormalUserAsync(AddNormalUserDto normalUser)
+        {
+            var pass = normalUser.Password.GetStringSha256Hash();
+            await ThrowIfUserExist(normalUser.Email);
+
+            _rsaDbContext.Users.Add(new User()
+            {
+                Email = normalUser.Email,
+                IsAdmin = false,
+                FullName = normalUser.FullName,
+                Mobile = normalUser.Mobile,
+                Password = pass,
+                StoreID = StoreID
+            });
+            await _rsaDbContext.SaveChangesAsync();
+        }
+
+        public IAsyncEnumerable<User> GetAllUsers()
+        {
+            return _rsaDbContext.Users.Where(x => x.StoreID == StoreID)
+                .AsAsyncEnumerable();
         }
 
         public async Task<UserInfoDto> GenerateJwtTokenAsync(string userName, string password)
@@ -104,7 +139,7 @@ namespace application.Services
 
         public Dictionary<string, string> GetUserClaims()
         {
-            var jwt = this.httpContextAccessor.HttpContext.Request.Headers["Authorization"];
+            var jwt = httpContextAccessor.HttpContext.Request.Headers["Authorization"];
             if (!string.IsNullOrEmpty(jwt))
             {
                 var keyvalues = Jwt.GetClaimsFromJwt(jwt).Select(x => new KeyValuePair<string, string>(x.Type, x.Value));

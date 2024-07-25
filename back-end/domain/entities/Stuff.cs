@@ -5,6 +5,7 @@ namespace domain.entities
     public class Stuff : IBaseEntity
     {
         public int ID { get; set; }
+        public long StoreID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public ServiceType ServiceType { get; set; }

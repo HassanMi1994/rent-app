@@ -1,10 +1,13 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Inject, Injectable, inject } from '@angular/core';
 import { Login, UserInfo } from '../models/login.model';
 import { SignUp } from '../models/sign-up.model';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { TranslocoService } from '@ngneat/transloco';
+import { DOCUMENT } from '@angular/common';
+import { Observable } from 'rxjs';
+import { User } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +19,38 @@ export class UserManagerService {
   public loginModel: Login = new Login();
   public signUpModel: SignUp = new SignUp();
   cookieService = inject(CookieService);
+  ls: Storage | undefined;
 
-  constructor(private client: HttpClient, private router: Router, private transLoco: TranslocoService) {
+  public users$: Observable<User[]>;
+  public users: User[];
+  public filterdUsers: User[];
+  public newUser: User = new User();
 
+  constructor(private client: HttpClient,
+    private router: Router,
+    private transLoco: TranslocoService,
+    @Inject(DOCUMENT) document: Document
+  ) {
+    this.ls = document.defaultView?.localStorage;
+
+    let ui = this.ls?.getItem('userInfo');
+    if (ui) {
+      let object: UserInfo = JSON.parse(ui);
+      this.userInfo = object;
+    }
+  }
+
+  getUsers() {
+    this.users$ = this.client.get<User[]>('https://localhost:7053/api/users');
+    this.users$.subscribe(x => this.filterdUsers = this.users = x);
+  }
+
+  addNormalUser() {
+    this.client.post('https://localhost:7053/api/users/add-user', this.newUser)
+      .subscribe(x => {
+        this.newUser = new User();
+        this.getUsers();
+      });
   }
 
   login() {
@@ -26,6 +58,8 @@ export class UserManagerService {
     this.client.post<UserInfo>('https://localhost:7053/api/users/login', this.loginModel)
       .subscribe((x: UserInfo) => {
         this.token = x.jwtKey;
+        x.isLoggedIn = true;
+        this.ls?.setItem("userInfo", JSON.stringify(x));
         this.cookieService.set('jwt-token', 'bearer ' + x.jwtKey);
         this.userInfo = x;
         this.userInfo.isLoggedIn = true;
@@ -38,10 +72,9 @@ export class UserManagerService {
     console.log(this.loginModel);
     this.userInfo = new UserInfo();
     this.cookieService.set('jwt-token', '');
+    this.ls?.removeItem('userInfo');
     this.router.navigateByUrl('/');
   }
-
-
 
   signUp() {
     this.client.post('https://localhost:7053/api/users/sign-up', this.signUpModel)
@@ -49,4 +82,19 @@ export class UserManagerService {
         //todo: show pop up to show that sign up was successful and redirect user
       })
   }
+
+  //#region search
+  private _searchTerm: string = '';
+  get searchTerm(): string {
+    return this._searchTerm;
+  }
+
+  set searchTerm(value: string) {
+    if (value !== this._searchTerm) {
+      this._searchTerm = value;
+      this.filterdUsers = this.users.filter(x => x.fullName.includes(this.searchTerm));
+    }
+  }
+
+  //#endregion
 }

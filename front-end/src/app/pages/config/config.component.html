@@ -10,10 +10,16 @@
 </div>
 
 <div class="row">
-    <ng-select [(ngModel)]="settingService.userConfig.calendarType">
-        <ng-option [value]="1">{{'persian'|transloco}}</ng-option>
-        <ng-option [value]="2">{{'georgian'|transloco}}</ng-option>
-    </ng-select>
+    <div class="col-4">
+        <span class="h4 text-center align-items-center align-text-bottom">{{'calendarType'|transloco}}</span>
+    </div>
+    <div class="col-8">
+        <ng-select [(ngModel)]="settingService.userConfig.calendarType">
+            <ng-option [value]="1">{{'persian'|transloco}}</ng-option>
+            <ng-option [value]="2">{{'georgian'|transloco}}</ng-option>
+        </ng-select>
+    </div>
+
 </div>
 
 

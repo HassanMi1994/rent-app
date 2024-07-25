@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { UserManagerService } from '../services/user-manager.service';
-import { Injectable, inject } from '@angular/core';
+import { inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {

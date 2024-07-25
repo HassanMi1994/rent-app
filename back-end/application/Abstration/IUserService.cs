@@ -1,4 +1,5 @@
 ﻿using application.Models.User;
+using domain.entities;
 using domain.enums;
 using Microsoft.AspNetCore.Identity;
 
@@ -13,5 +14,7 @@ namespace domain.abstraction
         ServiceType ServiceType{ get; }
 
         Dictionary<string, string> GetUserClaims();
+        Task CreateNormalUserAsync(AddNormalUserDto normalUser);
+        IAsyncEnumerable<User> GetAllUsers();
     }
 }

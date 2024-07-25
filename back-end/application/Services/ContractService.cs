@@ -22,7 +22,7 @@ namespace application.Services
 
         public async Task<Contract> AddPaymentAsync(long contractID, Payment addPaymentDto)
         {
-            var contract = _rentDb.Contracts.LoadWithAllChildrens()
+            var contract = _rentDb.Contracts.LoadWithAllChildren()
                                 .Where(x => x.ID == contractID).FirstOrDefault();
 
             if (contract == null)
@@ -56,7 +56,7 @@ namespace application.Services
         public async Task<Contract?> GetByIdAsync(int id)
         {
             var contract = await _rentDb
-                .Contracts.LoadWithAllChildrens().FirstOrDefaultAsync(x => x.ID == id);
+                .Contracts.LoadWithAllChildren().FirstOrDefaultAsync(x => x.ID == id);
 
             if (contract == null)
                 throw new ExceptionBase(ExceptionCodes.ItemNotFound);
@@ -71,7 +71,7 @@ namespace application.Services
         public async Task<Contract> ReturnOneItem(long contractID, ReturnedItem returnedItem)
         {
             var contract = await _rentDb.Contracts
-                .LoadWithAllChildrens()
+                .LoadWithAllChildren()
                 .FirstOrDefaultAsync(x => x.ID == contractID);
 
             if (contract == null)
@@ -86,7 +86,7 @@ namespace application.Services
         public async Task<Contract> ChangeStatus(long contractID, ContractStatus contractStatus)
         {
             var contract = await _rentDb.Contracts
-                    .LoadWithAllChildrens()
+                    .LoadWithAllChildren()
                     .FirstOrDefaultAsync(x => x.ID == contractID);
 
             if (contract == null)
@@ -99,9 +99,9 @@ namespace application.Services
         }
     }
 
-    public static class ContractExtentions
+    public static class ContractExtensions
     {
-        public static IQueryable<Contract> LoadWithAllChildrens(this IQueryable<Contract> query)
+        public static IQueryable<Contract> LoadWithAllChildren(this IQueryable<Contract> query)
         {
             return query
                 .Include(x => x.Customer)

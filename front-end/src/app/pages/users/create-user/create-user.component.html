@@ -1,0 +1,30 @@
+<div class="row">
+
+    <div class="col-12 col-md-6 col-lg-4">
+        <app-form-input [labelName]="'email'" (value)="userManager.newUser.email=($event)"></app-form-input>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4">
+        <app-form-input [labelName]="'fullName'" (value)="userManager.newUser.fullName=($event)"></app-form-input>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4">
+        <app-form-input [labelName]="'mobile'" (value)="userManager.newUser.mobile=($event)"></app-form-input>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4">
+        <app-form-input [labelName]="'password'" [type]="'password'"
+            (value)="userManager.newUser.password=($event)"></app-form-input>
+    </div>
+
+    <div class="col-12 col-md-6 col-lg-4">
+        <app-form-input [labelName]="'confirmPassword'" [type]="'password'"
+            (value)="userManager.newUser.confirmPasswrod=($event)"></app-form-input>
+    </div>
+
+    <div class="col-12">
+        <input class="form-control btn btn-outline-success" (click)="create()" type="button"
+            [value]="'create'|transloco">
+
+    </div>
+</div>

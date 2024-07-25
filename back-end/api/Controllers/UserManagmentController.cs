@@ -1,6 +1,7 @@
 ﻿using api.Middleware;
 using application.Models.User;
 using domain.abstraction;
+using domain.entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -23,6 +24,21 @@ namespace api.Controllers
         {
             await _userService.CreateStoreAsync(user);
             return Ok();
+        }
+
+        [Auth(domain.enums.RoleType.Admin)]
+        [HttpPost("add-user")]
+        public async Task<IActionResult> AddNoramlUser(AddNormalUserDto user)
+        {
+            await _userService.CreateNormalUserAsync(user);
+            return Ok();
+        }
+
+        [Auth(domain.enums.RoleType.Admin)]
+        [HttpGet]
+        public IAsyncEnumerable<User> GetAllUsers()
+        {
+            return _userService.GetAllUsers();
         }
 
         [AllowAnonymous]

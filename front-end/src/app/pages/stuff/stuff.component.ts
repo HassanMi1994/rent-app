@@ -16,15 +16,10 @@ import { StuffService } from '../../services/stuff.service';
   styleUrl: './stuff.component.scss'
 })
 export default class StuffComponent implements OnInit {
-  
-  transLoco: TranslocoService;
-  
-
 
   @ViewChild('popUp') child: PopUpComponent;
 
   constructor(public stuffService: StuffService, transLoco: TranslocoService) {
-    this.transLoco = transLoco;
   }
   ngOnInit(): void {
     this.stuffService.getStuff();

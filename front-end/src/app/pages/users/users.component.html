@@ -1,0 +1,36 @@
+<h3>
+    <a class="btn btn-outline-primary m-2 col-12" [routerLink]="['new']">{{'new-user'|transloco}}</a>
+</h3>
+
+<div class="row">
+
+    <!-- <app-form-input [labelName]="'search'" (value)="searchTerm=$event"></app-form-input> -->
+    <div class="col-12">
+        <app-form-input [labelName]="'search'" (value)="this.ums.searchTerm=$event"></app-form-input>
+    </div>
+</div>
+<div class="row justify-content-center">
+    @for (u of ums.filterdUsers; track $index) {
+    <div
+        class="col-12 rounded col-md-3 m-3 text-center rounded-5 border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient customer-template">
+        <div class="row">
+            <div class="col-12 bg-info"></div>
+            <div class="col-12 text-info">
+                <b> {{u.fullName}}</b>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6 text-center">
+                <b><b class="text-info"></b> {{u.email}}</b>
+            </div>
+            <div class="col-6 text-center">
+                <b class="text-info">{{u.mobile}}</b>
+            </div>
+        </div>
+        <div class="col-12 border-3 link-body-emphasis">
+            <button class="btn"><span class="bi bi-eye" (click)="showMoreInfo($event,u.id)"></span></button>
+        </div>
+    </div>
+    }
+    <app-pop-up id="morePopUp" #popUp></app-pop-up>
+</div>

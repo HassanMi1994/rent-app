@@ -11,6 +11,8 @@ import { ContractDetailsComponent } from './pages/contracts/contract-details/con
 import { SettingComponent } from './pages/config/config.component';
 import { LoginComponent } from './pages/_login_signup/login/login.component';
 import { SignUpComponent } from './pages/_login_signup/sign-up/sign-up.component';
+import { UsersComponent } from './pages/users/users.component';
+import { CreateUserComponent } from './pages/users/create-user/create-user.component';
 
 
 
@@ -22,6 +24,8 @@ export const routes: Routes = [
     { component: ContractsComponent, path: ':{lang}/contracts', },
     { component: CreateContractComponent, path: ':{lang}/contracts/new', },
     { component: ContractDetailsComponent, path: ':{lang}/contracts/details/:{id}}', },
+    { component: UsersComponent, path: ':{lang}/users', },
+    { component: CreateUserComponent, path: ':{lang}/users/new', },
     { component: CustomerComponent, path: ':{lang}/customers', },
     { component: CreateCustomerComponent, path: ':{lang}/customers/new' },
     { component: WelcomeComponent, path: ':{lang}/welcome' },

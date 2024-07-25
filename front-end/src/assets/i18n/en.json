@@ -93,10 +93,16 @@
     "date": "Date",
     "createdSuccessfuly": "Created Successfuly!",
     "resp": {
+        "200": "Operation done successfuly!",
+        "401": "You Are NOT Logged In, Please Sign In First",
         "1001": "Items To Return Are More Than Remaining",
-        "200": "Operation done successfuly!"
+        "1002": "Contract Is Closed Succuessfuly, So Cannot Be Changed!"
     },
+    "calendarType": "Calendar Type",
     "persian": "Persian",
     "georgian": "Georgian",
-    "contractNo": "Contract No."
+    "contractNo": "Contract No.",
+    "new-user": "New User",
+    "users": "Users",
+    "create": "Create"
 }

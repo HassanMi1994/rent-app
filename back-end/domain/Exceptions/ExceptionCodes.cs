@@ -19,7 +19,9 @@
         /// <summary>
         /// throw when try to edit a closed contract!
         /// </summary>
-        ContractIsClosedSuccuessfulyCannotBeChanged = 1002
+        ContractIsClosedSuccuessfulyCannotBeChanged = 1002,
+
+        UserAlreadyExist = 1401
 
 
         #endregion

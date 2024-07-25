@@ -6,6 +6,7 @@ namespace Rent.Entities
     {
         #region props
         public int ID { get; set; }
+        public long StoreID { get; set; }
         public string FullName { get; set; }
         public string NationalityCode { get; set; }
         public string FatherName { get; set; }
