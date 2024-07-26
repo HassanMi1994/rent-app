@@ -19,12 +19,12 @@
                     (value)="contract.date=($event)"></app-form-input-date>
             </div>
 
-            <div class="col-6">
+            <div class="col-6 align-content-center">
                 @if (contract.date!=undefined)
                 {
-                <p class="text-success h4 p-5">{{
-                    contract.date.toLocaleDateString('fa-Ir')}}
-                    {{contract.date.getHours()|number:'2.0'}}:{{contract.date.getMinutes()|number:'2.0'}}</p>
+                {{
+                contract.date.toLocaleDateString('fa-Ir')}}
+                {{contract.date.getHours()|number:'2.0'}}:{{contract.date.getMinutes()|number:'2.0'}}
                 }
             </div>
         </div>

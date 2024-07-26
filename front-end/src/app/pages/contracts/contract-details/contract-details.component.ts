@@ -5,11 +5,9 @@ import { Contract } from '../../../models/contract.model';
 import { TranslocoPipe } from '@ngneat/transloco';
 import { FormsModule } from '@angular/forms';
 import { AsyncPipe, CommonModule, DatePipe, DecimalPipe } from '@angular/common';
-import { ContractItemsComponent } from '../contract-items/contract-items.component';
-import { AddPaymentComponent } from '../add-payment/add-payment.component';
-import { ReturnItemComponent } from '../return-item/return-item.component';
+import { ContractItemsComponent } from './contract-items/contract-items.component';
+import { AddPaymentComponent } from './add-payment/add-payment.component';
 import { ContractStatus } from '../../../models/enum/ContractStatus';
-import { BehaviorSubject, Subject } from 'rxjs';
 import { ContractStatusComponent } from '../contract-status/contract-status.component';
 import { ConfigDateComponent } from '../../../utils/config-date/config-date.component';
 

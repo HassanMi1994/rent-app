@@ -1,3 +1,159 @@
+<!-- <nav class="navbar navbar-expand-xl">
+    <div class="container-fluid">
+
+        
+        <a [routerLink]="[this.transLoco.getActiveLang(),'welcome']" class="nav-link" data-bs-toggle="tab"
+            aria-current="page" routerLinkActive="active"> <span class="bi bi-house"></span>
+            {{'app-name'|transloco}} <b>{{userManager.userInfo!==null?"":" - "}} {{
+                userManager.userInfo.storeName}}</b></a>
+
+        @if(userManager.userInfo.isLoggedIn){
+            {{"..."}}
+        {{'welcome'|transloco}} <b> {{userManager.userInfo.fullName}}</b>
+
+        }
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+                @if(userManager.userInfo.isLoggedIn){
+                <li class="nav-item" role="presentation">
+                    <a [routerLink]="[this.transLoco.getActiveLang(),'contracts']" class="nav-link" data-bs-toggle="tab"
+                        routerLinkActive="active"><span class="bi bi-card-list"></span> {{'contracts'|transloco}}</a>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <a [routerLink]="[this.transLoco.getActiveLang(),'stuff']" class="nav-link" data-bs-toggle="tab"
+                        routerLinkActive="active" data-toggle="tooltip" data-placement="bottom"
+                        [title]="'stuffTooltip'|transloco"><span class="bi bi-tools"></span> {{'stuff'|transloco}}</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a [routerLink]="[transLoco.getActiveLang(),'customers']" class="nav-link" data-bs-toggle="tab"
+                        routerLinkActive="active"> <span class="bi bi-people"></span> {{'customers'|transloco}}</a>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <a [routerLink]="[transLoco.getActiveLang(),'users']" class="nav-link" data-bs-toggle="tab"
+                        routerLinkActive="active"> <span class="bi bi-people"></span> {{'users'|transloco}}</a>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    <a [routerLink]="[transLoco.getActiveLang(),'settings']" class="nav-link" data-bs-toggle="tab"
+                        routerLinkActive="active"> <span class="bi bi-gear-fill"></span> {{'settings'|transloco}}</a>
+                </li>
+                }
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        🌐
+                        {{selectedLang}}
+                    </a>
+                    <ul class="dropdown-menu text-center lang-list" aria-labelledby="navbarDropdown">
+                        <li><input type="search" class="form-control" [placeholder]="'search'|transloco" /></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li><a class="dropdown-item " routerLinkActive="active" (click)="changeLang('fa')">Persian
+                                (فارسی)</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" routerLinkActive="active" (click)="changeLang('en')">English</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" routerLinkActive="active" (click)="changeLang('ka')">Georgian
+                                (ქართული)</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" routerLinkActive="active" (click)="changeLang('ru')">Russion
+                                (Русский)</a></li>
+                        <li>
+                            <hr class="dropdown-divider ">
+                        </li>
+                        <li><a class="dropdown-item" routerLinkActive="active" (click)="changeLang('ch')">Chinese
+                                (中国人)</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" routerLinkActive="active" (click)="changeLang('it')">Italian
+                                (Italiana)</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" routerLinkActive="active" (click)="changeLang('fr')">France</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" routerLinkActive="active" (click)="changeLang('ar')">Arabic
+                                (عربی)</a></li>
+                    </ul>
+                </li>
+
+                <li class="nav-item" role="presentation">
+                    @if (!isDarkMode) {
+                    <span class="bi bi-moon-stars-fill nav-link" (click)="toggleDarkMode()"></span>
+                    }
+                    @if (isDarkMode) {
+                    <span class="bi bi-sun-fill nav-link" (click)="toggleDarkMode()"></span>
+                    }
+                </li>
+
+
+                @if(!userManager.userInfo.isLoggedIn)
+                {
+                <li class="nav-item float-end" role="presentation">
+                    <a [routerLink]="[transLoco.getActiveLang(),'login']" class="nav-link" data-bs-toggle="tab"
+                        routerLinkActive="active"> <span class="bi bi-box-arrow-in-left"></span>
+                        {{'login'|transloco}}</a>
+                </li>
+                <li class="nav-item float-end" role="presentation">
+                    <a [routerLink]="[transLoco.getActiveLang(),'sign-up']" class="nav-link" data-bs-toggle="tab"
+                        routerLinkActive="active"> <span class="bi bi-door-open"></span> {{'signUp'|transloco}}</a>
+                </li>
+                }@else{
+                <li class="nav-item float-end">
+                    <a (click)="userManager.logOut()" class="nav-link" data-bs-toggle="tab" routerLinkActive="active">
+                        <span class="bi bi-door-closed"></span> {{'logOut'|transloco}}</a>
+                </li>
+                }
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<div class="alert alert-warning text-center alert-dismissible">
+    <span class="bi bi-envelope-paper-heart"></span>
+    {{'underDev'|transloco}}
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <ul class="nav nav-tabs" id="navId" role="tablist">
     <li class="nav-item">
         <a [routerLink]="[this.transLoco.getActiveLang(),'welcome']" class="nav-link active" data-bs-toggle="tab"

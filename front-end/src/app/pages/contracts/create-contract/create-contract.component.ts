@@ -15,12 +15,13 @@ import { ContractService } from '../../../services/contract.service';
 import { FormInputNumberComponent } from '../../../utils/form-input-number/form-input-number.component';
 import { ContractItem } from '../../../models/contractItem.model';
 import { FormInputDateComponent } from '../../../utils/form-input-date/form-input-date.component';
-import { AddPaymentComponent } from '../add-payment/add-payment.component';
+import { AddPaymentComponent } from '../contract-details/add-payment/add-payment.component';
+import { ConfigDateComponent } from '../../../utils/config-date/config-date.component';
 
 @Component({
   selector: 'app-create-contract',
   standalone: true,
-  imports: [FormInputComponent, TranslocoPipe, NgSelectModule, FormsModule, CommonModule, RouterLink, FormInputNumberComponent, FormInputComponent, FormInputDateComponent, AddPaymentComponent, DecimalPipe],
+  imports: [FormInputComponent, TranslocoPipe, NgSelectModule, FormsModule, CommonModule, RouterLink,ConfigDateComponent, FormInputNumberComponent, FormInputComponent, FormInputDateComponent, AddPaymentComponent, DecimalPipe],
   templateUrl: './create-contract.component.html',
   styleUrl: './create-contract.component.scss'
 })

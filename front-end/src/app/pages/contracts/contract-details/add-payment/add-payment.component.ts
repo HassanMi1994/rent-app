@@ -1,13 +1,13 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { TranslocoPipe } from '@ngneat/transloco';
-import { ContractService } from '../../../services/contract.service';
-import { FormInputNumberComponent } from '../../../utils/form-input-number/form-input-number.component';
-import { FormInputComponent } from '../../../utils/form-input/form-input.component';
+import { ContractService } from '../../../../services/contract.service';
+import { FormInputNumberComponent } from '../../../../utils/form-input-number/form-input-number.component';
+import { FormInputComponent } from '../../../../utils/form-input/form-input.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Contract } from '../../../models/contract.model';
-import { ConfigDateComponent } from '../../../utils/config-date/config-date.component';
+import { Contract } from '../../../../models/contract.model';
+import { ConfigDateComponent } from '../../../../utils/config-date/config-date.component';
 
 @Component({
   selector: 'app-add-payment',

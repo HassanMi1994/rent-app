@@ -1,0 +1,17 @@
+.payment-row{
+    border-radius: 10px;
+    border-radius: 10px;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: center;
+    align-items: center;
+    justify-content: space-between;
+    overflow-wrap: unset;
+    text-wrap: nowrap;
+    height: 50px;
+    :hover{
+        background-color: rgba(0, 255, 255, 0.39);
+    }
+}

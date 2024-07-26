@@ -1,14 +1,17 @@
-import { Component, Input, ViewChild } from '@angular/core';
-import { ContractService } from '../../../services/contract.service';
-import { FormInputComponent } from '../../../utils/form-input/form-input.component';
-import { FormInputNumberComponent } from '../../../utils/form-input-number/form-input-number.component';
-import { TranslocoPipe } from '@ngneat/transloco';
-import { DecimalPipe } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
-import { FormInputDateComponent } from '../../../utils/form-input-date/form-input-date.component';
-import { ContractItem } from '../../../models/contractItem.model';
-import { ConfigDateComponent } from '../../../utils/config-date/config-date.component';
+import { Component, Input, ViewChild } from "@angular/core";
+import { FormInputComponent } from "../../../../../utils/form-input/form-input.component";
+import { FormInputNumberComponent } from "../../../../../utils/form-input-number/form-input-number.component";
+import { FormInputDateComponent } from "../../../../../utils/form-input-date/form-input-date.component";
+import { TranslocoPipe } from "@ngneat/transloco";
+import { DecimalPipe } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { ConfigDateComponent } from "../../../../../utils/config-date/config-date.component";
+import { NgSelectModule } from "@ng-select/ng-select";
+import { ContractItem } from "../../../../../models/contractItem.model";
+import { ContractService } from "../../../../../services/contract.service";
+
+
+
 
 @Component({
   selector: 'app-return-item',

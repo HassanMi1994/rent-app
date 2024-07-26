@@ -1,10 +1,9 @@
 import { AfterViewInit, Component, Input, OnInit, input } from '@angular/core';
-import { ReturnedItem } from '../../../models/returnedItem.model';
 import { DatePipe, DecimalPipe } from '@angular/common';
-import { ContractItem } from '../../../models/contractItem.model';
+import { ReturnedItem } from '../../../../../models/returnedItem.model';
 import { TranslocoPipe } from '@ngneat/transloco';
-import { ContractService } from '../../../services/contract.service';
-import { ConfigDateComponent } from '../../../utils/config-date/config-date.component';
+import { ConfigDateComponent } from '../../../../../utils/config-date/config-date.component';
+import { ContractService } from '../../../../../services/contract.service';
 
 @Component({
   selector: 'app-returned-items',

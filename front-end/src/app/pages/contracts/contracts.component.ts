@@ -10,7 +10,7 @@ import { ContractService } from '../../services/contract.service';
 import { Contract } from '../../models/contract.model';
 import { FormInputComponent } from '../../utils/form-input/form-input.component';
 import { DatePipe, DecimalPipe } from '@angular/common';
-import { ContractItemsComponent } from './contract-items/contract-items.component';
+import { ContractItemsComponent } from './contract-details/contract-items/contract-items.component';
 import { ContractStatusComponent } from './contract-status/contract-status.component';
 import { ConfigDateComponent } from '../../utils/config-date/config-date.component';
 

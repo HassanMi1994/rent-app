@@ -1,11 +1,11 @@
-import { Component, Input, ViewChildren, input } from '@angular/core';
-import { TranslocoPipe } from '@ngneat/transloco';
-import { ContractService } from '../../../services/contract.service';
-import { FormsModule } from '@angular/forms';
-import { DatePipe, DecimalPipe } from '@angular/common';
-import { CustomerService } from '../../../services/customer.service';
-import { ReturnItemComponent } from '../return-item/return-item.component';
-import { ReturnedItemsComponent } from '../returned-items/returned-items.component';
+import { DatePipe, DecimalPipe } from "@angular/common";
+import { FormsModule } from "@angular/forms";
+import { ReturnItemComponent } from "./return-item/return-item.component";
+import { ReturnedItemsComponent } from "./returned-items/returned-items.component";
+import { Component, Input, ViewChildren } from "@angular/core";
+import { ContractService } from "../../../../services/contract.service";
+import { TranslocoPipe } from "@ngneat/transloco";
+
 
 @Component({
   selector: 'app-contract-items',
