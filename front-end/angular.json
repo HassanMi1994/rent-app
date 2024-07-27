@@ -34,7 +34,9 @@
               "node_modules/bootstrap-icons/font/bootstrap-icons.min.css",
               "node_modules/@ng-select/ng-select/scss/material.theme.scss",
               "src/styles.scss",
-              "node_modules/ngx-toastr/toastr.css"
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+              "node_modules/primeng/resources/primeng.min.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
