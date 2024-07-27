@@ -8,6 +8,7 @@ import { TranslocoService } from '@ngneat/transloco';
 import { DOCUMENT } from '@angular/common';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -41,12 +42,12 @@ export class UserManagerService {
   }
 
   getUsers() {
-    this.users$ = this.client.get<User[]>('https://localhost:7053/api/users');
+    this.users$ = this.client.get<User[]>(environment.baseUrl + 'users');
     this.users$.subscribe(x => this.filterdUsers = this.users = x);
   }
 
   addNormalUser() {
-    this.client.post('https://localhost:7053/api/users/add-user', this.newUser)
+    this.client.post(environment.baseUrl + 'users/add-user', this.newUser)
       .subscribe(x => {
         this.newUser = new User();
         this.getUsers();
@@ -55,7 +56,7 @@ export class UserManagerService {
 
   login() {
     console.log(this.loginModel);
-    this.client.post<UserInfo>('https://localhost:7053/api/users/login', this.loginModel)
+    this.client.post<UserInfo>(environment.baseUrl + 'users/login', this.loginModel)
       .subscribe((x: UserInfo) => {
         this.token = x.jwtKey;
         x.isLoggedIn = true;
@@ -77,7 +78,7 @@ export class UserManagerService {
   }
 
   signUp() {
-    this.client.post('https://localhost:7053/api/users/sign-up', this.signUpModel)
+    this.client.post(environment.baseUrl + 'users/sign-up', this.signUpModel)
       .subscribe(x => {
         //todo: show pop up to show that sign up was successful and redirect user
       })

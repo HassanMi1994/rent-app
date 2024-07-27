@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EnvironmentInjector, EnvironmentProviders, Injectable } from '@angular/core';
 import { Customer } from '../models/customer.model';
 import { Observable, tap } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { TranslocoService } from '@ngneat/transloco';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,11 @@ export class CustomerService {
 
   constructor(private client: HttpClient,
     private toast: ToastrService,
-    private transloco: TranslocoService) { }
+    private transloco: TranslocoService) {
+  }
 
   create(customer: Customer) {
-    this.client.post('https://localhost:7053/api/customers', customer)
+    this.client.post(environment.baseUrl + 'customers', customer)
       .subscribe(x => {
         this.customers$.pipe(tap(x => x = [customer, ...this.customers]));
         this.customers = [customer, ...this.customers]
@@ -30,7 +32,7 @@ export class CustomerService {
   }
 
   getAll(): Observable<Customer[]> {
-    this.customers$ = this.client.get<Customer[]>('https://localhost:7053/api/customers');
+    this.customers$ = this.client.get<Customer[]>(environment.baseUrl + 'customers');
     this.customers$.subscribe(x => this.customers = this.filterdCustomers = x);
     return this.customers$;
   }

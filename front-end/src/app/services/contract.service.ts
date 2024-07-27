@@ -5,6 +5,7 @@ import { Contract } from '../models/contract.model';
 import { PaymentType } from "../models/enum/PaymentType";
 import { ReturnedItem } from '../models/returnedItem.model';
 import { ContractStatus } from '../models/enum/ContractStatus';
+import { environment } from '../../environments/environment';
 
 export class Payment {
   amount: number;
@@ -42,7 +43,7 @@ export class ContractService {
 
   create(contract: Contract) {
     contract.payments = this.contract.payments;
-    this.client.post<Contract>('https://localhost:7053/api/contracts', contract)
+    this.client.post<Contract>(environment.baseUrl + 'contracts', contract)
       .subscribe(x => {
         //todo: this won't work because we don't load the customer so temprairly we will use getAll();
         // this.contracts = this.filterdContracts = [x, ...this.contracts];
@@ -51,7 +52,7 @@ export class ContractService {
   }
 
   changeStatus(contractStatus: ContractStatus) {
-    let observable = this.client.patch<Contract>(`https://localhost:7053/api/contracts/${this.contract.id}/change-status/${contractStatus}`, contractStatus);
+    let observable = this.client.patch<Contract>(environment.baseUrl + `contracts/${this.contract.id}/change-status/${contractStatus}`, contractStatus);
     observable.subscribe(x => {
       this.contract = x;
       this.contract$.next(x);
@@ -64,7 +65,7 @@ export class ContractService {
   }
 
   addPayment() {
-    let observable = this.client.post<Contract>(`https://localhost:7053/api/contracts/` + this.contract.id + '/add-payment', this.newPayment);
+    let observable = this.client.post<Contract>(environment.baseUrl + `contracts/` + this.contract.id + '/add-payment', this.newPayment);
     observable.subscribe(x => {
       this.newPayment = new Payment();
       this.contract = x;
@@ -74,7 +75,7 @@ export class ContractService {
   }
 
   addReturn() {
-    let observable = this.client.post<Contract>(`https://localhost:7053/api/contracts/${this.contract.id}/return-item`, this.newReturnItem);
+    let observable = this.client.post<Contract>(environment.baseUrl + `contracts/${this.contract.id}/return-item`, this.newReturnItem);
     observable.subscribe(x => {
       this.newReturnItem = new ReturnedItem();
       this.contract = x;
@@ -84,13 +85,13 @@ export class ContractService {
   }
 
   getAll(): Observable<Contract[]> {
-    this.contracts$ = this.client.get<Contract[]>('https://localhost:7053/api/contracts');
+    this.contracts$ = this.client.get<Contract[]>(environment.baseUrl + 'contracts');
     this.contracts$.subscribe(x => this.contracts = this.filterdContracts = x);
     return this.contracts$;
   }
 
   getById(): Observable<Contract> {
-    let observable = this.client.get<Contract>(`https://localhost:7053/api/contracts/${this.selectedContractId}`);
+    let observable = this.client.get<Contract>(environment.baseUrl + `contracts/${this.selectedContractId}`);
     observable.subscribe(x => {
       this.contract = x;
       this.contract$.next(x);

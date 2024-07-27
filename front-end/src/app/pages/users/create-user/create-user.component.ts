@@ -19,6 +19,6 @@ export class CreateUserComponent {
 
   create() {
     this.userManager.addNormalUser();
-    this.router.navigateByUrl('/' + this.transLoco.getActiveLang() + '/stuff');
+    this.router.navigateByUrl('/' + this.transLoco.getActiveLang() + '/users');
   }
 }

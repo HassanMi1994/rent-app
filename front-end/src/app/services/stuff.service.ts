@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Stuff } from '../models/stuff.model';
 import { Observable, tap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class StuffService {
   constructor(private client: HttpClient) { }
 
   create(stuff: Stuff) {
-    this.client.post('https://localhost:7053/api/stuff', stuff)
+    this.client.post(environment.baseUrl + 'stuff', stuff)
       .subscribe(x => {
         this.stuff = this.filterdStuff = [stuff, ...this.stuff];
         // this.notifier.notify('success', 'a new customer was added');
@@ -23,7 +24,7 @@ export class StuffService {
   }
 
   getStuff(): Observable<Stuff[]> {
-    this.stuff$ = this.client.get<Stuff[]>('https://localhost:7053/api/stuff');
+    this.stuff$ = this.client.get<Stuff[]>(environment.baseUrl + 'stuff');
     this.stuff$.subscribe(x => this.stuff = this.filterdStuff = x);
     return this.stuff$;
   }
@@ -32,7 +33,7 @@ export class StuffService {
   get searchTerm(): string {
     return this._searchTerm;
   }
-  
+
   set searchTerm(value: string) {
     if (value !== this._searchTerm) {
       this._searchTerm = value;
