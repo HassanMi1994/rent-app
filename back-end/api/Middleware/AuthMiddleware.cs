@@ -16,7 +16,7 @@ namespace api.Middleware
 
         public async Task InvokeAsync(HttpContext context)
         {
-            var authAttribute = context.Features.Get<IEndpointFeature>().Endpoint.Metadata
+            var authAttribute = context.Features.Get<IEndpointFeature>()?.Endpoint?.Metadata
                 .FirstOrDefault(m => m is AuthAttribute) as AuthAttribute;
 
             if (authAttribute != null)
@@ -34,7 +34,7 @@ namespace api.Middleware
                 if (authAttribute.RoleType == domain.enums.RoleType.Admin)
                 {
                     var isAdmin = Jwt.GetClaimsFromJwt(authorization).Where(x => x.Type == AppClaims.IsAdmin).FirstOrDefault();
-                    if(isAdmin.Value.ToLower() == "false")
+                    if (isAdmin.Value.ToLower() == "false")
                     {
                         throw new ExceptionBase(ExceptionCodes.OnlyForAdminUsers);
                     }

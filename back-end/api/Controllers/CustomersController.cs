@@ -18,9 +18,10 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        public IAsyncEnumerable<Customer> GetAll()
+        public async Task<List<Customer>> GetAll()
         {
-            return _customerService.GetAll();
+            var custs = await _customerService.GetAll();
+            return custs;
         }
 
         [HttpPost]

@@ -16,12 +16,12 @@ namespace application.Services
             _userService = userService;
         }
 
-        public IAsyncEnumerable<Customer> GetAll()
+        public async Task<List<Customer>> GetAll()
         {
-            return _rentDb.Customers
+            return await _rentDb.Customers
                 .Where(x => x.StoreID == _userService.StoreID)
                 .OrderByDescending(x => x.CreatedAt)
-                .AsAsyncEnumerable();
+                .ToListAsync();
         }
 
         public async Task Create(Customer customer)

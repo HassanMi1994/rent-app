@@ -5,6 +5,7 @@ namespace domain.abstraction
     public interface ICustomerService
     {
         Task Create(Customer customer);
-        IAsyncEnumerable<Customer> GetAll();
+        //IAsyncEnumerable<Customer> GetAll();
+        Task<List<Customer>> GetAll();
     }
 }

@@ -65,7 +65,7 @@ namespace persistance.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Customers");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("domain.entities.Contract", b =>
@@ -116,7 +116,7 @@ namespace persistance.Migrations
 
                     b.HasIndex("StoreID");
 
-                    b.ToTable("Contracts");
+                    b.ToTable("Contracts", (string)null);
                 });
 
             modelBuilder.Entity("domain.entities.ContractItem", b =>
@@ -168,7 +168,7 @@ namespace persistance.Migrations
 
                     b.HasIndex("StuffID");
 
-                    b.ToTable("ContractItems");
+                    b.ToTable("ContractItems", (string)null);
                 });
 
             modelBuilder.Entity("domain.entities.History", b =>
@@ -196,7 +196,7 @@ namespace persistance.Migrations
 
                     b.HasIndex("ContractItemID");
 
-                    b.ToTable("Histories");
+                    b.ToTable("Histories", (string)null);
                 });
 
             modelBuilder.Entity("domain.entities.Payment", b =>
@@ -223,7 +223,7 @@ namespace persistance.Migrations
 
                     b.HasIndex("ContractID");
 
-                    b.ToTable("Payment");
+                    b.ToTable("Payment", (string)null);
                 });
 
             modelBuilder.Entity("domain.entities.ReturnedItem", b =>
@@ -256,7 +256,7 @@ namespace persistance.Migrations
 
                     b.HasIndex("ContractItemID");
 
-                    b.ToTable("ReturnedItems");
+                    b.ToTable("ReturnedItems", (string)null);
                 });
 
             modelBuilder.Entity("domain.entities.Store", b =>
@@ -279,7 +279,7 @@ namespace persistance.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Stores");
+                    b.ToTable("Stores", (string)null);
                 });
 
             modelBuilder.Entity("domain.entities.Stuff", b =>
@@ -327,7 +327,7 @@ namespace persistance.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Stuffs");
+                    b.ToTable("Stuffs", (string)null);
                 });
 
             modelBuilder.Entity("domain.entities.User", b =>
@@ -364,7 +364,7 @@ namespace persistance.Migrations
 
                     b.HasIndex("StoreID");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("domain.entities.UserConfig", b =>
@@ -410,7 +410,7 @@ namespace persistance.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserConfigs");
+                    b.ToTable("UserConfigs", (string)null);
                 });
 
             modelBuilder.Entity("domain.entities.Contract", b =>

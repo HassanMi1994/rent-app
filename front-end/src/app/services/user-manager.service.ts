@@ -37,6 +37,7 @@ export class UserManagerService {
     let ui = this.ls?.getItem('userInfo');
     if (ui) {
       let object: UserInfo = JSON.parse(ui);
+      console.warn(object);
       this.userInfo = object;
     }
   }
@@ -72,7 +73,7 @@ export class UserManagerService {
   logOut() {
     console.log(this.loginModel);
     this.userInfo = new UserInfo();
-    this.cookieService.set('jwt-token', '');
+    this.cookieService.deleteAll();
     this.ls?.removeItem('userInfo');
     this.router.navigateByUrl('/');
   }
