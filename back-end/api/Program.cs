@@ -61,10 +61,12 @@ builder.Services.AddCors(option => option.AddPolicy(name: corsPolicyName, policy
     policy.SetIsOriginAllowed(origin => true);
 }));
 
+
+
 var app = builder.Build();
 
 app.MapSwagger();
-
+app.UseStaticFiles(new StaticFileOptions());
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

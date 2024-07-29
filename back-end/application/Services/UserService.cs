@@ -103,6 +103,15 @@ namespace application.Services
         public IAsyncEnumerable<User> GetAllUsers()
         {
             return _rsaDbContext.Users.Where(x => x.StoreID == StoreID)
+                .Select(x => new User
+                {
+                    Email = x.Email,
+                    FullName = x.FullName,
+                    ID = x.ID,
+                    IsAdmin = x.IsAdmin,
+                    Mobile = x.Mobile,
+                    StoreID = x.StoreID,
+                })
                 .AsAsyncEnumerable();
         }
 
