@@ -62,7 +62,8 @@ namespace api.Controllers
                 Payments = contract.Payments.Select(x => new Payment
                 {
                     Amount = x.Amount,
-                    PaymentType = x.PaymentType
+                    PaymentType = x.PaymentType,
+                    DateTime = DateTime.UtcNow
                 }).ToList(),
                 Status = ContractStatus.Opened,
                 RentLocation = contract.RentLocation,

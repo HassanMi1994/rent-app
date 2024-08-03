@@ -75,6 +75,7 @@ export class UserManagerService {
     this.userInfo = new UserInfo();
     this.cookieService.deleteAll();
     this.ls?.removeItem('userInfo');
+    this.users = this.filterdUsers = [];
     this.router.navigateByUrl('/');
   }
 

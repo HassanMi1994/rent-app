@@ -65,7 +65,7 @@ namespace domain.entities
         public void AddPyament(Payment payment)
         {
             CanChange();
-            payment.DateTime = DateTime.Now;
+            payment.DateTime = DateTime.UtcNow;
             Payments.Add(payment);
             CheckForChangingStatus();
         }

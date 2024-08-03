@@ -43,7 +43,7 @@ namespace domain.entities
             {
                 StoreID = storeID,
                 UserID = userID,
-                CreatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
                 ContractNoSeed = 630823,
                 TaxPercent = 9,
                 CalendarType = CalendarType.Georgian,

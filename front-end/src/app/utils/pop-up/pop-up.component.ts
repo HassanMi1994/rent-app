@@ -50,7 +50,9 @@ export class PopUpComponent implements AfterViewInit {
       let html = `<div class="row">
     <div class="col-4 text-black">${this.translator.translate(lable)}</div>
     <div class="col-6 text-info">${j.toString()}</div>
-    <hr class="hr"/>
+     <div class="row">
+       <hr class="hr"/>
+     </div>
     </div>`;
       this.content += html;
     }
@@ -58,7 +60,9 @@ export class PopUpComponent implements AfterViewInit {
       let html = `<div class="row">
     <div class="col-4 text-black">${this.translator.translate(lable)}</div>
     <div class="col-6 text-info">${value}</div>
-    <hr class="hr"/>
+     <div class="row">
+       <hr class="hr"/>
+     </div>
     </div>`;
       this.content += html;
     }

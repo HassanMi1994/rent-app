@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormInputComponent } from '../../../utils/form-input/form-input.component';
 import { UserManagerService } from '../../../services/user-manager.service';
 import { TranslocoPipe } from '@ngneat/transloco';
+import { Login } from '../../../models/login.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +15,7 @@ import { TranslocoPipe } from '@ngneat/transloco';
 export class LoginComponent {
 
   constructor(public userManager: UserManagerService) {
-
+    this.userManager.loginModel = new Login();
   }
 
   login() {

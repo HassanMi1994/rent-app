@@ -30,11 +30,11 @@ namespace persistance
             {
                 if (entity.State == EntityState.Modified)
                     if (entity.Properties.Where(x => x.Metadata.Name == nameof(IBaseEntity.UpdatedAt)).Count() == 1)
-                        entity.Property(nameof(IBaseEntity.UpdatedAt)).CurrentValue = DateTime.Now;
+                        entity.Property(nameof(IBaseEntity.UpdatedAt)).CurrentValue = DateTime.UtcNow;
 
                 if (entity.State == EntityState.Added)
                     if (entity.Properties.Where(x => x.Metadata.Name == nameof(IBaseEntity.CreatedAt)).Count() == 1)
-                        entity.Property(nameof(IBaseEntity.CreatedAt)).CurrentValue = DateTime.Now;
+                        entity.Property(nameof(IBaseEntity.CreatedAt)).CurrentValue = DateTime.UtcNow;
             }
 
             int count = await base.SaveChangesAsync(cancellationToken);

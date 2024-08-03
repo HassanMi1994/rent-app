@@ -18,7 +18,7 @@ namespace application.Security
 
         public static string TokenGenerator(Dictionary<string, object> claims)
         {
-            DateTime value = DateTime.Now.AddDays(1);
+            DateTime value = DateTime.UtcNow.AddDays(1);
             byte[] bytes = Encoding.ASCII.GetBytes(Jwt.SECURITY_KEY);
             SigningCredentials signingCredentials = new SigningCredentials(new SymmetricSecurityKey(bytes), "http://www.w3.org/2001/04/xmldsig-more#hmac-sha256");
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
@@ -26,7 +26,7 @@ namespace application.Security
                 Expires = value,
                 SigningCredentials = signingCredentials,
                 Issuer = "Hasan Monjezi",
-                IssuedAt = DateTime.Now,
+                IssuedAt = DateTime.UtcNow,
                 Claims = claims
             };
             JwtSecurityTokenHandler jwtSecurityTokenHandler = new JwtSecurityTokenHandler();

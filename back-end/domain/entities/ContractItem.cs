@@ -34,7 +34,7 @@ namespace domain.entities
             {
                 ID = ID,
                 Aggregate = this.Aggregate,
-                CreatedAt = DateTime.Now,
+                CreatedAt = DateTime.UtcNow,
                 Object = JsonSerializer.Serialize(this)
             };
 

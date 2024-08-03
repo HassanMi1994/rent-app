@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Inject, Input, LOCALE_ID, OnInit } from '@angular/core';
 import { SettingService } from '../../services/setting.service';
 import { CalendarType } from '../../models/enum/calendar-type';
 
@@ -16,16 +16,16 @@ export class ConfigDateComponent implements OnInit, AfterViewInit {
   persian: string;
   georgian: string | undefined;
 
-  constructor(public configService: SettingService) {
+  constructor(public configService: SettingService, @Inject(LOCALE_ID) public locale: string) {
 
     //this.georgian = datePipe.transform(this.date, "yyyy/MM/dd HH:mm")?.toString();
   }
   ngAfterViewInit(): void {
-    let compDate = new Date(this.date);
+    let compDate = new Date(this.date.toString() + 'Z');
     let persianDate = compDate.toLocaleDateString('fa-IR').split('/');
     let dateString = persianDate[0].padStart(4, "0") + "/" + persianDate[1].padStart(2, "0") + "/" + persianDate[2].padStart(2, "0");
-    this.persian = dateString + " " +  compDate.getHours().toString().padStart(2,'0') + ":" + compDate.getMinutes().toString().padStart
-    (2,'0');
+    this.persian = dateString + " " + compDate.getHours().toString().padStart(2, '0') + ":" + compDate.getMinutes().toString().padStart
+      (2, '0');
   }
   ngOnInit(): void {
     if (this.configService.userConfig == undefined || this.configService.userConfig == null) {
