@@ -13,14 +13,14 @@
         </div>
 
         <div
-        class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
+            class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
             <span class="contract-label">
                 {{'fullName'|transloco}}
             </span>
             <b class="m-1">{{contract?.customer?.fullName??""}}</b>
         </div>
         <div
-        class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
+            class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
             <span class="contract-label">
                 {{'contractNo'|transloco}}
             </span>
@@ -29,14 +29,13 @@
 
         <div
             class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
-            <app-contract-status [contract]="contract"></app-contract-status>
             <span class="contract-label">
                 {{'status'|transloco}}
             </span>
-            <b class="m-1">{{contract.status}}</b>
+            <app-contract-status [contract]="contract"></app-contract-status>
         </div>
         <div
-        class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
+            class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
 
             <span class="contract-label">
 
@@ -45,7 +44,7 @@
             <b class="m-1">{{contract.customer.mobile}}</b>
         </div>
         <div
-        class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
+            class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
             <span class="contract-label">
                 {{'rentLocation'|transloco}}
             </span>
@@ -75,7 +74,7 @@
     <div class="row justify-content-center">
 
         <div
-        class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
+            class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
             <span class="contract-label">
                 {{'totalPaid'|transloco}}
             </span>
@@ -83,7 +82,7 @@
         </div>
 
         <div
-        class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
+            class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
             <span class="contract-label">
                 {{'totalPrice'|transloco}}
             </span>
@@ -100,7 +99,7 @@
 
 
         <div
-        class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
+            class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
             <span class="contract-label">
                 {{'totalPriceForReturnedItems'|transloco}}
             </span>
@@ -109,7 +108,7 @@
 
 
         <div
-        class="col-12 col-md-6 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
+            class="col-12 col-md-6 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
             @if(contract.remainItemsToReturn ==0&&
             contract.totalPaidAmount>=contract.totalPriceForReturnedItems){
             <button class="btn btn-outline-info col-12" type="button" (click)="closeContract()">

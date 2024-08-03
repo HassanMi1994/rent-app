@@ -1,23 +1,48 @@
-.badge{
+.badge {
     display: inline-block;
     border-radius: 50px;
+    margin-top: 10px;
     height: 20px;
     width: 20px;
+    margin: 3px;
 }
 
-.ready-to-be-closed{
+.ready-to-be-closed {
     background-color: rgba(70, 2, 2, 0.685);
+}
+
+.ready-to-be-closed-text {
+    color: rgba(70, 2, 2, 1);
+    background-color: rgba(70, 2, 2, 0.2);
+    border-radius: 20%;
 }
 
 .closed {
     background-color: black;
 }
 
-.open {
+.closed-text {
+    color: black;
+    background-color: (0, 0, 0, 0.2);
+    border-radius: 20%;
+}
 
+.open {
     background-color: rgba(34, 250, 196, 0.555);
+}
+
+.open-text {
+    color: rgba(34, 250, 196, 1);
+    background-color: rgba(34, 250, 196, 0.2);
+    border-radius: 20%;
 }
 
 .money {
     background-color: rgba(250, 66, 34, 0.555);
+}
+
+.money-text {
+    color: rgba(250, 66, 34, 1);
+    background-color: rgba(250, 66, 34, 0.2);
+    border-radius: 20%;
 }
