@@ -10,11 +10,12 @@ import { AddPaymentComponent } from './add-payment/add-payment.component';
 import { ContractStatus } from '../../../models/enum/ContractStatus';
 import { ContractStatusComponent } from '../contract-status/contract-status.component';
 import { ConfigDateComponent } from '../../../utils/config-date/config-date.component';
+import { FormInputComponent } from '../../../utils/form-input/form-input.component';
 
 @Component({
   selector: 'app-contract-details',
   standalone: true,
-  imports: [TranslocoPipe, FormsModule, DecimalPipe, ContractItemsComponent, ConfigDateComponent, AddPaymentComponent, DatePipe, AsyncPipe, CommonModule, ContractStatusComponent],
+  imports: [TranslocoPipe, FormsModule, DecimalPipe,FormInputComponent, ContractItemsComponent, ConfigDateComponent, AddPaymentComponent, DatePipe, AsyncPipe, CommonModule, ContractStatusComponent],
   templateUrl: './contract-details.component.html',
   styleUrl: './contract-details.component.scss'
 })

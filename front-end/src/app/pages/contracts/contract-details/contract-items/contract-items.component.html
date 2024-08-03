@@ -16,7 +16,7 @@
         {{'quantity'|transloco}}
     </div>
 
-    <div class="col-2 h6 text-info text-center">
+    <div class="col-1 h6 text-info text-center">
         {{'remainingItems'|transloco}}
     </div>
     <!-- <div class="col-1 h6 text-info text-center">
@@ -51,11 +51,11 @@
     <div class="col-2 h6 text-center">
         {{item.quantity}}
     </div>
-    <div class="col-2 h6 text-center">
+    <div class="col-1 h6 text-center">
         {{item.remainingItems|number}}
     </div>
 
-    <div class="col-1 h6">
+    <div class="col-2">
         <app-return-item [item]="item" [contractItemID]="item.id"></app-return-item>
         <app-returned-items [returnItems]="item.returnedItems" [contractItemID]="item.id"></app-returned-items>
     </div>

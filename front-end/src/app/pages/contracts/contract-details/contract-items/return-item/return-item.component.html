@@ -22,28 +22,32 @@
 
             <div class="modal-body">
 
-                <div class="col-12">
-                    <app-form-input-number [labelName]="'quantity'"
-                        (value)="contractService.newReturnItem.quantity=($event)"></app-form-input-number>
+                <div class="row">
+                    <div class="col-12">
+                        <app-form-input-number [labelName]="'quantity'"
+                            (value)="contractService.newReturnItem.quantity=($event)"></app-form-input-number>
+                    </div>
                 </div>
 
 
+
                 <div class="col-12">
-                    <app-form-input-date [labelName]="'date'" [draggable]="true"
+                    <app-form-input-date [labelName]="'date'"
                         (value)="contractService.newReturnItem.returnDateTime=($event)"></app-form-input-date>
                 </div>
 
-                <div class="col-12">
-                    <div class="col-6">{{'rentDate'|transloco}}
-                        <app-config-date [date]="item.rentDate"> </app-config-date>
-                    </div>
-                    <div class="col-6">{{'calculatedPrice'|transloco}} <span class="text-info">: {{howManyDaysRounded}}
-                            {{'days'|transloco}} * {{contractService.newReturnItem.quantity}} *
-                            {{item.pricePerDay|number}} =
-                            <!-- {{contractService.newReturnItem.price|number}} = -->
-                            {{calculatedPrice}}
-                        </span></div>
+                <div class="col-12">{{'rentDate'|transloco}}
+                    <app-config-date [date]="item.rentDate"> </app-config-date>
                 </div>
+                <div class="col-12">
+                    {{'calculatedPrice'|transloco}} <span class="text-info">: {{howManyDaysRounded}}
+                        {{'days'|transloco}} * {{contractService.newReturnItem.quantity}} *
+                        {{item.pricePerDay|number}} =
+                        <!-- {{contractService.newReturnItem.price|number}} = -->
+                        {{calculatedPrice}}
+                    </span>
+                </div>
+
                 <div class="col-12">
                     <app-form-input-number #priceInput [labelName]="'price'"
                         (value)="contractService.newReturnItem.price=($event)"></app-form-input-number>
