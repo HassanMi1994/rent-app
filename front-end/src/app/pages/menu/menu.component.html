@@ -1,8 +1,5 @@
 <div class="sidebar-menu">
     <span class="toggle-side-menu" style="font-size:30px;cursor:pointer" (click)="openNav()">&#9776;</span>
-
-
-
     <div #mySpan class="overlay">
         <a class="closebtn" (click)="closeNav()">&times;</a>
         <div class="overlay-content">
@@ -15,7 +12,7 @@
 
 
 
-            @if(!userManager.userInfo.isLoggedIn)
+            @if(userManager.userInfo.isLoggedIn==false)
             {
             <li (click)="closeNav()" class="nav-item" role="presentation">
                 <a [routerLink]="[transLoco.getActiveLang(),'login']" class="nav-link" data-bs-toggle="tab"
@@ -26,7 +23,7 @@
                     routerLinkActive="active"> <span class="bi bi-door-open"></span> {{'signUp'|transloco}}</a>
             </li>
             }
-            @if(userManager.userInfo.isLoggedIn) {
+            @if(userManager.userInfo.isLoggedIn==true) {
             <li>
                 <a>
                     {{'welcome'|transloco}}<b> {{userManager.userInfo.fullName}}</b>
@@ -35,7 +32,7 @@
             }
 
 
-            @if(userManager.userInfo.isLoggedIn){
+            @if(userManager.userInfo.isLoggedIn==true){
             <li (click)="closeNav()" class="nav-item" role="presentation">
                 <a [routerLink]="[this.transLoco.getActiveLang(),'contracts']" class="nav-link" data-bs-toggle="tab"
                     routerLinkActive="active"><span class="bi bi-card-list"></span> {{'contracts'|transloco}}</a>
@@ -127,7 +124,7 @@
                 }
             </li>
 
-            @if(userManager.userInfo.isLoggedIn) {
+            @if(userManager.userInfo.isLoggedIn==true) {
 
             <li class="nav-item" role="presentation">
                 <a (click)="userManager.logOut()" class="nav-link" data-bs-toggle="tab" routerLinkActive="active"> <span
@@ -137,18 +134,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -177,7 +162,7 @@
 
 
 
-        @if(userManager.userInfo.isLoggedIn){
+        @if(userManager.userInfo.isLoggedIn==true){
         <li class="nav-item" role="presentation">
             <a [routerLink]="[this.transLoco.getActiveLang(),'contracts']" class="nav-link" data-bs-toggle="tab"
                 routerLinkActive="active"><span class="bi bi-card-list"></span> {{'contracts'|transloco}}</a>
@@ -260,7 +245,7 @@
             }
         </li>
 
-        @if(!userManager.userInfo.isLoggedIn)
+        @if(userManager.userInfo.isLoggedIn==false)
         {
         <li class="nav-item float-end" role="presentation">
             <a [routerLink]="[transLoco.getActiveLang(),'login']" class="nav-link" data-bs-toggle="tab"

@@ -9,11 +9,12 @@ import { userInfo } from 'os';
 export const jwtInterceptor: HttpInterceptorFn = (req, next) => {
 
   const cookieService = inject(CookieService);
-  const token = cookieService.get('jwt-token');
+  // const token = cookieService.get('jwt-token');
   const userService = inject(UserManagerService);
+  const token = userService.userInfo.jwtKey;
 
   if (token && token.length > 1) {
-    userService.userInfo.isLoggedIn = true;//todo: save userinfo in local storage and load them after page is loaded ngOnInit!
+    //userService.userInfo.isLoggedIn = true;//todo: save userinfo in local storage and load them after page is loaded ngOnInit!
     const cloned = req.clone({
       setHeaders: {
         authorization: 'bearer ' + userService.userInfo.jwtKey,

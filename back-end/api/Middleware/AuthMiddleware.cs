@@ -22,7 +22,7 @@ namespace api.Middleware
             if (authAttribute != null)
             {
                 var authorization = context.Request.Headers["authorization"].ToString();
-                if (authorization.Length == 0)
+                if (authorization.Length < 50)
                 {
                     throw new ExceptionBase(ExceptionCodes.NotAuthorized);
                 }

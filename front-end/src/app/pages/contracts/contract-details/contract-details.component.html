@@ -2,7 +2,7 @@
     @if(contract !==undefined || contract !==null){
     <div class="row justify-content-center">
         <div
-            class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-50 bg-gradient">
+            class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
 
             <span class="contract-label">
                 {{'date'|transloco}}
@@ -12,39 +12,44 @@
             </b>
         </div>
 
-        <div class=" col-12 col-md-3 m-3  contract-label-container">
+        <div
+        class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
             <span class="contract-label">
                 {{'fullName'|transloco}}
             </span>
-            <b class="">{{contract?.customer?.fullName??""}}</b>
+            <b class="m-1">{{contract?.customer?.fullName??""}}</b>
         </div>
-        <div class=" col-12 col-md-3 m-3  contract-label-container">
+        <div
+        class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
             <span class="contract-label">
                 {{'contractNo'|transloco}}
             </span>
-            <b>{{contract.contractNumber}} </b>
+            <b class="m-1">{{contract.contractNumber}} </b>
         </div>
 
-        <div class=" col-12 col-md-3 m-3  contract-label-container">
+        <div
+            class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
             <app-contract-status [contract]="contract"></app-contract-status>
             <span class="contract-label">
                 {{'status'|transloco}}
             </span>
-            <b class="text-success">{{contract.status}}</b>
+            <b class="m-1">{{contract.status}}</b>
         </div>
-        <div class=" col-12 col-md-3 m-3  contract-label-container">
+        <div
+        class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
 
             <span class="contract-label">
 
                 {{'mobile'|transloco}}
             </span>
-            <b class="text-success">{{contract.customer.mobile}}</b>
+            <b class="m-1">{{contract.customer.mobile}}</b>
         </div>
-        <div class=" col-12 col-md-3 m-3  contract-label-container">
+        <div
+        class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
             <span class="contract-label">
                 {{'rentLocation'|transloco}}
             </span>
-            <b class="text-success">{{contract.rentLocation}}</b>
+            <b class="m-1">{{contract.rentLocation}}</b>
         </div>
 
     </div>
@@ -69,21 +74,24 @@
 
     <div class="row justify-content-center">
 
-        <div class=" col-12 col-md-3 m-3  contract-label-container">
+        <div
+        class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
             <span class="contract-label">
                 {{'totalPaid'|transloco}}
             </span>
             <b class="contract-label-value">{{contract.totalPaidAmount|number}}</b>
         </div>
 
-        <div class=" col-12 col-md-3 m-3  contract-label-container">
+        <div
+        class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
             <span class="contract-label">
                 {{'totalPrice'|transloco}}
             </span>
             <b class="contract-label-value">{{contract.totalPricePerDay|number}}</b>
         </div>
 
-        <div class=" col-12 col-md-3 m-3  contract-label-container">
+        <div
+            class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
             <span class="contract-label">
                 {{'remainItemsToReturn'|transloco}}
             </span>
@@ -91,7 +99,8 @@
         </div>
 
 
-        <div class=" col-12 col-md-3 m-3  contract-label-container">
+        <div
+        class="col-12 col-md-3 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
             <span class="contract-label">
                 {{'totalPriceForReturnedItems'|transloco}}
             </span>
@@ -99,10 +108,11 @@
         </div>
 
 
-        <div class="col-12 col-md-6">`
+        <div
+        class="col-12 col-md-6 m-3  rounded rounded-5 text-center border-info border-4 shadow-lg bg-body-secondary bg-opacity-25 bg-gradient">
             @if(contract.remainItemsToReturn ==0&&
             contract.totalPaidAmount>=contract.totalPriceForReturnedItems){
-            <button class="btn btn-info col-12" type="button" (click)="closeContract()">
+            <button class="btn btn-outline-info col-12" type="button" (click)="closeContract()">
                 {{'closeContract'|transloco}}
             </button>
             }

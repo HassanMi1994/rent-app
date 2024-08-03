@@ -39,6 +39,9 @@ export class UserManagerService {
       let object: UserInfo = JSON.parse(ui);
       console.warn(object);
       this.userInfo = object;
+    } else {
+      this.userInfo = new UserInfo();
+      this.userInfo.isLoggedIn = false;
     }
   }
 
@@ -62,10 +65,8 @@ export class UserManagerService {
         this.token = x.jwtKey;
         x.isLoggedIn = true;
         this.ls?.setItem("userInfo", JSON.stringify(x));
-        this.cookieService.set('jwt-token', 'bearer ' + x.jwtKey);
         this.userInfo = x;
         this.userInfo.isLoggedIn = true;
-        console.log(this.userInfo);
         this.router.navigateByUrl('/' + this.transLoco.getActiveLang() + '/contracts')
       });
   }
