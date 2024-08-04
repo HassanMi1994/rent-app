@@ -18,7 +18,7 @@
                 <div class="col-12 text-primary">
                     <b class="text-info"> {{con.customer.fullName}} </b>
                 </div>
-                <div class="col-12 text-primary">
+                <div class="col-12">
                     <b> <app-config-date [date]="con.date"></app-config-date> </b>
                     <!-- <b class="text-success"> {{con.totalPayment()}}</b> -->
                 </div>
@@ -26,7 +26,7 @@
                     {{'totalPaid'|transloco}} {{con.totalPaidAmount| number}}
                 </div>
                 <div class="col-12 border-3">
-                    <app-contract-status [showStatusText]="false" [contract]="con" />
+                    <app-contract-status [showStatusText]="true" [contract]="con" />
                 </div>
                 <div class="col-12 border-3 link-body-emphasis">
                     <button class="btn"><span class="bi bi-eye" (click)="showMoreInfo($event,con.id)"></span></button>
