@@ -1,14 +1,15 @@
-import { Payment } from "../services/contract.service";
+import { Payment } from './payment.model';
 import { baseModel } from "./base.model"
 import { ContractItem } from "./contractItem.model"
 import { Customer } from "./customer.model"
 import { ContractStatus } from "./enum/ContractStatus";
+import { User } from "./user.model";
 
 export class Contract extends baseModel {
 
     id: number;
     customerID: number;
-    contractNumber:number;
+    contractNumber: number;
     date: Date;
     persianDateTime: string;
     rentLocation: string;
@@ -21,6 +22,8 @@ export class Contract extends baseModel {
     items: ContractItem[] = [];
     payments: Payment[] = [];
     customer: Customer = new Customer();
+    createdBy: User;
+    updatedBy: User;
 
     constructor() {
         super()

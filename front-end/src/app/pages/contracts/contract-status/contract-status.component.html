@@ -15,14 +15,14 @@
 }
 
 @if (this.contract.status == 2) {
-<span class="badge open"></span>
+<span class="badge open blinking"></span>
 @if(showStatusText){
 <span class="open-text">{{'status.open'|transloco}}</span>
 }
 }
 
 @if (this.contract.status == 3) {
-<span class="badge money"></span>
+<span class="badge money blinking-slow"></span>
 @if(showStatusText){
 <span class="money-text">
     {{'status.shouldGiveMoney'|transloco}}

@@ -13,13 +13,14 @@ import { LoginComponent } from './pages/_login_signup/login/login.component';
 import { SignUpComponent } from './pages/_login_signup/sign-up/sign-up.component';
 import { UsersComponent } from './pages/users/users.component';
 import { CreateUserComponent } from './pages/users/create-user/create-user.component';
+import { HowItWorksComponent } from './pages/how-it-works/how-it-works.component';
 
 
 
 //todo: titles should be set dynamically
 
 export const routes: Routes = [
-    { component: LoginComponent, path: ':{lang}/login' },
+    { component: LoginComponent, path: ':{lang}/login', },
     { component: SignUpComponent, path: ':{lang}/sign-up' },
     { component: ContractsComponent, path: ':{lang}/contracts', },
     { component: CreateContractComponent, path: ':{lang}/contracts/new', },
@@ -28,10 +29,11 @@ export const routes: Routes = [
     { component: CreateUserComponent, path: ':{lang}/users/new', },
     { component: CustomerComponent, path: ':{lang}/customers', },
     { component: CreateCustomerComponent, path: ':{lang}/customers/new' },
-    { component: WelcomeComponent, path: ':{lang}/welcome' },
+    { component: WelcomeComponent, path: ':{lang}/welcome',title:"RSApp.ir: Comprehensive Rental Management Solution" },
     { component: StuffComponent, path: ':{lang}/stuff' },
     { component: CreateStuffComponent, path: ':{lang}/stuff/new' },
     { component: SettingComponent, path: ':{lang}/settings' },
+    { component: HowItWorksComponent, path: ':{lang}/features',title:"RSApp.ir: Comprehensive Rental Management Solution" },
     { path: 'en/welcome', redirectTo: 'en/welcome', pathMatch: 'full', },
     { path: '', redirectTo: 'en/welcome', pathMatch: 'full', },
     { path: '**', component: PageNotFoundComponent }

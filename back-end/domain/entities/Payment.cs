@@ -9,6 +9,12 @@ namespace domain.entities
         public decimal Amount { get; set; }
         public DateTime DateTime { get; set; }
         public PaymentType PaymentType { get; set; }
+
+        //who created/updated
+        public long? CreatedByID { get; set; }
+        public long? UpdatedByID { get; set; }
+        public User? CreatedBy { get; set; }
+        public User? UpdatedBy { get; set; }
     }
 }
 

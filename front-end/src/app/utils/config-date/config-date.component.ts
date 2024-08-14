@@ -23,8 +23,9 @@ export class ConfigDateComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     let compDate = new Date(this.date.toString() + 'Z');
     let persianDate = compDate.toLocaleDateString('fa-IR').split('/');
+    let persianTime = compDate.toLocaleTimeString('fa-IR').split(':');
     let dateString = persianDate[0].padStart(4, "۰") + "/" + persianDate[1].padStart(2, "۰") + "/" + persianDate[2].padStart(2, "۰");
-    this.persian = dateString + " " + compDate.getHours().toString().padStart(2, '۰') + ":" + compDate.getMinutes().toString().padStart
+    this.persian = dateString + " " + persianTime[0].padStart(2, '۰') + ":" + persianTime[1].padStart
       (2, '۰');
   }
   ngOnInit(): void {

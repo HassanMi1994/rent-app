@@ -2,16 +2,10 @@ import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Contract } from '../models/contract.model';
-import { PaymentType } from "../models/enum/PaymentType";
 import { ReturnedItem } from '../models/returnedItem.model';
 import { ContractStatus } from '../models/enum/ContractStatus';
 import { environment } from '../../environments/environment';
-
-export class Payment {
-  amount: number;
-  paymentType: PaymentType
-  dateTime: Date
-}
+import { Payment } from '../models/payment.model';
 
 @Injectable({
   providedIn: 'root'

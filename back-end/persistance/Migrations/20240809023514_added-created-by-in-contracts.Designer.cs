@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using persistance;
 
@@ -11,9 +12,11 @@ using persistance;
 namespace persistance.Migrations
 {
     [DbContext(typeof(RsaDbContext))]
-    partial class RsaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240809023514_added-created-by-in-contracts")]
+    partial class addedcreatedbyincontracts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,25 +226,15 @@ namespace persistance.Migrations
                     b.Property<int>("ContractID")
                         .HasColumnType("int");
 
-                    b.Property<long?>("CreatedByID")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("PaymentType")
                         .HasColumnType("int");
 
-                    b.Property<long?>("UpdatedByID")
-                        .HasColumnType("bigint");
-
                     b.HasKey("ID");
 
                     b.HasIndex("ContractID");
-
-                    b.HasIndex("CreatedByID");
-
-                    b.HasIndex("UpdatedByID");
 
                     b.ToTable("Payment");
                 });
@@ -260,9 +253,6 @@ namespace persistance.Migrations
                     b.Property<int>("ContractItemID")
                         .HasColumnType("int");
 
-                    b.Property<long?>("CreatedByID")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("ItemStatus")
                         .HasColumnType("int");
 
@@ -275,16 +265,9 @@ namespace persistance.Migrations
                     b.Property<DateTime>("ReturnDateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("UpdatedByID")
-                        .HasColumnType("bigint");
-
                     b.HasKey("ID");
 
                     b.HasIndex("ContractItemID");
-
-                    b.HasIndex("CreatedByID");
-
-                    b.HasIndex("UpdatedByID");
 
                     b.ToTable("ReturnedItems");
                 });
@@ -507,18 +490,6 @@ namespace persistance.Migrations
                         .HasForeignKey("ContractID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("domain.entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedByID");
-
-                    b.HasOne("domain.entities.User", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedByID");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("domain.entities.ReturnedItem", b =>
@@ -528,18 +499,6 @@ namespace persistance.Migrations
                         .HasForeignKey("ContractItemID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("domain.entities.User", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedByID");
-
-                    b.HasOne("domain.entities.User", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedByID");
-
-                    b.Navigation("CreatedBy");
-
-                    b.Navigation("UpdatedBy");
                 });
 
             modelBuilder.Entity("domain.entities.User", b =>

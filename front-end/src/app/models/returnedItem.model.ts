@@ -1,5 +1,6 @@
 import { ItemStatus } from "./enum/ItemStatus";
 import { ReturnStatus } from "./enum/ReturnStatus";
+import { User } from "./user.model";
 
 export class ReturnedItem {
     id: number;
@@ -9,4 +10,5 @@ export class ReturnedItem {
     calculatedPrice: number;
     returnDateTime: Date = new Date();
     itemStatus: ReturnStatus;
+    createdBy: User
 }

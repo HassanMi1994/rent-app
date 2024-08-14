@@ -5,12 +5,14 @@ import { ReturnedItemsComponent } from "./returned-items/returned-items.componen
 import { Component, Input, ViewChildren } from "@angular/core";
 import { ContractService } from "../../../../services/contract.service";
 import { TranslocoPipe } from "@ngneat/transloco";
+import { FormInputComponent } from "../../../../utils/form-input/form-input.component";
+import { FormInputNumberComponent } from "../../../../utils/form-input-number/form-input-number.component";
 
 
 @Component({
   selector: 'app-contract-items',
   standalone: true,
-  imports: [TranslocoPipe, FormsModule, DecimalPipe, ReturnItemComponent, DatePipe, ReturnedItemsComponent],
+  imports: [TranslocoPipe, FormsModule, DecimalPipe, ReturnItemComponent, DatePipe, ReturnedItemsComponent,FormInputNumberComponent],
   templateUrl: './contract-items.component.html',
   styleUrl: './contract-items.component.scss'
 })

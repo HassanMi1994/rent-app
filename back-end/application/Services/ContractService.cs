@@ -28,7 +28,7 @@ namespace application.Services
             if (contract == null)
                 throw new ExceptionBase(ExceptionCodes.ItemNotFound);
 
-            contract.AddPyament(addPaymentDto);
+            contract.AddPyament(addPaymentDto, _userService.UserID);
             await _rentDb.SaveChangesAsync();
 
             return contract;
@@ -37,6 +37,7 @@ namespace application.Services
         public async Task<Contract> Create(domain.entities.Contract contract)
         {
             contract.StoreID = _userService.StoreID;
+            contract.CreatedByID = _userService.UserID;
             contract.ContractNumber = await _userConfigService.GetNextContractNo();
             _rentDb.Add(contract);
             await _rentDb.SaveChangesAsync();
@@ -53,7 +54,7 @@ namespace application.Services
                 .AsAsyncEnumerable();
         }
 
-        public async Task<Contract?> GetByIdAsync(int id)
+        public async Task<Contract> GetByIdAsync(int id)
         {
             var contract = await _rentDb
                 .Contracts.LoadWithAllChildren().FirstOrDefaultAsync(x => x.ID == id);
@@ -77,7 +78,8 @@ namespace application.Services
             if (contract == null)
                 throw new ExceptionBase(ExceptionCodes.ItemNotFound);
 
-            contract.ReturnPartialItem(returnedItem);
+            contract.ReturnPartialItem(returnedItem, _userService.UserID);
+            contract.UpdatedByID = _userService.UserID;
 
             await _rentDb.SaveChangesAsync();
             return contract;
@@ -106,10 +108,14 @@ namespace application.Services
             return query
                 .Include(x => x.Customer)
                 .Include(x => x.Payments)
+                    .ThenInclude(x => x.CreatedBy)
                 .Include(x => x.Items)
                    .ThenInclude(x => x.Stuff)
                 .Include(x => x.Items)
-                   .ThenInclude(x => x.ReturnedItems);
+                   .ThenInclude(x => x.ReturnedItems)
+                        .ThenInclude(x => x.CreatedBy)
+                .Include(x => x.CreatedBy)
+                .Include(x => x.UpdatedBy);
 
         }
     }

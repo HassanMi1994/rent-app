@@ -8,13 +8,12 @@
         <app-form-input [labelName]="'fullName'" (value)="userManager.signUpModel.fullName=($event)"></app-form-input>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-4">
-        <!-- <ng-select [(ngModel)]="userManager.signUpModel.serviceType"> -->
+    <!-- <div class="col-12 col-md-6 col-lg-4">
         <ng-select [(ngModel)]="userManager.signUpModel.serviceType">
             <ng-option [value]="1">{{'rent'|transloco}}</ng-option>
             <ng-option [value]="2">{{'sell'|transloco}}</ng-option>
         </ng-select>
-    </div>
+    </div> -->
 
     <div class="col-12 col-md-6 col-lg-4">
         <app-form-input [labelName]="'storeName'" (value)="userManager.signUpModel.storeName=($event)"></app-form-input>

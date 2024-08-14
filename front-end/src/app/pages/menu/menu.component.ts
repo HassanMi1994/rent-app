@@ -21,9 +21,9 @@ export class MenuComponent implements AfterViewInit {
   items: MenuItem[5];
   @ViewChild('mySpan') span: HTMLSpanElement;
 
-  constructor(public transLoco: TranslocoService, @Inject(DOCUMENT) document: Document, private location: Location, public userManager: UserManagerService) {
+  constructor(public transLoco: TranslocoService, @Inject(DOCUMENT) private document: Document, private location: Location, public userManager: UserManagerService) {
     this.selectedLang = this.transLoco.getDefaultLang().toUpperCase();
-    this.ls = document.defaultView?.localStorage;
+    this.ls = this.document.defaultView?.localStorage;
 
   }
 
@@ -48,6 +48,12 @@ export class MenuComponent implements AfterViewInit {
     }
     this.selectedLang = lang.toUpperCase();
     this.transLoco.setActiveLang(lang);
+    if (lang == 'fa') {
+      this.document.body.style.direction = 'rtl'
+    }
+    else {
+      this.document.body.style.direction = 'ltr'
+    }
   }
 
 

@@ -21,6 +21,12 @@ namespace domain.entities
         public long StoreID { get; set; }
         public Store Store { get; set; }
 
+        //who is the item created by
+        public long? CreatedByID { get; set; }
+        public long? UpdatedByID { get; set; }
+        public User? CreatedBy { get; set; }
+        public User? UpdatedBy { get; set; }
+
         #region Calculated Fields
         public decimal TotalPaidAmount
         {
@@ -34,10 +40,8 @@ namespace domain.entities
         {
             get
             {
-
                 var sum = Items?.Sum(x => x.RemainingItems) ?? 0;
                 return sum;
-
             }
         }
 
@@ -62,10 +66,11 @@ namespace domain.entities
             return allCost;
         }
 
-        public void AddPyament(Payment payment)
+        public void AddPyament(Payment payment, long paidBy)
         {
             CanChange();
             payment.DateTime = DateTime.UtcNow;
+            payment.CreatedByID = paidBy;
             Payments.Add(payment);
             CheckForChangingStatus();
         }
@@ -80,7 +85,6 @@ namespace domain.entities
 
         public void CheckForChangingStatus()
         {
-            //check if all items returned
             CanChange();
             if (Items.All(x => x.RemainingItems == 0))
             {
@@ -97,7 +101,7 @@ namespace domain.entities
             }
         }
 
-        public void ReturnPartialItem(ReturnedItem returnedItem)
+        public void ReturnPartialItem(ReturnedItem returnedItem, long returnedBy)
         {
             CanChange();
             var item = Items.FirstOrDefault(x => x.ID == returnedItem.ContractItemID);
@@ -113,7 +117,10 @@ namespace domain.entities
                 throw new ExceptionBase(ExceptionCodes.ItemsToReturnAreMoreThanRemaining);
             }
 
+            returnedItem.CreatedByID = returnedBy;
+
             item.ReturnedItems.Add(returnedItem);
+            item.Stuff.Quantity += returnedItem.Quantity;
             //todo: add returned items to the available quantity of the stuff! very important>>>???!!!
             CheckForChangingStatus();
         }

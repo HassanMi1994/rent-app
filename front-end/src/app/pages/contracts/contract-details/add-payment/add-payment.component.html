@@ -6,16 +6,20 @@
 
 
 <div class="contract-item-header row">
-    <div class="col-4 h6 text-info text-center">
+    <div class="col-3 h6 text-info text-center">
         {{'amount'|transloco}}
     </div>
 
-    <div class="col-4 h6 text-info text-center">
+    <div class="col-3 h6 text-info text-center">
         {{'paymentType'|transloco}}
     </div>
 
-    <div class="col-4 h6 text-info text-center">
+    <div class="col-3 h6 text-info text-center">
         {{'datetime'|transloco}}
+    </div>
+
+    <div class="col-3 h6 text-info text-center">
+        {{'createdBy'|transloco}}
     </div>
 
 </div>
@@ -23,11 +27,11 @@
 @for (item of contractService.contract.payments; track $index) {
 
 <div class="payment-row row table-hover">
-    <div class=" col-4 h6 text-center">
+    <div class=" col-3 h6 text-center">
         {{item.amount|number}}
     </div>
 
-    <div class="col-4 h6 text-center">
+    <div class="col-3 h6 text-center">
         @if(item.paymentType==1){
         {{'card'|transloco}}
         }
@@ -36,9 +40,17 @@
         }
     </div>
 
-    <div class=" col-4 h6 text-center">
+    <div class=" col-3 m-2 h6 text-center">
         <app-config-date [date]="item.dateTime"> </app-config-date>
     </div>
+
+    <div class=" col-3 m-2 h6 text-center">
+        @if(item.createdBy){
+        {{item.createdBy.fullName}}
+        }
+    </div>
+
+
 
 </div>
 }
