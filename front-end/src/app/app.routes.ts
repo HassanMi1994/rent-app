@@ -14,6 +14,7 @@ import { SignUpComponent } from './pages/_login_signup/sign-up/sign-up.component
 import { UsersComponent } from './pages/users/users.component';
 import { CreateUserComponent } from './pages/users/create-user/create-user.component';
 import { HowItWorksComponent } from './pages/how-it-works/how-it-works.component';
+import { AboutComponent } from './pages/about/about.component';
 
 
 
@@ -34,6 +35,7 @@ export const routes: Routes = [
     { component: CreateStuffComponent, path: ':{lang}/stuff/new' },
     { component: SettingComponent, path: ':{lang}/settings' },
     { component: HowItWorksComponent, path: ':{lang}/features', title: "RSApp.ir: Comprehensive Rental Management Solution" },
+    { component: AboutComponent, path: ':{lang}/about', title: "RSApp.ir: Comprehensive Rental Management Solution" },
     { path: 'en/welcome', redirectTo: 'en/welcome', pathMatch: 'full', },
     { path: '', redirectTo: 'en/welcome', pathMatch: 'full', },
     { path: '**', component: PageNotFoundComponent }

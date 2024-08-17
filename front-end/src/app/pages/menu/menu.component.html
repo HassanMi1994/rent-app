@@ -22,9 +22,14 @@
                 <a [routerLink]="[transLoco.getActiveLang(),'sign-up']" class="nav-link" data-bs-toggle="tab"
                     routerLinkActive="active"> <span class="bi bi-door-open"></span> {{'signUp'|transloco}}</a>
             </li>
-            <li class="nav-item" role="presentation">
+            <li (click)="closeNav()" class="nav-item" role="presentation">
                 <a [routerLink]="[transLoco.getActiveLang(),'features']" class="nav-link" data-bs-toggle="tab"
                     routerLinkActive="active"> <span class="bi bi-list-stars"></span> {{'features'|transloco}}</a>
+            </li>
+
+            <li (click)="closeNav()" class="nav-item" role="presentation">
+                <a [routerLink]="[transLoco.getActiveLang(),'about']" class="nav-link" data-bs-toggle="tab"
+                    routerLinkActive="active"> <span class="bi bi-info-circle"></span> {{'aboutUs'|transloco}}</a>
             </li>
             }
             @if(userManager.userInfo.isLoggedIn==true) {
@@ -259,15 +264,20 @@
             <a [routerLink]="[transLoco.getActiveLang(),'sign-up']" class="nav-link" data-bs-toggle="tab"
                 routerLinkActive="active"> <span class="bi bi-door-open"></span> {{'signUp'|transloco}}</a>
         </li>
-        
-        <li class="nav-item float-end" role="presentation">
+
+        <li class="nav-item " role="presentation">
             <a [routerLink]="[transLoco.getActiveLang(),'features']" class="nav-link" data-bs-toggle="tab"
                 routerLinkActive="active"> <span class="bi bi-list-stars"></span> {{'features'|transloco}}</a>
+        </li>
+
+        <li class="nav-item " role="presentation">
+            <a [routerLink]="[transLoco.getActiveLang(),'about']" class="nav-link" data-bs-toggle="tab"
+                routerLinkActive="active"> <span class="bi bi-info-circle"></span> {{'aboutUs'|transloco}}</a>
         </li>
         }
         @else {
         <p>{{'welcome'|transloco}} <b> {{userManager.userInfo.fullName}}</b></p>
-        <li class="nav-item float-end" role="presentation">
+        <li class="nav-item" role="presentation">
             <a (click)="userManager.logOut()" class="nav-link" data-bs-toggle="tab" routerLinkActive="active"> <span
                     class="bi bi-power"></span> {{'logOut'|transloco}}</a>
         </li>
