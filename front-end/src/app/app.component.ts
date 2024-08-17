@@ -5,6 +5,7 @@ import { slideInAnimation } from './animations';
 import { CommonModule, Location, DOCUMENT } from '@angular/common';
 import { MenuComponent } from './pages/menu/menu.component';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { PopUpComponent } from './utils/pop-up/pop-up.component';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
     RouterLinkActive,
     TranslocoPipe,
     CommonModule,
-    MenuComponent,],
+    MenuComponent,
+    PopUpComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   animations: [slideInAnimation]

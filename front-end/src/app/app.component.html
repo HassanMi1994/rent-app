@@ -1,12 +1,16 @@
 <!-- Nav tabs -->
 <app-menu></app-menu>
 <br />
+<app-pop-up #popup id="morePopUp"></app-pop-up>
+
 <div class="route-animation-container" [@routeAnimations]="prepareRoute(outlet)">
   <router-outlet #outlet="outlet"></router-outlet>
 </div>
-<div class="text-center mt-auto footer-hm">
-  <hr />
+
+<div class="mt-auto text-center footer-hm">
   <p>
-    <a class="link-dark" href="https://www.linkedin.com/in/hassan-monjezi/"> Developer Hasan Monjezi</a>
+    <a class="link-dark" href="https://www.linkedin.com/in/hassan-monjezi/">
+      <span class="bi bi-linkedin"></span>
+    </a>
   </p>
 </div>

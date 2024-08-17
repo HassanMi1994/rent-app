@@ -59,6 +59,7 @@ export class CustomerComponent implements OnInit {
 
   showMoreInfo(e: MouseEvent, stuffId: number) {
     var selectedStuff = this.customerService.customers.find(x => x.id == stuffId) as Customer;
+    let popupnew = document.getElementById("morePopUp");
     this.popup.setTitle(selectedStuff?.fullName)
     this.popup.showObject(selectedStuff);
     this.popup.show();

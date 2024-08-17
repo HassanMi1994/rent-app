@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChildren } from '@angular/core';
 import { FormInputComponent } from '../../../utils/form-input/form-input.component';
 import { UserManagerService } from '../../../services/user-manager.service';
-import { TranslocoPipe } from '@ngneat/transloco';
-import { Login } from '../../../models/login.model';
+import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
+import { Login, LoginValidator } from '../../../models/login.model';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -14,11 +14,33 @@ import { Observable } from 'rxjs';
 })
 export class LoginComponent {
 
-  constructor(public userManager: UserManagerService) {
+  @ViewChildren('input') inputs: FormInputComponent[];
+
+  constructor(public userManager: UserManagerService, private transLoco: TranslocoService) {
     this.userManager.loginModel = new Login();
   }
 
   login() {
-    this.userManager.login();
+
+    let validation = new LoginValidator(this.transLoco);
+    let errors = validation.validate(this.userManager.loginModel);
+
+    let keys = Object.keys(errors);
+
+    if (errors) {
+      this.inputs.forEach(element => {
+        if (keys.find(x => x == element.labelName)) {
+          let key = element.labelName as keyof typeof errors;
+          element.setInvalid(errors[key] as string)
+        }
+        else {
+          element.setValid();
+        }
+      })
+    }
+
+    if (keys.length == 0) {
+      this.userManager.login();
+    }
   }
 }

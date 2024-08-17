@@ -20,20 +20,20 @@ import { HowItWorksComponent } from './pages/how-it-works/how-it-works.component
 //todo: titles should be set dynamically
 
 export const routes: Routes = [
-    { component: LoginComponent, path: ':{lang}/login', },
-    { component: SignUpComponent, path: ':{lang}/sign-up' },
+    { component: LoginComponent, path: ':{lang}/login', title: "RSApp.ir: Comprehensive Rental Management Solution" },
+    { component: SignUpComponent, path: ':{lang}/sign-up', title: "RSApp.ir: Comprehensive Rental Management Solution" },
     { component: ContractsComponent, path: ':{lang}/contracts', },
     { component: CreateContractComponent, path: ':{lang}/contracts/new', },
     { component: ContractDetailsComponent, path: ':{lang}/contracts/details/:{id}}', },
     { component: UsersComponent, path: ':{lang}/users', },
     { component: CreateUserComponent, path: ':{lang}/users/new', },
-    { component: CustomerComponent, path: ':{lang}/customers', },
-    { component: CreateCustomerComponent, path: ':{lang}/customers/new' },
-    { component: WelcomeComponent, path: ':{lang}/welcome',title:"RSApp.ir: Comprehensive Rental Management Solution" },
+    { component: CustomerComponent, path: ':{lang}/customers', title: "RSApp.ir: Comprehensive Rental Management Solution" },
+    { component: CreateCustomerComponent, path: ':{lang}/customers/new', title: "RSApp.ir: Comprehensive Rental Management Solution" },
+    { component: WelcomeComponent, path: ':{lang}/welcome', title: "RSApp.ir: Comprehensive Rental Management Solution" },
     { component: StuffComponent, path: ':{lang}/stuff' },
     { component: CreateStuffComponent, path: ':{lang}/stuff/new' },
     { component: SettingComponent, path: ':{lang}/settings' },
-    { component: HowItWorksComponent, path: ':{lang}/features',title:"RSApp.ir: Comprehensive Rental Management Solution" },
+    { component: HowItWorksComponent, path: ':{lang}/features', title: "RSApp.ir: Comprehensive Rental Management Solution" },
     { path: 'en/welcome', redirectTo: 'en/welcome', pathMatch: 'full', },
     { path: '', redirectTo: 'en/welcome', pathMatch: 'full', },
     { path: '**', component: PageNotFoundComponent }

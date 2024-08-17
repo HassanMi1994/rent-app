@@ -155,3 +155,8 @@ input::before {
     margin: 35px 0 !important;
   }
 }
+
+.invalid {
+  box-shadow: 0 0 10px red;
+  transition: 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}

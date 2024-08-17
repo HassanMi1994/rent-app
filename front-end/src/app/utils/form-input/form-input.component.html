@@ -1,13 +1,17 @@
-<div class="form-input-container">
+<div #container class="form-input-container">
     <div class="form-row">
         <div class="input-data">
-            <input type="text" [type]="getType()" #input (change)="valueChanged(input.value)" [required]="isRequired" [(ngModel)]="val">
-            <!-- <ng-content>
-                
-            </ng-content> -->
+            <input [name]="labelName" type="text" [type]="getType()" #input (change)="valueChanged(input.value)" [required]="isRequired"
+                [(ngModel)]="val">
             <div class=" underline">
             </div>
             <label for="">{{labelName|transloco}}</label>
+            @if(invalid)
+            {
+            <div class="text-danger validation-error">{{validationMessage}}</div>
+            }
         </div>
     </div>
+
+
 </div>

@@ -3,8 +3,16 @@
 .footer-hm {
     //  width: 100%;
     // height: 300px;
+    position: static;
+    bottom: 0;
+    width: 100%;
+    align-items: center;
 
-    margin-top: 80vh !important;
+    border-radius:50px 50px 0 0;
+
+    margin-top: 40vh !important;
+    // background-color: rgba(0, 0, 0, 0.3);
+    //margin-top: 80vh !important;
     // background-color: blue;
 }
 
