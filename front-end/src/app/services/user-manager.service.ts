@@ -9,6 +9,7 @@ import { DOCUMENT } from '@angular/common';
 import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 import { environment } from '../../environments/environment';
+import { ChangePassword } from '../models/channgePassword.model';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,8 @@ export class UserManagerService {
   public userInfo: UserInfo = new UserInfo();
   public loginModel: Login = new Login();
   public signUpModel: SignUp = new SignUp();
+  public changePasswrodModel = new ChangePassword();
+
   cookieService = inject(CookieService);
   ls: Storage | undefined;
 
@@ -82,6 +85,13 @@ export class UserManagerService {
 
   signUp() {
     this.client.post(environment.baseUrl + 'users/sign-up', this.signUpModel)
+      .subscribe(x => {
+        //todo: show pop up to show that sign up was successful and redirect user
+      })
+  }
+
+  changePassword() {
+    this.client.post(environment.baseUrl + 'users/change-password', this.changePasswrodModel)
       .subscribe(x => {
         //todo: show pop up to show that sign up was successful and redirect user
       })

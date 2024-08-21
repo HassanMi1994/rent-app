@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, input } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, Renderer2, input } from '@angular/core';
 import { TranslocoService } from '@ngneat/transloco';
 import moment from 'moment';
 
@@ -15,11 +15,13 @@ export class PopUpComponent implements AfterViewInit {
   elementToBeShown: any;
   content: string;
 
-  constructor(private translator: TranslocoService) { }
+  constructor(private translator: TranslocoService, private renderer: Renderer2) { }
 
-  public show() {
+  public show(position: { x: number, y: number }) {
     var content = document.getElementById("mydiv") as HTMLDivElement;
-    content.classList.remove('visually-hidden');
+     this.renderer.setStyle(content, 'left', `${position.x}px`);
+    this.renderer.setStyle(content, 'top', `${position.y}px`);
+    this.renderer.removeClass(content, 'visually-hidden');
   }
 
   public hide() {

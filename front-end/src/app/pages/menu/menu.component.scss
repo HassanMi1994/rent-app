@@ -25,7 +25,7 @@
     .overlay a {
         padding: 8px;
         text-decoration: none;
-        font-size: 30px;
+        font-size: 24px;
         color: #818181;
         display: block;
         transition: 0.3s;
@@ -152,4 +152,12 @@
 
     background-color: unset !important;
 
+}
+
+ul li a{
+    text-decoration: none;
+}
+
+ul li{
+    list-style-type: none;
 }

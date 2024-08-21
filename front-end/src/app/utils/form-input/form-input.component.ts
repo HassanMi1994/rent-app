@@ -17,10 +17,11 @@ export class FormInputComponent implements OnChanges {
   @Input() labelName: string;
   @Input() readOnly: boolean = false;
   @Input() type: string;
-  @Output() value = new EventEmitter<string>();
   @Input() val: string
   @ViewChild('input') input: HTMLInputElement;
   @ViewChild('container') container!: ElementRef
+  @Output() onChange = new EventEmitter<{ value: any, labelName: string, valueType: string }>();
+  @Output() value = new EventEmitter<string>();
 
   invalid: boolean = false;
   validationMessage: string;
@@ -46,8 +47,8 @@ export class FormInputComponent implements OnChanges {
   }
 
   valueChanged(value: string) {
-    console.log(value);
-    this.value.emit(value);
+    this.value.emit(this.val);
+    this.onChange.emit({ value: value, labelName: this.labelName, valueType: typeof value });
   }
 
   clear() {

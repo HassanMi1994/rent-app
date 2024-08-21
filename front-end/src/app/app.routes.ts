@@ -15,6 +15,7 @@ import { UsersComponent } from './pages/users/users.component';
 import { CreateUserComponent } from './pages/users/create-user/create-user.component';
 import { HowItWorksComponent } from './pages/how-it-works/how-it-works.component';
 import { AboutComponent } from './pages/about/about.component';
+import { ChangePasswordComponent } from './pages/users/change-password/change-password.component';
 
 
 
@@ -26,6 +27,7 @@ export const routes: Routes = [
     { component: ContractsComponent, path: ':{lang}/contracts', },
     { component: CreateContractComponent, path: ':{lang}/contracts/new', },
     { component: ContractDetailsComponent, path: ':{lang}/contracts/details/:{id}}', },
+    { component: ChangePasswordComponent, path: ':{lang}/users/change-password', },
     { component: UsersComponent, path: ':{lang}/users', },
     { component: CreateUserComponent, path: ':{lang}/users/new', },
     { component: CustomerComponent, path: ':{lang}/customers', title: "RSApp.ir: Comprehensive Rental Management Solution" },

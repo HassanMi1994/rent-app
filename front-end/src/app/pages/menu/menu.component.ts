@@ -33,6 +33,10 @@ export class MenuComponent implements AfterViewInit {
       if (langHistory !== undefined) {
         this.selectedLang = langHistory!.toUpperCase();
         this.transLoco.setActiveLang(langHistory!);
+        if(langHistory=='fa')
+        {
+          this.document.body.dir='rtl';
+        }
       }
     }
     this.onResize(null);

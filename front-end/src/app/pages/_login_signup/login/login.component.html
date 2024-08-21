@@ -2,12 +2,13 @@
     <div class="row justify-content-center">
 
         <div class="col-12 col-md-6">
-            <app-form-input #input [labelName]="'email'" (value)="userManager.loginModel.email=($event)"></app-form-input>
+            <app-form-input #input [labelName]="'email'" (onChange)="onValueChanged($event)"
+                (value)="userManager.loginModel.email=($event)"></app-form-input>
         </div>
     </div>
     <div class="row justify-content-center">
         <div class="col-12 col-md-6 ">
-            <app-form-input #input [labelName]="'password'" [type]="'password'"
+            <app-form-input #input [labelName]="'password'" (onChange)="onValueChanged($event)" [type]="'password'"
                 (value)="userManager.loginModel.password=($event)"></app-form-input>
         </div>
     </div>

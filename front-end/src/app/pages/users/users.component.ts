@@ -27,7 +27,7 @@ export class UsersComponent {
     var selectedUser = this.ums.users.find(x => x.id == stuffId) as User;
     this.child.setTitle(selectedUser?.fullName)
     this.child.showObject(selectedUser);
-    this.child.show();
+    this.child.show({ x: e.clientX, y: e.clientY });
     let popUp = document.getElementById('morePopUp') as HTMLDivElement
     popUp.style.top = e.y + 'px'
     popUp.style.left = e.x + 'px'

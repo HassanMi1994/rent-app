@@ -16,5 +16,6 @@ namespace domain.abstraction
         Dictionary<string, string> GetUserClaims();
         Task CreateNormalUserAsync(AddNormalUserDto normalUser);
         IAsyncEnumerable<User> GetAllUsers();
+        Task ChangePassword(ChangePasswordDto changePasswordDto);
     }
 }

@@ -4,8 +4,6 @@
     {
         NotAuthorized = 401,
 
-
-        #region domain exception codes
         /// <summary>
         /// throw when an object is null
         /// </summary>
@@ -21,11 +19,8 @@
         /// </summary>
         ContractIsClosedSuccuessfulyCannotBeChanged = 1002,
 
+        InvalidOperation = 1400,
         UserAlreadyExist = 1401,
-        OnlyForAdminUsers = 1420
-
-
-
-        #endregion
+        OnlyForAdminUsers = 1420,
     }
 }

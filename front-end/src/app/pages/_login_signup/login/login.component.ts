@@ -20,6 +20,25 @@ export class LoginComponent {
     this.userManager.loginModel = new Login();
   }
 
+  onValueChanged(event: { value: any, labelName: string, valueType: string }) {
+    console.log(event);
+
+    let validation = new LoginValidator(this.transLoco);
+    let errors = validation.validate(this.userManager.signUpModel);
+    let key = event.labelName as keyof typeof errors;
+
+    if (errors && typeof errors === 'object') {
+      this.inputs.forEach(element => {
+        if (errors[element.labelName as keyof typeof errors] !== undefined) {
+          element.setInvalid(errors[element.labelName as keyof typeof errors] as string);
+        } else {
+          element.setValid();
+        }
+      });
+    }
+  }
+
+
   login() {
 
     let validation = new LoginValidator(this.transLoco);

@@ -63,7 +63,8 @@ namespace api.Controllers
                 {
                     Amount = x.Amount,
                     PaymentType = x.PaymentType,
-                    DateTime = DateTime.UtcNow
+                    DateTime = DateTime.UtcNow,
+                    CreatedByID = _userService.UserID
                 }).ToList(),
                 Status = ContractStatus.Opened,
                 RentLocation = contract.RentLocation,

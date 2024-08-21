@@ -29,7 +29,7 @@ export default class StuffComponent implements OnInit {
     var selectedStuff = this.stuffService.stuff.find(x => x.id == stuffId) as Stuff;
     this.child.setTitle(selectedStuff?.name)
     this.child.showObject(selectedStuff);
-    this.child.show();
+    this.child.show({ x: e.clientX, y: e.clientY });
     let popUp = document.getElementById('morePopUp') as HTMLDivElement
     popUp.style.top = e.y + 'px'
     popUp.style.left = e.x + 'px'

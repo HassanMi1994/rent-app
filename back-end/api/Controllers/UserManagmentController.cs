@@ -55,5 +55,13 @@ namespace api.Controllers
         {
             return Ok(_userService.GetUserClaims());
         }
+
+        [HttpPost("change-password")]
+        [Auth(domain.enums.RoleType.Normal)]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDto changePasswordDto)
+        {
+            await _userService.ChangePassword(changePasswordDto);
+            return Ok();
+        }
     }
 }

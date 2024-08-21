@@ -146,6 +146,19 @@ namespace application.Services
             };
         }
 
+        public async Task ChangePassword(ChangePasswordDto changePasswordDto)
+        {
+            var user = await _rsaDbContext.Users.Where(x => x.ID == UserID).FirstAsync();
+            var oldDbPass = user.Password;
+            var userOldPass = changePasswordDto.OldPassword.GetStringSha256Hash();
+
+            if (!oldDbPass.Equals(userOldPass))
+                throw new ExceptionBase(ExceptionCodes.InvalidOperation);
+
+            user.Password = changePasswordDto.NewPassword.GetStringSha256Hash();
+            await _rsaDbContext.SaveChangesAsync();
+        }
+
         public Dictionary<string, string> GetUserClaims()
         {
             var jwt = httpContextAccessor.HttpContext.Request.Headers["Authorization"];

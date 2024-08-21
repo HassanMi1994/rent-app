@@ -62,7 +62,7 @@ export class CustomerComponent implements OnInit {
     let popupnew = document.getElementById("morePopUp");
     this.popup.setTitle(selectedStuff?.fullName)
     this.popup.showObject(selectedStuff);
-    this.popup.show();
+    this.popup.show({ x: e.clientX, y: e.clientY });
     let popUp = document.getElementById('morePopUp') as HTMLDivElement
     popUp.style.top = e.y + 'px'
     popUp.style.left = e.x + 'px'

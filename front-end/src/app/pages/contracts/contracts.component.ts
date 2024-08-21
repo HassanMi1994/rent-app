@@ -39,7 +39,7 @@ export class ContractsComponent {
     var selectedContract = this.contractService.contracts.find(x => x.id == contractId) as Contract;
     this.popup.setTitle(selectedContract?.totalPricePerDay + ' ' + selectedContract?.totalPricePerDay)
     this.popup.showObject(selectedContract);
-    this.popup.show();
+    this.popup.show({ x: e.clientX, y: e.clientY });
     let popUp = document.getElementById('morePopUp') as HTMLDivElement
     popUp.style.top = e.y + 'px'
     popUp.style.left = e.x + 'px'

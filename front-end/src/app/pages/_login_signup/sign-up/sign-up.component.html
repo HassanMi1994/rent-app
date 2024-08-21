@@ -1,11 +1,11 @@
 <div class="row">
 
     <div class="col-12 col-md-6 col-lg-4">
-        <app-form-input #inputs [labelName]="'email'" (value)="userManager.signUpModel.email=($event)"></app-form-input>
+        <app-form-input #inputs [labelName]="'email'" (onChange)="onValueChanged($event)" (value)="userManager.signUpModel.email=($event)"></app-form-input>
     </div>
 
     <div class="col-12 col-md-6 col-lg-4">
-        <app-form-input #inputs [labelName]="'fullName'" (value)="userManager.signUpModel.fullName=($event)"></app-form-input>
+        <app-form-input #inputs [labelName]="'fullName'" (onChange)="onValueChanged($event)" (value)="userManager.signUpModel.fullName=($event)"></app-form-input>
     </div>
 
     
@@ -17,20 +17,20 @@
     </div> -->
 
     <div class="col-12 col-md-6 col-lg-4">
-        <app-form-input #inputs [labelName]="'storeName'" (value)="userManager.signUpModel.storeName=($event)"></app-form-input>
+        <app-form-input #inputs [labelName]="'storeName'" (onChange)="onValueChanged($event)" (value)="userManager.signUpModel.storeName=($event)"></app-form-input>
     </div>
 
     <div class="col-12 col-md-6 col-lg-4">
-        <app-form-input #inputs [labelName]="'mobile'" (value)="userManager.signUpModel.mobile=($event)"></app-form-input>
+        <app-form-input #inputs [labelName]="'mobile'" (onChange)="onValueChanged($event)" (value)="userManager.signUpModel.mobile=($event)"></app-form-input>
     </div>
 
     <div class="col-12 col-md-6 col-lg-4">
-        <app-form-input #inputs [labelName]="'password'" [type]="'password'"
+        <app-form-input #inputs [labelName]="'password'" (onChange)="onValueChanged($event)" [type]="'password'"
             (value)="userManager.signUpModel.password=($event)"></app-form-input>
     </div>
 
     <div class="col-12 col-md-6 col-lg-4">
-        <app-form-input #inputs [labelName]="'confirmPassword'" [type]="'password'"
+        <app-form-input #inputs [labelName]="'confirmPassword'" (onChange)="onValueChanged($event)" [type]="'password'"
             (value)="userManager.signUpModel.confirmPassword=($event)"></app-form-input>
     </div>
 
