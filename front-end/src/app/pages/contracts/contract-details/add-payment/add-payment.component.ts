@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { TranslocoPipe } from '@ngneat/transloco';
 import { ContractService } from '../../../../services/contract.service';
 import { FormInputNumberComponent } from '../../../../utils/form-input-number/form-input-number.component';
@@ -19,17 +19,25 @@ import { ConfigDateComponent } from '../../../../utils/config-date/config-date.c
 export class AddPaymentComponent {
 
   @ViewChild('amountRef') amountInput: FormInputNumberComponent;
+  @ViewChild('closeModal') closeModal: ElementRef;
+
   @Input() sendForServer: boolean = false;
   constructor(public contractService: ContractService) {
   }
 
   addPayment() {
-    if (this.sendForServer) {
-      this.contractService.addPayment();
+
+    if (this.amountInput.getValue() > 0) {
+
+      if (this.sendForServer) {
+        this.contractService.addPayment();
+      }
+      this.contractService.addPaymentLocaly();
+      this.amountInput.setValue(0);
+      this.contractService.contract.totalPaidAmount += this.contractService.newPayment.amount;
+      this.closeModal.nativeElement.click();
     }
-    this.contractService.addPaymentLocaly();
-    this.amountInput.setValue(0);
-    this.contractService.contract.totalPaidAmount += this.contractService.newPayment.amount;
+
   }
 
 }

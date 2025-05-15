@@ -31,7 +31,10 @@ export class ConfigDateComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     if (this.configService.userConfig == undefined || this.configService.userConfig == null) {
       this.configService.get()
-        .subscribe(x => this.calendarType = x.calendarType);
+        .subscribe(x => {
+          this.calendarType = x.calendarType;
+          this.configService.userConfig = x;
+        });
     } else {
       this.calendarType = this.configService.userConfig.calendarType;
     }

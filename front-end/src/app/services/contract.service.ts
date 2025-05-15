@@ -54,8 +54,10 @@ export class ContractService {
   }
 
   addPaymentLocaly() {
-    this.contract.payments.push(this.newPayment);
-    this.newPayment = new Payment();
+    if (this.newPayment.amount > 0) {
+      this.contract.payments.push(this.newPayment);
+      this.newPayment = new Payment();
+    }
   }
 
   addPayment() {
