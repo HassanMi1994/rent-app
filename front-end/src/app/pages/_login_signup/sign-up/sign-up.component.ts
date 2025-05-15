@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SignUp, SignUpValidation } from '../../../models/sign-up.model';
 import { Validator } from 'fluentvalidation-ts';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sign-up',
@@ -21,9 +22,17 @@ export class SignUpComponent implements AfterViewInit, OnChanges {
 
   constructor(public userManager: UserManagerService,
     private router: Router,
-    private transLoco: TranslocoService) {
+    private transLoco: TranslocoService,
+    private titleService: Title,
+    private metaService: Meta) {
 
   }
+
+  ngOnInit() {
+    this.titleService.setTitle('Sign-Up - RSapp.ir');;
+    this.metaService.updateTag({ name: 'description', content: 'Register you store at our website in less than a min, and manage you rental business as easy as possible | RSapp.ir' });
+  }
+  
   ngOnChanges(changes: SimpleChanges): void {
 
   }

@@ -4,6 +4,7 @@ import { UserManagerService } from '../../../services/user-manager.service';
 import { TranslocoPipe, TranslocoService } from '@ngneat/transloco';
 import { Login, LoginValidator } from '../../../models/login.model';
 import { Observable } from 'rxjs';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -16,8 +17,17 @@ export class LoginComponent {
 
   @ViewChildren('input') inputs: FormInputComponent[];
 
-  constructor(public userManager: UserManagerService, private transLoco: TranslocoService) {
+  constructor(
+    public userManager: UserManagerService,
+    private transLoco: TranslocoService,
+    private titleService: Title,
+    private metaService: Meta) {
     this.userManager.loginModel = new Login();
+  }
+
+  ngOnInit() {
+    this.titleService.setTitle('Login - RSapp.ir');;
+    this.metaService.updateTag({ name: 'description', content: 'Login into your account and manage your rental business. | RSapp.ir' });
   }
 
   onValueChanged(event: { value: any, labelName: string, valueType: string }) {
