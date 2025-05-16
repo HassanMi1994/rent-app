@@ -3,28 +3,28 @@
     <!-- col-12 col-md-6 col-lg-4 -->
     <div class="row">
         <div class="col-12 col-md-6 col-lg-4">
-            <app-form-input [labelName]="'fullName'" (value)="customer.fullName=$event">
+            <app-form-input #inputs [labelName]="'fullName'" (value)="customer.fullName=$event">
             </app-form-input>
         </div>
 
         <div class="col-12 col-md-6 col-lg-4">
-            <app-form-input [labelName]="'nationalityCode'" (value)="customer.nationalityCode=$event"></app-form-input>
+            <app-form-input  #inputs [labelName]="'nationalityCode'" (value)="customer.nationalityCode=$event"></app-form-input>
         </div>
 
         <div class="col-12 col-md-6 col-lg-4">
-            <app-form-input [labelName]="'fatherName'" (value)="customer.fatherName=$event"></app-form-input>
+            <app-form-input #inputs [labelName]="'fatherName'" (value)="customer.fatherName=$event"></app-form-input>
         </div>
 
         <div class="col-12 col-md-6 col-lg-4">
-            <app-form-input [labelName]="'mobile'" (value)="customer.mobile=$event"></app-form-input>
+            <app-form-input #inputs [labelName]="'mobile'" (value)="customer.mobile=$event"></app-form-input>
         </div>
 
         <div class="col-12 col-md-6 col-lg-4">
-            <app-form-input [labelName]="'address'" (value)="customer.address=$event"> </app-form-input>
+            <app-form-input #inputs [labelName]="'address'" (value)="customer.address=$event"> </app-form-input>
         </div>
 
         <div class="col-12 col-md-6 col-lg-4">
-            <app-form-input [labelName]="'refereeName'" (value)="customer.refereeName=$event">
+            <app-form-input #inputs [labelName]="'refereeName'" (value)="customer.refereeName=$event">
             </app-form-input>
         </div>
 
