@@ -1,7 +1,7 @@
 <form name="create-customer-form">
     <div class="row">
         <div class="col-12 col-md-6 col-lg-4">
-            <app-form-input [labelName]="'name'" (value)="stuff.name=$event">
+            <app-form-input #inputs [labelName]="'name'" (value)="stuff.name=$event">
             </app-form-input>
         </div>
 
@@ -10,11 +10,11 @@
         </div>
 
         <div class="col-12 col-md-6 col-lg-4">
-            <app-form-input-number [labelName]="'quantity'" (value)="stuff.quantity=($event)"></app-form-input-number>
+            <app-form-input-number #inputs [labelName]="'quantity'" (value)="stuff.quantity=($event)"></app-form-input-number>
         </div>
 
         <div class="col-12 col-md-6 col-lg-4">
-            <app-form-input-number [labelName]="'pricePerDay'"
+            <app-form-input-number #inputs [labelName]="'pricePerDay'"
                 (value)="stuff.pricePerDay=($event)"></app-form-input-number>
         </div>
 

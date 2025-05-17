@@ -25,8 +25,15 @@ export class CreateCustomerComponent {
   }
 
   create() {
+    let keys = this.getErrors();
 
+    if (keys.length == 0) {
+      this.customerService.create(this.customer);
+      this.router.navigateByUrl('/' + this.transLoco.getActiveLang() + '/customers');
+    }
+  }
 
+  private getErrors() {
     let validation = new CustomerValidator(this.transLoco);
     let errors = validation.validate(this.customer);
 
@@ -36,17 +43,13 @@ export class CreateCustomerComponent {
       this.inputs.forEach(element => {
         if (keys.find(x => x == element.labelName)) {
           let key = element.labelName as keyof typeof errors;
-          element.setInvalid(errors[key] as string)
+          element.setInvalid(errors[key] as string);
         }
         else {
           element.setValid();
         }
-      })
+      });
     }
-
-    if (keys.length == 0) {
-      this.customerService.create(this.customer);
-      this.router.navigateByUrl('/' + this.transLoco.getActiveLang() + '/customers');
-    }
+    return keys;
   }
 }

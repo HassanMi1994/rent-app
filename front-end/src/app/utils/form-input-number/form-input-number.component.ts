@@ -1,5 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslocoPipe } from '@ngneat/transloco';
 
@@ -15,10 +15,12 @@ export class FormInputNumberComponent {
   @Output() value = new EventEmitter<number>();
   @ViewChild('input') input: HTMLInputElement;
   @Input() val: number;
-
   isFocused: boolean = false;
-
-  constructor() {
+  invalid: boolean = false;
+  validationMessage: string;
+ @ViewChild('container') container!: ElementRef
+ 
+  constructor(private renderer: Renderer2) {
     if (this.val !== undefined)
       this.valueChanged(this.val.toString());
   }
@@ -27,7 +29,16 @@ export class FormInputNumberComponent {
     this.isFocused = flag;
   }
 
+ setInvalid(message: string) {
+    this.invalid = true;
+    this.validationMessage = message;
+    this.renderer.addClass(this.container.nativeElement, 'invalid');
+  }
 
+  setValid() {
+    this.invalid = false;
+    this.renderer.removeClass(this.container.nativeElement, 'invalid');
+  }
 
   valueChanged(value: string) {
     this.val = parseInt(value);

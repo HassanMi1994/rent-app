@@ -1,14 +1,18 @@
-<div class="form-input-container">
+<div #container class="form-input-container">
     <div class="form-row">
         <div class="input-data">
             <!-- {{val|number}} -->
-            <input type="number" #input (change)="valueChanged(input.value)" [(ngModel)]="val"
-             (blur)="isOnFocus(false)" (focus)="isOnFocus(true)" required>
+            <input type="number" #input (change)="valueChanged(input.value)" [(ngModel)]="val" (blur)="isOnFocus(false)"
+                (focus)="isOnFocus(true)" value="0" required>
             <!-- <ng-content>
                 
             </ng-content> -->
             <div class="underline"></div>
             <label for="">{{labelName|transloco}}</label>
+            @if(invalid)
+            {
+            <div class="text-danger validation-error">{{validationMessage}}</div>
+            }
         </div>
     </div>
 </div>
