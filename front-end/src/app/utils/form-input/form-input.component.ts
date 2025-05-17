@@ -38,7 +38,6 @@ export class FormInputComponent implements OnChanges {
     this.invalid = true;
     this.validationMessage = message;
     this.renderer.addClass(this.container.nativeElement, 'invalid');
-
   }
 
   setValid() {

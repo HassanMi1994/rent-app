@@ -32,6 +32,7 @@ export const routes: Routes = [
     { component: CreateUserComponent, path: ':{lang}/users/new', },
     { component: CustomerComponent, path: ':{lang}/customers', title: "RSApp.ir: Comprehensive Rental Management Solution" },
     { component: CreateCustomerComponent, path: ':{lang}/customers/new', title: "RSApp.ir: Comprehensive Rental Management Solution" },
+    { component: CreateCustomerComponent, path: ':{lang}/customers/edit/:id', title: "RSApp.ir: Comprehensive Rental Management Solution" },
     { component: WelcomeComponent, path: ':{lang}/welcome', title: "RSApp.ir: Comprehensive Rental Management Solution" },
     { component: StuffComponent, path: ':{lang}/stuff' },
     { component: CreateStuffComponent, path: ':{lang}/stuff/new' },

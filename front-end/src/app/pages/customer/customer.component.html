@@ -31,6 +31,9 @@
       <div class="col-12 border-3 link-body-emphasis">
         <button class="btn"><span class="bi bi-eye" (click)="showMoreInfo($event,cus.id)"></span></button>
       </div>
+      <div class="col-12 border-3 link-body-emphasis">
+        <a class="btn" [routerLink]="['edit',cus.id]"><span class="bi bi-pencil-fill"></span></a>
+      </div>
     </div>
   </div>
   }

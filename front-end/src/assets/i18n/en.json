@@ -92,6 +92,7 @@
     "needToBeReturned": "Need To Be Returned Before Closing Contract",
     "date": "Date",
     "createdSuccessfuly": "Created Successfuly!",
+    "updatedSuccessfuly": "Updated Successfuly!",
     "resp": {
         "0": ":)   (:",
         "200": "Operation done successfuly!",
