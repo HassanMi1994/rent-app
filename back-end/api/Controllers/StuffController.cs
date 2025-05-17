@@ -25,9 +25,10 @@ namespace api.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Stuff stuff)
         {
-
             await _stuffService.Create(stuff);
             return Ok();
         }
+
+
     }
 }

@@ -30,5 +30,12 @@ namespace api.Controllers
             await _customerService.Create(customer);
             return Ok();
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(Customer customer)
+        {
+            await _customerService.Update(customer);
+            return Ok();
+        }
     }
 }

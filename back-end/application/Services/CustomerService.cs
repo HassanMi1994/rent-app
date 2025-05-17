@@ -30,5 +30,19 @@ namespace application.Services
             _rentDb.Customers.Add(customer);
             await _rentDb.SaveChangesAsync();
         }
+
+        public async Task Update(Customer customer)
+        {
+            customer.StoreID = _userService.StoreID;
+            var found = await _rentDb.Customers.Where(x => x.ID == customer.ID).FirstOrDefaultAsync();
+            if (found is null)
+            {
+                throw new NullReferenceException();
+            }
+
+            found.Update(customer);
+            await _rentDb.SaveChangesAsync();
+
+        }
     }
 }

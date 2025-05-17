@@ -7,5 +7,6 @@ namespace domain.abstraction
         Task Create(Customer customer);
         //IAsyncEnumerable<Customer> GetAll();
         Task<List<Customer>> GetAll();
+        Task Update(Customer customer);
     }
 }

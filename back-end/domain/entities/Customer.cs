@@ -26,5 +26,20 @@ namespace Rent.Entities
             return this;
         }
         #endregion
+
+        #region update
+        public Customer Update(Customer customer)
+        {
+            FullName = customer.FullName;
+            NationalityCode = customer.NationalityCode;
+            FatherName = customer.FatherName;
+            Mobile = customer.Mobile;
+            RefereeName = customer.RefereeName;
+            Address = customer.Address;
+
+            return this;
+        }
+        #endregion
+
     }
 }
